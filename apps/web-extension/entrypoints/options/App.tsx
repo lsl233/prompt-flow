@@ -1,0 +1,90 @@
+import { useState, useEffect } from 'react';
+import { useStore } from './useStore';
+import Sidebar from './components/Sidebar';
+import Topbar from './components/Topbar';
+import Dashboard from './components/Dashboard';
+import PromptLibrary from './components/PromptLibrary';
+import FloatingPopup from './components/FloatingPopup';
+import ImportExportModal from './components/Modals/ImportExportModal';
+import PromptEditorModal from './components/Modals/PromptEditorModal';
+import './App.css';
+
+export default function App() {
+  const store = useStore();
+  const [isImportExportOpen, setIsImportExportOpen] = useState(false);
+  const [editingPromptId, setEditingPromptId] = useState<string | null>(null);
+  const [isEditorOpen, setIsEditorOpen] = useState(false);
+  const [isFloatingOpen, setIsFloatingOpen] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsFloatingOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
+  const handleCreatePrompt = () => {
+    setEditingPromptId(null);
+    setIsEditorOpen(true);
+  };
+
+  const handleEditPrompt = (id: string) => {
+    setEditingPromptId(id);
+    setIsEditorOpen(true);
+  };
+
+  return (
+    <div className="flex h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans overflow-hidden transition-colors duration-200">
+      <Sidebar
+        view={store.view}
+        setView={store.setView}
+        tags={store.allTags}
+        onImportExport={() => setIsImportExportOpen(true)}
+      />
+
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <Topbar
+          toggleTheme={store.toggleTheme}
+          isDarkMode={store.isDarkMode}
+          onCreatePrompt={handleCreatePrompt}
+        />
+
+        <main className="flex-1 overflow-y-auto p-6">
+          <div className="max-w-6xl mx-auto">
+            {store.view === 'dashboard' ? (
+              <Dashboard store={store} onCreatePrompt={handleCreatePrompt} />
+            ) : (
+              <PromptLibrary store={store} onEditPrompt={handleEditPrompt} />
+            )}
+          </div>
+        </main>
+      </div>
+
+      {isEditorOpen && (
+        <PromptEditorModal
+          promptId={editingPromptId}
+          store={store}
+          onClose={() => setIsEditorOpen(false)}
+        />
+      )}
+
+      {isImportExportOpen && (
+        <ImportExportModal
+          store={store}
+          onClose={() => setIsImportExportOpen(false)}
+        />
+      )}
+
+      {isFloatingOpen && (
+        <FloatingPopup
+          store={store}
+          onClose={() => setIsFloatingOpen(false)}
+        />
+      )}
+    </div>
+  );
+}

@@ -1,0 +1,119 @@
+import { useState, useEffect } from 'react';
+import { Prompt } from '../../types';
+import { Store } from '../../useStore';
+import { X, Clock, RotateCcw, Eye } from 'lucide-react';
+
+interface VersionHistoryModalProps {
+  prompt: Prompt;
+  store: Store;
+  onClose: () => void;
+}
+
+export default function VersionHistoryModal({ prompt, store, onClose }: VersionHistoryModalProps) {
+  const [selectedVersionId, setSelectedVersionId] = useState<string | null>(null);
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = 'unset'; };
+  }, []);
+
+  const handleRestore = (versionId: string) => {
+    const version = prompt.versions.find(v => v.id === versionId);
+    if (version) {
+      store.updatePrompt(prompt.id, { content: version.content });
+      onClose();
+    }
+  };
+
+  const selectedVersion = prompt.versions.find(v => v.id === selectedVersionId);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="bg-white dark:bg-slate-800 w-full max-w-4xl rounded-2xl shadow-xl flex flex-col max-h-full overflow-hidden animate-in zoom-in-95 duration-200">
+
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+          <div>
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+              <Clock size={18} className="text-blue-500" />
+              Version History: {prompt.title}
+            </h2>
+          </div>
+          <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+            <X size={20} />
+          </button>
+        </div>
+
+        <div className="flex-1 overflow-hidden flex flex-col md:flex-row min-h-[400px]">
+          <div className="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50 overflow-y-auto">
+            <div className="p-4 border-b border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 sticky top-0">
+              <h3 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Previous Versions</h3>
+            </div>
+            <ul className="divide-y divide-slate-100 dark:divide-slate-700/50">
+              {prompt.versions.length === 0 ? (
+                <li className="p-6 text-center text-sm text-slate-500">No previous versions found.</li>
+              ) : (
+                prompt.versions.map((version, index) => (
+                  <li
+                    key={version.id}
+                    onClick={() => setSelectedVersionId(version.id)}
+                    className={`p-4 cursor-pointer transition-colors ${
+                      selectedVersionId === version.id
+                        ? 'bg-blue-50 dark:bg-blue-900/20 border-l-2 border-blue-500'
+                        : 'hover:bg-slate-100 dark:hover:bg-slate-700/50 border-l-2 border-transparent'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="font-medium text-sm text-slate-900 dark:text-white">
+                        {index === 0 ? 'Current Version' : `Version ${prompt.versions.length - index}`}
+                      </span>
+                      <span className="text-xs text-slate-400">
+                        {new Date(version.timestamp).toLocaleString(undefined, {
+                          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                        })}
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
+                      {version.content}
+                    </p>
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+
+          <div className="w-full md:w-2/3 p-6 flex flex-col bg-white dark:bg-slate-800 overflow-hidden">
+            {selectedVersion ? (
+              <>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
+                    <Eye size={16} className="text-slate-400" />
+                    Previewing Version
+                  </h3>
+                  {prompt.versions[0]?.id !== selectedVersion.id && (
+                    <button
+                      onClick={() => handleRestore(selectedVersion.id)}
+                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 rounded-md transition-colors"
+                    >
+                      <RotateCcw size={14} />
+                      Restore This Version
+                    </button>
+                  )}
+                </div>
+                <div className="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
+                  <pre className="text-sm font-mono text-slate-800 dark:text-slate-300 whitespace-pre-wrap break-words font-sans">
+                    {selectedVersion.content}
+                  </pre>
+                </div>
+              </>
+            ) : (
+              <div className="flex-1 flex flex-col items-center justify-center text-slate-400">
+                <Clock size={48} className="mb-4 opacity-20" />
+                <p>Select a version from the list to preview it.</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

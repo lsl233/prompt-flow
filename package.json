@@ -1,0 +1,20 @@
+{
+  "name": "prompt-flow-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Prompt Flow monorepo",
+  "scripts": {
+    "dev": "pnpm --filter web-extension dev",
+    "dev:firefox": "pnpm --filter web-extension dev:firefox",
+    "build": "pnpm --filter web-extension build",
+    "build:firefox": "pnpm --filter web-extension build:firefox",
+    "zip": "pnpm --filter web-extension zip",
+    "zip:firefox": "pnpm --filter web-extension zip:firefox",
+    "compile": "pnpm --filter web-extension compile",
+    "postinstall": "pnpm --filter web-extension postinstall"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "pnpm@10.0.0"
+}
