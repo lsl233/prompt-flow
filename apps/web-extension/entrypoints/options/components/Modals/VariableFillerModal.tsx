@@ -56,6 +56,8 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
       await navigator.clipboard.writeText(generatedContent);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+      // Record usage
+      store.recordPromptUsage(prompt.id);
     } catch (err) {
       console.error('Failed to copy text: ', err);
     }

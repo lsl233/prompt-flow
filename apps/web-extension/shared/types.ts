@@ -14,6 +14,8 @@ export interface Prompt {
   versions: PromptVersion[];
   createdAt: number;
   updatedAt: number;
+  useCount: number;
+  lastUsedAt: number | null;
 }
 
 export type ViewState = 'dashboard' | 'library';

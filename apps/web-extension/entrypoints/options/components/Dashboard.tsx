@@ -1,5 +1,5 @@
 import { Store } from '../useStore';
-import { FileText, Hash, Clock, Plus, Star } from 'lucide-react';
+import { FileText, Hash, Clock, Plus, Star, TrendingUp, History } from 'lucide-react';
 
 interface DashboardProps {
   store: Store;
@@ -9,9 +9,18 @@ interface DashboardProps {
 export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
   const { prompts, allTags } = store;
 
-  const totalVersions = prompts.reduce((acc, p) => acc + p.versions.length, 0);
-  const recentPrompts = [...prompts].sort((a, b) => b.updatedAt - a.updatedAt).slice(0, 5);
+  const totalUsage = prompts.reduce((acc, p) => acc + (p.useCount || 0), 0);
+  // Recent activity: sort by lastUsedAt (most recently used first)
+  const recentlyUsedPrompts = [...prompts]
+    .filter(p => p.lastUsedAt !== null)
+    .sort((a, b) => (b.lastUsedAt || 0) - (a.lastUsedAt || 0))
+    .slice(0, 5);
   const favoritePrompts = prompts.filter(p => p.isFavorite);
+  // Most used prompts (top 5)
+  const mostUsedPrompts = [...prompts]
+    .filter(p => (p.useCount || 0) > 0)
+    .sort((a, b) => (b.useCount || 0) - (a.useCount || 0))
+    .slice(0, 5);
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -43,11 +52,11 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
 
         <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex items-center gap-4">
           <div className="w-12 h-12 rounded-full bg-purple-50 dark:bg-purple-900/30 flex items-center justify-center text-purple-600 dark:text-purple-400">
-            <Clock size={24} />
+            <TrendingUp size={24} />
           </div>
           <div>
-            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Total Versions</p>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">{totalVersions}</p>
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Total Usage</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-white">{totalUsage}</p>
           </div>
         </div>
       </div>
@@ -55,45 +64,70 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Recent Activity</h2>
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+              <History size={18} className="text-slate-400" />
+              Recently Used
+            </h2>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
-            {recentPrompts.length > 0 ? (
+            {recentlyUsedPrompts.length > 0 ? (
               <ul className="divide-y divide-slate-100 dark:divide-slate-700/50">
-                {recentPrompts.map(prompt => (
+                {recentlyUsedPrompts.map(prompt => (
                   <li key={prompt.id} className="p-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors cursor-pointer" onClick={() => store.setView('library')}>
                     <div className="flex items-center justify-between">
                       <p className="font-medium text-slate-900 dark:text-white truncate">{prompt.title}</p>
-                      <span className="text-xs text-slate-400">{new Date(prompt.updatedAt).toLocaleDateString()}</span>
+                      <span className="text-xs text-slate-400">{new Date(prompt.lastUsedAt!).toLocaleDateString()}</span>
                     </div>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 truncate mt-1">{prompt.description}</p>
+                    <div className="flex items-center justify-between mt-1">
+                      <p className="text-sm text-slate-500 dark:text-slate-400 truncate">{prompt.description}</p>
+                      <span className="text-xs text-slate-400">Used {prompt.useCount} time{prompt.useCount === 1 ? '' : 's'}</span>
+                    </div>
                   </li>
                 ))}
               </ul>
             ) : (
-              <div className="p-8 text-center text-slate-500">No recent activity.</div>
+              <div className="p-8 text-center text-slate-500">
+                <p className="text-sm">No recently used prompts.</p>
+                <p className="text-xs mt-1 text-slate-400">Start using your prompts to see them here.</p>
+              </div>
             )}
           </div>
         </div>
 
         <div className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Favorites</h2>
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+              <TrendingUp size={18} className="text-slate-400" />
+              Most Used
+            </h2>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
-            {favoritePrompts.length > 0 ? (
+            {mostUsedPrompts.length > 0 ? (
               <ul className="divide-y divide-slate-100 dark:divide-slate-700/50">
-                {favoritePrompts.map(prompt => (
+                {mostUsedPrompts.map((prompt, index) => (
                   <li key={prompt.id} className="p-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors cursor-pointer" onClick={() => store.setView('library')}>
                     <div className="flex items-center gap-3">
-                      <Star size={16} className="text-amber-400 fill-amber-400" />
-                      <p className="font-medium text-slate-900 dark:text-white truncate">{prompt.title}</p>
+                      <span className={`flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
+                        index === 0 ? 'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400' :
+                        index === 1 ? 'bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-400' :
+                        index === 2 ? 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400' :
+                        'bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-500'
+                      }`}>
+                        {index + 1}
+                      </span>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium text-slate-900 dark:text-white truncate">{prompt.title}</p>
+                        <p className="text-xs text-slate-400">{prompt.useCount} use{prompt.useCount === 1 ? '' : 's'}</p>
+                      </div>
                     </div>
                   </li>
                 ))}
               </ul>
             ) : (
-              <div className="p-8 text-center text-slate-500">No favorite prompts yet.</div>
+              <div className="p-8 text-center text-slate-500">
+                <p className="text-sm">No usage data yet.</p>
+                <p className="text-xs mt-1 text-slate-400">Your most used prompts will appear here.</p>
+              </div>
             )}
           </div>
         </div>

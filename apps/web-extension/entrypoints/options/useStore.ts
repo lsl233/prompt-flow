@@ -5,7 +5,7 @@ import { browser } from 'wxt/browser';
 const STORAGE_KEY = 'promptflow_prompts';
 const STORAGE_VERSION_KEY = 'promptflow_version';
 const STORAGE_THEME_KEY = 'promptflow_theme';
-const CURRENT_VERSION = 1;
+const CURRENT_VERSION = 2;
 const MAX_VERSIONS_PER_PROMPT = 20;
 
 const INITIAL_PROMPTS: Prompt[] = [];
@@ -75,10 +75,15 @@ export function useStore() {
   }, []);
 
   // Data migration function
-  const migrateData = (data: Prompt[], _fromVersion: number): Prompt[] => {
-    // Add future migration logic here
-    // _fromVersion is prefixed with underscore to indicate it's intentionally unused
-    // It will be used when adding new migration logic in the future
+  const migrateData = (data: Prompt[], fromVersion: number): Prompt[] => {
+    // Migration from version 1 to 2: add useCount and lastUsedAt fields
+    if (fromVersion < 2) {
+      return data.map(prompt => ({
+        ...prompt,
+        useCount: 0,
+        lastUsedAt: null,
+      }));
+    }
     return data;
   };
 
@@ -114,13 +119,15 @@ export function useStore() {
     });
   };
 
-  const addPrompt = (prompt: Omit<Prompt, 'id' | 'createdAt' | 'updatedAt' | 'versions'>) => {
+  const addPrompt = (prompt: Omit<Prompt, 'id' | 'createdAt' | 'updatedAt' | 'versions' | 'useCount' | 'lastUsedAt'>) => {
     const newPrompt: Prompt = {
       ...prompt,
       id: Math.random().toString(36).substring(2, 9),
       createdAt: Date.now(),
       updatedAt: Date.now(),
-      versions: [{ id: Math.random().toString(36).substring(2, 9), content: prompt.content, timestamp: Date.now() }]
+      versions: [{ id: Math.random().toString(36).substring(2, 9), content: prompt.content, timestamp: Date.now() }],
+      useCount: 0,
+      lastUsedAt: null,
     };
     setPrompts([newPrompt, ...prompts]);
   };
@@ -181,6 +188,20 @@ export function useStore() {
     updatePrompt(promptId, { content: version.content });
   };
 
+  // Record prompt usage (increment useCount and update lastUsedAt)
+  const recordPromptUsage = (promptId: string) => {
+    setPrompts(prompts.map(p => {
+      if (p.id === promptId) {
+        return {
+          ...p,
+          useCount: (p.useCount || 0) + 1,
+          lastUsedAt: Date.now(),
+        };
+      }
+      return p;
+    }));
+  };
+
   const allTags = Array.from(new Set(prompts.flatMap(p => p.tags))).sort();
 
   // Filtered prompts based on selected tag
@@ -203,6 +224,7 @@ export function useStore() {
     duplicatePrompt,
     deleteVersion,
     restoreVersion,
+    recordPromptUsage,
     allTags,
     setPrompts
   };

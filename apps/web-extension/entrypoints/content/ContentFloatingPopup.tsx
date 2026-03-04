@@ -92,8 +92,26 @@ export default function ContentFloatingPopup() {
     setTimeout(() => setCopied(false), 1500);
   };
 
-  const handleSelect = (_prompt: unknown, filledContent: string) => {
+  const handleSelect = async (prompt: Prompt, filledContent: string) => {
     insertContent(filledContent);
+    // Record usage by updating storage directly
+    try {
+      const result = await browser.storage.local.get('promptflow_prompts');
+      const storedPrompts = (result.promptflow_prompts || []) as Prompt[];
+      const updatedPrompts = storedPrompts.map(p => {
+        if (p.id === prompt.id) {
+          return {
+            ...p,
+            useCount: (p.useCount || 0) + 1,
+            lastUsedAt: Date.now(),
+          };
+        }
+        return p;
+      });
+      await browser.storage.local.set({ promptflow_prompts: updatedPrompts });
+    } catch (e) {
+      console.error('[Prompt Flow] Failed to record usage:', e);
+    }
   };
 
   const handleClose = () => {

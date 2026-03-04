@@ -90,7 +90,7 @@ export default function Topbar({ toggleTheme, isDarkMode, onCreatePrompt, prompt
 
   return (
     <>
-      <header className="h-16 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 flex items-center justify-between px-6 sticky top-0 z-10">
+      <header className="h-16 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 flex items-center justify-between px-6 sticky top-0">
         <div className="flex-1 flex items-center" ref={containerRef}>
           <div className="relative w-full max-w-md hidden sm:block">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />

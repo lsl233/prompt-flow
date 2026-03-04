@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Store } from '../useStore';
 import PromptPicker from '@/shared/components/PromptPicker';
+import type { Prompt } from '@/shared/types';
 
 interface FloatingPopupProps {
   store: Store;
@@ -10,9 +11,11 @@ interface FloatingPopupProps {
 export default function FloatingPopup({ store, onClose }: FloatingPopupProps) {
   const [copied, setCopied] = useState(false);
 
-  const handleSelect = async (_prompt: unknown, filledContent: string) => {
+  const handleSelect = async (prompt: Prompt, filledContent: string) => {
     try {
       await navigator.clipboard.writeText(filledContent);
+      // Record usage
+      store.recordPromptUsage(prompt.id);
       setCopied(true);
       setTimeout(() => {
         setCopied(false);

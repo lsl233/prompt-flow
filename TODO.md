@@ -112,13 +112,14 @@
 
 ---
 
-### 9. 提示词使用统计
+### 9. 提示词使用统计 ✅ 已完成
 
 **文件**：`apps/web-extension/entrypoints/options/components/Dashboard.tsx`
 
-**可改进项**：
-- [ ] 记录使用次数（useCount）
-- [ ] 最近使用过的提示词排序
+**已完成功能**：
+- [x] 记录使用次数（useCount）- 在 Prompt 类型中添加 useCount 字段
+- [x] 最近使用过的提示词排序 - Dashboard 显示 Recently Used 和 Most Used 列表
+- [x] 数据迁移 - 自动为旧数据添加 useCount 和 lastUsedAt 字段
 
 ---
 
