@@ -1,12 +1,18 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { browser } from 'wxt/browser';
 import type { Prompt } from '@/shared/types';
 import PromptPicker from '@/shared/components/PromptPicker';
+import Toast from '@/shared/components/Toast';
 
 export default function ContentFloatingPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [copied, setCopied] = useState(false);
+  const [toast, setToast] = useState<{ message: string; visible: boolean }>({
+    message: '',
+    visible: false,
+  });
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Load prompts from storage
   useEffect(() => {
@@ -80,16 +86,23 @@ export default function ContentFloatingPopup() {
       activeElement.selectionStart = activeElement.selectionEnd = start + content.length;
       activeElement.dispatchEvent(new Event('input', { bubbles: true }));
       activeElement.focus();
+
+      setIsOpen(false);
+      setCopied(true);
+      showNotification('Prompt inserted!');
+      setTimeout(() => setCopied(false), 1500);
     } else {
       // Fallback: copy to clipboard
-      navigator.clipboard.writeText(content).catch(err => {
+      navigator.clipboard.writeText(content).then(() => {
+        setIsOpen(false);
+        setCopied(true);
+        showNotification('Prompt copied to clipboard!');
+        setTimeout(() => setCopied(false), 1500);
+      }).catch(err => {
         console.error('[Prompt Flow] Failed to copy:', err);
+        showNotification('Failed to copy prompt');
       });
     }
-
-    setIsOpen(false);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
   };
 
   const handleSelect = async (prompt: Prompt, filledContent: string) => {
@@ -118,22 +131,53 @@ export default function ContentFloatingPopup() {
     setIsOpen(false);
   };
 
-  if (!isOpen) return null;
+  // Handle click outside to close popup
+  const handleOverlayClick = useCallback((e: React.MouseEvent) => {
+    // Close when clicking the overlay background (not the popup content)
+    if (e.target === e.currentTarget) {
+      setIsOpen(false);
+    }
+  }, []);
+
+  // Show toast notification
+  const showNotification = useCallback((message: string) => {
+    setToast({ message, visible: true });
+  }, []);
+
+  const hideToast = useCallback(() => {
+    setToast(prev => ({ ...prev, visible: false }));
+  }, []);
 
   return (
-    <div className="fixed inset-0 z-[2147483647] flex items-start justify-center pt-[15vh] p-4 bg-slate-900/50 backdrop-blur-sm">
-      <div
-        className="bg-white dark:bg-slate-800 w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"
-        onClick={e => e.stopPropagation()}
-      >
-        <PromptPicker
-          prompts={prompts}
-          onSelect={handleSelect}
-          onClose={handleClose}
-          classNamePrefix=""
-          actionLabel={copied ? 'Inserted!' : 'Insert / Copy'}
-        />
-      </div>
-    </div>
+    <>
+      {/* Popup Modal */}
+      {isOpen && (
+        <div
+          ref={containerRef}
+          className="fixed inset-0 z-[2147483647] flex items-start justify-center pt-[15vh] p-4 bg-slate-900/50 backdrop-blur-sm"
+          onClick={handleOverlayClick}
+        >
+          <div
+            className="bg-white dark:bg-slate-800 w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+            onClick={e => e.stopPropagation()}
+          >
+            <PromptPicker
+              prompts={prompts}
+              onSelect={handleSelect}
+              onClose={handleClose}
+              classNamePrefix=""
+              actionLabel={copied ? 'Inserted!' : 'Insert / Copy'}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Toast Notification - 独立于弹窗显示 */}
+      <Toast
+        message={toast.message}
+        visible={toast.visible}
+        onClose={hideToast}
+      />
+    </>
   );
 }

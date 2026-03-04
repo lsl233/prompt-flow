@@ -158,6 +158,8 @@ CSS is automatically injected into the Shadow DOM. The content script uses `pf-`
 5. **Theme persistence** - Dark/light mode now saves to storage
 6. **Tags selector improvement** - Dropdown with filtering and keyboard navigation
 7. **Save as New Prompt** - VariableFillerModal can save filled prompts
+8. **Content Script interactions** - Click outside to close popup, Toast notifications for copy/insert
+9. **Created `Toast` component** - Reusable toast notification in `shared/components/`
 
 ## Important File Locations
 

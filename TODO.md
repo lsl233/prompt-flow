@@ -22,13 +22,13 @@
 - [ ] 用户可自定义快捷键配置
 - [ ] 快捷键冲突检测与提示
 
-### 3. Content Script 交互优化
+### 3. Content Script 交互优化 ✅
 
 **文件**：`entrypoints/content.ts`, `entrypoints/content/ContentFloatingPopup.tsx`
 
-**需求**：
-- [ ] 点击外部区域关闭弹窗（需处理 Shadow DOM 边界）
-- [ ] 复制提示词成功后显示提示（Toast 或短暂提示文字）
+**已完成**：
+- [x] 点击外部区域关闭弹窗（通过 `onClick` 处理 overlay 点击事件）
+- [x] 复制提示词成功后显示 Toast 提示（2秒自动消失，支持插入/复制两种场景）
 
 ### 4. 多语言支持 (i18n)
 
