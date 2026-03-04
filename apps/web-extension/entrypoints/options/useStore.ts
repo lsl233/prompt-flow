@@ -8,32 +8,7 @@ const STORAGE_THEME_KEY = 'promptflow_theme';
 const CURRENT_VERSION = 1;
 const MAX_VERSIONS_PER_PROMPT = 20;
 
-const INITIAL_PROMPTS: Prompt[] = [
-  {
-    id: '1',
-    title: 'Code Review Assistant',
-    description: 'Analyze code for bugs, style, and performance.',
-    content: 'Please review the following code for any bugs, style issues, or performance improvements. \n\nLanguage: {{language}}\n\nCode:\n```\n{{code}}\n```',
-    tags: ['Development', 'Review'],
-    isFavorite: true,
-    versions: [
-      { id: 'v1', content: 'Please review the following code.', timestamp: Date.now() - 100000 }
-    ],
-    createdAt: Date.now() - 100000,
-    updatedAt: Date.now(),
-  },
-  {
-    id: '2',
-    title: 'Email Responder',
-    description: 'Draft a professional response to an email.',
-    content: 'Draft a professional and polite response to the following email. The tone should be {{tone}}.\n\nOriginal Email:\n{{email_content}}\n\nKey points to include:\n{{key_points}}',
-    tags: ['Communication', 'Email'],
-    isFavorite: false,
-    versions: [],
-    createdAt: Date.now() - 50000,
-    updatedAt: Date.now() - 50000,
-  }
-];
+const INITIAL_PROMPTS: Prompt[] = [];
 
 export function useStore() {
   const [prompts, setPrompts] = useState<Prompt[]>(INITIAL_PROMPTS);

@@ -1,0 +1,29 @@
+{
+  "skill_name": "todo-manager",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "在 TODO.md 里记录一个新 bug：点击侧边栏标签没有过滤效果，文件位置是 Sidebar.tsx:53",
+      "expected_output": "Adds a new bug entry to the TODO.md file in the '已知问题' table with the description, file location, and impact",
+      "files": ["TODO.md"]
+    },
+    {
+      "id": 2,
+      "prompt": "帮我清理 TODO.md 中已完成的项",
+      "expected_output": "Removes or archives completed TODO items (those with [x] or ~~strikethrough~~) to keep the file clean and manageable",
+      "files": ["TODO.md"]
+    },
+    {
+      "id": 3,
+      "prompt": "添加一个需求：需要实现数据导入功能，位置在 ImportExportModal.tsx:34",
+      "expected_output": "Adds a new feature request section with proper formatting, including status, file location, and checklist items",
+      "files": ["TODO.md"]
+    },
+    {
+      "id": 4,
+      "prompt": "完成第5个TODO：实现主题切换功能",
+      "expected_output": "Reads the TODO item #5, reads the relevant code files, implements the theme toggle functionality, and marks the TODO as completed",
+      "files": ["TODO.md", "apps/web-extension/entrypoints/options/components/Topbar.tsx"]
+    }
+  ]
+}
