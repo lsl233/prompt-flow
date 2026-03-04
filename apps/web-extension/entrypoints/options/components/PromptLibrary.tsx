@@ -136,6 +136,7 @@ export default function PromptLibrary({ store, onEditPrompt }: PromptLibraryProp
         <VariableFillerModal
           prompt={store.prompts.find(p => p.id === fillerPromptId)!}
           onClose={() => setFillerPromptId(null)}
+          store={store}
         />
       )}
 

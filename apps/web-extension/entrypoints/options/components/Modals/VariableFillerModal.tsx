@@ -1,15 +1,22 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Prompt } from '../../types';
-import { X, Copy, Check } from 'lucide-react';
+import { X, Copy, Check, Save } from 'lucide-react';
+import { Store } from '../../useStore';
 
 interface VariableFillerModalProps {
   prompt: Prompt;
   onClose: () => void;
+  store: Store;
 }
 
-export default function VariableFillerModal({ prompt, onClose }: VariableFillerModalProps) {
+export default function VariableFillerModal({ prompt, onClose, store }: VariableFillerModalProps) {
   const [variables, setVariables] = useState<Record<string, string>>({});
   const [copied, setCopied] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [newTitle, setNewTitle] = useState(`${prompt.title} (Filled)`);
+  const [newDescription, setNewDescription] = useState(`Generated from: ${prompt.description}`);
+  const [newTags, setNewTags] = useState<string[]>(prompt.tags);
 
   const variableNames = useMemo(() => {
     const regex = /\{\{([^}]+)\}\}/g;
@@ -51,6 +58,36 @@ export default function VariableFillerModal({ prompt, onClose }: VariableFillerM
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy text: ', err);
+    }
+  };
+
+  const handleSaveAsNew = () => {
+    if (!newTitle.trim()) return;
+
+    store.addPrompt({
+      title: newTitle,
+      description: newDescription,
+      content: generatedContent,
+      tags: newTags,
+      isFavorite: false
+    });
+
+    setSaved(true);
+    setTimeout(() => {
+      setSaved(false);
+      setShowSaveDialog(false);
+      onClose();
+    }, 1500);
+  };
+
+  const removeTag = (tagToRemove: string) => {
+    setNewTags(newTags.filter(t => t !== tagToRemove));
+  };
+
+  const addTag = (tag: string) => {
+    const trimmed = tag.trim();
+    if (trimmed && !newTags.includes(trimmed)) {
+      setNewTags([...newTags, trimmed]);
     }
   };
 
@@ -126,6 +163,13 @@ export default function VariableFillerModal({ prompt, onClose }: VariableFillerM
             Close
           </button>
           <button
+            onClick={() => setShowSaveDialog(true)}
+            className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors flex items-center gap-2"
+          >
+            <Save size={16} />
+            Save as New
+          </button>
+          <button
             onClick={handleCopy}
             className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm shadow-blue-500/20 flex items-center gap-2"
           >
@@ -134,6 +178,104 @@ export default function VariableFillerModal({ prompt, onClose }: VariableFillerM
           </button>
         </div>
       </div>
+
+      {/* Save as New Prompt Dialog */}
+      {showSaveDialog && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-slate-800 w-full max-w-lg rounded-2xl shadow-xl flex flex-col max-h-full overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700">
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Save as New Prompt</h3>
+              <button
+                onClick={() => setShowSaveDialog(false)}
+                className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4 overflow-y-auto">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Title</label>
+                <input
+                  type="text"
+                  value={newTitle}
+                  onChange={e => setNewTitle(e.target.value)}
+                  placeholder="Enter prompt title..."
+                  className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
+                  autoFocus
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Description</label>
+                <input
+                  type="text"
+                  value={newDescription}
+                  onChange={e => setNewDescription(e.target.value)}
+                  placeholder="Brief description..."
+                  className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Tags</label>
+                <div className="flex flex-wrap gap-2">
+                  {newTags.map(tag => (
+                    <span key={tag} className="flex items-center gap-1 px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs rounded-md font-medium">
+                      {tag}
+                      <button onClick={() => removeTag(tag)} className="text-slate-400 hover:text-red-500"><X size={12} /></button>
+                    </span>
+                  ))}
+                  {newTags.length === 0 && (
+                    <span className="text-sm text-slate-400 italic">No tags</span>
+                  )}
+                </div>
+                <div className="flex gap-2 mt-2">
+                  <input
+                    type="text"
+                    placeholder="Add a tag and press Enter"
+                    onKeyDown={e => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        const input = e.target as HTMLInputElement;
+                        addTag(input.value);
+                        input.value = '';
+                      }
+                    }}
+                    className="flex-1 px-3 py-1.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Preview</label>
+                <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-3 max-h-32 overflow-y-auto">
+                  <pre className="text-xs text-slate-600 dark:text-slate-400 whitespace-pre-wrap break-words">
+                    {generatedContent.slice(0, 200)}{generatedContent.length > 200 ? '...' : ''}
+                  </pre>
+                </div>
+              </div>
+            </div>
+
+            <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex justify-end gap-3 bg-slate-50 dark:bg-slate-800/50">
+              <button
+                onClick={() => setShowSaveDialog(false)}
+                className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSaveAsNew}
+                disabled={!newTitle.trim() || saved}
+                className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors shadow-sm shadow-emerald-500/20 flex items-center gap-2"
+              >
+                {saved ? <Check size={16} /> : <Save size={16} />}
+                {saved ? 'Saved!' : 'Save Prompt'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

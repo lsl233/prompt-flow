@@ -54,6 +54,7 @@ export default function App() {
           isDarkMode={store.isDarkMode}
           onCreatePrompt={handleCreatePrompt}
           prompts={store.prompts}
+          store={store}
         />
 
         <main className="flex-1 overflow-y-auto p-6">

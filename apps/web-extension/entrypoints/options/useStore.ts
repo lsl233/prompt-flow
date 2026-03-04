@@ -4,6 +4,7 @@ import { browser } from 'wxt/browser';
 
 const STORAGE_KEY = 'promptflow_prompts';
 const STORAGE_VERSION_KEY = 'promptflow_version';
+const STORAGE_THEME_KEY = 'promptflow_theme';
 const CURRENT_VERSION = 1;
 const MAX_VERSIONS_PER_PROMPT = 20;
 
@@ -71,6 +72,12 @@ export function useStore() {
           await browser.storage.local.set({ [STORAGE_KEY]: INITIAL_PROMPTS });
           await browser.storage.local.set({ [STORAGE_VERSION_KEY]: CURRENT_VERSION });
         }
+
+        // Load theme preference
+        const themeResult = await browser.storage.local.get(STORAGE_THEME_KEY);
+        if (themeResult[STORAGE_THEME_KEY] !== undefined) {
+          setIsDarkMode(themeResult[STORAGE_THEME_KEY] as boolean);
+        }
       } catch (e) {
         // Fallback to localStorage
         const saved = localStorage.getItem(STORAGE_KEY);
@@ -112,7 +119,14 @@ export function useStore() {
     }
   }, [isDarkMode]);
 
-  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+  const toggleTheme = () => {
+    const newValue = !isDarkMode;
+    setIsDarkMode(newValue);
+    browser.storage.local.set({ [STORAGE_THEME_KEY]: newValue }).catch(() => {
+      // Fallback to localStorage
+      localStorage.setItem(STORAGE_THEME_KEY, JSON.stringify(newValue));
+    });
+  };
 
   const addPrompt = (prompt: Omit<Prompt, 'id' | 'createdAt' | 'updatedAt' | 'versions'>) => {
     const newPrompt: Prompt = {

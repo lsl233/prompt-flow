@@ -3,14 +3,17 @@ import { Search, Sun, Moon, Plus, User, X } from 'lucide-react';
 import { Prompt } from '../types';
 import VariableFillerModal from './Modals/VariableFillerModal';
 
+import { Store } from '../useStore';
+
 interface TopbarProps {
   toggleTheme: () => void;
   isDarkMode: boolean;
   onCreatePrompt: () => void;
   prompts: Prompt[];
+  store: Store;
 }
 
-export default function Topbar({ toggleTheme, isDarkMode, onCreatePrompt, prompts }: TopbarProps) {
+export default function Topbar({ toggleTheme, isDarkMode, onCreatePrompt, prompts, store }: TopbarProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [showResults, setShowResults] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -189,6 +192,7 @@ export default function Topbar({ toggleTheme, isDarkMode, onCreatePrompt, prompt
         <VariableFillerModal
           prompt={prompts.find(p => p.id === selectedPromptId)!}
           onClose={() => setSelectedPromptId(null)}
+          store={store}
         />
       )}
     </>

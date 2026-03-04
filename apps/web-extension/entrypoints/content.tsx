@@ -1,5 +1,6 @@
-import { createRoot } from 'react-dom/client';
+import { createShadowRootUi } from 'wxt/utils/content-script-ui/shadow-root';
 import ContentFloatingPopup from './content/ContentFloatingPopup';
+import ReactDOM from 'react-dom/client';
 import './content/content-styles.css';
 
 export default defineContentScript({
@@ -8,35 +9,24 @@ export default defineContentScript({
     '*://*.google.com/recaptcha/*',
     '*://*.gstatic.com/recaptcha/*',
   ],
-  main() {
-    // Create container with Shadow DOM for style isolation
-    const container = document.createElement('div');
-    container.id = 'prompt-flow-container';
-    document.body.appendChild(container);
+  cssInjectionMode: 'ui',
+  async main(ctx) {
+    const ui = await createShadowRootUi(ctx, {
+      name: 'prompt-flow-popup',
+      position: 'overlay',
+      anchor: 'body',
+      append: 'first',
+      onMount(container: HTMLElement) {
+        const root = ReactDOM.createRoot(container);
+        root.render(<ContentFloatingPopup />);
+        return root;
+      },
+      onRemove(root: ReactDOM.Root | undefined) {
+        root?.unmount();
+      },
+    });
 
-    // Create shadow root
-    const shadowRoot = container.attachShadow({ mode: 'open' });
-
-    // Create style element for Tailwind CSS
-    const style = document.createElement('style');
-    style.textContent = `
-      /* Reset styles */
-      :host {
-        all: initial;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      }
-      /* Tailwind will be injected here by the build process */
-    `;
-    shadowRoot.appendChild(style);
-
-    // Create root element for React
-    const rootElement = document.createElement('div');
-    rootElement.id = 'prompt-flow-root';
-    shadowRoot.appendChild(rootElement);
-
-    // Mount React app
-    const root = createRoot(rootElement);
-    root.render(<ContentFloatingPopup />);
+    ui.mount();
 
     // Listen for messages from background script
     browser.runtime.onMessage.addListener((message) => {
