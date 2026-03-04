@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Search, Sun, Moon, Plus, User, X } from 'lucide-react';
 import { Prompt } from '@/shared/types';
 import VariableFillerModal from './Modals/VariableFillerModal';
+import { useI18n } from '@/shared/i18n';
 
 import { Store } from '../useStore';
 
@@ -14,6 +15,7 @@ interface TopbarProps {
 }
 
 export default function Topbar({ toggleTheme, isDarkMode, onCreatePrompt, prompts, store }: TopbarProps) {
+  const { t } = useI18n();
   const [searchQuery, setSearchQuery] = useState('');
   const [showResults, setShowResults] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -97,7 +99,7 @@ export default function Topbar({ toggleTheme, isDarkMode, onCreatePrompt, prompt
             <input
               ref={inputRef}
               type="text"
-              placeholder="Search prompts (Cmd+K in any page)"
+              placeholder={t('topbarSearchPlaceholder')}
               value={searchQuery}
               onChange={handleInputChange}
               onFocus={() => searchQuery && setShowResults(true)}
@@ -117,7 +119,7 @@ export default function Topbar({ toggleTheme, isDarkMode, onCreatePrompt, prompt
               <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden z-50">
                 {filteredPrompts.length === 0 ? (
                   <div className="p-4 text-center text-slate-500 text-sm">
-                    No prompts found
+                    {t('topbarNoPromptsFound')}
                   </div>
                 ) : (
                   <>
@@ -153,10 +155,10 @@ export default function Topbar({ toggleTheme, isDarkMode, onCreatePrompt, prompt
                     </ul>
                     <div className="px-4 py-2 border-t border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between text-xs text-slate-500">
                       <div className="flex gap-3">
-                        <span>↑↓ navigate</span>
-                        <span>↵ select</span>
+                        <span>↑↓ {t('topbarNavigate')}</span>
+                        <span>↵ {t('topbarSelect')}</span>
                       </div>
-                      <span>esc close</span>
+                      <span>esc {t('topbarClose')}</span>
                     </div>
                   </>
                 )}
@@ -171,13 +173,13 @@ export default function Topbar({ toggleTheme, isDarkMode, onCreatePrompt, prompt
             className="hidden sm:flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors shadow-sm shadow-blue-500/20"
           >
             <Plus size={16} />
-            Create Prompt
+            {t('topbarCreatePrompt')}
           </button>
 
           <button
             onClick={toggleTheme}
             className="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full transition-colors"
-            aria-label="Toggle theme"
+            aria-label={t('topbarToggleTheme')}
           >
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>

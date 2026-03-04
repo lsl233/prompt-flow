@@ -3,6 +3,7 @@ import { browser } from 'wxt/browser';
 import type { Prompt } from '@/shared/types';
 import PromptPicker from '@/shared/components/PromptPicker';
 import Toast from '@/shared/components/Toast';
+import { t } from '@/shared/i18n';
 
 export default function ContentFloatingPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -89,18 +90,18 @@ export default function ContentFloatingPopup() {
 
       setIsOpen(false);
       setCopied(true);
-      showNotification('Prompt inserted!');
+      showNotification(t('contentInserted'));
       setTimeout(() => setCopied(false), 1500);
     } else {
       // Fallback: copy to clipboard
       navigator.clipboard.writeText(content).then(() => {
         setIsOpen(false);
         setCopied(true);
-        showNotification('Prompt copied to clipboard!');
+        showNotification(t('contentCopied'));
         setTimeout(() => setCopied(false), 1500);
       }).catch(err => {
         console.error('[Prompt Flow] Failed to copy:', err);
-        showNotification('Failed to copy prompt');
+        showNotification(t('contentCopyFailed'));
       });
     }
   };
@@ -166,7 +167,7 @@ export default function ContentFloatingPopup() {
               onSelect={handleSelect}
               onClose={handleClose}
               classNamePrefix=""
-              actionLabel={copied ? 'Inserted!' : 'Insert / Copy'}
+              actionLabel={copied ? t('contentInserted') : t('variablesCopyClipboard')}
             />
           </div>
         </div>

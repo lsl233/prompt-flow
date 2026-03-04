@@ -1,5 +1,6 @@
 import { Store } from '../useStore';
 import { FileText, Hash, Plus, TrendingUp, History } from 'lucide-react';
+import { useI18n } from '@/shared/i18n';
 
 interface DashboardProps {
   store: Store;
@@ -7,6 +8,7 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
+  const { t } = useI18n();
   const { prompts, allTags } = store;
 
   const totalUsage = prompts.reduce((acc, p) => acc + (p.useCount || 0), 0);
@@ -24,8 +26,8 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Welcome back</h1>
-        <p className="text-slate-500 dark:text-slate-400">Here&apos;s an overview of your prompt library.</p>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{t('dashboardWelcome')}</h1>
+        <p className="text-slate-500 dark:text-slate-400">{t('dashboardOverview')}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -34,7 +36,7 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
             <FileText size={24} />
           </div>
           <div>
-            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Total Prompts</p>
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{t('dashboardTotalPrompts')}</p>
             <p className="text-2xl font-bold text-slate-900 dark:text-white">{prompts.length}</p>
           </div>
         </div>
@@ -44,7 +46,7 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
             <Hash size={24} />
           </div>
           <div>
-            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Tags</p>
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{t('dashboardTags')}</p>
             <p className="text-2xl font-bold text-slate-900 dark:text-white">{allTags.length}</p>
           </div>
         </div>
@@ -54,7 +56,7 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
             <TrendingUp size={24} />
           </div>
           <div>
-            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">Total Usage</p>
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{t('dashboardTotalUsage')}</p>
             <p className="text-2xl font-bold text-slate-900 dark:text-white">{totalUsage}</p>
           </div>
         </div>
@@ -65,7 +67,7 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
               <History size={18} className="text-slate-400" />
-              Recently Used
+              {t('dashboardRecentlyUsed')}
             </h2>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
@@ -79,15 +81,15 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
                     </div>
                     <div className="flex items-center justify-between mt-1">
                       <p className="text-sm text-slate-500 dark:text-slate-400 truncate">{prompt.description}</p>
-                      <span className="text-xs text-slate-400">Used {prompt.useCount} time{prompt.useCount === 1 ? '' : 's'}</span>
+                      <span className="text-xs text-slate-400">{t('dashboardUsedTimes', [String(prompt.useCount || 0), prompt.useCount === 1 ? '' : 's'])}</span>
                     </div>
                   </li>
                 ))}
               </ul>
             ) : (
               <div className="p-8 text-center text-slate-500">
-                <p className="text-sm">No recently used prompts.</p>
-                <p className="text-xs mt-1 text-slate-400">Start using your prompts to see them here.</p>
+                <p className="text-sm">{t('dashboardNoRecent')}</p>
+                <p className="text-xs mt-1 text-slate-400">{t('dashboardStartUsing')}</p>
               </div>
             )}
           </div>
@@ -97,7 +99,7 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white flex items-center gap-2">
               <TrendingUp size={18} className="text-slate-400" />
-              Most Used
+              {t('dashboardMostUsed')}
             </h2>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
@@ -116,7 +118,7 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
                       </span>
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-slate-900 dark:text-white truncate">{prompt.title}</p>
-                        <p className="text-xs text-slate-400">{prompt.useCount} use{prompt.useCount === 1 ? '' : 's'}</p>
+                        <p className="text-xs text-slate-400">{t('dashboardUsedTimes', [String(prompt.useCount || 0), prompt.useCount === 1 ? '' : 's'])}</p>
                       </div>
                     </div>
                   </li>
@@ -124,8 +126,8 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
               </ul>
             ) : (
               <div className="p-8 text-center text-slate-500">
-                <p className="text-sm">No usage data yet.</p>
-                <p className="text-xs mt-1 text-slate-400">Your most used prompts will appear here.</p>
+                <p className="text-sm">{t('dashboardNoUsage')}</p>
+                <p className="text-xs mt-1 text-slate-400">{t('dashboardMostUsedHint')}</p>
               </div>
             )}
           </div>

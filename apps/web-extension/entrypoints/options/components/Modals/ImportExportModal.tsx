@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { Store } from '../../useStore';
 import { X, Download, FileJson, AlertTriangle, Check, Merge, Replace } from 'lucide-react';
 import { Prompt } from '@/shared/types';
+import { useI18n } from '@/shared/i18n';
 
 type ImportMode = 'replace' | 'merge';
 type ImportStep = 'upload' | 'preview' | 'confirm';
@@ -18,6 +19,7 @@ interface ImportPreview {
 }
 
 export default function ImportExportModal({ store, onClose }: ImportExportModalProps) {
+  const { t } = useI18n();
   const [dragActive, setDragActive] = useState(false);
   const [importStatus, setImportStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
   const [importMode, setImportMode] = useState<ImportMode>('merge');
@@ -75,14 +77,14 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
       } else if (parsed.prompts && Array.isArray(parsed.prompts)) {
         promptsToImport = parsed.prompts;
       } else {
-        setImportStatus({ type: 'error', message: 'Invalid format. Expected an array of prompts or an export object.' });
+        setImportStatus({ type: 'error', message: t('importExportInvalidFormat') });
         return;
       }
 
       const validPrompts = promptsToImport.filter(p => p.id && p.title && p.content);
 
       if (validPrompts.length === 0) {
-        setImportStatus({ type: 'error', message: 'No valid prompts found in the file.' });
+        setImportStatus({ type: 'error', message: t('importExportNoValidPrompts') });
         return;
       }
 
@@ -97,7 +99,7 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
         setImportStep('preview');
       }
     } catch (e) {
-      setImportStatus({ type: 'error', message: 'Failed to parse JSON file.' });
+      setImportStatus({ type: 'error', message: t('importExportParseError') });
     }
   };
 
@@ -106,7 +108,7 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
 
     if (importMode === 'replace') {
       store.setPrompts(pendingImport);
-      setImportStatus({ type: 'success', message: `Successfully replaced with ${pendingImport.length} prompts.` });
+      setImportStatus({ type: 'success', message: t('importExportSuccessReplace', [String(pendingImport.length)]) });
     } else {
       // Merge mode
       const existingIds = new Set(store.prompts.map(p => p.id));
@@ -131,7 +133,7 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
       store.setPrompts(merged);
       const newCount = pendingImport.filter(p => !existingIds.has(p.id)).length;
       const updatedCount = pendingImport.filter(p => existingIds.has(p.id)).length;
-      setImportStatus({ type: 'success', message: `Import complete: ${newCount} new, ${updatedCount} updated.` });
+      setImportStatus({ type: 'success', message: t('importExportSuccessMerge', [String(newCount), String(updatedCount)]) });
     }
 
     setTimeout(() => {
@@ -178,7 +180,7 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
         };
         reader.readAsText(file);
       } else {
-        setImportStatus({ type: 'error', message: 'Please upload a valid JSON file.' });
+        setImportStatus({ type: 'error', message: t('importExportInvalidFile') });
       }
     }
   };
@@ -196,9 +198,9 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
 
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700">
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
-            {importStep === 'upload' ? 'Import / Export' :
-             importStep === 'preview' ? 'Import Preview' :
-             'Confirm Import'}
+            {importStep === 'upload' ? t('importExportTitle') :
+             importStep === 'preview' ? t('importExportPreviewTitle') :
+             t('importExportConfirmTitle')}
           </h2>
           <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
             <X size={20} />
@@ -210,7 +212,7 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
             <div className="p-6 space-y-6">
               {/* Import Mode Selection */}
               <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700">
-                <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Import Mode</h3>
+                <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">{t('importExportModeTitle')}</h3>
                 <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={() => setImportMode('merge')}
@@ -222,8 +224,8 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
                   >
                     <Merge size={18} className={importMode === 'merge' ? 'text-blue-500' : 'text-slate-400'} />
                     <div>
-                      <p className={`text-sm font-medium ${importMode === 'merge' ? 'text-blue-700 dark:text-blue-400' : 'text-slate-700 dark:text-slate-300'}`}>Merge</p>
-                      <p className="text-xs text-slate-500">Add new, update existing</p>
+                      <p className={`text-sm font-medium ${importMode === 'merge' ? 'text-blue-700 dark:text-blue-400' : 'text-slate-700 dark:text-slate-300'}`}>{t('importExportMerge')}</p>
+                      <p className="text-xs text-slate-500">{t('importExportMergeDesc')}</p>
                     </div>
                   </button>
                   <button
@@ -236,33 +238,33 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
                   >
                     <Replace size={18} className={importMode === 'replace' ? 'text-amber-500' : 'text-slate-400'} />
                     <div>
-                      <p className={`text-sm font-medium ${importMode === 'replace' ? 'text-amber-700 dark:text-amber-400' : 'text-slate-700 dark:text-slate-300'}`}>Replace</p>
-                      <p className="text-xs text-slate-500">Delete all, start fresh</p>
+                      <p className={`text-sm font-medium ${importMode === 'replace' ? 'text-amber-700 dark:text-amber-400' : 'text-slate-700 dark:text-slate-300'}`}>{t('importExportReplace')}</p>
+                      <p className="text-xs text-slate-500">{t('importExportReplaceDesc')}</p>
                     </div>
                   </button>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Export Prompts</h3>
+                <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">{t('importExportExportTitle')}</h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mb-3">
-                  Download all your prompts and versions as a JSON file for backup or sharing.
+                  {t('importExportExportDesc')}
                 </p>
                 <button
                   onClick={handleExport}
                   className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 font-medium rounded-lg hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
                 >
                   <Download size={18} />
-                  Export to JSON
+                  {t('importExportExportButton')}
                 </button>
               </div>
 
               <div className="h-px bg-slate-200 dark:bg-slate-700 w-full" />
 
               <div>
-                <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Import Prompts</h3>
+                <h3 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">{t('importExportImportTitle')}</h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mb-3">
-                  Upload a previously exported JSON file.
+                  {t('importExportImportDesc')}
                 </p>
 
                 <div
@@ -286,10 +288,10 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
                   />
                   <FileJson size={32} className="mx-auto text-slate-400 mb-3" />
                   <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
-                    Click to upload or drag and drop
+                    {t('importExportUploadHint')}
                   </p>
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-                    JSON files only
+                    {t('importExportFileType')}
                   </p>
                 </div>
 
@@ -311,20 +313,20 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
               <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4">
                 <h3 className="text-sm font-semibold text-blue-700 dark:text-blue-400 mb-2 flex items-center gap-2">
                   <Check size={16} />
-                  Import Summary
+                  {t('importExportSummary')}
                 </h3>
                 <ul className="text-sm text-blue-600 dark:text-blue-300 space-y-1">
                   <li className="flex items-center justify-between">
-                    <span>New prompts to add:</span>
+                    <span>{t('importExportNewPrompts')}</span>
                     <span className="font-semibold">{importPreview.newPrompts.length}</span>
                   </li>
                   <li className="flex items-center justify-between">
-                    <span>Existing prompts to update:</span>
+                    <span>{t('importExportUpdatedPrompts')}</span>
                     <span className="font-semibold">{importPreview.updatedPrompts.length}</span>
                   </li>
                   {importPreview.unchangedCount > 0 && (
                     <li className="flex items-center justify-between text-slate-500">
-                      <span>Unchanged prompts:</span>
+                      <span>{t('importExportUnchanged')}</span>
                       <span>{importPreview.unchangedCount}</span>
                     </li>
                   )}
@@ -333,7 +335,7 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
 
               {importPreview.newPrompts.length > 0 && (
                 <div>
-                  <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">New Prompts</h4>
+                  <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">{t('importExportNewPromptsTitle')}</h4>
                   <div className="space-y-2 max-h-32 overflow-y-auto">
                     {importPreview.newPrompts.slice(0, 5).map(p => (
                       <div key={p.id} className="flex items-center gap-2 text-sm p-2 bg-slate-50 dark:bg-slate-800 rounded">
@@ -344,7 +346,7 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
                       </div>
                     ))}
                     {importPreview.newPrompts.length > 5 && (
-                      <p className="text-xs text-slate-500 text-center">+{importPreview.newPrompts.length - 5} more</p>
+                      <p className="text-xs text-slate-500 text-center">{t('importExportMore', [String(importPreview.newPrompts.length - 5)])}</p>
                     )}
                   </div>
                 </div>
@@ -352,16 +354,16 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
 
               {importPreview.updatedPrompts.length > 0 && (
                 <div>
-                  <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">Prompts to Update</h4>
+                  <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-2">{t('importExportUpdatedPromptsTitle')}</h4>
                   <div className="space-y-2 max-h-32 overflow-y-auto">
-                    {importPreview.updatedPrompts.slice(0, 5).map(({ existing, imported }) => (
+                    {importPreview.updatedPrompts.slice(0, 5).map(({ existing }) => (
                       <div key={existing.id} className="flex items-center justify-between text-sm p-2 bg-amber-50 dark:bg-amber-900/20 rounded">
                         <span className="truncate flex-1">{existing.title}</span>
-                        <span className="text-xs text-amber-600 dark:text-amber-400">Will be updated</span>
+                        <span className="text-xs text-amber-600 dark:text-amber-400">{t('importExportWillBeUpdated')}</span>
                       </div>
                     ))}
                     {importPreview.updatedPrompts.length > 5 && (
-                      <p className="text-xs text-slate-500 text-center">+{importPreview.updatedPrompts.length - 5} more</p>
+                      <p className="text-xs text-slate-500 text-center">{t('importExportMore', [String(importPreview.updatedPrompts.length - 5)])}</p>
                     )}
                   </div>
                 </div>
@@ -372,13 +374,13 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
                   onClick={resetImport}
                   className="flex-1 px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 >
-                  Back
+                  {t('importExportBack')}
                 </button>
                 <button
                   onClick={executeImport}
                   className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors"
                 >
-                  Confirm Import
+                  {t('importExportConfirm')}
                 </button>
               </div>
             </div>
@@ -389,14 +391,14 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
               <div className="flex items-center gap-3 text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 p-4 rounded-lg">
                 <AlertTriangle size={24} />
                 <div>
-                  <h3 className="font-semibold">Warning: Replace Mode</h3>
-                  <p className="text-sm">This will delete all your current prompts and replace them with the imported data.</p>
+                  <h3 className="font-semibold">{t('importExportWarning')}</h3>
+                  <p className="text-sm">{t('importExportReplaceWarning')}</p>
                 </div>
               </div>
 
               <p className="text-sm text-slate-600 dark:text-slate-400">
-                Current prompts: <strong>{store.prompts.length}</strong><br />
-                Prompts to import: <strong>{pendingImport?.length || 0}</strong>
+                {t('importExportCurrentPrompts')} <strong>{store.prompts.length}</strong><br />
+                {t('importExportPromptsToImport')} <strong>{pendingImport?.length || 0}</strong>
               </p>
 
               <div className="flex gap-3 pt-4">
@@ -404,13 +406,13 @@ export default function ImportExportModal({ store, onClose }: ImportExportModalP
                   onClick={resetImport}
                   className="flex-1 px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
                 >
-                  Cancel
+                  {t('importExportCancel')}
                 </button>
                 <button
                   onClick={executeImport}
                   className="flex-1 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-lg transition-colors"
                 >
-                  Yes, Replace All
+                  {t('importExportReplaceAll')}
                 </button>
               </div>
             </div>

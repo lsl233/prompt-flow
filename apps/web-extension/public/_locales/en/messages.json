@@ -1,0 +1,595 @@
+{
+  "extensionName": {
+    "message": "Prompt Flow",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "A tool to manage and execute your prompts",
+    "description": "Extension description"
+  },
+  "commandTogglePopup": {
+    "message": "Toggle Prompt Flow popup",
+    "description": "Keyboard shortcut description"
+  },
+
+  "sidebarDashboard": {
+    "message": "Dashboard",
+    "description": "Sidebar navigation - Dashboard"
+  },
+  "sidebarPromptLibrary": {
+    "message": "Prompt Library",
+    "description": "Sidebar navigation - Prompt Library"
+  },
+  "sidebarTags": {
+    "message": "Tags",
+    "description": "Sidebar section title - Tags"
+  },
+  "sidebarImportExport": {
+    "message": "Import / Export",
+    "description": "Sidebar navigation - Import/Export"
+  },
+
+  "topbarSearchPlaceholder": {
+    "message": "Search prompts (Cmd+K in any page)",
+    "description": "Topbar search placeholder"
+  },
+  "topbarCreatePrompt": {
+    "message": "Create Prompt",
+    "description": "Topbar create button"
+  },
+  "topbarToggleTheme": {
+    "message": "Toggle theme",
+    "description": "Topbar theme toggle aria-label"
+  },
+  "topbarNoPromptsFound": {
+    "message": "No prompts found",
+    "description": "Search results empty state"
+  },
+  "topbarNavigate": {
+    "message": "navigate",
+    "description": "Keyboard shortcut hint"
+  },
+  "topbarSelect": {
+    "message": "select",
+    "description": "Keyboard shortcut hint"
+  },
+  "topbarClose": {
+    "message": "close",
+    "description": "Keyboard shortcut hint"
+  },
+
+  "dashboardWelcome": {
+    "message": "Welcome back",
+    "description": "Dashboard welcome title"
+  },
+  "dashboardOverview": {
+    "message": "Here's an overview of your prompt library.",
+    "description": "Dashboard subtitle"
+  },
+  "dashboardTotalPrompts": {
+    "message": "Total Prompts",
+    "description": "Dashboard stat label"
+  },
+  "dashboardTags": {
+    "message": "Tags",
+    "description": "Dashboard stat label"
+  },
+  "dashboardTotalUsage": {
+    "message": "Total Usage",
+    "description": "Dashboard stat label"
+  },
+  "dashboardRecentlyUsed": {
+    "message": "Recently Used",
+    "description": "Dashboard section title"
+  },
+  "dashboardMostUsed": {
+    "message": "Most Used",
+    "description": "Dashboard section title"
+  },
+  "dashboardNoRecent": {
+    "message": "No recently used prompts.",
+    "description": "Empty state message"
+  },
+  "dashboardStartUsing": {
+    "message": "Start using your prompts to see them here.",
+    "description": "Empty state hint"
+  },
+  "dashboardNoUsage": {
+    "message": "No usage data yet.",
+    "description": "Empty state message"
+  },
+  "dashboardMostUsedHint": {
+    "message": "Your most used prompts will appear here.",
+    "description": "Empty state hint"
+  },
+  "dashboardUsedTimes": {
+    "message": "Used $count$ time$plural$",
+    "description": "Usage count display",
+    "placeholders": {
+      "count": { "content": "$1" },
+      "plural": { "content": "$2" }
+    }
+  },
+
+  "libraryTitle": {
+    "message": "Prompt Library",
+    "description": "Library page title"
+  },
+  "libraryDescription": {
+    "message": "Manage and execute your prompt templates.",
+    "description": "Library page subtitle"
+  },
+  "librarySearchPlaceholder": {
+    "message": "Search library...",
+    "description": "Library search placeholder"
+  },
+  "libraryUpdated": {
+    "message": "Updated",
+    "description": "Prompt card update timestamp"
+  },
+  "libraryUse": {
+    "message": "Use",
+    "description": "Prompt card action button"
+  },
+  "libraryEdit": {
+    "message": "Edit",
+    "description": "Prompt card menu action"
+  },
+  "libraryDuplicate": {
+    "message": "Duplicate",
+    "description": "Prompt card menu action"
+  },
+  "libraryHistory": {
+    "message": "History",
+    "description": "Prompt card menu action"
+  },
+  "libraryDelete": {
+    "message": "Delete",
+    "description": "Prompt card menu action"
+  },
+  "libraryNoPromptsFound": {
+    "message": "No prompts found",
+    "description": "Empty state title"
+  },
+  "libraryAdjustSearch": {
+    "message": "Try adjusting your search or filters.",
+    "description": "Empty state hint"
+  },
+
+  "editorCreateTitle": {
+    "message": "Create New Prompt",
+    "description": "Editor modal title"
+  },
+  "editorEditTitle": {
+    "message": "Edit Prompt",
+    "description": "Editor modal title"
+  },
+  "editorTitleLabel": {
+    "message": "Title",
+    "description": "Form field label"
+  },
+  "editorTitlePlaceholder": {
+    "message": "e.g., Code Review Assistant",
+    "description": "Title input placeholder"
+  },
+  "editorDescriptionLabel": {
+    "message": "Description",
+    "description": "Form field label"
+  },
+  "editorDescriptionPlaceholder": {
+    "message": "Briefly describe what this prompt does...",
+    "description": "Description input placeholder"
+  },
+  "editorTagsLabel": {
+    "message": "Tags",
+    "description": "Form field label"
+  },
+  "editorTagsPlaceholder": {
+    "message": "Type to search or create tags...",
+    "description": "Tags input placeholder"
+  },
+  "editorTagsAddMore": {
+    "message": "Add more tags...",
+    "description": "Tags input placeholder when tags exist"
+  },
+  "editorCreateTag": {
+    "message": "Create",
+    "description": "Create new tag button"
+  },
+  "editorAllTagsSelected": {
+    "message": "All tags already selected",
+    "description": "Tags dropdown empty state"
+  },
+  "editorContentLabel": {
+    "message": "Prompt Content",
+    "description": "Form field label"
+  },
+  "editorVariableHint": {
+    "message": "Use {{variable_name}} for dynamic inputs",
+    "description": "Content field helper text"
+  },
+  "editorContentPlaceholder": {
+    "message": "Enter your prompt template here...",
+    "description": "Content textarea placeholder"
+  },
+  "editorCancel": {
+    "message": "Cancel",
+    "description": "Button"
+  },
+  "editorSave": {
+    "message": "Save Prompt",
+    "description": "Save button"
+  },
+
+  "variablesTitle": {
+    "message": "Variables",
+    "description": "Variables section title"
+  },
+  "variablesPreview": {
+    "message": "Preview",
+    "description": "Preview section title"
+  },
+  "variablesCopyClipboard": {
+    "message": "Copy to Clipboard",
+    "description": "Copy button"
+  },
+  "variablesCopied": {
+    "message": "Copied!",
+    "description": "Copy success feedback"
+  },
+  "variablesClose": {
+    "message": "Close",
+    "description": "Button"
+  },
+  "variablesSaveAsNew": {
+    "message": "Save as New",
+    "description": "Button"
+  },
+  "variablesCopyClose": {
+    "message": "Copy & Close",
+    "description": "Button"
+  },
+  "variablesFillVariables": {
+    "message": "Fill in the variables",
+    "description": "Subtitle in variable modal"
+  },
+  "variablesSaveDialogTitle": {
+    "message": "Save as New Prompt",
+    "description": "Save dialog title"
+  },
+  "variablesEnterValue": {
+    "message": "Enter value for $name$...",
+    "description": "Variable input placeholder",
+    "placeholders": {
+      "name": { "content": "$1" }
+    }
+  },
+  "variablesSavePrompt": {
+    "message": "Save Prompt",
+    "description": "Button"
+  },
+  "variablesSaved": {
+    "message": "Saved!",
+    "description": "Success feedback"
+  },
+  "variablesNoTags": {
+    "message": "No tags",
+    "description": "Empty tags state"
+  },
+  "variablesAddTagHint": {
+    "message": "Add a tag and press Enter",
+    "description": "Tag input placeholder"
+  },
+  "variablesPreviewLabel": {
+    "message": "Preview",
+    "description": "Preview section label"
+  },
+  "variablesCmdEnter": {
+    "message": "Cmd + Enter to $action$",
+    "description": "Keyboard shortcut hint",
+    "placeholders": {
+      "action": { "content": "$1" }
+    }
+  },
+
+  "historyTitle": {
+    "message": "Version History: $title$",
+    "description": "History modal title",
+    "placeholders": {
+      "title": { "content": "$1" }
+    }
+  },
+  "historyVersionsCount": {
+    "message": "$count$ version$plural$ saved (max 20)",
+    "description": "Version count text",
+    "placeholders": {
+      "count": { "content": "$1" },
+      "plural": { "content": "$2" }
+    }
+  },
+  "historyPreviousVersions": {
+    "message": "Previous Versions",
+    "description": "Section title"
+  },
+  "historyNoVersions": {
+    "message": "No previous versions found.",
+    "description": "Empty state"
+  },
+  "historyCurrentVersion": {
+    "message": "Current Version",
+    "description": "Version label"
+  },
+  "historyVersionNumber": {
+    "message": "Version $number$",
+    "description": "Version number label",
+    "placeholders": {
+      "number": { "content": "$1" }
+    }
+  },
+  "historyDeleteTitle": {
+    "message": "Delete version",
+    "description": "Delete button tooltip"
+  },
+  "historyPreviewing": {
+    "message": "Previewing Version",
+    "description": "Preview section title"
+  },
+  "historySelectPrompt": {
+    "message": "Select a version from the list to preview it.",
+    "description": "Empty state hint"
+  },
+  "historyRestore": {
+    "message": "Restore",
+    "description": "Restore button"
+  },
+  "historyDeleteConfirm": {
+    "message": "Delete?",
+    "description": "Confirmation text"
+  },
+  "historyYes": {
+    "message": "Yes",
+    "description": "Confirmation button"
+  },
+  "historyNo": {
+    "message": "No",
+    "description": "Confirmation button"
+  },
+
+  "importExportTitle": {
+    "message": "Import / Export",
+    "description": "Modal title"
+  },
+  "importExportPreviewTitle": {
+    "message": "Import Preview",
+    "description": "Modal title"
+  },
+  "importExportConfirmTitle": {
+    "message": "Confirm Import",
+    "description": "Modal title"
+  },
+  "importExportModeTitle": {
+    "message": "Import Mode",
+    "description": "Section title"
+  },
+  "importExportMerge": {
+    "message": "Merge",
+    "description": "Import mode option"
+  },
+  "importExportMergeDesc": {
+    "message": "Add new, update existing",
+    "description": "Import mode description"
+  },
+  "importExportReplace": {
+    "message": "Replace",
+    "description": "Import mode option"
+  },
+  "importExportReplaceDesc": {
+    "message": "Delete all, start fresh",
+    "description": "Import mode description"
+  },
+  "importExportExportTitle": {
+    "message": "Export Prompts",
+    "description": "Section title"
+  },
+  "importExportExportDesc": {
+    "message": "Download all your prompts and versions as a JSON file for backup or sharing.",
+    "description": "Export description"
+  },
+  "importExportExportButton": {
+    "message": "Export to JSON",
+    "description": "Export button"
+  },
+  "importExportImportTitle": {
+    "message": "Import Prompts",
+    "description": "Section title"
+  },
+  "importExportImportDesc": {
+    "message": "Upload a previously exported JSON file.",
+    "description": "Import description"
+  },
+  "importExportUploadHint": {
+    "message": "Click to upload or drag and drop",
+    "description": "Upload area text"
+  },
+  "importExportFileType": {
+    "message": "JSON files only",
+    "description": "File type hint"
+  },
+  "importExportSummary": {
+    "message": "Import Summary",
+    "description": "Summary section title"
+  },
+  "importExportNewPrompts": {
+    "message": "New prompts to add:",
+    "description": "Summary item"
+  },
+  "importExportUpdatedPrompts": {
+    "message": "Existing prompts to update:",
+    "description": "Summary item"
+  },
+  "importExportUnchanged": {
+    "message": "Unchanged prompts:",
+    "description": "Summary item"
+  },
+  "importExportNewPromptsTitle": {
+    "message": "New Prompts",
+    "description": "Section title"
+  },
+  "importExportUpdatedPromptsTitle": {
+    "message": "Prompts to Update",
+    "description": "Section title"
+  },
+  "importExportWillBeUpdated": {
+    "message": "Will be updated",
+    "description": "Status label"
+  },
+  "importExportMore": {
+    "message": "+$count$ more",
+    "description": "Additional items hint",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "importExportBack": {
+    "message": "Back",
+    "description": "Button"
+  },
+  "importExportConfirm": {
+    "message": "Confirm Import",
+    "description": "Button"
+  },
+  "importExportWarning": {
+    "message": "Warning: Replace Mode",
+    "description": "Warning title"
+  },
+  "importExportReplaceWarning": {
+    "message": "This will delete all your current prompts and replace them with the imported data.",
+    "description": "Warning message"
+  },
+  "importExportCurrentPrompts": {
+    "message": "Current prompts:",
+    "description": "Label"
+  },
+  "importExportPromptsToImport": {
+    "message": "Prompts to import:",
+    "description": "Label"
+  },
+  "importExportCancel": {
+    "message": "Cancel",
+    "description": "Button"
+  },
+  "importExportReplaceAll": {
+    "message": "Yes, Replace All",
+    "description": "Button"
+  },
+  "importExportInvalidFormat": {
+    "message": "Invalid format. Expected an array of prompts or an export object.",
+    "description": "Error message"
+  },
+  "importExportNoValidPrompts": {
+    "message": "No valid prompts found in the file.",
+    "description": "Error message"
+  },
+  "importExportParseError": {
+    "message": "Failed to parse JSON file.",
+    "description": "Error message"
+  },
+  "importExportInvalidFile": {
+    "message": "Please upload a valid JSON file.",
+    "description": "Error message"
+  },
+  "importExportSuccessReplace": {
+    "message": "Successfully replaced with $count$ prompts.",
+    "description": "Success message",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "importExportSuccessMerge": {
+    "message": "Import complete: $new$ new, $updated$ updated.",
+    "description": "Success message",
+    "placeholders": {
+      "new": { "content": "$1" },
+      "updated": { "content": "$2" }
+    }
+  },
+
+  "popupTitle": {
+    "message": "Prompt Flow",
+    "description": "Popup title"
+  },
+  "popupDescription": {
+    "message": "Manage and use your AI prompts efficiently.",
+    "description": "Popup description"
+  },
+  "popupOpenSettings": {
+    "message": "Open Settings",
+    "description": "Popup button"
+  },
+
+  "pickerSearchPlaceholder": {
+    "message": "Search prompts...",
+    "description": "Picker search placeholder"
+  },
+  "pickerNoPromptsSearch": {
+    "message": "No prompts found.",
+    "description": "Empty state"
+  },
+  "pickerNoPromptsAvailable": {
+    "message": "No prompts available. Add some in the extension options.",
+    "description": "Empty state"
+  },
+  "pickerNavigate": {
+    "message": "to navigate",
+    "description": "Keyboard hint"
+  },
+  "pickerSelect": {
+    "message": "to select",
+    "description": "Keyboard hint"
+  },
+  "pickerClose": {
+    "message": "esc to close",
+    "description": "Keyboard hint"
+  },
+  "pickerInsertHint": {
+    "message": "Cmd + Enter to $action$",
+    "description": "Keyboard hint",
+    "placeholders": {
+      "action": { "content": "$1" }
+    }
+  },
+
+  "contentInserted": {
+    "message": "Prompt inserted!",
+    "description": "Toast message"
+  },
+  "contentCopied": {
+    "message": "Prompt copied to clipboard!",
+    "description": "Toast message"
+  },
+  "contentCopyFailed": {
+    "message": "Failed to copy prompt",
+    "description": "Toast message"
+  },
+
+  "settingsTitle": {
+    "message": "Settings",
+    "description": "Settings page title"
+  },
+  "settingsLanguage": {
+    "message": "Language",
+    "description": "Settings option"
+  },
+  "settingsLanguageDesc": {
+    "message": "Choose your preferred language",
+    "description": "Settings description"
+  },
+  "settingsDarkMode": {
+    "message": "Dark Mode",
+    "description": "Settings option"
+  },
+  "settingsDarkModeDesc": {
+    "message": "Toggle between light and dark theme",
+    "description": "Settings description"
+  }
+}

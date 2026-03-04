@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Prompt } from '@/shared/types';
 import { X, Copy, Check, Save } from 'lucide-react';
 import { Store } from '../../useStore';
+import { useI18n } from '@/shared/i18n';
 
 interface VariableFillerModalProps {
   prompt: Prompt;
@@ -10,6 +11,7 @@ interface VariableFillerModalProps {
 }
 
 export default function VariableFillerModal({ prompt, onClose, store }: VariableFillerModalProps) {
+  const { t } = useI18n();
   const [variables, setVariables] = useState<Record<string, string>>({});
   const [copied, setCopied] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -113,7 +115,7 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
         <div className="flex-1 overflow-hidden flex flex-col md:flex-row">
           {variableNames.length > 0 && (
             <div className="w-full md:w-1/2 p-6 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
-              <h3 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider mb-4">Variables</h3>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider mb-4">{t('variablesTitle')}</h3>
 
               <div className="space-y-4">
                 {variableNames.map(vName => (
@@ -124,7 +126,7 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
                     <textarea
                       value={variables[vName] || ''}
                       onChange={e => handleVarChange(vName, e.target.value)}
-                      placeholder={`Enter value for ${vName}...`}
+                      placeholder={t('variablesEnterValue', [vName])}
                       className="w-full px-3 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-shadow min-h-[80px] resize-y"
                     />
                   </div>
@@ -135,13 +137,13 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
 
           <div className={`w-full p-6 flex flex-col bg-white dark:bg-slate-800 overflow-hidden ${variableNames.length > 0 ? 'md:w-1/2' : ''}`}>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider">Preview</h3>
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider">{t('variablesPreview')}</h3>
               <button
                 onClick={handleCopy}
                 className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-600 rounded-md transition-colors"
               >
                 {copied ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
-                {copied ? 'Copied!' : 'Copy to Clipboard'}
+                {copied ? t('variablesCopied') : t('variablesCopyClipboard')}
               </button>
             </div>
 
@@ -158,7 +160,7 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
             onClick={onClose}
             className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
           >
-            Close
+            {t('variablesClose')}
           </button>
           {variableNames.length > 0 && (
             <button
@@ -166,7 +168,7 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
               className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors flex items-center gap-2"
             >
               <Save size={16} />
-              Save as New
+              {t('variablesSaveAsNew')}
             </button>
           )}
           <button
@@ -174,7 +176,7 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
             className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm shadow-blue-500/20 flex items-center gap-2"
           >
             {copied ? <Check size={16} /> : <Copy size={16} />}
-            {copied ? 'Copied!' : 'Copy & Close'}
+            {copied ? t('variablesCopied') : t('variablesCopyClose')}
           </button>
         </div>
       </div>
@@ -184,7 +186,7 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
           <div className="bg-white dark:bg-slate-800 w-full max-w-lg rounded-2xl shadow-xl flex flex-col max-h-full overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700">
-              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">Save as New Prompt</h3>
+              <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{t('variablesSaveDialogTitle')}</h3>
               <button
                 onClick={() => setShowSaveDialog(false)}
                 className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors"
@@ -195,19 +197,19 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
 
             <div className="p-6 space-y-4 overflow-y-auto">
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Title</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('editorTitleLabel')}</label>
                 <input
                   type="text"
                   value={newTitle}
                   onChange={e => setNewTitle(e.target.value)}
-                  placeholder="Enter prompt title..."
+                  placeholder={t('editorTitlePlaceholder')}
                   className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
                   autoFocus
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Description</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('editorDescriptionLabel')}</label>
                 <input
                   type="text"
                   value={newDescription}

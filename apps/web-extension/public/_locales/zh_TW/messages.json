@@ -1,0 +1,595 @@
+{
+  "extensionName": {
+    "message": "Prompt Flow",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "管理和執行提示詞的工具",
+    "description": "Extension description"
+  },
+  "commandTogglePopup": {
+    "message": "切換 Prompt Flow 彈窗",
+    "description": "Keyboard shortcut description"
+  },
+
+  "sidebarDashboard": {
+    "message": "概覽",
+    "description": "Sidebar navigation - Dashboard"
+  },
+  "sidebarPromptLibrary": {
+    "message": "提示詞庫",
+    "description": "Sidebar navigation - Prompt Library"
+  },
+  "sidebarTags": {
+    "message": "標籤",
+    "description": "Sidebar section title - Tags"
+  },
+  "sidebarImportExport": {
+    "message": "匯入 / 匯出",
+    "description": "Sidebar navigation - Import/Export"
+  },
+
+  "topbarSearchPlaceholder": {
+    "message": "搜尋提示詞（任意頁面按 Cmd+K）",
+    "description": "Topbar search placeholder"
+  },
+  "topbarCreatePrompt": {
+    "message": "建立提示詞",
+    "description": "Topbar create button"
+  },
+  "topbarToggleTheme": {
+    "message": "切換主題",
+    "description": "Topbar theme toggle aria-label"
+  },
+  "topbarNoPromptsFound": {
+    "message": "未找到提示詞",
+    "description": "Search results empty state"
+  },
+  "topbarNavigate": {
+    "message": "導航",
+    "description": "Keyboard shortcut hint"
+  },
+  "topbarSelect": {
+    "message": "選擇",
+    "description": "Keyboard shortcut hint"
+  },
+  "topbarClose": {
+    "message": "關閉",
+    "description": "Keyboard shortcut hint"
+  },
+
+  "dashboardWelcome": {
+    "message": "歡迎回來",
+    "description": "Dashboard welcome title"
+  },
+  "dashboardOverview": {
+    "message": "以下是您的提示詞庫概覽。",
+    "description": "Dashboard subtitle"
+  },
+  "dashboardTotalPrompts": {
+    "message": "提示詞總數",
+    "description": "Dashboard stat label"
+  },
+  "dashboardTags": {
+    "message": "標籤數",
+    "description": "Dashboard stat label"
+  },
+  "dashboardTotalUsage": {
+    "message": "總使用次數",
+    "description": "Dashboard stat label"
+  },
+  "dashboardRecentlyUsed": {
+    "message": "最近使用",
+    "description": "Dashboard section title"
+  },
+  "dashboardMostUsed": {
+    "message": "使用最多",
+    "description": "Dashboard section title"
+  },
+  "dashboardNoRecent": {
+    "message": "暫無最近使用的提示詞。",
+    "description": "Empty state message"
+  },
+  "dashboardStartUsing": {
+    "message": "開始使用您的提示詞，它們將顯示在這裡。",
+    "description": "Empty state hint"
+  },
+  "dashboardNoUsage": {
+    "message": "暫無使用資料。",
+    "description": "Empty state message"
+  },
+  "dashboardMostUsedHint": {
+    "message": "您使用最多的提示詞將顯示在這裡。",
+    "description": "Empty state hint"
+  },
+  "dashboardUsedTimes": {
+    "message": "已使用 $count$ 次",
+    "description": "Usage count display",
+    "placeholders": {
+      "count": { "content": "$1" },
+      "plural": { "content": "$2" }
+    }
+  },
+
+  "libraryTitle": {
+    "message": "提示詞庫",
+    "description": "Library page title"
+  },
+  "libraryDescription": {
+    "message": "管理和執行您的提示詞範本。",
+    "description": "Library page subtitle"
+  },
+  "librarySearchPlaceholder": {
+    "message": "搜尋提示詞庫...",
+    "description": "Library search placeholder"
+  },
+  "libraryUpdated": {
+    "message": "更新於",
+    "description": "Prompt card update timestamp"
+  },
+  "libraryUse": {
+    "message": "使用",
+    "description": "Prompt card action button"
+  },
+  "libraryEdit": {
+    "message": "編輯",
+    "description": "Prompt card menu action"
+  },
+  "libraryDuplicate": {
+    "message": "複製",
+    "description": "Prompt card menu action"
+  },
+  "libraryHistory": {
+    "message": "歷史版本",
+    "description": "Prompt card menu action"
+  },
+  "libraryDelete": {
+    "message": "刪除",
+    "description": "Prompt card menu action"
+  },
+  "libraryNoPromptsFound": {
+    "message": "未找到提示詞",
+    "description": "Empty state title"
+  },
+  "libraryAdjustSearch": {
+    "message": "請嘗試調整搜尋條件或篩選器。",
+    "description": "Empty state hint"
+  },
+
+  "editorCreateTitle": {
+    "message": "建立新提示詞",
+    "description": "Editor modal title"
+  },
+  "editorEditTitle": {
+    "message": "編輯提示詞",
+    "description": "Editor modal title"
+  },
+  "editorTitleLabel": {
+    "message": "標題",
+    "description": "Form field label"
+  },
+  "editorTitlePlaceholder": {
+    "message": "例如：程式碼審查助手",
+    "description": "Title input placeholder"
+  },
+  "editorDescriptionLabel": {
+    "message": "描述",
+    "description": "Form field label"
+  },
+  "editorDescriptionPlaceholder": {
+    "message": "簡要描述此提示詞的用途...",
+    "description": "Description input placeholder"
+  },
+  "editorTagsLabel": {
+    "message": "標籤",
+    "description": "Form field label"
+  },
+  "editorTagsPlaceholder": {
+    "message": "輸入以搜尋或建立標籤...",
+    "description": "Tags input placeholder"
+  },
+  "editorTagsAddMore": {
+    "message": "新增更多標籤...",
+    "description": "Tags input placeholder when tags exist"
+  },
+  "editorCreateTag": {
+    "message": "建立",
+    "description": "Create new tag button"
+  },
+  "editorAllTagsSelected": {
+    "message": "已選擇所有標籤",
+    "description": "Tags dropdown empty state"
+  },
+  "editorContentLabel": {
+    "message": "提示詞內容",
+    "description": "Form field label"
+  },
+  "editorVariableHint": {
+    "message": "使用 {{variable_name}} 作為動態輸入",
+    "description": "Content field helper text"
+  },
+  "editorContentPlaceholder": {
+    "message": "在此輸入您的提示詞範本...",
+    "description": "Content textarea placeholder"
+  },
+  "editorCancel": {
+    "message": "取消",
+    "description": "Button"
+  },
+  "editorSave": {
+    "message": "儲存提示詞",
+    "description": "Save button"
+  },
+
+  "variablesTitle": {
+    "message": "變數",
+    "description": "Variables section title"
+  },
+  "variablesPreview": {
+    "message": "預覽",
+    "description": "Preview section title"
+  },
+  "variablesCopyClipboard": {
+    "message": "複製到剪貼簿",
+    "description": "Copy button"
+  },
+  "variablesCopied": {
+    "message": "已複製！",
+    "description": "Copy success feedback"
+  },
+  "variablesClose": {
+    "message": "關閉",
+    "description": "Button"
+  },
+  "variablesSaveAsNew": {
+    "message": "另存為新提示詞",
+    "description": "Button"
+  },
+  "variablesCopyClose": {
+    "message": "複製並關閉",
+    "description": "Button"
+  },
+  "variablesFillVariables": {
+    "message": "填寫變數",
+    "description": "Subtitle in variable modal"
+  },
+  "variablesSaveDialogTitle": {
+    "message": "另存為新提示詞",
+    "description": "Save dialog title"
+  },
+  "variablesEnterValue": {
+    "message": "輸入 $name$ 的值...",
+    "description": "Variable input placeholder",
+    "placeholders": {
+      "name": { "content": "$1" }
+    }
+  },
+  "variablesSavePrompt": {
+    "message": "儲存提示詞",
+    "description": "Button"
+  },
+  "variablesSaved": {
+    "message": "已儲存！",
+    "description": "Success feedback"
+  },
+  "variablesNoTags": {
+    "message": "無標籤",
+    "description": "Empty tags state"
+  },
+  "variablesAddTagHint": {
+    "message": "新增標籤並按 Enter",
+    "description": "Tag input placeholder"
+  },
+  "variablesPreviewLabel": {
+    "message": "預覽",
+    "description": "Preview section label"
+  },
+  "variablesCmdEnter": {
+    "message": "Cmd + Enter 以$action$",
+    "description": "Keyboard shortcut hint",
+    "placeholders": {
+      "action": { "content": "$1" }
+    }
+  },
+
+  "historyTitle": {
+    "message": "版本歷史：$title$",
+    "description": "History modal title",
+    "placeholders": {
+      "title": { "content": "$1" }
+    }
+  },
+  "historyVersionsCount": {
+    "message": "已儲存 $count$ 個版本（最多 20 個）",
+    "description": "Version count text",
+    "placeholders": {
+      "count": { "content": "$1" },
+      "plural": { "content": "$2" }
+    }
+  },
+  "historyPreviousVersions": {
+    "message": "歷史版本",
+    "description": "Section title"
+  },
+  "historyNoVersions": {
+    "message": "未找到歷史版本。",
+    "description": "Empty state"
+  },
+  "historyCurrentVersion": {
+    "message": "目前版本",
+    "description": "Version label"
+  },
+  "historyVersionNumber": {
+    "message": "版本 $number$",
+    "description": "Version number label",
+    "placeholders": {
+      "number": { "content": "$1" }
+    }
+  },
+  "historyDeleteTitle": {
+    "message": "刪除版本",
+    "description": "Delete button tooltip"
+  },
+  "historyPreviewing": {
+    "message": "預覽版本",
+    "description": "Preview section title"
+  },
+  "historySelectPrompt": {
+    "message": "從列表中選擇一個版本進行預覽。",
+    "description": "Empty state hint"
+  },
+  "historyRestore": {
+    "message": "還原",
+    "description": "Restore button"
+  },
+  "historyDeleteConfirm": {
+    "message": "確認刪除？",
+    "description": "Confirmation text"
+  },
+  "historyYes": {
+    "message": "是",
+    "description": "Confirmation button"
+  },
+  "historyNo": {
+    "message": "否",
+    "description": "Confirmation button"
+  },
+
+  "importExportTitle": {
+    "message": "匯入 / 匯出",
+    "description": "Modal title"
+  },
+  "importExportPreviewTitle": {
+    "message": "匯入預覽",
+    "description": "Modal title"
+  },
+  "importExportConfirmTitle": {
+    "message": "確認匯入",
+    "description": "Modal title"
+  },
+  "importExportModeTitle": {
+    "message": "匯入模式",
+    "description": "Section title"
+  },
+  "importExportMerge": {
+    "message": "合併",
+    "description": "Import mode option"
+  },
+  "importExportMergeDesc": {
+    "message": "新增提示詞，更新現有提示詞",
+    "description": "Import mode description"
+  },
+  "importExportReplace": {
+    "message": "取代",
+    "description": "Import mode option"
+  },
+  "importExportReplaceDesc": {
+    "message": "刪除全部，重新開始",
+    "description": "Import mode description"
+  },
+  "importExportExportTitle": {
+    "message": "匯出提示詞",
+    "description": "Section title"
+  },
+  "importExportExportDesc": {
+    "message": "將所有提示詞和版本下載為 JSON 檔案，用於備份或分享。",
+    "description": "Export description"
+  },
+  "importExportExportButton": {
+    "message": "匯出為 JSON",
+    "description": "Export button"
+  },
+  "importExportImportTitle": {
+    "message": "匯入提示詞",
+    "description": "Section title"
+  },
+  "importExportImportDesc": {
+    "message": "上傳之前匯出的 JSON 檔案。",
+    "description": "Import description"
+  },
+  "importExportUploadHint": {
+    "message": "點擊上傳或拖曳檔案到此處",
+    "description": "Upload area text"
+  },
+  "importExportFileType": {
+    "message": "僅支援 JSON 檔案",
+    "description": "File type hint"
+  },
+  "importExportSummary": {
+    "message": "匯入摘要",
+    "description": "Summary section title"
+  },
+  "importExportNewPrompts": {
+    "message": "要新增的新提示詞：",
+    "description": "Summary item"
+  },
+  "importExportUpdatedPrompts": {
+    "message": "要更新的現有提示詞：",
+    "description": "Summary item"
+  },
+  "importExportUnchanged": {
+    "message": "未更改的提示詞：",
+    "description": "Summary item"
+  },
+  "importExportNewPromptsTitle": {
+    "message": "新提示詞",
+    "description": "Section title"
+  },
+  "importExportUpdatedPromptsTitle": {
+    "message": "要更新的提示詞",
+    "description": "Section title"
+  },
+  "importExportWillBeUpdated": {
+    "message": "將被更新",
+    "description": "Status label"
+  },
+  "importExportMore": {
+    "message": "還有 $count$ 個",
+    "description": "Additional items hint",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "importExportBack": {
+    "message": "返回",
+    "description": "Button"
+  },
+  "importExportConfirm": {
+    "message": "確認匯入",
+    "description": "Button"
+  },
+  "importExportWarning": {
+    "message": "警告：取代模式",
+    "description": "Warning title"
+  },
+  "importExportReplaceWarning": {
+    "message": "這將刪除您所有的目前提示詞，並用匯入的資料取代它們。",
+    "description": "Warning message"
+  },
+  "importExportCurrentPrompts": {
+    "message": "目前提示詞：",
+    "description": "Label"
+  },
+  "importExportPromptsToImport": {
+    "message": "要匯入的提示詞：",
+    "description": "Label"
+  },
+  "importExportCancel": {
+    "message": "取消",
+    "description": "Button"
+  },
+  "importExportReplaceAll": {
+    "message": "是，全部取代",
+    "description": "Button"
+  },
+  "importExportInvalidFormat": {
+    "message": "格式無效。需要提示詞陣列或匯出物件。",
+    "description": "Error message"
+  },
+  "importExportNoValidPrompts": {
+    "message": "檔案中未找到有效的提示詞。",
+    "description": "Error message"
+  },
+  "importExportParseError": {
+    "message": "解析 JSON 檔案失敗。",
+    "description": "Error message"
+  },
+  "importExportInvalidFile": {
+    "message": "請上傳有效的 JSON 檔案。",
+    "description": "Error message"
+  },
+  "importExportSuccessReplace": {
+    "message": "成功取代為 $count$ 個提示詞。",
+    "description": "Success message",
+    "placeholders": {
+      "count": { "content": "$1" }
+    }
+  },
+  "importExportSuccessMerge": {
+    "message": "匯入完成：$new$ 個新提示詞，$updated$ 個已更新。",
+    "description": "Success message",
+    "placeholders": {
+      "new": { "content": "$1" },
+      "updated": { "content": "$2" }
+    }
+  },
+
+  "popupTitle": {
+    "message": "Prompt Flow",
+    "description": "Popup title"
+  },
+  "popupDescription": {
+    "message": "高效管理和使用 AI 提示詞。",
+    "description": "Popup description"
+  },
+  "popupOpenSettings": {
+    "message": "開啟設定",
+    "description": "Popup button"
+  },
+
+  "pickerSearchPlaceholder": {
+    "message": "搜尋提示詞...",
+    "description": "Picker search placeholder"
+  },
+  "pickerNoPromptsSearch": {
+    "message": "未找到提示詞。",
+    "description": "Empty state"
+  },
+  "pickerNoPromptsAvailable": {
+    "message": "沒有可用的提示詞。請在擴充功能選項中新增一些。",
+    "description": "Empty state"
+  },
+  "pickerNavigate": {
+    "message": "導航",
+    "description": "Keyboard hint"
+  },
+  "pickerSelect": {
+    "message": "選擇",
+    "description": "Keyboard hint"
+  },
+  "pickerClose": {
+    "message": "esc 關閉",
+    "description": "Keyboard hint"
+  },
+  "pickerInsertHint": {
+    "message": "Cmd + Enter 以$action$",
+    "description": "Keyboard hint",
+    "placeholders": {
+      "action": { "content": "$1" }
+    }
+  },
+
+  "contentInserted": {
+    "message": "提示詞已插入！",
+    "description": "Toast message"
+  },
+  "contentCopied": {
+    "message": "提示詞已複製到剪貼簿！",
+    "description": "Toast message"
+  },
+  "contentCopyFailed": {
+    "message": "複製提示詞失敗",
+    "description": "Toast message"
+  },
+
+  "settingsTitle": {
+    "message": "設定",
+    "description": "Settings page title"
+  },
+  "settingsLanguage": {
+    "message": "語言",
+    "description": "Settings option"
+  },
+  "settingsLanguageDesc": {
+    "message": "選擇您偏好的語言",
+    "description": "Settings description"
+  },
+  "settingsDarkMode": {
+    "message": "深色模式",
+    "description": "Settings option"
+  },
+  "settingsDarkModeDesc": {
+    "message": "在淺色和深色主題之間切換",
+    "description": "Settings description"
+  }
+}

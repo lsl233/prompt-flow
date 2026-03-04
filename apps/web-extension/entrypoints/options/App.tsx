@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useStore } from './useStore';
+import { I18nProvider } from '@/shared/i18n';
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 import Dashboard from './components/Dashboard';
@@ -9,7 +10,7 @@ import ImportExportModal from './components/Modals/ImportExportModal';
 import PromptEditorModal from './components/Modals/PromptEditorModal';
 import '@/shared/style.css';
 
-export default function App() {
+function AppContent() {
   const store = useStore();
   const [isImportExportOpen, setIsImportExportOpen] = useState(false);
   const [editingPromptId, setEditingPromptId] = useState<string | null>(null);
@@ -90,5 +91,13 @@ export default function App() {
         />
       )}
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <I18nProvider>
+      <AppContent />
+    </I18nProvider>
   );
 }

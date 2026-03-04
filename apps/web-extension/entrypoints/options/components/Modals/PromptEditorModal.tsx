@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Store } from '../../useStore';
 import { X, Plus, ChevronDown } from 'lucide-react';
+import { useI18n } from '@/shared/i18n';
 
 interface PromptEditorModalProps {
   promptId: string | null;
@@ -9,6 +10,7 @@ interface PromptEditorModalProps {
 }
 
 export default function PromptEditorModal({ promptId, store, onClose }: PromptEditorModalProps) {
+  const { t } = useI18n();
   const existingPrompt = promptId ? store.prompts.find(p => p.id === promptId) : null;
 
   const [title, setTitle] = useState(existingPrompt?.title || '');
@@ -112,7 +114,7 @@ export default function PromptEditorModal({ promptId, store, onClose }: PromptEd
 
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-700">
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white">
-            {promptId ? 'Edit Prompt' : 'Create New Prompt'}
+            {promptId ? t('editorEditTitle') : t('editorCreateTitle')}
           </h2>
           <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
             <X size={20} />
@@ -122,30 +124,30 @@ export default function PromptEditorModal({ promptId, store, onClose }: PromptEd
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Title</label>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('editorTitleLabel')}</label>
               <input
                 type="text"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
-                placeholder="e.g., Code Review Assistant"
+                placeholder={t('editorTitlePlaceholder')}
                 className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
                 autoFocus
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Description</label>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('editorDescriptionLabel')}</label>
               <input
                 type="text"
                 value={description}
                 onChange={e => setDescription(e.target.value)}
-                placeholder="Briefly describe what this prompt does..."
+                placeholder={t('editorDescriptionPlaceholder')}
                 className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
               />
             </div>
 
             <div ref={tagDropdownRef} className="relative">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Tags</label>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('editorTagsLabel')}</label>
               <div className="flex flex-wrap gap-2 mb-2">
                 {tags.map(tag => (
                   <span key={tag} className="flex items-center gap-1 px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs rounded-md font-medium">
@@ -165,7 +167,7 @@ export default function PromptEditorModal({ promptId, store, onClose }: PromptEd
                   }}
                   onKeyDown={handleTagInputKeyDown}
                   onFocus={() => setIsTagDropdownOpen(true)}
-                  placeholder={tags.length > 0 ? "Add more tags..." : "Type to search or create tags..."}
+                  placeholder={tags.length > 0 ? t('editorTagsAddMore') : t('editorTagsPlaceholder')}
                   className="w-full px-4 py-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
                 />
                 <ChevronDown
@@ -183,7 +185,7 @@ export default function PromptEditorModal({ promptId, store, onClose }: PromptEd
                         className="w-full px-4 py-2.5 text-left text-sm flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-700 border-b border-slate-100 dark:border-slate-700"
                       >
                         <Plus size={14} className="text-blue-500" />
-                        <span>Create "<span className="font-medium text-slate-900 dark:text-white">{tagInput.trim()}</span>"</span>
+                        <span>{t('editorCreateTag')} "<span className="font-medium text-slate-900 dark:text-white">{tagInput.trim()}</span>"</span>
                       </button>
                     )}
 
@@ -208,7 +210,7 @@ export default function PromptEditorModal({ promptId, store, onClose }: PromptEd
                 {/* Empty state - no existing tags */}
                 {isTagDropdownOpen && availableTags.length === 0 && !showCreateOption && store.allTags.length > 0 && (
                   <div className="absolute z-50 w-full mt-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg p-4 text-sm text-slate-500 text-center">
-                    All tags already selected
+                    {t('editorAllTagsSelected')}
                   </div>
                 )}
               </div>
@@ -217,13 +219,13 @@ export default function PromptEditorModal({ promptId, store, onClose }: PromptEd
 
           <div>
             <div className="flex items-center justify-between mb-1">
-              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Prompt Content</label>
-              <span className="text-xs text-slate-500">Use {'{{variable_name}}'} for dynamic inputs</span>
+              <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">{t('editorContentLabel')}</label>
+              <span className="text-xs text-slate-500">{t('editorVariableHint')}</span>
             </div>
             <textarea
               value={content}
               onChange={e => setContent(e.target.value)}
-              placeholder="Enter your prompt template here..."
+              placeholder={t('editorContentPlaceholder')}
               className="w-full h-64 px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-mono focus:ring-2 focus:ring-blue-500 outline-none transition-shadow resize-y"
             />
           </div>
@@ -234,14 +236,14 @@ export default function PromptEditorModal({ promptId, store, onClose }: PromptEd
             onClick={onClose}
             className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
           >
-            Cancel
+            {t('editorCancel')}
           </button>
           <button
             onClick={handleSave}
             disabled={!title.trim() || !content.trim()}
             className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors shadow-sm shadow-blue-500/20"
           >
-            Save Prompt
+            {t('editorSave')}
           </button>
         </div>
       </div>

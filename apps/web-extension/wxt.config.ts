@@ -14,16 +14,17 @@ export default defineConfig({
     },
   }),
   manifest: {
-    name: 'Prompt Flow',
-    description: 'A tool to manage and execute your prompts',
+    name: '__MSG_extensionName__',
+    description: '__MSG_extensionDescription__',
     version: '1.0.0',
+    default_locale: 'en',
     commands: {
       'toggle-popup': {
         suggested_key: {
           default: 'Ctrl+Shift+P',
           mac: 'Command+Shift+P',
         },
-        description: 'Toggle Prompt Flow popup',
+        description: '__MSG_commandTogglePopup__',
       },
     },
     permissions: [

@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Search, Command, Check, X } from 'lucide-react';
 import type { Prompt } from '@/shared/types';
+import { useI18n } from '@/shared/i18n';
 
 export interface PromptPickerProps {
   prompts: Prompt[];
@@ -23,9 +24,11 @@ export default function PromptPicker({
   onClose,
   autoFocus = true,
   classNamePrefix = '',
-  actionLabel = 'Copy to Clipboard',
+  actionLabel,
   showInsertHint = true,
 }: PromptPickerProps) {
+  const { t } = useI18n();
+  const finalActionLabel = actionLabel ?? t('variablesCopyClipboard');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedPrompt, setSelectedPrompt] = useState<Prompt | null>(null);
@@ -168,7 +171,7 @@ export default function PromptPicker({
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
             onKeyDown={handleKeyNavigation}
-            placeholder="Search prompts..."
+            placeholder={t('pickerSearchPlaceholder')}
             className={p(
               'flex-1 bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 text-lg'
             )}
@@ -190,8 +193,8 @@ export default function PromptPicker({
               )}
             >
               {searchQuery
-                ? 'No prompts found.'
-                : 'No prompts available. Add some in the extension options.'}
+                ? t('pickerNoPromptsSearch')
+                : t('pickerNoPromptsAvailable')}
             </div>
           ) : (
             <ul className={p('space-y-1')}>
@@ -252,10 +255,10 @@ export default function PromptPicker({
           )}
         >
           <div className={p('flex gap-4')}>
-            <span className={p('flex items-center gap-1')}>↑↓ to navigate</span>
-            <span className={p('flex items-center gap-1')}>↵ to select</span>
+            <span className={p('flex items-center gap-1')}>↑↓ {t('pickerNavigate')}</span>
+            <span className={p('flex items-center gap-1')}>↵ {t('pickerSelect')}</span>
           </div>
-          <span>esc to close</span>
+          <span>{t('pickerClose')}</span>
         </div>
       </>
     );
@@ -278,7 +281,7 @@ export default function PromptPicker({
             {selectedPrompt.title}
           </h3>
           <p className={p('text-xs text-slate-500 mt-0.5')}>
-            Fill in the variables
+            {t('variablesFillVariables')}
           </p>
         </div>
         <button
@@ -329,7 +332,7 @@ export default function PromptPicker({
       >
         {showInsertHint && (
           <span className={p('text-xs text-slate-500')}>
-            Cmd + Enter to {actionLabel.toLowerCase()}
+            {t('variablesCmdEnter', [finalActionLabel.toLowerCase()])}
           </span>
         )}
         <button
@@ -339,7 +342,7 @@ export default function PromptPicker({
           )}
         >
           {copied ? <Check className={p('w-4 h-4')} /> : null}
-          {copied ? 'Copied!' : actionLabel}
+          {copied ? t('variablesCopied') : finalActionLabel}
         </button>
       </div>
     </div>

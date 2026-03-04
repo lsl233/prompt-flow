@@ -1,5 +1,6 @@
 import { LayoutDashboard, Library, Hash, Download, X, Filter } from 'lucide-react';
 import { ViewState } from '@/shared/types';
+import { useI18n } from '@/shared/i18n';
 
 interface SidebarProps {
   view: ViewState;
@@ -11,6 +12,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ view, setView, tags, onImportExport, selectedTag, onSelectTag }: SidebarProps) {
+  const { t } = useI18n();
   const handleTagClick = (tag: string) => {
     if (selectedTag === tag) {
       // Toggle off if already selected
@@ -48,7 +50,7 @@ export default function Sidebar({ view, setView, tags, onImportExport, selectedT
           }`}
         >
           <LayoutDashboard size={18} />
-          Dashboard
+          {t('sidebarDashboard')}
         </button>
         <button
           onClick={() => {
@@ -62,13 +64,13 @@ export default function Sidebar({ view, setView, tags, onImportExport, selectedT
           }`}
         >
           <Library size={18} />
-          Prompt Library
+          {t('sidebarPromptLibrary')}
         </button>
 
         <div className="pt-6 pb-2">
           <div className="flex items-center justify-between px-3">
             <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
-              Tags
+              {t('sidebarTags')}
             </p>
             {/* {selectedTag && (
               <button
@@ -116,7 +118,7 @@ export default function Sidebar({ view, setView, tags, onImportExport, selectedT
           className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
         >
           <Download size={18} />
-          Import / Export
+          {t('sidebarImportExport')}
         </button>
       </div>
     </div>

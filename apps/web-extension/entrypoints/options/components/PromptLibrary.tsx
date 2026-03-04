@@ -3,6 +3,7 @@ import { Store } from '../useStore';
 import { Search, Filter, MoreVertical, Edit2, Trash2, Copy, Play, Star, History, X } from 'lucide-react';
 import VariableFillerModal from './Modals/VariableFillerModal';
 import VersionHistoryModal from './Modals/VersionHistoryModal';
+import { useI18n } from '@/shared/i18n';
 
 interface PromptLibraryProps {
   store: Store;
@@ -10,6 +11,7 @@ interface PromptLibraryProps {
 }
 
 export default function PromptLibrary({ store, onEditPrompt }: PromptLibraryProps) {
+  const { t } = useI18n();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
@@ -27,8 +29,8 @@ export default function PromptLibrary({ store, onEditPrompt }: PromptLibraryProp
     <div className="space-y-6 h-full flex flex-col animate-in fade-in duration-500">
       <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Prompt Library</h1>
-          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">Manage and execute your prompt templates.</p>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">{t('libraryTitle')}</h1>
+          <p className="text-slate-500 dark:text-slate-400 text-sm mt-1">{t('libraryDescription')}</p>
         </div>
 
         <div className="flex gap-2 w-full sm:w-auto">
@@ -36,7 +38,7 @@ export default function PromptLibrary({ store, onEditPrompt }: PromptLibraryProp
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
             <input
               type="text"
-              placeholder="Search library..."
+              placeholder={t('librarySearchPlaceholder')}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-9 pr-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
@@ -80,17 +82,17 @@ export default function PromptLibrary({ store, onEditPrompt }: PromptLibraryProp
                       <div className="fixed inset-0 z-10" onClick={() => setActiveMenu(null)} />
                       <div className="absolute right-0 mt-1 w-40 bg-white dark:bg-slate-800 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-1 z-20 animate-in fade-in zoom-in-95 duration-100">
                         <button onClick={() => { onEditPrompt(prompt.id); setActiveMenu(null); }} className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2">
-                          <Edit2 size={14} /> Edit
+                          <Edit2 size={14} /> {t('libraryEdit')}
                         </button>
                         <button onClick={() => { store.duplicatePrompt(prompt.id); setActiveMenu(null); }} className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2">
-                          <Copy size={14} /> Duplicate
+                          <Copy size={14} /> {t('libraryDuplicate')}
                         </button>
                         <button onClick={() => { setHistoryPromptId(prompt.id); setActiveMenu(null); }} className="w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 flex items-center gap-2">
-                          <History size={14} /> History
+                          <History size={14} /> {t('libraryHistory')}
                         </button>
                         <div className="h-px bg-slate-200 dark:bg-slate-700 my-1" />
                         <button onClick={() => { store.deletePrompt(prompt.id); setActiveMenu(null); }} className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 flex items-center gap-2">
-                          <Trash2 size={14} /> Delete
+                          <Trash2 size={14} /> {t('libraryDelete')}
                         </button>
                       </div>
                     </>
@@ -110,12 +112,12 @@ export default function PromptLibrary({ store, onEditPrompt }: PromptLibraryProp
             </div>
 
             <div className="mt-auto pt-4 border-t border-slate-100 dark:border-slate-700/50 flex justify-between items-center">
-              <span className="text-xs text-slate-400">Updated {new Date(prompt.updatedAt).toLocaleDateString()}</span>
+              <span className="text-xs text-slate-400">{t('libraryUpdated')} {new Date(prompt.updatedAt).toLocaleDateString()}</span>
               <button
                 onClick={() => setFillerPromptId(prompt.id)}
                 className="flex items-center gap-1.5 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 bg-blue-50 dark:bg-blue-900/20 hover:bg-blue-100 dark:hover:bg-blue-900/40 px-3 py-1.5 rounded-lg transition-colors"
               >
-                <Play size={14} /> Use
+                <Play size={14} /> {t('libraryUse')}
               </button>
             </div>
           </div>
@@ -126,8 +128,8 @@ export default function PromptLibrary({ store, onEditPrompt }: PromptLibraryProp
             <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4">
               <Search size={24} className="text-slate-400" />
             </div>
-            <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-1">No prompts found</h3>
-            <p className="text-slate-500 dark:text-slate-400">Try adjusting your search or filters.</p>
+            <h3 className="text-lg font-medium text-slate-900 dark:text-white mb-1">{t('libraryNoPromptsFound')}</h3>
+            <p className="text-slate-500 dark:text-slate-400">{t('libraryAdjustSearch')}</p>
           </div>
         )}
       </div>

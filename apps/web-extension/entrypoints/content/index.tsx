@@ -1,6 +1,7 @@
 import { createShadowRootUi } from 'wxt/utils/content-script-ui/shadow-root';
 import ContentFloatingPopup from './ContentFloatingPopup';
 import ReactDOM from 'react-dom/client';
+import { I18nProvider } from '@/shared/i18n';
 import '@/shared/style.css';
 
 export default defineContentScript({
@@ -18,7 +19,11 @@ export default defineContentScript({
       append: 'first',
       onMount(container: HTMLElement) {
         const root = ReactDOM.createRoot(container);
-        root.render(<ContentFloatingPopup />);
+        root.render(
+          <I18nProvider>
+            <ContentFloatingPopup />
+          </I18nProvider>
+        );
         return root;
       },
       onRemove(root: ReactDOM.Root | undefined) {
