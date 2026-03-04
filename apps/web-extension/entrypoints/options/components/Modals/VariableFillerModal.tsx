@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { Prompt } from '../../types';
+import { Prompt } from '@/shared/types';
 import { X, Copy, Check, Save } from 'lucide-react';
 import { Store } from '../../useStore';
 

@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { Store } from '../../useStore';
 import { X, Download, FileJson, AlertTriangle, Check, Merge, Replace } from 'lucide-react';
-import { Prompt } from '../../types';
+import { Prompt } from '@/shared/types';
 
 type ImportMode = 'replace' | 'merge';
 type ImportStep = 'upload' | 'preview' | 'confirm';

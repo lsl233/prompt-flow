@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Search, Sun, Moon, Plus, User, X } from 'lucide-react';
-import { Prompt } from '../types';
+import { Prompt } from '@/shared/types';
 import VariableFillerModal from './Modals/VariableFillerModal';
 
 import { Store } from '../useStore';

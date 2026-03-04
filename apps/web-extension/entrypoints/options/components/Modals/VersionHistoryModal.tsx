@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Prompt } from '../../types';
+import { Prompt } from '@/shared/types';
 import { Store } from '../../useStore';
 import { X, Clock, RotateCcw, Eye, Trash2, AlertCircle } from 'lucide-react';
 

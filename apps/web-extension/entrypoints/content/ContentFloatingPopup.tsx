@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { browser } from 'wxt/browser';
-import type { Prompt } from '../options/types';
-import PromptPicker from '../options/components/PromptPicker';
+import type { Prompt } from '@/shared/types';
+import PromptPicker from '@/shared/components/PromptPicker';
 
 export default function ContentFloatingPopup() {
   const [isOpen, setIsOpen] = useState(false);

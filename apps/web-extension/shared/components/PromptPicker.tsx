@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { Search, Command, Check, X } from 'lucide-react';
-import type { Prompt } from '../types';
+import type { Prompt } from '@/shared/types';
 
 export interface PromptPickerProps {
   prompts: Prompt[];

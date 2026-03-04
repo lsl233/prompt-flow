@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Prompt, ViewState } from './types';
+import { Prompt, ViewState } from '@/shared/types';
 import { browser } from 'wxt/browser';
 
 const STORAGE_KEY = 'promptflow_prompts';

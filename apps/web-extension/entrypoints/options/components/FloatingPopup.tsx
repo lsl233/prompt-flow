@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Store } from '../useStore';
-import PromptPicker from './PromptPicker';
+import PromptPicker from '@/shared/components/PromptPicker';
 
 interface FloatingPopupProps {
   store: Store;

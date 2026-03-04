@@ -1,5 +1,5 @@
 import { LayoutDashboard, Library, Hash, Download, X, Filter } from 'lucide-react';
-import { ViewState } from '../types';
+import { ViewState } from '@/shared/types';
 
 interface SidebarProps {
   view: ViewState;

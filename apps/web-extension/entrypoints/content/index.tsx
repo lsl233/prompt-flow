@@ -1,7 +1,7 @@
 import { createShadowRootUi } from 'wxt/utils/content-script-ui/shadow-root';
-import ContentFloatingPopup from './content/ContentFloatingPopup';
+import ContentFloatingPopup from './ContentFloatingPopup';
 import ReactDOM from 'react-dom/client';
-import './content/content-styles.css';
+import '@/shared/style.css';
 
 export default defineContentScript({
   matches: ['<all_urls>'],

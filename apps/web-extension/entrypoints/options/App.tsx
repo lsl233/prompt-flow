@@ -7,7 +7,7 @@ import PromptLibrary from './components/PromptLibrary';
 import FloatingPopup from './components/FloatingPopup';
 import ImportExportModal from './components/Modals/ImportExportModal';
 import PromptEditorModal from './components/Modals/PromptEditorModal';
-import './App.css';
+import '@/shared/style.css';
 
 export default function App() {
   const store = useStore();
