@@ -5,6 +5,9 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* Enable class-based dark mode variant */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;

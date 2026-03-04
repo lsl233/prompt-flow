@@ -1,5 +1,5 @@
 import { Store } from '../useStore';
-import { FileText, Hash, Clock, Plus, Star, TrendingUp, History } from 'lucide-react';
+import { FileText, Hash, Plus, TrendingUp, History } from 'lucide-react';
 
 interface DashboardProps {
   store: Store;
@@ -15,7 +15,6 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
     .filter(p => p.lastUsedAt !== null)
     .sort((a, b) => (b.lastUsedAt || 0) - (a.lastUsedAt || 0))
     .slice(0, 5);
-  const favoritePrompts = prompts.filter(p => p.isFavorite);
   // Most used prompts (top 5)
   const mostUsedPrompts = [...prompts]
     .filter(p => (p.useCount || 0) > 0)

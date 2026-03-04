@@ -139,7 +139,7 @@ export default function Topbar({ toggleTheme, isDarkMode, onCreatePrompt, prompt
                             </span>
                             <div className="flex gap-1">
                               {prompt.tags.slice(0, 2).map(tag => (
-                                <span key={tag} className="text-[10px] px-1.5 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 rounded">
+                                <span key={tag} className="text-xs px-1.5 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 rounded">
                                   {tag}
                                 </span>
                               ))}
@@ -182,9 +182,9 @@ export default function Topbar({ toggleTheme, isDarkMode, onCreatePrompt, prompt
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
 
-          <div className="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 ml-2">
+          {/* <div className="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 ml-2">
             <User size={18} />
-          </div>
+          </div> */}
         </div>
       </header>
 

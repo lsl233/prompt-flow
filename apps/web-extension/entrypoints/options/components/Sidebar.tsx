@@ -70,19 +70,19 @@ export default function Sidebar({ view, setView, tags, onImportExport, selectedT
             <p className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
               Tags
             </p>
-            {selectedTag && (
+            {/* {selectedTag && (
               <button
                 onClick={clearFilter}
-                className="flex items-center gap-1 text-[10px] text-blue-600 hover:text-blue-700 dark:text-blue-400"
+                className="flex items-center gap-1 text-xs text-blue-600 hover:text-blue-700 dark:text-blue-400"
               >
                 <X size={10} />
                 Clear
               </button>
-            )}
+            )} */}
           </div>
         </div>
 
-        {selectedTag && (
+        {/* {selectedTag && (
           <div className="px-3 py-2 mx-2 mb-2 bg-blue-50 dark:bg-blue-900/20 rounded-lg flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Filter size={12} className="text-blue-500" />
@@ -92,7 +92,7 @@ export default function Sidebar({ view, setView, tags, onImportExport, selectedT
               <X size={14} />
             </button>
           </div>
-        )}
+        )} */}
 
         {tags.map(tag => (
           <button

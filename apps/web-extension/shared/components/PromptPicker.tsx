@@ -225,7 +225,7 @@ export default function PromptPicker({
                         <span
                           key={tag}
                           className={p(
-                            'text-[10px] px-1.5 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 rounded'
+                            'text-xs px-1.5 py-0.5 bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 rounded'
                           )}
                         >
                           {tag}

@@ -14,34 +14,10 @@
 
 ---
 
-## 🐛 已知问题
-
-| 问题 | 位置 | 状态 |
-|------|------|------|
-| **切换明暗主题后样式不生效** | `shared/style.css` | 🐛 HTML 标签已添加 `dark` 类，但 Tailwind dark 变体样式未生成 |
-
-### 主题切换 Bug 详情
-
-**现象**：
-- HTML 标签已正确添加/移除 `dark` class
-- 但 Tailwind 的 dark 变体样式（如 `.dark\:text-slate-100`, `.dark\:bg-slate-900`）未生成
-
-**可能原因**：
-- Tailwind v4 的 dark mode 配置问题
-- 需要在 CSS 中添加 `@variant dark` 配置
-- 或检查 `wxt.config.ts` 中的 Tailwind 插件配置
-
-**相关文件**：
-- `apps/web-extension/shared/style.css`
-- `apps/web-extension/wxt.config.ts`
-- `apps/web-extension/entrypoints/options/index.html` (已有防闪烁脚本)
-
----
-
 ## ✅ 已完成（归档）
 
 <details>
-<summary>点击展开已完成的 9 项功能</summary>
+<summary>点击展开已完成的 10 项功能</summary>
 
 ### 高优先级
 1. **Content Script** - 网页端 FloatingPopup 注入 (`content.ts`)
@@ -57,5 +33,6 @@
 7. **数据持久化优化** - 数据结构版本号（v2）
 8. **UI/UX** - 深色模式切换闪烁问题修复
 9. **提示词使用统计** - useCount、lastUsedAt、Recently Used / Most Used 列表
+10. **主题切换样式修复** - Tailwind v4 添加 `@custom-variant dark` 配置
 
 </details>
