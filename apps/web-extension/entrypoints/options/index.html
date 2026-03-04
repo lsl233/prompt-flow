@@ -5,6 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prompt Flow</title>
     <meta name="manifest.open_in_tab" content="true" />
+    <script>
+      // Prevent dark mode flash by checking theme preference early
+      (function() {
+        const savedTheme = localStorage.getItem('promptflow_theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let isDark = prefersDark;
+        if (savedTheme) {
+          try {
+            isDark = JSON.parse(savedTheme);
+          } catch (e) {}
+        }
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

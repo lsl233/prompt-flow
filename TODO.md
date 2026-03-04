@@ -99,7 +99,7 @@
 **文件**：`apps/web-extension/entrypoints/options/useStore.ts`
 
 **可改进项**：
-- [ ] 添加数据结构版本号（便于未来迁移）
+- [x] 添加数据结构版本号（便于未来迁移）- ✅ 已实现
 
 ---
 
@@ -108,7 +108,7 @@
 **可改进项**：
 - [ ] 拖拽排序 prompt 或文件夹
 - [ ] 批量操作（批量删除、批量添加标签）
-- [ ] 深色模式切换闪烁问题
+- [x] 深色模式切换闪烁问题 - ✅ 已修复：在 HTML 中添加提前设置主题的脚本
 
 ---
 
@@ -140,5 +140,5 @@
 | ~~Topbar 搜索无响应~~ | ~~Topbar.tsx~~ | ✅ 已修复：实现完整搜索功能 |
 | ~~标签点击无过滤~~ | ~~Sidebar.tsx~~ | ✅ 已修复：实现标签过滤 |
 | ~~导入直接覆盖数据~~ | ~~ImportExportModal.tsx~~ | ✅ 已修复：添加合并模式 |
-| 点击主题切换没有效果 | Topbar.tsx | 主题切换按钮无响应 |
-| 无变量提示词 UI 优化 | VariableFillerModal.tsx | 应隐藏左侧变量区域和保存按钮 |
+| ~~点击主题切换没有效果~~ | ~~Topbar.tsx~~ | ✅ 已修复：添加 localStorage fallback |
+| ~~无变量提示词 UI 优化~~ | ~~VariableFillerModal.tsx~~ | ✅ 已修复：无变量时隐藏左侧区域和保存按钮 |

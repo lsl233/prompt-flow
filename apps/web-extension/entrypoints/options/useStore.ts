@@ -59,6 +59,15 @@ export function useStore() {
         if (saved) {
           setPrompts(JSON.parse(saved));
         }
+        // Fallback: load theme from localStorage
+        const savedTheme = localStorage.getItem(STORAGE_THEME_KEY);
+        if (savedTheme !== null) {
+          try {
+            setIsDarkMode(JSON.parse(savedTheme));
+          } catch (err) {
+            // Ignore parse error
+          }
+        }
       }
       setIsLoaded(true);
     };
@@ -66,8 +75,10 @@ export function useStore() {
   }, []);
 
   // Data migration function
-  const migrateData = (data: Prompt[], fromVersion: number): Prompt[] => {
+  const migrateData = (data: Prompt[], _fromVersion: number): Prompt[] => {
     // Add future migration logic here
+    // _fromVersion is prefixed with underscore to indicate it's intentionally unused
+    // It will be used when adding new migration logic in the future
     return data;
   };
 

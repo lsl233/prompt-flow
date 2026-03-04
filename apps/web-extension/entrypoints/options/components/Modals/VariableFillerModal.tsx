@@ -109,14 +109,10 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
         </div>
 
         <div className="flex-1 overflow-hidden flex flex-col md:flex-row">
-          <div className="w-full md:w-1/2 p-6 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider mb-4">Variables</h3>
+          {variableNames.length > 0 && (
+            <div className="w-full md:w-1/2 p-6 overflow-y-auto border-b md:border-b-0 md:border-r border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
+              <h3 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider mb-4">Variables</h3>
 
-            {variableNames.length === 0 ? (
-              <div className="text-sm text-slate-500 dark:text-slate-400 italic p-4 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
-                No variables found in this prompt. You can use it directly.
-              </div>
-            ) : (
               <div className="space-y-4">
                 {variableNames.map(vName => (
                   <div key={vName}>
@@ -132,10 +128,10 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
                   </div>
                 ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
 
-          <div className="w-full md:w-1/2 p-6 flex flex-col bg-white dark:bg-slate-800 overflow-hidden">
+          <div className={`w-full p-6 flex flex-col bg-white dark:bg-slate-800 overflow-hidden ${variableNames.length > 0 ? 'md:w-1/2' : ''}`}>
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-semibold text-slate-900 dark:text-white uppercase tracking-wider">Preview</h3>
               <button
@@ -162,13 +158,15 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
           >
             Close
           </button>
-          <button
-            onClick={() => setShowSaveDialog(true)}
-            className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors flex items-center gap-2"
-          >
-            <Save size={16} />
-            Save as New
-          </button>
+          {variableNames.length > 0 && (
+            <button
+              onClick={() => setShowSaveDialog(true)}
+              className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors flex items-center gap-2"
+            >
+              <Save size={16} />
+              Save as New
+            </button>
+          )}
           <button
             onClick={handleCopy}
             className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm shadow-blue-500/20 flex items-center gap-2"
