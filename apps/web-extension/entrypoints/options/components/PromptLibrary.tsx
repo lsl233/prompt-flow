@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Store } from '../useStore';
-import { Search, Filter, MoreVertical, Edit2, Trash2, Copy, Play, Star, History } from 'lucide-react';
+import { Search, Filter, MoreVertical, Edit2, Trash2, Copy, Play, Star, History, X } from 'lucide-react';
 import VariableFillerModal from './Modals/VariableFillerModal';
 import VersionHistoryModal from './Modals/VersionHistoryModal';
 
@@ -11,17 +11,16 @@ interface PromptLibraryProps {
 
 export default function PromptLibrary({ store, onEditPrompt }: PromptLibraryProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   const [fillerPromptId, setFillerPromptId] = useState<string | null>(null);
   const [historyPromptId, setHistoryPromptId] = useState<string | null>(null);
 
-  const filteredPrompts = store.prompts.filter(p => {
+  // Use filteredPrompts from store (includes tag filtering)
+  const filteredPrompts = store.filteredPrompts.filter(p => {
     const matchesSearch = p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           p.description.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesTag = selectedTag ? p.tags.includes(selectedTag) : true;
-    return matchesSearch && matchesTag;
+    return matchesSearch;
   });
 
   return (
@@ -43,19 +42,16 @@ export default function PromptLibrary({ store, onEditPrompt }: PromptLibraryProp
               className="w-full pl-9 pr-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
             />
           </div>
-          <div className="relative">
-            <select
-              value={selectedTag || ''}
-              onChange={(e) => setSelectedTag(e.target.value || null)}
-              className="appearance-none pl-9 pr-8 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer"
+          {store.selectedTag && (
+            <button
+              onClick={() => store.setSelectedTag(null)}
+              className="flex items-center gap-2 px-3 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-lg text-sm font-medium hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
             >
-              <option value="">All Tags</option>
-              {store.allTags.map(tag => (
-                <option key={tag} value={tag}>{tag}</option>
-              ))}
-            </select>
-            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-          </div>
+              <Filter size={16} />
+              {store.selectedTag}
+              <X size={14} />
+            </button>
+          )}
         </div>
       </div>
 

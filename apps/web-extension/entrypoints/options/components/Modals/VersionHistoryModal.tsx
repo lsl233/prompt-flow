@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Prompt } from '../../types';
 import { Store } from '../../useStore';
-import { X, Clock, RotateCcw, Eye } from 'lucide-react';
+import { X, Clock, RotateCcw, Eye, Trash2, AlertCircle } from 'lucide-react';
 
 interface VersionHistoryModalProps {
   prompt: Prompt;
@@ -11,6 +11,7 @@ interface VersionHistoryModalProps {
 
 export default function VersionHistoryModal({ prompt, store, onClose }: VersionHistoryModalProps) {
   const [selectedVersionId, setSelectedVersionId] = useState<string | null>(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(null);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -18,11 +19,16 @@ export default function VersionHistoryModal({ prompt, store, onClose }: VersionH
   }, []);
 
   const handleRestore = (versionId: string) => {
-    const version = prompt.versions.find(v => v.id === versionId);
-    if (version) {
-      store.updatePrompt(prompt.id, { content: version.content });
-      onClose();
+    store.restoreVersion(prompt.id, versionId);
+    onClose();
+  };
+
+  const handleDelete = (versionId: string) => {
+    store.deleteVersion(prompt.id, versionId);
+    if (selectedVersionId === versionId) {
+      setSelectedVersionId(null);
     }
+    setShowDeleteConfirm(null);
   };
 
   const selectedVersion = prompt.versions.find(v => v.id === selectedVersionId);
@@ -37,6 +43,9 @@ export default function VersionHistoryModal({ prompt, store, onClose }: VersionH
               <Clock size={18} className="text-blue-500" />
               Version History: {prompt.title}
             </h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              {prompt.versions.length} version{prompt.versions.length !== 1 ? 's' : ''} saved (max 20)
+            </p>
           </div>
           <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
             <X size={20} />
@@ -56,7 +65,7 @@ export default function VersionHistoryModal({ prompt, store, onClose }: VersionH
                   <li
                     key={version.id}
                     onClick={() => setSelectedVersionId(version.id)}
-                    className={`p-4 cursor-pointer transition-colors ${
+                    className={`p-4 cursor-pointer transition-colors group ${
                       selectedVersionId === version.id
                         ? 'bg-blue-50 dark:bg-blue-900/20 border-l-2 border-blue-500'
                         : 'hover:bg-slate-100 dark:hover:bg-slate-700/50 border-l-2 border-transparent'
@@ -66,13 +75,25 @@ export default function VersionHistoryModal({ prompt, store, onClose }: VersionH
                       <span className="font-medium text-sm text-slate-900 dark:text-white">
                         {index === 0 ? 'Current Version' : `Version ${prompt.versions.length - index}`}
                       </span>
-                      <span className="text-xs text-slate-400">
-                        {new Date(version.timestamp).toLocaleString(undefined, {
-                          month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
-                        })}
-                      </span>
+                      {index !== 0 && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setShowDeleteConfirm(version.id);
+                          }}
+                          className="opacity-0 group-hover:opacity-100 p-1 text-slate-400 hover:text-red-500 transition-all"
+                          title="Delete version"
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      )}
                     </div>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
+                    <span className="text-xs text-slate-400">
+                      {new Date(version.timestamp).toLocaleString(undefined, {
+                        month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                      })}
+                    </span>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1">
                       {version.content}
                     </p>
                   </li>
@@ -89,15 +110,47 @@ export default function VersionHistoryModal({ prompt, store, onClose }: VersionH
                     <Eye size={16} className="text-slate-400" />
                     Previewing Version
                   </h3>
-                  {prompt.versions[0]?.id !== selectedVersion.id && (
-                    <button
-                      onClick={() => handleRestore(selectedVersion.id)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 rounded-md transition-colors"
-                    >
-                      <RotateCcw size={14} />
-                      Restore This Version
-                    </button>
-                  )}
+                  <div className="flex items-center gap-2">
+                    {showDeleteConfirm === selectedVersion.id ? (
+                      <div className="flex items-center gap-2 bg-red-50 dark:bg-red-900/20 px-3 py-1.5 rounded-md">
+                        <AlertCircle size={14} className="text-red-500" />
+                        <span className="text-xs text-red-600 dark:text-red-400">Delete?</span>
+                        <button
+                          onClick={() => handleDelete(selectedVersion.id)}
+                          className="text-xs font-medium text-red-600 hover:text-red-700"
+                        >
+                          Yes
+                        </button>
+                        <button
+                          onClick={() => setShowDeleteConfirm(null)}
+                          className="text-xs text-slate-500 hover:text-slate-700"
+                        >
+                          No
+                        </button>
+                      </div>
+                    ) : (
+                      <>
+                        {prompt.versions[0]?.id !== selectedVersion.id && (
+                          <>
+                            <button
+                              onClick={() => setShowDeleteConfirm(selectedVersion.id)}
+                              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-md transition-colors"
+                            >
+                              <Trash2 size={14} />
+                              Delete
+                            </button>
+                            <button
+                              onClick={() => handleRestore(selectedVersion.id)}
+                              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 rounded-md transition-colors"
+                            >
+                              <RotateCcw size={14} />
+                              Restore
+                            </button>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </div>
                 </div>
                 <div className="flex-1 overflow-y-auto bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-4">
                   <pre className="text-sm font-mono text-slate-800 dark:text-slate-300 whitespace-pre-wrap break-words font-sans">

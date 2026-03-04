@@ -17,3 +17,8 @@ export interface Prompt {
 }
 
 export type ViewState = 'dashboard' | 'library';
+
+export interface FilterState {
+  tag: string | null;
+  search: string;
+}

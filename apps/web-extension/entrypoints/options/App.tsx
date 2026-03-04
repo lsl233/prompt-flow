@@ -44,6 +44,8 @@ export default function App() {
         setView={store.setView}
         tags={store.allTags}
         onImportExport={() => setIsImportExportOpen(true)}
+        selectedTag={store.selectedTag}
+        onSelectTag={store.setSelectedTag}
       />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
@@ -51,6 +53,7 @@ export default function App() {
           toggleTheme={store.toggleTheme}
           isDarkMode={store.isDarkMode}
           onCreatePrompt={handleCreatePrompt}
+          prompts={store.prompts}
         />
 
         <main className="flex-1 overflow-y-auto p-6">

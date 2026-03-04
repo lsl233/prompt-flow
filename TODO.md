@@ -12,10 +12,10 @@
 **文件**：`apps/web-extension/entrypoints/content.ts`
 
 **缺失功能**：
-- [ ] 监听全局快捷键 (Cmd+K) 在任意网页触发 FloatingPopup
-- [ ] 将 FloatingPopup React 组件注入到网页 DOM
-- [ ] 处理与 options 页面的通信（获取 prompt 数据）
-- [ ] 自动填充变量后的内容到当前输入框
+- [x] 监听全局快捷键 (Cmd+K) 在任意网页触发 FloatingPopup
+- [x] 将 FloatingPopup React 组件注入到网页 DOM
+- [x] 处理与 options 页面的通信（获取 prompt 数据）
+- [x] 自动填充变量后的内容到当前输入框
 
 **建议实现**：
 ```typescript
@@ -34,10 +34,10 @@
 **文件**：`apps/web-extension/entrypoints/background.ts`
 
 **缺失功能**：
-- [ ] 处理快捷键命令（如 Cmd+Shift+P 快速弹出搜索）
-- [ ] 作为 content script 与 options 页面的消息中转站
-- [ ] 监听扩展安装/更新事件（数据迁移）
-- [ ] 管理跨页面状态同步
+- [x] 处理快捷键命令（如 Cmd+Shift+P 快速弹出搜索）
+- [x] 作为 content script 与 options 页面的消息中转站
+- [x] 监听扩展安装/更新事件（数据迁移）
+- [x] 管理跨页面状态同步
 
 ---
 
@@ -49,10 +49,10 @@
 **文件**：`apps/web-extension/entrypoints/options/components/Topbar.tsx`
 
 **缺失功能**：
-- [ ] 输入时实时搜索 prompt
-- [ ] 显示搜索结果下拉列表
-- [ ] 支持键盘导航（↑↓ 选择，Enter 确认）
-- [ ] 点击搜索结果打开 VariableFillerModal
+- [x] 输入时实时搜索 prompt
+- [x] 显示搜索结果下拉列表
+- [x] 支持键盘导航（↑↓ 选择，Enter 确认）
+- [x] 点击搜索结果打开 VariableFillerModal
 
 ---
 
@@ -62,9 +62,9 @@
 **文件**：`apps/web-extension/entrypoints/options/components/Sidebar.tsx:53`
 
 **缺失功能**：
-- [ ] 点击标签后按该标签过滤 prompt 列表
-- [ ] 高亮当前选中的标签
-- [ ] 清除过滤的选项
+- [x] 点击标签后按该标签过滤 prompt 列表
+- [x] 高亮当前选中的标签
+- [x] 清除过滤的选项
 
 ---
 
@@ -74,8 +74,8 @@
 **文件**：`apps/web-extension/entrypoints/options/useStore.ts:105`
 
 **缺失功能**：
-- [ ] 限制版本数量（如保留最近 20 个版本）
-- [ ] 手动删除特定版本
+- [x] 限制版本数量（如保留最近 20 个版本）
+- [x] 手动删除特定版本
 - [ ] 版本对比功能（diff 视图）
 
 ---
@@ -86,10 +86,10 @@
 **文件**：`apps/web-extension/entrypoints/options/components/Modals/ImportExportModal.tsx:34`
 
 **缺失功能**：
-- [ ] 合并模式：导入的 prompt 与现有数据合并
-- [ ] 去重策略：相同 ID 或标题的处理
-- [ ] 预览模式：导入前预览将要导入的内容
-- [ ] 导入确认对话框（防止误覆盖）
+- [x] 合并模式：导入的 prompt 与现有数据合并
+- [x] 去重策略：相同 ID 或标题的处理
+- [x] 预览模式：导入前预览将要导入的内容
+- [x] 导入确认对话框（防止误覆盖）
 
 ---
 
@@ -140,7 +140,7 @@
 
 | 问题 | 位置 | 影响 |
 |------|------|------|
-| Content Script 仅匹配 Google 页面 | content.ts matches | 无法在其他网站使用 |
-| Topbar 搜索无响应 | Topbar.tsx | 功能不可用 |
-| 标签点击无过滤 | Sidebar.tsx | 用户体验差 |
-| 导入直接覆盖数据 | ImportExportModal.tsx | 可能导致数据丢失 |
+| ~~Content Script 仅匹配 Google 页面~~ | ~~content.ts matches~~ | ✅ 已修复：匹配所有网址 |
+| ~~Topbar 搜索无响应~~ | ~~Topbar.tsx~~ | ✅ 已修复：实现完整搜索功能 |
+| ~~标签点击无过滤~~ | ~~Sidebar.tsx~~ | ✅ 已修复：实现标签过滤 |
+| ~~导入直接覆盖数据~~ | ~~ImportExportModal.tsx~~ | ✅ 已修复：添加合并模式 |

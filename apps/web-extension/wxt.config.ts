@@ -7,4 +7,22 @@ export default defineConfig({
   vite: (env) => ({
     plugins: [tailwindcss()],
   }),
+  manifest: {
+    commands: {
+      'toggle-popup': {
+        suggested_key: {
+          default: 'Ctrl+Shift+P',
+          mac: 'Command+Shift+P',
+        },
+        description: 'Toggle Prompt Flow popup',
+      },
+    },
+    permissions: [
+      'storage',
+      'activeTab',
+    ],
+    host_permissions: [
+      '<all_urls>',
+    ],
+  },
 });
