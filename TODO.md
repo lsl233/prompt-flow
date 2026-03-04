@@ -11,8 +11,36 @@
 **可改进项**：
 - [ ] 拖拽排序 prompt 或文件夹
 - [ ] 批量操作（批量删除、批量添加标签）
+- [ ] Tag 可以置顶（常用 Tag 快速访问）
 
----
+### 2. 键盘快捷键支持
+
+**文件**：`entrypoints/background.ts`
+
+**需求**：
+- [ ] 支持默认快捷键唤起 Prompt Picker（如 `Ctrl+Shift+P` / `Cmd+Shift+P`）
+- [ ] 用户可自定义快捷键配置
+- [ ] 快捷键冲突检测与提示
+
+### 3. Content Script 交互优化
+
+**文件**：`entrypoints/content.ts`, `entrypoints/content/ContentFloatingPopup.tsx`
+
+**需求**：
+- [ ] 点击外部区域关闭弹窗（需处理 Shadow DOM 边界）
+- [ ] 复制提示词成功后显示提示（Toast 或短暂提示文字）
+
+### 4. 多语言支持 (i18n)
+
+**参考文档**：[WXT i18n Guide](https://wxt.dev/guide/essentials/i18n.html)
+
+**文件**：`public/_locales/`, `entrypoints/*/`, `shared/components/`
+
+**需求**：
+- [ ] 创建 `_locales` 目录结构（至少支持 zh_CN、en）
+- [ ] 提取所有用户可见文本到 locale 文件
+- [ ] UI 添加语言切换设置
+- [ ] 浏览器语言自动检测与回退
 
 ## ✅ 已完成（归档）
 

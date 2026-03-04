@@ -14,6 +14,9 @@ export default defineConfig({
     },
   }),
   manifest: {
+    name: 'Prompt Flow',
+    description: 'A tool to manage and execute your prompts',
+    version: '1.0.0',
     commands: {
       'toggle-popup': {
         suggested_key: {
