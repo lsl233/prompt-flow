@@ -1,144 +1,61 @@
-# Prompt Flow 未实现功能清单
+# Prompt Flow 功能清单
 
-> 自动生成于 2026-03-03
-
----
-
-## 🔴 高优先级（核心功能缺失）
-
-### 1. Content Script - 网页端 FloatingPopup 注入
-
-**当前状态**：仅打印日志，且只匹配 Google 页面
-**文件**：`apps/web-extension/entrypoints/content.ts`
-
-**缺失功能**：
-- [x] 监听全局快捷键 (Cmd+K) 在任意网页触发 FloatingPopup
-- [x] 将 FloatingPopup React 组件注入到网页 DOM
-- [x] 处理与 options 页面的通信（获取 prompt 数据）
-- [x] 自动填充变量后的内容到当前输入框
-
-**建议实现**：
-```typescript
-// 需要实现
-- 使用 Shadow DOM 隔离样式
-- 监听键盘事件触发搜索弹窗
-- 与 background script 通信获取 prompt 列表
-- 将生成的内容填充到当前聚焦的 input/textarea
-```
+> 最后更新于 2026-03-04
 
 ---
 
-### 2. Background Script - 核心服务逻辑
+## 🟢 待办（体验优化）
 
-**当前状态**：仅打印日志
-**文件**：`apps/web-extension/entrypoints/background.ts`
-
-**缺失功能**：
-- [x] 处理快捷键命令（如 Cmd+Shift+P 快速弹出搜索）
-- [x] 作为 content script 与 options 页面的消息中转站
-- [x] 监听扩展安装/更新事件（数据迁移）
-- [x] 管理跨页面状态同步
-
----
-
-## 🟡 中优先级（功能不完整）
-
-### 3. Topbar 搜索框 - 纯占位符
-
-**当前状态**：输入框无任何事件处理
-**文件**：`apps/web-extension/entrypoints/options/components/Topbar.tsx`
-
-**缺失功能**：
-- [x] 输入时实时搜索 prompt
-- [x] 显示搜索结果下拉列表
-- [x] 支持键盘导航（↑↓ 选择，Enter 确认）
-- [x] 点击搜索结果打开 VariableFillerModal
-
----
-
-### 4. Sidebar 标签点击 - 无过滤效果
-
-**当前状态**：点击标签仅切换视图，无过滤
-**文件**：`apps/web-extension/entrypoints/options/components/Sidebar.tsx:53`
-
-**缺失功能**：
-- [x] 点击标签后按该标签过滤 prompt 列表
-- [x] 高亮当前选中的标签
-- [x] 清除过滤的选项
-
----
-
-### 5. Prompt 版本历史 - 无清理策略
-
-**当前状态**：版本无限累积
-**文件**：`apps/web-extension/entrypoints/options/useStore.ts:105`
-
-**缺失功能**：
-- [x] 限制版本数量（如保留最近 20 个版本）
-- [x] 手动删除特定版本
-
----
-
-### 6. 数据导入 - 无合并策略
-
-**当前状态**：完全替换现有数据
-**文件**：`apps/web-extension/entrypoints/options/components/Modals/ImportExportModal.tsx:34`
-
-**缺失功能**：
-- [x] 合并模式：导入的 prompt 与现有数据合并
-- [x] 去重策略：相同 ID 或标题的处理
-- [x] 预览模式：导入前预览将要导入的内容
-- [x] 导入确认对话框（防止误覆盖）
-
----
-
-## 🟢 低优先级（体验优化）
-
-### 7. 数据持久化优化
-
-**文件**：`apps/web-extension/entrypoints/options/useStore.ts`
-
-**可改进项**：
-- [x] 添加数据结构版本号（便于未来迁移）- ✅ 已实现
-
----
-
-### 8. UI/UX 改进
+### 1. UI/UX 改进
 
 **可改进项**：
 - [ ] 拖拽排序 prompt 或文件夹
 - [ ] 批量操作（批量删除、批量添加标签）
-- [x] 深色模式切换闪烁问题 - ✅ 已修复：在 HTML 中添加提前设置主题的脚本
-
----
-
-### 9. 提示词使用统计 ✅ 已完成
-
-**文件**：`apps/web-extension/entrypoints/options/components/Dashboard.tsx`
-
-**已完成功能**：
-- [x] 记录使用次数（useCount）- 在 Prompt 类型中添加 useCount 字段
-- [x] 最近使用过的提示词排序 - Dashboard 显示 Recently Used 和 Most Used 列表
-- [x] 数据迁移 - 自动为旧数据添加 useCount 和 lastUsedAt 字段
-
----
-
-## 📋 开发建议顺序
-
-1. **先完成 Content Script** - 这是产品的核心功能（在网页中使用提示词）
-2. **优化数据导入导出** - 防止用户误操作丢失数据
-3. **实现搜索和标签过滤** - 提升使用效率
-4. **版本管理优化** - 长期使用的必要功能
 
 ---
 
 ## 🐛 已知问题
 
-| 问题 | 位置 | 影响 |
+| 问题 | 位置 | 状态 |
 |------|------|------|
-| ~~Content Script 仅匹配 Google 页面~~ | ~~content.ts matches~~ | ✅ 已修复：匹配所有网址 |
-| ~~Topbar 搜索无响应~~ | ~~Topbar.tsx~~ | ✅ 已修复：实现完整搜索功能 |
-| ~~标签点击无过滤~~ | ~~Sidebar.tsx~~ | ✅ 已修复：实现标签过滤 |
-| ~~导入直接覆盖数据~~ | ~~ImportExportModal.tsx~~ | ✅ 已修复：添加合并模式 |
-| ~~点击主题切换没有效果~~ | ~~Topbar.tsx~~ | ✅ 已修复：添加 localStorage fallback |
-| ~~无变量提示词 UI 优化~~ | ~~VariableFillerModal.tsx~~ | ✅ 已修复：无变量时隐藏左侧区域和保存按钮 |
+| **切换明暗主题后样式不生效** | `shared/style.css` | 🐛 HTML 标签已添加 `dark` 类，但 Tailwind dark 变体样式未生成 |
+
+### 主题切换 Bug 详情
+
+**现象**：
+- HTML 标签已正确添加/移除 `dark` class
+- 但 Tailwind 的 dark 变体样式（如 `.dark\:text-slate-100`, `.dark\:bg-slate-900`）未生成
+
+**可能原因**：
+- Tailwind v4 的 dark mode 配置问题
+- 需要在 CSS 中添加 `@variant dark` 配置
+- 或检查 `wxt.config.ts` 中的 Tailwind 插件配置
+
+**相关文件**：
+- `apps/web-extension/shared/style.css`
+- `apps/web-extension/wxt.config.ts`
+- `apps/web-extension/entrypoints/options/index.html` (已有防闪烁脚本)
+
+---
+
+## ✅ 已完成（归档）
+
+<details>
+<summary>点击展开已完成的 9 项功能</summary>
+
+### 高优先级
+1. **Content Script** - 网页端 FloatingPopup 注入 (`content.ts`)
+2. **Background Script** - 核心服务逻辑 (`background.ts`)
+
+### 中优先级
+3. **Topbar 搜索框** - 实时搜索、下拉列表、键盘导航
+4. **Sidebar 标签过滤** - 标签点击过滤、高亮选中
+5. **Prompt 版本历史** - 限制 20 个版本、支持删除特定版本
+6. **数据导入导出** - 合并模式、去重策略、预览、确认对话框
+
+### 低优先级
+7. **数据持久化优化** - 数据结构版本号（v2）
+8. **UI/UX** - 深色模式切换闪烁问题修复
+9. **提示词使用统计** - useCount、lastUsedAt、Recently Used / Most Used 列表
+
+</details>

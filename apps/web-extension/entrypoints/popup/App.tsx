@@ -1,5 +1,5 @@
 import { Settings } from 'lucide-react';
-import './App.css';
+import '@/shared/style.css';
 
 function App() {
   const openOptions = () => {
