@@ -8,7 +8,96 @@ const STORAGE_THEME_KEY = 'promptflow_theme';
 const CURRENT_VERSION = 2;
 const MAX_VERSIONS_PER_PROMPT = 20;
 
-const INITIAL_PROMPTS: Prompt[] = [];
+const INITIAL_PROMPTS: Prompt[] = [
+  {
+    id: 'template-rctco',
+    title: 'RCTCO 提示词框架',
+    description: '一个结构化的提示词模版框架，包含角色、背景、任务、约束和输出格式五个核心要素',
+    content: `角色 (Role)：{{给 AI 一个明确的身份定位}}
+
+背景 (Context)：
+{{解释为什么要做这件事，受众是谁}}
+
+任务 (Task)：
+{{极其明确地描述具体要做什么}}
+
+约束 (Constraints)：
+{{设定边界条件（字数、语气、避开的内容）}}
+
+输出格式 (Output)：
+{{规定结果的长相}}`,
+    tags: ['模版', 'RCTCO框架'],
+    isFavorite: true,
+    versions: [
+      {
+        id: 'v1-rctco',
+        content: `角色 (Role)：
+{{角色}}
+
+背景 (Context)：
+{{背景}}
+
+任务 (Task)：
+{{任务}}
+
+约束 (Constraints)：
+{{约束}}
+
+输出格式 (Output)：
+{{输出格式}}`,
+        timestamp: Date.now(),
+      }
+    ],
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+    useCount: 1,
+    lastUsedAt: Date.now(),
+  },
+  {
+    id: 'example-fitness',
+    title: '健身教练计划（示例）',
+    description: '使用 RCTCO 框架制定的4周减脂增肌计划示例',
+    content: `角色 (Role)：你是一位拥有 10 年经验的资深健身教练。
+
+背景 (Context)：
+我是一个平时工作很忙、只有周末能运动的上班族。
+
+任务 (Task)：
+请为我制定一份为期 4 周的减脂增肌计划。
+
+约束 (Constraints)：
+不要推荐昂贵的器械，每餐预算控制在 30 元内。
+
+输出格式 (Output)：
+请用表格形式呈现，并分条列出购物清单。`,
+    tags: ['示例', '健身', 'RCTCO框架'],
+    isFavorite: false,
+    versions: [
+      {
+        id: 'v1-fitness',
+        content: `角色 (Role)：
+你是一位拥有 10 年经验的资深健身教练。
+
+背景 (Context)：
+我是一个平时工作很忙、只有周末能运动的上班族。
+
+任务 (Task)：
+请为我制定一份为期 4 周的减脂增肌计划。
+
+约束 (Constraints)：
+不要推荐昂贵的器械，每餐预算控制在 30 元内。
+
+输出格式 (Output)：
+请用表格形式呈现，并分条列出购物清单。`,
+        timestamp: Date.now(),
+      }
+    ],
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+    useCount: 2,
+    lastUsedAt: Date.now(),
+  },
+];
 
 export function useStore() {
   const [prompts, setPrompts] = useState<Prompt[]>(INITIAL_PROMPTS);
