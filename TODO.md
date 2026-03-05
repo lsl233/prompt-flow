@@ -18,7 +18,6 @@
 **文件**：`entrypoints/background.ts`
 
 **需求**：
-- [ ] 支持默认快捷键唤起 Prompt Picker（如 `Ctrl+Shift+P` / `Cmd+Shift+P`）
 - [ ] 用户可自定义快捷键配置
 - [ ] 快捷键冲突检测与提示
 
@@ -30,17 +29,34 @@
 - [x] 点击外部区域关闭弹窗（通过 `onClick` 处理 overlay 点击事件）
 - [x] 复制提示词成功后显示 Toast 提示（2秒自动消失，支持插入/复制两种场景）
 
-### 4. 多语言支持 (i18n)
+### 5. 组件重构 - TagSelector 提取
 
-**参考文档**：[WXT i18n Guide](https://wxt.dev/guide/essentials/i18n.html)
-
-**文件**：`public/_locales/`, `entrypoints/*/`, `shared/components/`
+**文件**：`entrypoints/options/components/Modals/VariableFillerModal.tsx:220-250`
 
 **需求**：
-- [ ] 创建 `_locales` 目录结构（至少支持 zh_CN、en）
-- [ ] 提取所有用户可见文本到 locale 文件
-- [ ] UI 添加语言切换设置
-- [ ] 浏览器语言自动检测与回退
+- [ ] 将 Tag 选择和创建功能抽离为独立组件 `TagSelector`
+- [ ] 支持复用到其他需要 Tag 管理的场景（如 PromptEditor）
+- [ ] 组件 Props：`tags: string[]`, `availableTags?: string[]`, `onChange: (tags: string[]) => void`
+
+### 6. VariableFillerModal 预览区支持直接编辑
+
+**文件**：`entrypoints/options/components/Modals/VariableFillerModal.tsx:150-154`
+
+**需求**：
+- [ ] 预览区域从只读改为可编辑（`pre` 标签改为 `textarea` 或 `contentEditable`）
+
+### 7. i18n 文案补全 - VariableFillerModal
+
+**文件**：`entrypoints/options/components/Modals/VariableFillerModal.tsx:223-275`
+
+**问题**：
+- [ ] "Tags" 标签未使用 i18n
+- [ ] "No tags" 提示未使用 i18n
+- [ ] "Add a tag and press Enter" placeholder 未使用 i18n
+- [ ] "Preview" 标签未使用 i18n
+- [ ] "Cancel" 按钮未使用 i18n
+- [ ] "Save Prompt" 按钮未使用 i18n
+- [ ] "Saved!" 提示未使用 i18n
 
 ## ✅ 已完成（归档）
 
