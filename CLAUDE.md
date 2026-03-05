@@ -64,35 +64,6 @@ WXT abstracts browser differences. The same codebase targets both Chrome and Fir
 - Popup UI is a standard React app at `entrypoints/popup/`
 - Use the standard React hooks and patterns
 
-## Project Structure
-
-```
-apps/web-extension/
-├── entrypoints/          # WXT entrypoints (auto-discovered)
-│   ├── background.ts     # Service worker
-│   ├── content.ts        # Content script
-│   ├── content/          # Content script components
-│   │   └── ContentFloatingPopup.tsx
-│   ├── options/          # Options page
-│   │   ├── App.tsx
-│   │   ├── useStore.ts   # Main state management
-│   │   └── components/
-│   └── popup/            # Popup UI (React app)
-│       ├── index.html
-│       ├── main.tsx
-│       └── App.tsx
-├── shared/               # Shared code between entrypoints
-│   ├── components/       # Shared React components
-│   │   └── PromptPicker.tsx
-│   ├── hooks/            # Shared hooks
-│   ├── utils/            # Utility functions
-│   └── types.ts          # Shared TypeScript types
-├── assets/               # Static assets imported in code
-├── public/               # Static files copied to output
-├── wxt.config.ts         # WXT configuration
-└── tsconfig.json         # TypeScript config with path aliases
-```
-
 ## Adding Shared Packages
 
 To add a shared package in `packages/`:
@@ -149,17 +120,65 @@ export default defineContentScript({
 
 CSS is automatically injected into the Shadow DOM. The content script uses `pf-` prefixed utility classes (in `content/content-styles.css`) to avoid conflicts with host page styles.
 
-## Recent Refactoring (2026-03-04)
+## Internationalization (i18n)
 
-1. **Created `shared/` directory** - For code shared between options, content, and popup
-2. **Extracted `PromptPicker` component** - Shared between FloatingPopup (options) and ContentFloatingPopup (content script)
-3. **Added path aliases** - Simplified imports across the codebase
-4. **Fixed Content Script styles** - Now using WXT's proper Shadow DOM handling
-5. **Theme persistence** - Dark/light mode now saves to storage
-6. **Tags selector improvement** - Dropdown with filtering and keyboard navigation
-7. **Save as New Prompt** - VariableFillerModal can save filled prompts
-8. **Content Script interactions** - Click outside to close popup, Toast notifications for copy/insert
-9. **Created `Toast` component** - Reusable toast notification in `shared/components/`
+The extension supports multiple languages using Chrome Extension's i18n API:
+
+- **Supported Languages**: English (`en`), Simplified Chinese (`zh_CN`), Traditional Chinese (`zh_TW`)
+- **Translation Files**: Located in `public/_locales/<lang>/messages.json`
+- **Usage in React**: `const { t } = useI18n()` from `@/shared/i18n`
+- **Usage in Content Scripts**: Direct `t()` function from `@/shared/i18n`
+
+All UI text must use i18n keys instead of hardcoded strings. When adding new text:
+1. Add the key to all `messages.json` files
+2. Use `t('keyName')` or `t('keyName', [substitution1, substitution2])` for placeholders
+
+## Project Structure (Updated)
+
+```
+apps/web-extension/
+├── entrypoints/          # WXT entrypoints (auto-discovered)
+│   ├── background.ts     # Service worker
+│   ├── content/          # Content script
+│   │   ├── index.tsx     # Content script entry
+│   │   └── ContentFloatingPopup.tsx
+│   ├── options/          # Options page
+│   │   ├── App.tsx
+│   │   ├── useStore.ts   # Main state management
+│   │   └── components/
+│   │       └── Modals/   # Modal components
+│   └── popup/            # Popup UI
+├── shared/               # Shared code
+│   ├── components/       # Shared React components
+│   │   ├── PromptPicker.tsx
+│   │   └── Toast.tsx
+│   ├── i18n/             # i18n utilities
+│   │   └── index.tsx     # I18nProvider and useI18n hook
+│   ├── types.ts          # Shared TypeScript types
+│   └── style.css         # Shared styles
+├── public/_locales/      # Translation files
+│   ├── en/messages.json
+│   ├── zh_CN/messages.json
+│   └── zh_TW/messages.json
+└── wxt.config.ts
+```
+
+## Recent Refactoring (2026-03-05)
+
+1. **Multi-language Support (i18n)** - Full internationalization with 3 languages
+   - `I18nProvider` wraps all entry points (options, popup, content)
+   - `useI18n()` hook for React components
+   - `t()` function for non-React contexts
+   - Browser language auto-detection with manual override
+2. **Created `shared/` directory** - For code shared between options, content, and popup
+3. **Extracted `PromptPicker` component** - Shared between FloatingPopup (options) and ContentFloatingPopup (content script)
+4. **Added path aliases** - Simplified imports across the codebase
+5. **Fixed Content Script styles** - Now using WXT's proper Shadow DOM handling
+6. **Theme persistence** - Dark/light mode now saves to storage
+7. **Tags selector improvement** - Dropdown with filtering and keyboard navigation
+8. **Save as New Prompt** - VariableFillerModal can save filled prompts
+9. **Content Script interactions** - Click outside to close popup, Toast notifications for copy/insert
+10. **Created `Toast` component** - Reusable toast notification in `shared/components/`
 
 ## Important File Locations
 
@@ -168,4 +187,6 @@ CSS is automatically injected into the Shadow DOM. The content script uses `pf-`
 - `apps/web-extension/package.json` - Extension dependencies and scripts
 - `apps/web-extension/shared/types.ts` - Shared TypeScript types
 - `apps/web-extension/shared/components/` - Shared React components
+- `apps/web-extension/shared/i18n/index.tsx` - i18n Provider and hooks
+- `apps/web-extension/public/_locales/` - Translation files
 - `apps/web-extension/entrypoints/options/useStore.ts` - Main state management
