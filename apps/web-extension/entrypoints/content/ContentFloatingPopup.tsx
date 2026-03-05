@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { browser } from 'wxt/browser';
 import type { Prompt } from '@/shared/types';
-import PromptPicker from '@/shared/components/PromptPicker';
-import Toast from '@/shared/components/Toast';
+import ContentPromptPicker from './ContentPromptPicker';
+import ContentToast from './ContentToast';
 import { t } from '@/shared/i18n';
 
 export default function ContentFloatingPopup() {
@@ -155,18 +155,17 @@ export default function ContentFloatingPopup() {
       {isOpen && (
         <div
           ref={containerRef}
-          className="fixed inset-0 z-[2147483647] flex items-start justify-center pt-[15vh] p-4 bg-slate-900/50 backdrop-blur-sm"
+          className="fixed inset-0 z-[2147483647] flex items-start justify-center pt-[15vh] p-[16px] bg-slate-900/50 backdrop-blur-sm"
           onClick={handleOverlayClick}
         >
           <div
-            className="bg-white dark:bg-slate-800 w-full max-w-xl rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"
+            className="bg-white dark:bg-slate-800 w-full max-w-[576px] rounded-[16px] shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"
             onClick={e => e.stopPropagation()}
           >
-            <PromptPicker
+            <ContentPromptPicker
               prompts={prompts}
               onSelect={handleSelect}
               onClose={handleClose}
-              classNamePrefix=""
               actionLabel={copied ? t('contentInserted') : t('variablesCopyClipboard')}
             />
           </div>
@@ -174,7 +173,7 @@ export default function ContentFloatingPopup() {
       )}
 
       {/* Toast Notification - 独立于弹窗显示 */}
-      <Toast
+      <ContentToast
         message={toast.message}
         visible={toast.visible}
         onClose={hideToast}
