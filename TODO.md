@@ -79,14 +79,19 @@ const handleCopyAndClose = async () => {
 };
 ```
 
-### 9. Dashboard 统计项点击交互优化
+### 9. Dashboard 统计项点击交互优化 ✅
 
 **文件**：`entrypoints/options/components/Dashboard.tsx`
 
-**需求**：
-- [ ] "最近使用"列表中的提示词点击后直接打开 `VariableFillerModal`
-- [ ] "使用最多"列表中的提示词点击后直接打开 `VariableFillerModal`
-- [ ] 替代当前的点击行为（可能需要先查看当前实现）
+**已完成**：
+- [x] "最近使用"列表中的提示词点击后直接打开 `VariableFillerModal`
+- [x] "使用最多"列表中的提示词点击后直接打开 `VariableFillerModal`
+- [x] 移除了原来的点击跳转行为（从 `store.setView('library')` 改为直接打开模态框）
+
+**实现说明**：
+- 添加了 `fillerPromptId` 状态管理
+- 点击列表项时调用 `setFillerPromptId(prompt.id)` 打开模态框
+- 关闭时调用 `setFillerPromptId(null)`
 
 ## ✅ 已完成（归档）
 

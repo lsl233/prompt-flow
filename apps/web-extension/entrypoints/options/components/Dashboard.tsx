@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { Store } from '../useStore';
 import { FileText, Hash, Plus, TrendingUp, History } from 'lucide-react';
 import { useI18n } from '@/shared/i18n';
+import VariableFillerModal from './Modals/VariableFillerModal';
 
 interface DashboardProps {
   store: Store;
@@ -10,6 +12,7 @@ interface DashboardProps {
 export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
   const { t } = useI18n();
   const { prompts, allTags } = store;
+  const [fillerPromptId, setFillerPromptId] = useState<string | null>(null);
 
   const totalUsage = prompts.reduce((acc, p) => acc + (p.useCount || 0), 0);
   // Recent activity: sort by lastUsedAt (most recently used first)
@@ -74,7 +77,7 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
             {recentlyUsedPrompts.length > 0 ? (
               <ul className="divide-y divide-slate-100 dark:divide-slate-700/50">
                 {recentlyUsedPrompts.map(prompt => (
-                  <li key={prompt.id} className="p-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors cursor-pointer" onClick={() => store.setView('library')}>
+                  <li key={prompt.id} className="p-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors cursor-pointer" onClick={() => setFillerPromptId(prompt.id)}>
                     <div className="flex items-center justify-between">
                       <p className="font-medium text-slate-900 dark:text-white truncate">{prompt.title}</p>
                       <span className="text-xs shrink-0 ml-2 text-slate-400">{new Date(prompt.lastUsedAt!).toLocaleDateString()}</span>
@@ -106,7 +109,7 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
             {mostUsedPrompts.length > 0 ? (
               <ul className="divide-y divide-slate-100 dark:divide-slate-700/50">
                 {mostUsedPrompts.map((prompt, index) => (
-                  <li key={prompt.id} className="p-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors cursor-pointer" onClick={() => store.setView('library')}>
+                  <li key={prompt.id} className="p-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors cursor-pointer" onClick={() => setFillerPromptId(prompt.id)}>
                     <div className="flex items-center gap-3">
                       <span className={`flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
                         index === 0 ? 'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400' :
@@ -140,6 +143,14 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
       >
         <Plus size={24} />
       </button>
+
+      {fillerPromptId && (
+        <VariableFillerModal
+          prompt={prompts.find(p => p.id === fillerPromptId)!}
+          onClose={() => setFillerPromptId(null)}
+          store={store}
+        />
+      )}
     </div>
   );
 }
