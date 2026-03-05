@@ -31,9 +31,11 @@ export default function Sidebar({ view, setView, tags, onImportExport, selectedT
   return (
     <div className="w-64 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 flex flex-col h-full">
       <div className="p-6 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center text-white font-bold text-xl">
-          P
-        </div>
+        <img
+          src="/icon/logo.svg"
+          alt="PromptFlow"
+          className="w-8 h-8"
+        />
         <span className="font-semibold text-lg tracking-tight">PromptFlow</span>
       </div>
 

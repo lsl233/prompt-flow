@@ -78,13 +78,31 @@
 - 点击列表项时调用 `setFillerPromptId(prompt.id)` 打开模态框
 - 关闭时调用 `setFillerPromptId(null)`
 
-### 10. Sidebar Logo 更新
+### 10. Sidebar Logo 更新 ✅
 
 **文件**：`entrypoints/options/components/Sidebar.tsx`
 
-**需求**：
-- [ ] 将 Sidebar 中的 Logo 替换为 `public/icon/logo.svg`
-- [ ] 保持适当的尺寸和样式
+**已完成**：
+- [x] 将 Sidebar 中的 Logo 替换为 `/icon/logo.svg`
+- [x] 保持适当的尺寸和样式（使用 `w-8 h-8` 类保持与原来一致的 32px 尺寸）
+
+**实现说明**：
+- 使用 `<img>` 标签引用 SVG logo
+- 路径使用 `/icon/logo.svg`（浏览器扩展中 public 目录映射到根路径）
+- 保持原有的布局间距和文字样式
+
+### 11. Content Script 样式修复 - 避免使用 rem
+
+**文件**：`entrypoints/content/content-styles.css`, `shared/components/ContentFloatingPopup.tsx`
+
+**问题**：
+- [ ] `rem` 单位依赖于宿主网页的 root font-size，导致样式不一致
+- [ ] 某些网站设置 `html { font-size: 10px }` 或 `html { font-size: 20px }` 会导致 UI 过大或过小
+
+**修复建议**：
+- 将 `rem` 替换为 `px` 或 `em`
+- 或使用 Shadow DOM 隔离样式时设置固定的 root font-size
+- 或使用 CSS 变量定义尺寸系统
 
 ## ✅ 已完成（归档）
 
