@@ -64,21 +64,6 @@
 - [x] "Save Prompt" 按钮 → 使用 `t('variablesSavePrompt')`
 - [x] "Saved!" 提示 → 使用 `t('variablesSaved')`
 
-### 8. Bug 修复 - "复制并关闭"按钮未实现关闭
-
-**文件**：`entrypoints/options/components/Modals/VariableFillerModal.tsx:164-170`
-
-**问题**：
-- [ ] "复制并关闭"按钮（`variablesCopyClose`）只执行了复制操作，没有调用 `onClose()` 关闭弹窗
-
-**修复建议**：
-```typescript
-const handleCopyAndClose = async () => {
-  await handleCopy();
-  onClose();
-};
-```
-
 ### 9. Dashboard 统计项点击交互优化 ✅
 
 **文件**：`entrypoints/options/components/Dashboard.tsx`
