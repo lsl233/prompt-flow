@@ -59,12 +59,18 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
       await navigator.clipboard.writeText(generatedContent);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+
       // Record usage
       store.recordPromptUsage(prompt.id);
     } catch (err) {
       console.error('Failed to copy text: ', err);
     }
   };
+
+  const handleCopyAndClose = async () => {
+    await handleCopy();
+    onClose();
+  }
 
   const handleSaveAsNew = () => {
     if (!newTitle.trim()) return;
@@ -162,7 +168,7 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
             </button>
           )}
           <button
-            onClick={handleCopy}
+            onClick={handleCopyAndClose}
             className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors shadow-sm shadow-blue-500/20 flex items-center gap-2"
           >
             {copied ? <Check size={16} /> : <Copy size={16} />}
