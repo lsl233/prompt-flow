@@ -77,11 +77,11 @@ export default function Dashboard({ store, onCreatePrompt }: DashboardProps) {
                   <li key={prompt.id} className="p-4 hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors cursor-pointer" onClick={() => store.setView('library')}>
                     <div className="flex items-center justify-between">
                       <p className="font-medium text-slate-900 dark:text-white truncate">{prompt.title}</p>
-                      <span className="text-xs text-slate-400">{new Date(prompt.lastUsedAt!).toLocaleDateString()}</span>
+                      <span className="text-xs shrink-0 ml-2 text-slate-400">{new Date(prompt.lastUsedAt!).toLocaleDateString()}</span>
                     </div>
                     <div className="flex items-center justify-between mt-1">
                       <p className="text-sm text-slate-500 dark:text-slate-400 truncate">{prompt.description}</p>
-                      <span className="text-xs text-slate-400">{t('dashboardUsedTimes', [String(prompt.useCount || 0), prompt.useCount === 1 ? '' : 's'])}</span>
+                      <span className="text-xs shrink-0 ml-2 text-slate-400">{t('dashboardUsedTimes', [String(prompt.useCount || 0), prompt.useCount === 1 ? '' : 's'])}</span>
                     </div>
                   </li>
                 ))}
