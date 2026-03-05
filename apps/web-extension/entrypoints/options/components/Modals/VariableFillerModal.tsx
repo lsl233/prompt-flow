@@ -3,6 +3,7 @@ import { Prompt } from '@/shared/types';
 import { X, Copy, Check, Save } from 'lucide-react';
 import { Store } from '../../useStore';
 import { useI18n } from '@/shared/i18n';
+import TagSelector from '@/shared/components/TagSelector';
 
 interface VariableFillerModalProps {
   prompt: Prompt;
@@ -82,17 +83,6 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
       setShowSaveDialog(false);
       onClose();
     }, 1500);
-  };
-
-  const removeTag = (tagToRemove: string) => {
-    setNewTags(newTags.filter(t => t !== tagToRemove));
-  };
-
-  const addTag = (tag: string) => {
-    const trimmed = tag.trim();
-    if (trimmed && !newTags.includes(trimmed)) {
-      setNewTags([...newTags, trimmed]);
-    }
   };
 
   return (
@@ -220,37 +210,17 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Tags</label>
-                <div className="flex flex-wrap gap-2">
-                  {newTags.map(tag => (
-                    <span key={tag} className="flex items-center gap-1 px-2.5 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs rounded-md font-medium">
-                      {tag}
-                      <button onClick={() => removeTag(tag)} className="text-slate-400 hover:text-red-500"><X size={12} /></button>
-                    </span>
-                  ))}
-                  {newTags.length === 0 && (
-                    <span className="text-sm text-slate-400 italic">No tags</span>
-                  )}
-                </div>
-                <div className="flex gap-2 mt-2">
-                  <input
-                    type="text"
-                    placeholder="Add a tag and press Enter"
-                    onKeyDown={e => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        const input = e.target as HTMLInputElement;
-                        addTag(input.value);
-                        input.value = '';
-                      }
-                    }}
-                    className="flex-1 px-3 py-1.5 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-shadow"
-                  />
-                </div>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('editorTagsLabel')}</label>
+                <TagSelector
+                  tags={newTags}
+                  availableTags={store.allTags}
+                  onChange={setNewTags}
+                  showDropdown={true}
+                />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Preview</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">{t('variablesPreviewLabel')}</label>
                 <div className="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg p-3 max-h-32 overflow-y-auto">
                   <pre className="text-xs text-slate-600 dark:text-slate-400 whitespace-pre-wrap break-words">
                     {generatedContent.slice(0, 200)}{generatedContent.length > 200 ? '...' : ''}
@@ -264,7 +234,7 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
                 onClick={() => setShowSaveDialog(false)}
                 className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg transition-colors"
               >
-                Cancel
+                {t('editorCancel')}
               </button>
               <button
                 onClick={handleSaveAsNew}
@@ -272,7 +242,7 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
                 className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors shadow-sm shadow-emerald-500/20 flex items-center gap-2"
               >
                 {saved ? <Check size={16} /> : <Save size={16} />}
-                {saved ? 'Saved!' : 'Save Prompt'}
+                {saved ? t('variablesSaved') : t('variablesSavePrompt')}
               </button>
             </div>
           </div>

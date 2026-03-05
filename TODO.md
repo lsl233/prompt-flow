@@ -29,14 +29,20 @@
 - [x] 点击外部区域关闭弹窗（通过 `onClick` 处理 overlay 点击事件）
 - [x] 复制提示词成功后显示 Toast 提示（2秒自动消失，支持插入/复制两种场景）
 
-### 5. 组件重构 - TagSelector 提取
+### 5. 组件重构 - TagSelector 提取 ✅
 
 **文件**：`entrypoints/options/components/Modals/VariableFillerModal.tsx:220-250`
 
-**需求**：
-- [ ] 将 Tag 选择和创建功能抽离为独立组件 `TagSelector`
-- [ ] 支持复用到其他需要 Tag 管理的场景（如 PromptEditor）
-- [ ] 组件 Props：`tags: string[]`, `availableTags?: string[]`, `onChange: (tags: string[]) => void`
+**已完成**：
+- [x] 将 Tag 选择和创建功能抽离为独立组件 `TagSelector`
+- [x] 支持复用到其他需要 Tag 管理的场景（如 PromptEditor）
+- [x] 组件 Props：`tags: string[]`, `availableTags?: string[]`, `onChange: (tags: string[]) => void`
+
+**实现说明**：
+- 新组件位于 `shared/components/TagSelector.tsx`
+- 已在 `VariableFillerModal` 和 `PromptEditorModal` 中替换原有内联实现
+- 支持键盘导航（Enter 添加、Backspace 删除、方向键选择）
+- 支持从可用标签下拉选择或创建新标签
 
 ### 6. VariableFillerModal 预览区支持直接编辑
 
@@ -45,18 +51,18 @@
 **需求**：
 - [ ] 预览区域从只读改为可编辑（`pre` 标签改为 `textarea` 或 `contentEditable`）
 
-### 7. i18n 文案补全 - VariableFillerModal
+### 7. i18n 文案补全 - VariableFillerModal ✅
 
-**文件**：`entrypoints/options/components/Modals/VariableFillerModal.tsx:223-275`
+**文件**：`entrypoints/options/components/Modals/VariableFillerModal.tsx`
 
-**问题**：
-- [ ] "Tags" 标签未使用 i18n
-- [ ] "No tags" 提示未使用 i18n
-- [ ] "Add a tag and press Enter" placeholder 未使用 i18n
-- [ ] "Preview" 标签未使用 i18n
-- [ ] "Cancel" 按钮未使用 i18n
-- [ ] "Save Prompt" 按钮未使用 i18n
-- [ ] "Saved!" 提示未使用 i18n
+**已完成**：
+- [x] "Tags" 标签 → 使用 `t('editorTagsLabel')`
+- [x] "No tags" 提示 → 组件内部处理
+- [x] "Add a tag and press Enter" placeholder → 使用 `t('editorTagsAddMore')` / `t('editorTagsPlaceholder')`
+- [x] "Preview" 标签 → 使用 `t('variablesPreviewLabel')`
+- [x] "Cancel" 按钮 → 使用 `t('editorCancel')`
+- [x] "Save Prompt" 按钮 → 使用 `t('variablesSavePrompt')`
+- [x] "Saved!" 提示 → 使用 `t('variablesSaved')`
 
 ## ✅ 已完成（归档）
 
