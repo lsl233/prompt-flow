@@ -11,7 +11,7 @@ const MAX_VERSIONS_PER_PROMPT = 20;
 const INITIAL_PROMPTS: Prompt[] = [
   {
     id: 'template-rctco',
-    title: 'RCTCO 提示词框架',
+    title: 'RCTCO 提示词框架（演示）',
     description: '一个结构化的提示词模版框架，包含角色、背景、任务、约束和输出格式五个核心要素',
     content: `角色 (Role)：{{给 AI 一个明确的身份定位}}
 
@@ -55,7 +55,7 @@ const INITIAL_PROMPTS: Prompt[] = [
   },
   {
     id: 'example-fitness',
-    title: '健身教练计划（示例）',
+    title: '健身教练计划（演示）',
     description: '使用 RCTCO 框架制定的4周减脂增肌计划示例',
     content: `角色 (Role)：你是一位拥有 10 年经验的资深健身教练。
 

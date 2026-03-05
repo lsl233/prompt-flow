@@ -78,6 +78,14 @@
 - 点击列表项时调用 `setFillerPromptId(prompt.id)` 打开模态框
 - 关闭时调用 `setFillerPromptId(null)`
 
+### 10. Sidebar Logo 更新
+
+**文件**：`entrypoints/options/components/Sidebar.tsx`
+
+**需求**：
+- [ ] 将 Sidebar 中的 Logo 替换为 `public/icon/logo.svg`
+- [ ] 保持适当的尺寸和样式
+
 ## ✅ 已完成（归档）
 
 <details>
