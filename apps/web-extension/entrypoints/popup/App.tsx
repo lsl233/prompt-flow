@@ -71,7 +71,6 @@ function AppContent() {
   const injectContentScript = async () => {
     setIsInjecting(true);
     setInjectionStatus('idle');
-    debugger
 
     try {
       const tabs = await browser.tabs.query({ active: true, currentWindow: true });

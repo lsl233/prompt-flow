@@ -92,42 +92,72 @@ async function injectContentScript(tabId: number): Promise<boolean> {
       // Content script not injected yet, proceed with injection
     }
 
-    // Get the manifest to find content script files
-    const manifest = browser.runtime.getManifest();
-
-    // Inject CSS first (if any)
-    const contentCss = manifest.content_scripts?.[0]?.css || [];
-    for (const cssFile of contentCss) {
-      try {
-        await browser.scripting.insertCSS({
-          target: { tabId },
-          files: [cssFile as unknown as string]
-        });
-      } catch (e) {
-        console.warn('[Prompt Flow] Failed to inject CSS:', cssFile, e);
-      }
+    // Get the tab URL
+    const tab = await browser.tabs.get(tabId);
+    if (!tab.url) {
+      console.error('[Prompt Flow] Tab has no URL');
+      return false;
     }
 
-    // Inject JS files
-    const contentJs = manifest.content_scripts?.[0]?.js || [];
-    for (const jsFile of contentJs) {
-      try {
-        await browser.scripting.executeScript({
-          target: { tabId },
-          files: [jsFile as never]
-        });
-      } catch (e) {
-        console.error('[Prompt Flow] Failed to inject script:', jsFile, e);
-        return false;
-      }
+    // Check if it's a restricted URL
+    if (tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://') ||
+        tab.url.startsWith('about:') || tab.url.startsWith('edge://') ||
+        tab.url.startsWith('moz-extension://')) {
+      console.error('[Prompt Flow] Cannot inject into restricted URL:', tab.url);
+      return false;
     }
 
-    // Wait a bit for the content script to initialize, then send toggle message
-    await new Promise(resolve => setTimeout(resolve, 100));
-    await browser.tabs.sendMessage(tabId, { type: 'TOGGLE_POPUP' });
+    // Method 1: Try scripting.registerContentScripts (Chrome 96+)
+    try {
+      if (browser.scripting?.registerContentScripts) {
+        const url = new URL(tab.url);
+        const matchPattern = `${url.protocol}//${url.hostname}/*`;
 
-    console.log('[Prompt Flow] Content script injected successfully');
-    return true;
+        await browser.scripting.registerContentScripts([{
+          id: `prompt-flow-dynamic-${tabId}`,
+          js: ['/content-scripts/content.js'],
+          css: ['/content-scripts/content.css'],
+          matches: [matchPattern],
+          runAt: 'document_end',
+          world: 'ISOLATED'
+        }]);
+
+        // Reload the tab to apply the registered script
+        await browser.tabs.reload(tabId);
+        console.log('[Prompt Flow] Content script registered for', matchPattern);
+        return true;
+      }
+    } catch (e) {
+      console.warn('[Prompt Flow] registerContentScripts failed, falling back:', e);
+    }
+
+    // Method 2: Direct injection via executeScript
+    try {
+      // Inject CSS first
+      await browser.scripting.insertCSS({
+        target: { tabId },
+        files: ['/content-scripts/content.css']
+      });
+
+      // Inject the content script
+      await browser.scripting.executeScript({
+        target: { tabId },
+        files: ['/content-scripts/content.js'],
+        world: 'ISOLATED'
+      });
+
+      // Wait for initialization
+      await new Promise(resolve => setTimeout(resolve, 300));
+
+      // Try to send toggle message
+      await browser.tabs.sendMessage(tabId, { type: 'TOGGLE_POPUP' });
+
+      console.log('[Prompt Flow] Content script injected successfully via executeScript');
+      return true;
+    } catch (e) {
+      console.error('[Prompt Flow] executeScript injection failed:', e);
+      return false;
+    }
   } catch (error) {
     console.error('[Prompt Flow] Failed to inject content script:', error);
     return false;

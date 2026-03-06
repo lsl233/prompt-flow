@@ -37,5 +37,11 @@ export default defineConfig({
     optional_host_permissions: [
       '<all_urls>',
     ],
+    web_accessible_resources: [
+      {
+        resources: ['content-scripts/*', 'chunks/*'],
+        matches: ['<all_urls>'],
+      },
+    ],
   },
 });
