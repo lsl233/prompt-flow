@@ -572,24 +572,8 @@
     "description": "Toast message"
   },
 
-  "settingsTitle": {
-    "message": "設定",
-    "description": "Settings page title"
-  },
-  "settingsLanguage": {
-    "message": "語言",
-    "description": "Settings option"
-  },
-  "settingsLanguageDesc": {
-    "message": "選擇您偏好的語言",
-    "description": "Settings description"
-  },
-  "settingsDarkMode": {
-    "message": "深色模式",
-    "description": "Settings option"
-  },
-  "settingsDarkModeDesc": {
-    "message": "在淺色和深色主題之間切換",
-    "description": "Settings description"
+  "contentScriptMatchedSites": {
+    "message": "內容腳本在以下主流 AI 平台執行：ChatGPT、Claude、Gemini、Perplexity、Bing Chat、DeepSeek、Kimi、Doubao、通義千問等。",
+    "description": "Information about supported AI platforms"
   }
 }

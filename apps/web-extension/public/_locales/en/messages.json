@@ -572,24 +572,8 @@
     "description": "Toast message"
   },
 
-  "settingsTitle": {
-    "message": "Settings",
-    "description": "Settings page title"
-  },
-  "settingsLanguage": {
-    "message": "Language",
-    "description": "Settings option"
-  },
-  "settingsLanguageDesc": {
-    "message": "Choose your preferred language",
-    "description": "Settings description"
-  },
-  "settingsDarkMode": {
-    "message": "Dark Mode",
-    "description": "Settings option"
-  },
-  "settingsDarkModeDesc": {
-    "message": "Toggle between light and dark theme",
-    "description": "Settings description"
+  "contentScriptMatchedSites": {
+    "message": "Content script runs on major AI platforms including: ChatGPT, Claude, Gemini, Perplexity, Bing Chat, DeepSeek, Kimi, Doubao, and Qianwen.",
+    "description": "Information about supported AI platforms"
   }
 }

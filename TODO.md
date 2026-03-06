@@ -104,6 +104,35 @@
 - 或使用 Shadow DOM 隔离样式时设置固定的 root font-size
 - 或使用 CSS 变量定义尺寸系统
 
+### 12. Content Script 匹配模式优化 ✅
+
+**文件**：`entrypoints/content/index.tsx`, `wxt.config.ts`, `shared/ai-websites.ts`
+
+**已完成**：
+- [x] 默认仅匹配主流 AI 网站（ChatGPT、Claude、Gemini 等）
+- [x] 更新 `wxt.config.ts` 的 `host_permissions` 为具体网站列表
+- [x] 更新 `entrypoints/content/index.tsx` 的 `matches` 为具体网站列表
+- [x] 添加 `optional_host_permissions: ['<all_urls>']` 支持未来用户自定义
+- [x] 创建 `shared/ai-websites.ts` 作为单一数据源，避免重复定义
+
+**主流 AI 网站列表**：
+```
+- chat.openai.com
+- claude.ai
+- gemini.google.com
+- perplexity.ai
+- you.com
+- bing.com
+- chat.deepseek.com
+- www.kimi.com
+- www.doubao.com
+- yuanbao.tencent.com
+- www.qianwen.com
+```
+
+**实现说明**：
+- `shared/ai-websites.ts` 是唯一的网站列表数据源，被 `wxt.config.ts` 和 `content/index.tsx` 共享
+
 ## ✅ 已完成（归档）
 
 <details>

@@ -2,10 +2,11 @@ import { createShadowRootUi } from 'wxt/utils/content-script-ui/shadow-root';
 import ContentFloatingPopup from './ContentFloatingPopup';
 import ReactDOM from 'react-dom/client';
 import { I18nProvider } from '@/shared/i18n';
+import { DEFAULT_AI_WEBSITES, getMatchPatterns } from '@/shared/ai-websites';
 import '@/shared/style.css';
 
 export default defineContentScript({
-  matches: ['<all_urls>'],
+  matches: getMatchPatterns(DEFAULT_AI_WEBSITES),
   excludeMatches: [
     '*://*.google.com/recaptcha/*',
     '*://*.gstatic.com/recaptcha/*',

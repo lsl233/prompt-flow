@@ -315,7 +315,7 @@ export function useStore() {
     restoreVersion,
     recordPromptUsage,
     allTags,
-    setPrompts
+    setPrompts,
   };
 }
 

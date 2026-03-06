@@ -1,11 +1,12 @@
 import { defineConfig } from 'wxt';
 import tailwindcss from '@tailwindcss/vite';
 import path from 'path';
+import { DEFAULT_AI_WEBSITES, getMatchPatterns } from './shared/ai-websites';
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
   modules: ['@wxt-dev/module-react'],
-  vite: (env) => ({
+  vite: () => ({
     plugins: [tailwindcss()],
     resolve: {
       alias: {
@@ -31,7 +32,8 @@ export default defineConfig({
       'storage',
       'activeTab',
     ],
-    host_permissions: [
+    host_permissions: getMatchPatterns(DEFAULT_AI_WEBSITES),
+    optional_host_permissions: [
       '<all_urls>',
     ],
   },
