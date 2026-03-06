@@ -526,6 +526,34 @@
     "message": "Open Settings",
     "description": "Popup button"
   },
+  "popupOpenPicker": {
+    "message": "Open Prompt Picker",
+    "description": "Popup button to open prompt picker"
+  },
+  "popupNoPermission": {
+    "message": "No permission for this site",
+    "description": "Warning when no permission for current site"
+  },
+  "popupRequestPermission": {
+    "message": "Grant Permission & Open",
+    "description": "Button to request permission and open picker"
+  },
+  "popupContentScriptInjected": {
+    "message": "Prompt Picker opened!",
+    "description": "Success message after injecting content script"
+  },
+  "popupInjectFailed": {
+    "message": "Failed to open picker. Please try again.",
+    "description": "Error message when injection fails"
+  },
+  "popupOpening": {
+    "message": "Opening...",
+    "description": "Loading state text"
+  },
+  "popupShortcutHint": {
+    "message": "Tip: Use Cmd+Shift+P (Mac) or Ctrl+Shift+P (Windows) to toggle",
+    "description": "Hint about keyboard shortcut"
+  },
 
   "pickerSearchPlaceholder": {
     "message": "Search prompts...",

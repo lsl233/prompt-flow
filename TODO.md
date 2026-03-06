@@ -28,59 +28,24 @@
 **需求**：
 - [ ] 预览区域从只读改为可编辑（`pre` 标签改为 `textarea` 或 `contentEditable`）
 
-### 4. Popup 权限检测与 Content Script 注入
+### 4. Popup 权限检测与 Content Script 注入 ✅
 
 **文件**：`entrypoints/popup/App.tsx`, `entrypoints/background.ts`
 
-**需求**：
-- [ ] 用户点击 popup 时检测当前网站是否有权限注入 content script
-- [ ] 如果没有权限，显示授权提示并引导用户授权
-- [ ] 授权成功后自动注入 content script
-- [ ] Popup 中增加"打开 Prompt Picker"按钮，点击后注入并打开 content script
+**已完成**：
+- [x] 用户点击 popup 时检测当前网站是否有权限注入 content script
+- [x] 如果没有权限，显示授权提示并引导用户授权
+- [x] 授权成功后自动注入 content script
+- [x] Popup 中增加"打开 Prompt Picker"按钮，点击后注入并打开 content script
 
-**流程图**:
-```mermaid
-flowchart TD
-    A[用户点击扩展图标] --> B[获取当前标签页<br/>tabs.query]
-    B --> C[解析页面Origin]
-    C --> D{检查权限<br/>permissions.contains}
-    
-    D -->|已授权| E[执行脚本注入]
-    D -->|未授权| F[申请权限<br/>permissions.request]
-    F -->|用户拒绝| G[结束无权限]
-    F -->|用户同意| E
-    
-    E --> H[browser.scripting<br/>.executeScript]
-    H --> I{选择注入类型}
-    
-    I -->|类型A<br/>推荐| J[注入独立JS<br/>unlisted-scripts/xxx.js]
-    I -->|类型B<br/>React| K[注入引导脚本<br/>手动挂载React]
-    
-    J --> L[页面立即生效]
-    K --> L
-    
-    style J fill:#90EE90
-    style K fill:#FFB6C1
-```
-
-**技术方案**：
-```typescript
-// 检测权限
-const hasPermission = await browser.permissions.contains({
-  origins: [currentUrl]
-});
-
-// 请求权限
-await browser.permissions.request({
-  origins: [currentUrl]
-});
-
-// 手动注入 content script
-await browser.scripting.executeScript({
-  target: { tabId: tab.id },
-  files: ['content-scripts/content.js']
-});
-```
+**实现说明**：
+- Popup 打开时自动检测当前标签页的权限状态
+- 无权限时显示黄色警告框，提示当前网站
+- 按钮文字根据权限状态动态变化："授权并打开"或"打开提示词选择器"
+- 授权成功后自动注入 content script 并打开 picker
+- 注入成功后显示绿色提示，并自动关闭 popup
+- 添加 `scripting` 权限到 manifest 以支持动态注入
+- 背景脚本添加 `INJECT_CONTENT_SCRIPT` 消息处理
 
 ## ✅ 已完成（归档）
 
@@ -111,5 +76,6 @@ await browser.scripting.executeScript({
 15. **Sidebar Logo 更新** - 替换为 SVG 图标
 16. **Content Script 匹配模式优化** - 默认仅匹配主流 AI 网站
 17. **Popup Logo 更新** - 替换为 SVG 图标
+18. **Popup 权限检测** - 权限检测与 Content Script 动态注入
 
 </details>

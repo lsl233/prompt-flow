@@ -31,6 +31,7 @@ export default defineConfig({
     permissions: [
       'storage',
       'activeTab',
+      'scripting',
     ],
     host_permissions: getMatchPatterns(DEFAULT_AI_WEBSITES),
     optional_host_permissions: [

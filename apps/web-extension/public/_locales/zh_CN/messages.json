@@ -526,6 +526,34 @@
     "message": "打开设置",
     "description": "Popup button"
   },
+  "popupOpenPicker": {
+    "message": "打开提示词选择器",
+    "description": "Popup button to open prompt picker"
+  },
+  "popupNoPermission": {
+    "message": "当前网站没有权限",
+    "description": "Warning when no permission for current site"
+  },
+  "popupRequestPermission": {
+    "message": "授权并打开",
+    "description": "Button to request permission and open picker"
+  },
+  "popupContentScriptInjected": {
+    "message": "提示词选择器已打开！",
+    "description": "Success message after injecting content script"
+  },
+  "popupInjectFailed": {
+    "message": "打开失败，请重试",
+    "description": "Error message when injection fails"
+  },
+  "popupOpening": {
+    "message": "正在打开...",
+    "description": "Loading state text"
+  },
+  "popupShortcutHint": {
+    "message": "提示：按 Cmd+Shift+P（Mac）或 Ctrl+Shift+P（Windows）快速切换",
+    "description": "Hint about keyboard shortcut"
+  },
 
   "pickerSearchPlaceholder": {
     "message": "搜索提示词...",

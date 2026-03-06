@@ -526,6 +526,34 @@
     "message": "開啟設定",
     "description": "Popup button"
   },
+  "popupOpenPicker": {
+    "message": "開啟提示詞選擇器",
+    "description": "Popup button to open prompt picker"
+  },
+  "popupNoPermission": {
+    "message": "當前網站沒有權限",
+    "description": "Warning when no permission for current site"
+  },
+  "popupRequestPermission": {
+    "message": "授權並開啟",
+    "description": "Button to request permission and open picker"
+  },
+  "popupContentScriptInjected": {
+    "message": "提示詞選擇器已開啟！",
+    "description": "Success message after injecting content script"
+  },
+  "popupInjectFailed": {
+    "message": "開啟失敗，請重試",
+    "description": "Error message when injection fails"
+  },
+  "popupOpening": {
+    "message": "正在開啟...",
+    "description": "Loading state text"
+  },
+  "popupShortcutHint": {
+    "message": "提示：按 Cmd+Shift+P（Mac）或 Ctrl+Shift+P（Windows）快速切換",
+    "description": "Hint about keyboard shortcut"
+  },
 
   "pickerSearchPlaceholder": {
     "message": "搜尋提示詞...",
