@@ -1,6 +1,6 @@
 # Prompt Flow 功能清单
 
-> 最后更新于 2026-03-04
+> 最后更新于 2026-03-06
 
 ---
 
@@ -21,132 +21,14 @@
 - [ ] 用户可自定义快捷键配置
 - [ ] 快捷键冲突检测与提示
 
-### 3. Content Script 交互优化 ✅
-
-**文件**：`entrypoints/content.ts`, `entrypoints/content/ContentFloatingPopup.tsx`
-
-**已完成**：
-- [x] 点击外部区域关闭弹窗（通过 `onClick` 处理 overlay 点击事件）
-- [x] 复制提示词成功后显示 Toast 提示（2秒自动消失，支持插入/复制两种场景）
-
-### 5. 组件重构 - TagSelector 提取 ✅
-
-**文件**：`entrypoints/options/components/Modals/VariableFillerModal.tsx:220-250`
-
-**已完成**：
-- [x] 将 Tag 选择和创建功能抽离为独立组件 `TagSelector`
-- [x] 支持复用到其他需要 Tag 管理的场景（如 PromptEditor）
-- [x] 组件 Props：`tags: string[]`, `availableTags?: string[]`, `onChange: (tags: string[]) => void`
-
-**实现说明**：
-- 新组件位于 `shared/components/TagSelector.tsx`
-- 已在 `VariableFillerModal` 和 `PromptEditorModal` 中替换原有内联实现
-- 支持键盘导航（Enter 添加、Backspace 删除、方向键选择）
-- 支持从可用标签下拉选择或创建新标签
-
-### 6. VariableFillerModal 预览区支持直接编辑
+### 3. VariableFillerModal 预览区支持直接编辑
 
 **文件**：`entrypoints/options/components/Modals/VariableFillerModal.tsx:150-154`
 
 **需求**：
 - [ ] 预览区域从只读改为可编辑（`pre` 标签改为 `textarea` 或 `contentEditable`）
 
-### 7. i18n 文案补全 - VariableFillerModal ✅
-
-**文件**：`entrypoints/options/components/Modals/VariableFillerModal.tsx`
-
-**已完成**：
-- [x] "Tags" 标签 → 使用 `t('editorTagsLabel')`
-- [x] "No tags" 提示 → 组件内部处理
-- [x] "Add a tag and press Enter" placeholder → 使用 `t('editorTagsAddMore')` / `t('editorTagsPlaceholder')`
-- [x] "Preview" 标签 → 使用 `t('variablesPreviewLabel')`
-- [x] "Cancel" 按钮 → 使用 `t('editorCancel')`
-- [x] "Save Prompt" 按钮 → 使用 `t('variablesSavePrompt')`
-- [x] "Saved!" 提示 → 使用 `t('variablesSaved')`
-
-### 9. Dashboard 统计项点击交互优化 ✅
-
-**文件**：`entrypoints/options/components/Dashboard.tsx`
-
-**已完成**：
-- [x] "最近使用"列表中的提示词点击后直接打开 `VariableFillerModal`
-- [x] "使用最多"列表中的提示词点击后直接打开 `VariableFillerModal`
-- [x] 移除了原来的点击跳转行为（从 `store.setView('library')` 改为直接打开模态框）
-
-**实现说明**：
-- 添加了 `fillerPromptId` 状态管理
-- 点击列表项时调用 `setFillerPromptId(prompt.id)` 打开模态框
-- 关闭时调用 `setFillerPromptId(null)`
-
-### 10. Sidebar Logo 更新 ✅
-
-**文件**：`entrypoints/options/components/Sidebar.tsx`
-
-**已完成**：
-- [x] 将 Sidebar 中的 Logo 替换为 `/icon/logo.svg`
-- [x] 保持适当的尺寸和样式（使用 `w-8 h-8` 类保持与原来一致的 32px 尺寸）
-
-**实现说明**：
-- 使用 `<img>` 标签引用 SVG logo
-- 路径使用 `/icon/logo.svg`（浏览器扩展中 public 目录映射到根路径）
-- 保持原有的布局间距和文字样式
-
-### 11. Content Script 样式修复 - 避免使用 rem
-
-**文件**：`entrypoints/content/content-styles.css`, `shared/components/ContentFloatingPopup.tsx`
-
-**问题**：
-- [ ] `rem` 单位依赖于宿主网页的 root font-size，导致样式不一致
-- [ ] 某些网站设置 `html { font-size: 10px }` 或 `html { font-size: 20px }` 会导致 UI 过大或过小
-
-**修复建议**：
-- 将 `rem` 替换为 `px` 或 `em`
-- 或使用 Shadow DOM 隔离样式时设置固定的 root font-size
-- 或使用 CSS 变量定义尺寸系统
-
-### 12. Content Script 匹配模式优化 ✅
-
-**文件**：`entrypoints/content/index.tsx`, `wxt.config.ts`, `shared/ai-websites.ts`
-
-**已完成**：
-- [x] 默认仅匹配主流 AI 网站（ChatGPT、Claude、Gemini 等）
-- [x] 更新 `wxt.config.ts` 的 `host_permissions` 为具体网站列表
-- [x] 更新 `entrypoints/content/index.tsx` 的 `matches` 为具体网站列表
-- [x] 添加 `optional_host_permissions: ['<all_urls>']` 支持未来用户自定义
-- [x] 创建 `shared/ai-websites.ts` 作为单一数据源，避免重复定义
-
-**主流 AI 网站列表**：
-```
-- chat.openai.com
-- claude.ai
-- gemini.google.com
-- perplexity.ai
-- you.com
-- bing.com
-- chat.deepseek.com
-- www.kimi.com
-- www.doubao.com
-- yuanbao.tencent.com
-- www.qianwen.com
-```
-
-**实现说明**：
-- `shared/ai-websites.ts` 是唯一的网站列表数据源，被 `wxt.config.ts` 和 `content/index.tsx` 共享
-
-### 13. Popup Logo 更新 ✅
-
-**文件**：`entrypoints/popup/App.tsx:16-20`
-
-**已完成**：
-- [x] 将 Popup 中的 Logo 替换为 `/icon/logo.svg`
-- [x] 保持 `w-8 h-8`（32px）尺寸，与原来一致
-
-**实现说明**：
-- 使用 `<img>` 标签引用 SVG logo，路径为 `/icon/logo.svg`
-- 保持原有的 `flex items-center gap-2.5` 布局
-- 保持标题样式不变
-
-### 14. Popup 权限检测与 Content Script 注入
+### 4. Popup 权限检测与 Content Script 注入
 
 **文件**：`entrypoints/popup/App.tsx`, `entrypoints/background.ts`
 
@@ -155,6 +37,31 @@
 - [ ] 如果没有权限，显示授权提示并引导用户授权
 - [ ] 授权成功后自动注入 content script
 - [ ] Popup 中增加"打开 Prompt Picker"按钮，点击后注入并打开 content script
+
+**流程图**:
+```mermaid
+flowchart TD
+    A[用户点击扩展图标] --> B[获取当前标签页<br/>tabs.query]
+    B --> C[解析页面Origin]
+    C --> D{检查权限<br/>permissions.contains}
+    
+    D -->|已授权| E[执行脚本注入]
+    D -->|未授权| F[申请权限<br/>permissions.request]
+    F -->|用户拒绝| G[结束无权限]
+    F -->|用户同意| E
+    
+    E --> H[browser.scripting<br/>.executeScript]
+    H --> I{选择注入类型}
+    
+    I -->|类型A<br/>推荐| J[注入独立JS<br/>unlisted-scripts/xxx.js]
+    I -->|类型B<br/>React| K[注入引导脚本<br/>手动挂载React]
+    
+    J --> L[页面立即生效]
+    K --> L
+    
+    style J fill:#90EE90
+    style K fill:#FFB6C1
+```
 
 **技术方案**：
 ```typescript
@@ -195,5 +102,14 @@ await browser.scripting.executeScript({
 8. **UI/UX** - 深色模式切换闪烁问题修复
 9. **提示词使用统计** - useCount、lastUsedAt、Recently Used / Most Used 列表
 10. **主题切换样式修复** - Tailwind v4 添加 `@custom-variant dark` 配置
+
+### 2026-03-05 至 2026-03-06 完成
+11. **Content Script 交互优化** - 点击外部关闭弹窗、Toast 提示
+12. **组件重构** - TagSelector 提取为独立组件
+13. **i18n 文案补全** - VariableFillerModal 国际化
+14. **Dashboard 统计项优化** - 点击直接打开 VariableFillerModal
+15. **Sidebar Logo 更新** - 替换为 SVG 图标
+16. **Content Script 匹配模式优化** - 默认仅匹配主流 AI 网站
+17. **Popup Logo 更新** - 替换为 SVG 图标
 
 </details>
