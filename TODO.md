@@ -146,6 +146,35 @@
 - 保持原有的 `flex items-center gap-2.5` 布局
 - 保持标题样式不变
 
+### 14. Popup 权限检测与 Content Script 注入
+
+**文件**：`entrypoints/popup/App.tsx`, `entrypoints/background.ts`
+
+**需求**：
+- [ ] 用户点击 popup 时检测当前网站是否有权限注入 content script
+- [ ] 如果没有权限，显示授权提示并引导用户授权
+- [ ] 授权成功后自动注入 content script
+- [ ] Popup 中增加"打开 Prompt Picker"按钮，点击后注入并打开 content script
+
+**技术方案**：
+```typescript
+// 检测权限
+const hasPermission = await browser.permissions.contains({
+  origins: [currentUrl]
+});
+
+// 请求权限
+await browser.permissions.request({
+  origins: [currentUrl]
+});
+
+// 手动注入 content script
+await browser.scripting.executeScript({
+  target: { tabId: tab.id },
+  files: ['content-scripts/content.js']
+});
+```
+
 ## ✅ 已完成（归档）
 
 <details>
