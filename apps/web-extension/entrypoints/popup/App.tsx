@@ -13,9 +13,11 @@ function AppContent() {
   return (
     <div className="w-[280px] min-h-[160px] p-5 flex flex-col items-center gap-3 bg-white dark:bg-slate-900">
       <div className="flex items-center gap-2.5">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold text-lg">
-          P
-        </div>
+        <img
+          src="/icon/logo.svg"
+          alt="PromptFlow"
+          className="w-8 h-8"
+        />
         <h1 className="text-lg font-semibold text-slate-800 dark:text-white">{t('popupTitle')}</h1>
       </div>
       <p className="text-[13px] text-slate-500 dark:text-slate-400 text-center leading-relaxed">

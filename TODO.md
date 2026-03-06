@@ -133,6 +133,19 @@
 **实现说明**：
 - `shared/ai-websites.ts` 是唯一的网站列表数据源，被 `wxt.config.ts` 和 `content/index.tsx` 共享
 
+### 13. Popup Logo 更新 ✅
+
+**文件**：`entrypoints/popup/App.tsx:16-20`
+
+**已完成**：
+- [x] 将 Popup 中的 Logo 替换为 `/icon/logo.svg`
+- [x] 保持 `w-8 h-8`（32px）尺寸，与原来一致
+
+**实现说明**：
+- 使用 `<img>` 标签引用 SVG logo，路径为 `/icon/logo.svg`
+- 保持原有的 `flex items-center gap-2.5` 布局
+- 保持标题样式不变
+
 ## ✅ 已完成（归档）
 
 <details>
