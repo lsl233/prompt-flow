@@ -38,8 +38,9 @@ export default defineContentScript({
     browser.runtime.onMessage.addListener((message) => {
       if (message.type === 'TOGGLE_POPUP') {
         window.dispatchEvent(new CustomEvent('prompt-flow:toggle'));
+        return true;
       }
-      return Promise.resolve();
+      return false;
     });
 
     console.log('[Prompt Flow] Content script initialized');

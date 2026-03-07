@@ -58,6 +58,34 @@ export default defineBackground(() => {
       });
       return true; // Keep channel open for async response
     }
+
+    if (message.type === 'TOGGLE_POPUP') {
+      const tabId = message.tabId;
+
+      // Try to send toggle message with retry
+      const tryToggle = async (attempts = 3): Promise<boolean> => {
+        for (let i = 0; i < attempts; i++) {
+          try {
+            await browser.tabs.sendMessage(tabId, { type: 'TOGGLE_POPUP' });
+            console.log('[Prompt Flow] Successfully toggled popup on tab', tabId);
+            return true;
+          } catch (e) {
+            console.log(`[Prompt Flow] Toggle attempt ${i + 1}/${attempts} failed on tab`, tabId);
+            if (i < attempts - 1) {
+              // Wait before retry
+              await new Promise(resolve => setTimeout(resolve, 100));
+            }
+          }
+        }
+        return false;
+      };
+
+      tryToggle().then(success => {
+        sendResponse({ success });
+      });
+
+      return true;
+    }
   });
 
   // Storage change listener for cross-page sync
@@ -101,8 +129,8 @@ async function injectContentScript(tabId: number): Promise<boolean> {
 
     // Check if it's a restricted URL
     if (tab.url.startsWith('chrome://') || tab.url.startsWith('chrome-extension://') ||
-        tab.url.startsWith('about:') || tab.url.startsWith('edge://') ||
-        tab.url.startsWith('moz-extension://')) {
+      tab.url.startsWith('about:') || tab.url.startsWith('edge://') ||
+      tab.url.startsWith('moz-extension://')) {
       console.error('[Prompt Flow] Cannot inject into restricted URL:', tab.url);
       return false;
     }
@@ -123,7 +151,7 @@ async function injectContentScript(tabId: number): Promise<boolean> {
         }]);
 
         // Reload the tab to apply the registered script
-        await browser.tabs.reload(tabId);
+        // await browser.tabs.reload(tabId);
         console.log('[Prompt Flow] Content script registered for', matchPattern);
         return true;
       }

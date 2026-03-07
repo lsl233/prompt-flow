@@ -68,13 +68,17 @@ function AppContent() {
     }
   };
 
+  const getCurrentTab = async () => {
+    const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+    return tabs[0];
+  };
+
   const injectContentScript = async () => {
     setIsInjecting(true);
     setInjectionStatus('idle');
 
     try {
-      const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-      const currentTab = tabs[0];
+      const currentTab = await getCurrentTab();
 
       if (!currentTab?.id) {
         setInjectionStatus('error');
@@ -115,7 +119,52 @@ function AppContent() {
       return;
     }
 
-    await injectContentScript();
+    const currentTab = await getCurrentTab();
+    if (!currentTab?.id) {
+      setInjectionStatus('error');
+      return;
+    }
+
+    try {
+      // Try to toggle popup - background will handle retry
+      const response = await browser.runtime.sendMessage({
+        type: 'TOGGLE_POPUP',
+        tabId: currentTab.id
+      });
+
+      if (response?.success) {
+        // Close popup after successful toggle
+        window.close();
+      } else {
+        // Content script not ready, inject it and then toggle
+        setIsInjecting(true);
+        const injectResponse = await browser.runtime.sendMessage({
+          type: 'INJECT_CONTENT_SCRIPT',
+          tabId: currentTab.id
+        });
+
+        if (injectResponse?.success) {
+          // Wait a bit for content script to initialize, then try toggle again
+          await new Promise(resolve => setTimeout(resolve, 500));
+          const retryResponse = await browser.runtime.sendMessage({
+            type: 'TOGGLE_POPUP',
+            tabId: currentTab.id
+          });
+
+          if (retryResponse?.success) {
+            window.close();
+          } else {
+            setInjectionStatus('error');
+          }
+        } else {
+          setInjectionStatus('error');
+        }
+        setIsInjecting(false);
+      }
+    } catch (error) {
+      console.error('[Prompt Flow] Failed to toggle popup:', error);
+      setInjectionStatus('error');
+    }
   };
 
   return (
