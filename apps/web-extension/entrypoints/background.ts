@@ -1,5 +1,12 @@
 import { browser } from 'wxt/browser';
 
+// Storage for pending permission requests
+const pendingPermissionRequests = new Map<number, {
+  origin: string;
+  tabId: number;
+  intervalId: ReturnType<typeof setInterval>;
+}>();
+
 export default defineBackground(() => {
   console.log('[Prompt Flow] Background script initialized');
 
@@ -86,6 +93,53 @@ export default defineBackground(() => {
 
       return true;
     }
+
+    // Handle PREPARE_PERMISSION_REQUEST - Setup polling for permission changes
+    // This is needed because browser.permissions.request() destroys the popup,
+    // so we need the background script to monitor and handle the result
+    if (message.type === 'PREPARE_PERMISSION_REQUEST') {
+      const { origin, tabId } = message;
+
+      // Clear any existing pending request for this tab
+      const existing = pendingPermissionRequests.get(tabId);
+      if (existing) {
+        clearInterval(existing.intervalId);
+        pendingPermissionRequests.delete(tabId);
+      }
+
+      // Set up polling to check for permission grant
+      const intervalId = setInterval(async () => {
+        const granted = await browser.permissions.contains({ origins: [origin] });
+        if (granted) {
+          // Permission granted, stop polling
+          const pending = pendingPermissionRequests.get(tabId);
+          if (pending) {
+            clearInterval(pending.intervalId);
+            pendingPermissionRequests.delete(tabId);
+
+            // Inject content script
+            console.log('[Prompt Flow] Permission granted, injecting content script...');
+            await injectContentScript(tabId);
+          }
+        }
+      }, 500); // Check every 500ms
+
+      // Store the pending request
+      pendingPermissionRequests.set(tabId, { origin, tabId, intervalId });
+
+      // Set timeout to stop polling after 60 seconds
+      setTimeout(() => {
+        const pending = pendingPermissionRequests.get(tabId);
+        if (pending) {
+          clearInterval(pending.intervalId);
+          pendingPermissionRequests.delete(tabId);
+          console.log('[Prompt Flow] Permission request timeout for tab', tabId);
+        }
+      }, 60000);
+
+      sendResponse({ success: true });
+      return false;
+    }
   });
 
   // Storage change listener for cross-page sync
@@ -136,6 +190,7 @@ async function injectContentScript(tabId: number): Promise<boolean> {
     }
 
     // Method 1: Try scripting.registerContentScripts (Chrome 96+)
+    // Also execute immediately for current page
     try {
       if (browser.scripting?.registerContentScripts) {
         const url = new URL(tab.url);
@@ -150,9 +205,26 @@ async function injectContentScript(tabId: number): Promise<boolean> {
           world: 'ISOLATED'
         }]);
 
-        // Reload the tab to apply the registered script
-        // await browser.tabs.reload(tabId);
         console.log('[Prompt Flow] Content script registered for', matchPattern);
+
+        // Also inject immediately for current page (don't wait for page reload)
+        try {
+          await browser.scripting.insertCSS({
+            target: { tabId },
+            files: ['/content-scripts/content.css']
+          });
+
+          await browser.scripting.executeScript({
+            target: { tabId },
+            files: ['/content-scripts/content.js'],
+            world: 'ISOLATED'
+          });
+
+          console.log('[Prompt Flow] Content script immediately injected after registration');
+        } catch (immediateError) {
+          console.warn('[Prompt Flow] Immediate injection after registration failed:', immediateError);
+        }
+
         return true;
       }
     } catch (e) {

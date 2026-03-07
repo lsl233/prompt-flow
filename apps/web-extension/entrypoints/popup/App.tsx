@@ -45,7 +45,7 @@ function AppContent() {
       const tabs = await browser.tabs.query({ active: true, currentWindow: true });
       const currentTab = tabs[0];
 
-      if (!currentTab?.url) {
+      if (!currentTab?.url || !currentTab?.id) {
         setInjectionStatus('error');
         return;
       }
@@ -53,15 +53,24 @@ function AppContent() {
       const url = new URL(currentTab.url);
       const origin = `${url.protocol}//${url.hostname}${url.port ? ':' + url.port : ''}/*`;
 
-      const granted = await browser.permissions.request({
+      // Step 1: Notify background script to prepare for permission request
+      // This is critical because browser.permissions.request() destroys the popup,
+      // so background needs to handle the follow-up injection after permission is granted
+      await browser.runtime.sendMessage({
+        type: 'PREPARE_PERMISSION_REQUEST',
+        origin,
+        tabId: currentTab.id
+      });
+
+      // Step 2: Request permission
+      // Note: This will destroy the popup, so any code after this may not execute
+      await browser.permissions.request({
         origins: [origin]
       });
 
-      if (granted) {
-        setHasPermission(true);
-        // Auto inject content script after permission granted
-        await injectContentScript();
-      }
+      // This code may never execute because popup is destroyed
+      // Background script will handle injection instead
+      console.log('[Prompt Flow] Permission request completed');
     } catch (error) {
       console.error('[Prompt Flow] Failed to request permission:', error);
       setInjectionStatus('error');
