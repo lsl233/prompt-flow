@@ -17,7 +17,7 @@ export default defineConfig({
   manifest: {
     name: '__MSG_extensionName__',
     description: '__MSG_extensionDescription__',
-    version: '1.0.1',
+    version: '1.0.2',
     default_locale: 'en',
     commands: {
       'toggle-popup': {

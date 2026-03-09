@@ -7,14 +7,9 @@
       "Bash(cp:*)",
       "WebFetch(domain:wxt.dev)",
       "WebSearch",
-      "Bash(pnpm build:*)"
-    ]
-  },
-  "hooks": {
-    "PostToolUse": [
-      "echo 'Running post-edit checks...'",
-      "npm run type-check 2>&1 || echo '⚠️ TypeScript errors detected'",
-      "npm run lint -- --max-warnings=0 2>&1 || echo '⚠️ Lint errors detected'"
+      "Bash(pnpm build:*)",
+      "Bash(pnpm:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }
