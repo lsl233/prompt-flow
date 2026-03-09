@@ -1,18 +1,14 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { browser } from 'wxt/browser';
 import type { Prompt } from '@/shared/types';
 import ContentPromptPicker from './ContentPromptPicker';
-import ContentToast from './ContentToast';
+import { toast } from '@/shared/components/Toast';
 import { t } from '@/shared/i18n';
 
 export default function ContentFloatingPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const [prompts, setPrompts] = useState<Prompt[]>([]);
   const [copied, setCopied] = useState(false);
-  const [toast, setToast] = useState<{ message: string; visible: boolean }>({
-    message: '',
-    visible: false,
-  });
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Load prompts from storage
@@ -90,18 +86,18 @@ export default function ContentFloatingPopup() {
 
       setIsOpen(false);
       setCopied(true);
-      showNotification(t('contentInserted'));
+      toast.success({ message: t('contentInserted'), contentScript: true });
       setTimeout(() => setCopied(false), 1500);
     } else {
       // Fallback: copy to clipboard
       navigator.clipboard.writeText(content).then(() => {
         setIsOpen(false);
         setCopied(true);
-        showNotification(t('contentCopied'));
+        toast.success({ message: t('contentCopied'), contentScript: true });
         setTimeout(() => setCopied(false), 1500);
       }).catch(err => {
         console.error('[Prompt Flow] Failed to copy:', err);
-        showNotification(t('contentCopyFailed'));
+        toast.error({ message: t('contentCopyFailed'), contentScript: true });
       });
     }
   };
@@ -133,21 +129,12 @@ export default function ContentFloatingPopup() {
   };
 
   // Handle click outside to close popup
-  const handleOverlayClick = useCallback((e: React.MouseEvent) => {
+  const handleOverlayClick = (e: React.MouseEvent) => {
     // Close when clicking the overlay background (not the popup content)
     if (e.target === e.currentTarget) {
       setIsOpen(false);
     }
-  }, []);
-
-  // Show toast notification
-  const showNotification = useCallback((message: string) => {
-    setToast({ message, visible: true });
-  }, []);
-
-  const hideToast = useCallback(() => {
-    setToast(prev => ({ ...prev, visible: false }));
-  }, []);
+  };
 
   return (
     <>
@@ -171,13 +158,6 @@ export default function ContentFloatingPopup() {
           </div>
         </div>
       )}
-
-      {/* Toast Notification - 独立于弹窗显示 */}
-      <ContentToast
-        message={toast.message}
-        visible={toast.visible}
-        onClose={hideToast}
-      />
     </>
   );
 }

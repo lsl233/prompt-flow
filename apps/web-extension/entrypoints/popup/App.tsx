@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Settings, Play, Shield, CheckCircle, AlertCircle } from 'lucide-react';
 import '@/shared/style.css';
 import { useI18n, I18nProvider } from '@/shared/i18n';
+import { ToastProvider } from '@/shared/components/Toast';
 
 function AppContent() {
   const { t } = useI18n();
@@ -270,7 +271,9 @@ function AppContent() {
 function App() {
   return (
     <I18nProvider>
-      <AppContent />
+      <ToastProvider>
+        <AppContent />
+      </ToastProvider>
     </I18nProvider>
   );
 }

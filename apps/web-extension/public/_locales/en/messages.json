@@ -599,6 +599,10 @@
     "message": "Failed to copy prompt",
     "description": "Toast message"
   },
+  "toastCopySuccess": {
+    "message": "Copied to clipboard!",
+    "description": "Toast message for copy success"
+  },
 
   "contentScriptMatchedSites": {
     "message": "Content script runs on major AI platforms including: ChatGPT, Claude, Gemini, Perplexity, Bing Chat, DeepSeek, Kimi, Doubao, and Qianwen.",

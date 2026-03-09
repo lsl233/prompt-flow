@@ -2,6 +2,7 @@ import { createShadowRootUi } from 'wxt/utils/content-script-ui/shadow-root';
 import ContentFloatingPopup from './ContentFloatingPopup';
 import ReactDOM from 'react-dom/client';
 import { I18nProvider } from '@/shared/i18n';
+import { ToastProvider } from '@/shared/components/Toast';
 import { DEFAULT_AI_WEBSITES, getMatchPatterns } from '@/shared/ai-websites';
 import '@/shared/style.css';
 
@@ -22,7 +23,9 @@ export default defineContentScript({
         const root = ReactDOM.createRoot(container);
         root.render(
           <I18nProvider>
-            <ContentFloatingPopup />
+            <ToastProvider>
+              <ContentFloatingPopup />
+            </ToastProvider>
           </I18nProvider>
         );
         return root;

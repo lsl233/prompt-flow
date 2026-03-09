@@ -28,7 +28,38 @@
 **需求**：
 - [ ] 预览区域从只读改为可编辑（`pre` 标签改为 `textarea` 或 `contentEditable`）
 
-### 4. Popup 权限检测与 Content Script 注入 ✅
+### 4. VariableFillerModal 复制成功提示 ✅
+
+**文件**：`entrypoints/options/components/Modals/VariableFillerModal.tsx`
+
+**已完成**：
+- [x] 复制成功后展示 toast 提示（当前只有图标变化）
+- [x] 使用命令式 Toast API (`toast.success()`) 简化代码
+
+### 5. Toast 组件命令式 API ✅
+
+**文件**：`shared/components/Toast/`
+
+**已完成**：
+- [x] 创建命令式 Toast API (`toast.show()`, `toast.success()`, `toast.error()`)
+- [x] 支持 `contentScript` 选项以适配 content script 环境
+- [x] 使用 `ToastProvider` 管理全局 toast 状态
+- [x] 保留声明式 Toast 组件用于向后兼容
+- [x] 删除独立的 `ContentToast.tsx` 文件
+
+**API 示例**：
+```typescript
+import { toast } from '@/shared/components/Toast';
+
+// 在 Options 页面
+toast.success('复制成功！');
+toast.error('操作失败');
+
+// 在 Content Script
+toast.success({ message: '复制成功！', contentScript: true });
+```
+
+### 6. Popup 权限检测与 Content Script 注入 ✅
 
 **文件**：`entrypoints/popup/App.tsx`, `entrypoints/background.ts`
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useStore } from './useStore';
 import { I18nProvider } from '@/shared/i18n';
+import { ToastProvider } from '@/shared/components/Toast';
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 import Dashboard from './components/Dashboard';
@@ -97,7 +98,9 @@ function AppContent() {
 export default function App() {
   return (
     <I18nProvider>
-      <AppContent />
+      <ToastProvider>
+        <AppContent />
+      </ToastProvider>
     </I18nProvider>
   );
 }

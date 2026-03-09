@@ -599,6 +599,10 @@
     "message": "复制提示词失败",
     "description": "Toast message"
   },
+  "toastCopySuccess": {
+    "message": "已复制到剪贴板！",
+    "description": "Toast message for copy success"
+  },
 
   "contentScriptMatchedSites": {
     "message": "内容脚本在以下主流 AI 平台运行：ChatGPT、Claude、Gemini、Perplexity、Bing Chat、DeepSeek、Kimi、Doubao、通义千问等。",

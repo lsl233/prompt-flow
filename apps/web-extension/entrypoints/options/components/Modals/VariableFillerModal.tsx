@@ -4,6 +4,7 @@ import { X, Copy, Check, Save } from 'lucide-react';
 import { Store } from '../../useStore';
 import { useI18n } from '@/shared/i18n';
 import TagSelector from '@/shared/components/TagSelector';
+import { toast } from '@/shared/components/Toast';
 
 interface VariableFillerModalProps {
   prompt: Prompt;
@@ -59,6 +60,9 @@ export default function VariableFillerModal({ prompt, onClose, store }: Variable
       await navigator.clipboard.writeText(generatedContent);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+
+      // Show toast notification
+      toast.success(t('toastCopySuccess'));
 
       // Record usage
       store.recordPromptUsage(prompt.id);
