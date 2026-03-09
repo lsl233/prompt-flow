@@ -1,6 +1,6 @@
 # Prompt Flow 功能清单
 
-> 最后更新于 2026-03-06
+> 最后更新于 2026-03-09
 
 ---
 
@@ -77,6 +77,33 @@ toast.success({ message: '复制成功！', contentScript: true });
 - 注入成功后显示绿色提示，并自动关闭 popup
 - 添加 `scripting` 权限到 manifest 以支持动态注入
 - 背景脚本添加 `INJECT_CONTENT_SCRIPT` 消息处理
+
+### 7. 设置模块 - 功能整合与信息展示
+
+**文件**：`entrypoints/options/App.tsx`, 新建 `entrypoints/options/components/SettingsPanel.tsx`
+
+**需求**：
+- [ ] 导入/导出功能移到设置模块
+  - 当前导入/导出在 Sidebar 或独立位置，需要迁移到设置面板
+  - 保持现有导入/导出逻辑不变，仅调整 UI 位置
+- [ ] 版本号查看
+  - 从 `package.json` 或 `manifest.json` 读取版本号
+  - 在设置面板底部显示扩展版本
+- [ ] 快捷键查看
+  - 展示当前配置的快捷键列表
+  - 从 manifest 的 `commands` 配置读取
+  - 提供快捷键说明和触发方式
+
+**建议实现**：
+```typescript
+// 设置面板入口
+<SettingsPanel
+  version={browser.runtime.getManifest().version}
+  commands={manifest.commands}
+  onImport={handleImport}
+  onExport={handleExport}
+/>
+```
 
 ## ✅ 已完成（归档）
 
