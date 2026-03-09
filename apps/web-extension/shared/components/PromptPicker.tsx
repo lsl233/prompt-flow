@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { Search, Command, Check, X } from 'lucide-react';
 import type { Prompt } from '@/shared/types';
 import { useI18n } from '@/shared/i18n';
+import { toast } from '@/shared/components/Toast';
 
 export interface PromptPickerProps {
   prompts: Prompt[];
@@ -110,6 +111,7 @@ export default function PromptPicker({
       onSelect(prompt, prompt.content);
       setCopied(true);
       setTimeout(() => setCopied(false), 1000);
+      toast.success(t('toastCopySuccess'));
     } else {
       setSelectedPrompt(prompt);
       setVariables(varNames.map(name => ({ name, value: '' })));
@@ -131,6 +133,7 @@ export default function PromptPicker({
     onSelect(selectedPrompt, result);
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
+    toast.success(t('toastCopySuccess'));
   };
 
   const handleKeyNavigation = (e: React.KeyboardEvent) => {
