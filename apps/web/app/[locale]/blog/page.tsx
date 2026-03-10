@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight, Calendar, Clock } from 'lucide-react';
+import { getTranslations } from 'next-intl/server';
 
 const MOCK_POSTS = [
   {
@@ -34,15 +35,17 @@ const MOCK_POSTS = [
   },
 ];
 
-export default function BlogListPage() {
+export default async function BlogListPage() {
+  const t = await getTranslations('blog');
+
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
       <div className="text-center max-w-2xl mx-auto mb-16">
         <h1 className="text-4xl font-bold tracking-tight text-neutral-900 sm:text-5xl mb-4">
-          The Quick Prompt Blog
+          {t('title')}
         </h1>
         <p className="text-lg text-neutral-600 leading-relaxed">
-          Insights, tutorials, and updates from the team building the fastest prompt management tool.
+          {t('subtitle')}
         </p>
       </div>
 
@@ -77,7 +80,7 @@ export default function BlogListPage() {
                 {post.excerpt}
               </p>
               <Link href={`/blog/${post.slug}`} className="inline-flex items-center text-sm font-semibold text-neutral-900 hover:text-emerald-600 transition-colors mt-auto">
-                Read article
+                {t('readArticle')}
                 <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </div>

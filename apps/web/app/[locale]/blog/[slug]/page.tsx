@@ -13,6 +13,11 @@ export function generateStaticParams() {
   }));
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  return <BlogPostClient slug={params.slug} />;
+type PageParams = {
+  params: Promise<{ locale: string; slug: string }>;
+};
+
+export default async function BlogPostPage({ params }: PageParams) {
+  const { slug } = await params;
+  return <BlogPostClient slug={slug} />;
 }

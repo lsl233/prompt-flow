@@ -9,7 +9,10 @@
       "WebSearch",
       "Bash(pnpm build:*)",
       "Bash(pnpm:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(mkdir:*)",
+      "Bash(ls:*)",
+      "Bash(kill 76980:*)"
     ]
   }
 }

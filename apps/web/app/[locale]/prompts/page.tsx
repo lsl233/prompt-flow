@@ -5,6 +5,7 @@ import { Search, Filter, SlidersHorizontal } from 'lucide-react';
 import { PromptCard } from '@/components/PromptCard';
 import { Button } from '@/components/Button';
 import { TagChip } from '@/components/TagChip';
+import { useTranslations } from 'next-intl';
 
 const MOCK_PROMPTS = [
   {
@@ -57,31 +58,34 @@ const MOCK_PROMPTS = [
   },
 ];
 
-const CATEGORIES = ['All', 'Coding', 'Marketing', 'Business', 'Writing', 'Image Gen', 'Productivity'];
-
 export default function PromptsPage() {
-  const [activeCategory, setActiveCategory] = useState('All');
+  const t = useTranslations('prompts');
+  const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+
+  const CATEGORIES = ['all', 'coding', 'marketing', 'business', 'writing', 'imageGen', 'productivity'] as const;
+
+  const POPULAR_TAGS = ['React', 'SEO', 'Sales', 'Midjourney', 'Python', 'Copywriting'];
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl mb-2">
-            Explore AI Prompts
+            {t('title')}
           </h1>
           <p className="text-neutral-500 text-lg">
-            Discover the best prompts created by the community.
+            {t('subtitle')}
           </p>
         </div>
 
         <div className="flex items-center gap-4">
           <Button variant="outline" className="gap-2">
             <SlidersHorizontal className="h-4 w-4" />
-            Popular
+            {t('popular')}
           </Button>
           <Button variant="primary">
-            Submit Prompt
+            {t('submit')}
           </Button>
         </div>
       </div>
@@ -95,7 +99,7 @@ export default function PromptsPage() {
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-neutral-400" />
                 <input
                   type="text"
-                  placeholder="Search prompts..."
+                  placeholder={t('searchPlaceholder')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full rounded-lg border border-neutral-200 bg-white pl-10 pr-4 py-2 text-sm focus:border-neutral-900 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
@@ -106,7 +110,7 @@ export default function PromptsPage() {
             <div>
               <h3 className="text-sm font-semibold text-neutral-900 mb-4 flex items-center gap-2">
                 <Filter className="h-4 w-4" />
-                Categories
+                {t('categories')}
               </h3>
               <div className="flex flex-col gap-2">
                 {CATEGORIES.map((category) => (
@@ -119,16 +123,16 @@ export default function PromptsPage() {
                         : 'text-neutral-600 hover:bg-neutral-100'
                     }`}
                   >
-                    {category}
+                    {t(`category.${category}`)}
                   </button>
                 ))}
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-neutral-900 mb-4">Popular Tags</h3>
+              <h3 className="text-sm font-semibold text-neutral-900 mb-4">{t('popularTags')}</h3>
               <div className="flex flex-wrap gap-2">
-                {['React', 'SEO', 'Sales', 'Midjourney', 'Python', 'Copywriting'].map((tag) => (
+                {POPULAR_TAGS.map((tag) => (
                   <button key={tag} className="hover:opacity-80 transition-opacity">
                     <TagChip label={tag} />
                   </button>
@@ -148,7 +152,7 @@ export default function PromptsPage() {
 
           <div className="mt-12 flex justify-center">
             <Button variant="outline" size="lg">
-              Load More Prompts
+              {t('loadMore')}
             </Button>
           </div>
         </div>

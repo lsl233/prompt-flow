@@ -9,6 +9,11 @@ export function generateStaticParams() {
   }));
 }
 
-export default function UserPage({ params }: { params: { username: string } }) {
-  return <UserPageClient username={params.username} />;
+type PageParams = {
+  params: Promise<{ locale: string; username: string }>;
+};
+
+export default async function UserPage({ params }: PageParams) {
+  const { username } = await params;
+  return <UserPageClient username={username} />;
 }

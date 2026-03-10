@@ -61,7 +61,7 @@ export default function PromptLibrary({ store, onEditPrompt }: PromptLibraryProp
         {filteredPrompts.map(prompt => (
           <div key={prompt.id} className="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col group relative">
             <div className="flex justify-between items-start mb-3">
-              <h3 className="font-semibold text-slate-900 dark:text-white text-lg leading-tight pr-8">{prompt.title}</h3>
+              <h3 className="font-semibold text-slate-900 dark:text-white text-lg leading-tight pr-16">{prompt.title}</h3>
               <div className="absolute top-4 right-4 flex items-center gap-1">
                 <button
                   onClick={() => store.updatePrompt(prompt.id, { isFavorite: !prompt.isFavorite })}

@@ -1,6 +1,6 @@
-# Prompt Flow 功能清单
+# PromptFlow 功能清单
 
-> 最后更新于 2026-03-09
+> 最后更新于 2026-03-10
 
 ---
 
@@ -47,18 +47,6 @@
 - [x] 保留声明式 Toast 组件用于向后兼容
 - [x] 删除独立的 `ContentToast.tsx` 文件
 
-**API 示例**：
-```typescript
-import { toast } from '@/shared/components/Toast';
-
-// 在 Options 页面
-toast.success('复制成功！');
-toast.error('操作失败');
-
-// 在 Content Script
-toast.success({ message: '复制成功！', contentScript: true });
-```
-
 ### 6. Popup 权限检测与 Content Script 注入 ✅
 
 **文件**：`entrypoints/popup/App.tsx`, `entrypoints/background.ts`
@@ -69,41 +57,158 @@ toast.success({ message: '复制成功！', contentScript: true });
 - [x] 授权成功后自动注入 content script
 - [x] Popup 中增加"打开 Prompt Picker"按钮，点击后注入并打开 content script
 
-**实现说明**：
-- Popup 打开时自动检测当前标签页的权限状态
-- 无权限时显示黄色警告框，提示当前网站
-- 按钮文字根据权限状态动态变化："授权并打开"或"打开提示词选择器"
-- 授权成功后自动注入 content script 并打开 picker
-- 注入成功后显示绿色提示，并自动关闭 popup
-- 添加 `scripting` 权限到 manifest 以支持动态注入
-- 背景脚本添加 `INJECT_CONTENT_SCRIPT` 消息处理
-
 ### 7. 设置模块 - 功能整合与信息展示
 
 **文件**：`entrypoints/options/App.tsx`, 新建 `entrypoints/options/components/SettingsPanel.tsx`
 
 **需求**：
 - [ ] 导入/导出功能移到设置模块
-  - 当前导入/导出在 Sidebar 或独立位置，需要迁移到设置面板
-  - 保持现有导入/导出逻辑不变，仅调整 UI 位置
 - [ ] 版本号查看
-  - 从 `package.json` 或 `manifest.json` 读取版本号
-  - 在设置面板底部显示扩展版本
 - [ ] 快捷键查看
-  - 展示当前配置的快捷键列表
-  - 从 manifest 的 `commands` 配置读取
-  - 提供快捷键说明和触发方式
 
-**建议实现**：
-```typescript
-// 设置面板入口
-<SettingsPanel
-  version={browser.runtime.getManifest().version}
-  commands={manifest.commands}
-  onImport={handleImport}
-  onExport={handleExport}
-/>
-```
+---
+
+## 🖥️ Web 项目（Next.js）
+
+### 1. 基础架构 ✅
+
+- [x] Next.js 15 + React 19 项目初始化
+- [x] Tailwind CSS v4 配置
+- [x] 项目目录结构规划
+
+### 2. i18n 国际化支持 ✅
+
+**已完成**：
+- [x] 集成 `next-intl`
+- [x] 配置语言路由 `/zh` `/en`
+- [x] 创建语言文件结构
+- [x] 封装翻译 Hook
+
+**相关文件**：
+- `apps/web/middleware.ts`
+- `apps/web/i18n/routing.ts`
+- `apps/web/messages/en.json`
+- `apps/web/messages/zh.json`
+- `apps/web/app/[locale]/`
+
+### 3. 落地页（首页）开发
+
+**参考文档**：`PROJECT.md` 第 6、7 章
+
+**页面结构**：
+- [ ] Hero 区域（核心价值主张 + 主 CTA）
+- [ ] 功能特性展示（浏览器扩展 + 社区）
+- [ ] 支持的 AI 平台 Logo 墙
+- [ ] 定价区域（功能点付费说明）
+- [ ] 用户评价/社交证明（可后期补充）
+- [ ] FAQ 常见问题
+- [ ] Footer
+
+**文案需求**：
+- [ ] Hero 标题 + 副标题（双语）
+- [ ] 功能特性描述（双语）
+- [ ] CTA 按钮文案
+
+**技术要点**：
+- [ ] 响应式设计
+- [ ] 深色模式支持
+- [ ] 性能优化（图片懒加载）
+
+### 4. 社区功能开发
+
+**依赖**：Supabase 项目创建、数据库设计
+
+#### 4.1 数据库设计
+
+**文件**：`apps/web/supabase/schema.sql`
+
+- [ ] 创建 `categories` 表（分类）
+- [ ] 创建 `community_prompts` 表（社区提示词）
+- [ ] 创建 `user_purchases` 表（购买记录）
+- [ ] 设置 RLS（行级安全）策略
+
+#### 4.2 社区首页 `/prompts`
+
+- [ ] 页面布局（侧边栏分类 + 主内容区）
+- [ ] 分类导航组件
+- [ ] 热门/最新 Tab 切换
+- [ ] 提示词卡片组件（标题、摘要、作者、点赞/保存数）
+- [ ] 分页或无限滚动加载
+
+#### 4.3 提示词详情页 `/prompts/[id]`
+
+**URL 结构**：`/prompts/{slug}` 或 `/prompts/{id}/{slug}`
+
+- [ ] 提示词内容展示（支持变量高亮）
+- [ ] 一键复制按钮（带成功提示）
+- [ ] 作者信息卡片
+- [ ] 点赞/保存功能（需登录）
+- [ ] 相关推荐（同分类其他提示词）
+- [ ] SEO Meta 标签动态生成
+- [ ] 结构化数据（JSON-LD）
+
+#### 4.4 分类页 `/categories/[slug]`
+
+- [ ] 分类信息展示（标题、描述）
+- [ ] 该分类下的提示词列表
+- [ ] 分类 SEO 优化
+
+### 5. 用户系统
+
+**依赖**：Supabase Auth
+
+- [ ] 登录页 `/login`
+- [ ] 注册页 `/register`
+- [ ] 用户中心 `/dashboard`
+  - [ ] 我的提示词列表（从扩展同步的）
+  - [ ] 购买记录/已解锁功能
+  - [ ] 个人资料设置
+
+### 6. SEO 优化
+
+- [ ] Sitemap.xml 动态生成
+- [ ] Robots.txt 配置
+- [ ] Open Graph / Twitter Card 元标签
+- [ ] 多语言 hreflang 标签
+- [ ] 结构化数据（JSON-LD）
+  - [ ] Article（博客文章）
+  - [ ] ItemList（列表页）
+  - [ ] HowTo（提示词详情页）
+
+### 7. 博客系统（可选 Phase 2）
+
+- [ ] 博客列表页 `/blog`
+- [ ] 博客详情页 `/blog/[slug]`
+- [ ] MDX 支持
+- [ ] 文章结构化数据
+
+---
+
+## 🔧 后端与支付
+
+### 1. Supabase 项目设置
+
+- [ ] 创建 Supabase 项目
+- [ ] 配置环境变量（`NEXT_PUBLIC_SUPABASE_URL` 等）
+- [ ] 初始化数据库 Schema
+- [ ] 配置 Auth（邮箱 + 社交登录）
+
+### 2. 扩展与网页数据同步
+
+**方案待确定**：
+- 方案 A：用户登录后，扩展通过 API 拉取社区提示词
+- 方案 B：网页端生成分享码/链接，扩展扫码/点击导入
+
+### 3. 支付集成（PayPal）
+
+**参考**：PayPal Developer Docs
+
+- [ ] 创建 PayPal 开发者账号
+- [ ] 配置 PayPal Buttons（一次性付款）
+- [ ] 后端验证支付状态（Edge Function）
+- [ ] 解锁对应功能（更新 user_purchases 表）
+
+---
 
 ## ✅ 已完成（归档）
 

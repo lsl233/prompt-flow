@@ -16,6 +16,11 @@ export function generateStaticParams() {
   }));
 }
 
-export default function PromptDetailPage({ params }: { params: { slug: string } }) {
-  return <PromptDetailClient slug={params.slug} />;
+type PageParams = {
+  params: Promise<{ locale: string; slug: string }>;
+};
+
+export default async function PromptDetailPage({ params }: PageParams) {
+  const { slug } = await params;
+  return <PromptDetailClient slug={slug} />;
 }

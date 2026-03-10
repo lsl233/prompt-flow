@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "title": "Quick Prompt - Save, reuse, and share AI prompts instantly",
+    "description": "The fastest way to manage prompts for ChatGPT, Claude, and AI tools. Built for developers, marketers, and prompt engineers to boost productivity."
+  },
+  "nav": {
+    "brand": "Quick Prompt",
+    "prompts": "Prompts",
+    "blog": "Blog",
+    "extension": "Extension",
+    "install": "Install Extension"
+  },
+  "home": {
+    "badge": "Quick Prompt v2.0 is now live",
+    "title": "Save, reuse, and share AI prompts instantly",
+    "description": "The fastest way to manage prompts for ChatGPT, Claude, and AI tools. Built for developers, marketers, and prompt engineers to boost productivity.",
+    "installChrome": "Install Chrome Extension",
+    "explorePrompts": "Explore Prompts",
+    "screenshotPlaceholder": "[Product Interface Screenshot]",
+    "features": {
+      "title": "Everything you need for prompt engineering",
+      "subtitle": "A complete toolkit designed for high-efficiency AI workflows.",
+      "saveInstantly": {
+        "title": "Save instantly",
+        "description": "Capture prompts from any website with a single click using our browser extension."
+      },
+      "insertOneClick": {
+        "title": "Insert in one click",
+        "description": "Access your prompt library directly inside ChatGPT, Claude, and other AI tools."
+      },
+      "organize": {
+        "title": "Organize & Tag",
+        "description": "Keep your prompts structured with folders, tags, and powerful search capabilities."
+      },
+      "share": {
+        "title": "Share with a link",
+        "description": "Generate public links for your best prompts to share with your team or the community."
+      }
+    },
+    "howItWorks": {
+      "title": "How Quick Prompt works",
+      "demoPlaceholder": "[Interactive Demo / Animation]",
+      "step1": {
+        "title": "Save prompt",
+        "description": "Highlight any text and hit Cmd+Shift+S to save it to your library instantly."
+      },
+      "step2": {
+        "title": "Reuse instantly",
+        "description": "Type '/' in any AI chat interface to bring up your prompt library and insert."
+      },
+      "step3": {
+        "title": "Share with friends",
+        "description": "Click 'Share' to get a public link that anyone can view and copy from."
+      }
+    },
+    "cta": {
+      "title": "Ready to supercharge your AI workflow?",
+      "subtitle": "Join thousands of developers and marketers who use Quick Prompt every day.",
+      "button": "Add to Chrome — It's Free"
+    }
+  },
+  "prompts": {
+    "title": "Explore AI Prompts",
+    "subtitle": "Discover the best prompts created by the community.",
+    "popular": "Popular",
+    "submit": "Submit Prompt",
+    "searchPlaceholder": "Search prompts...",
+    "categories": "Categories",
+    "popularTags": "Popular Tags",
+    "loadMore": "Load More Prompts",
+    "category": {
+      "all": "All",
+      "coding": "Coding",
+      "marketing": "Marketing",
+      "business": "Business",
+      "writing": "Writing",
+      "imageGen": "Image Gen",
+      "productivity": "Productivity"
+    }
+  },
+  "blog": {
+    "title": "The Quick Prompt Blog",
+    "subtitle": "Insights, tutorials, and updates from the team building the fastest prompt management tool.",
+    "readArticle": "Read article"
+  },
+  "footer": {
+    "description": "The fastest way to manage prompts for ChatGPT, Claude, and AI tools.",
+    "product": {
+      "title": "Product",
+      "explorePrompts": "Explore Prompts",
+      "chromeExtension": "Chrome Extension",
+      "pricing": "Pricing"
+    },
+    "resources": {
+      "title": "Resources",
+      "blog": "Blog",
+      "documentation": "Documentation",
+      "community": "Community"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "twitter": "Twitter",
+      "github": "GitHub"
+    },
+    "copyright": "© {year} Quick Prompt. All rights reserved.",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "zh": "中文",
+    "en": "English"
+  }
+}
