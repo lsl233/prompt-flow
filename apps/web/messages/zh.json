@@ -1,90 +1,92 @@
 {
   "metadata": {
-    "title": "Quick Prompt - 保存、复用和分享 AI 提示词",
-    "description": "管理 ChatGPT、Claude 和其他 AI 工具提示词的最快方式。为开发者、营销人员和提示词工程师打造，提升工作效率。"
+    "title": "PromptFlow - AI 提示词库 | 管理你的 ChatGPT、Claude、DeepSeek 提示词",
+    "description": "PromptFlow 是你的个人 AI 提示词库。在 ChatGPT、Claude、DeepSeek、Kimi 等任意 AI 工具中，按 ⌘K 一键调用保存的提示词。支持模板变量、分类管理、社区分享。"
   },
   "nav": {
-    "brand": "Quick Prompt",
+    "brand": "PromptFlow",
     "prompts": "提示词",
     "blog": "博客",
     "extension": "扩展",
     "install": "安装扩展"
   },
   "home": {
-    "badge": "Quick Prompt v2.0 现已上线",
-    "title": "保存、复用和分享 AI 提示词",
-    "description": "管理 ChatGPT、Claude 和其他 AI 工具提示词的最快方式。为开发者、营销人员和提示词工程师打造，提升工作效率。",
-    "installChrome": "安装 Chrome 扩展",
-    "explorePrompts": "浏览提示词",
-    "screenshotPlaceholder": "[产品界面截图]",
+    "badge": "已支持 ChatGPT、Claude、DeepSeek 等 10+ AI 平台",
+    "title": "你的 AI 提示词库，一键调用",
+    "description": "保存和管理你的最佳 ChatGPT 提示词、Midjourney 绘画指令、Claude 系统提示。在任何 AI 页面按 ⌘K，立即调出所需内容。",
+    "installChrome": "免费添加到 Chrome",
+    "explorePrompts": "浏览 500+ 社区精选提示词",
+    "screenshotPlaceholder": "产品界面截图",
     "features": {
-      "title": "提示词工程所需的一切",
-      "subtitle": "专为高效 AI 工作流程设计的完整工具包。",
+      "title": "强大而简洁的功能",
+      "subtitle": "专为提升 AI 工作效率设计",
       "saveInstantly": {
-        "title": "即时保存",
-        "description": "使用我们的浏览器扩展，一键从任何网站捕获提示词。"
+        "title": "一键调用 ChatGPT 提示词",
+        "description": "在 ChatGPT、Claude、DeepSeek 等页面按 ⌘K，从个人提示词库中快速选择，自动复制到剪贴板。"
       },
       "insertOneClick": {
-        "title": "一键插入",
-        "description": "直接在 ChatGPT、Claude 和其他 AI 工具中访问您的提示词库。"
+        "title": "提示词分类管理",
+        "description": "创建文件夹、添加标签，轻松管理数百条提示词。支持日记、写作、编程、绘画等多场景分类。"
       },
       "organize": {
-        "title": "整理与标签",
-        "description": "使用文件夹、标签和强大的搜索功能，保持提示词井然有序。"
+        "title": "社区精选模板",
+        "description": "发现和保存社区分享的最佳提示词。一键同步到你的个人提示词库。"
       },
       "share": {
-        "title": "链接分享",
-        "description": "为您最好的提示词生成公开链接，与团队或社区分享。"
+        "title": "模板变量支持",
+        "description": "创建带变量的提示词模板，如 {'{'}topic{'}'} {'{'}style{'}'}。调用时自动填充，一条模板应对多种场景。"
       }
     },
     "howItWorks": {
-      "title": "Quick Prompt 的工作原理",
-      "demoPlaceholder": "[交互式演示 / 动画]",
+      "title": "三步开始使用",
+      "demoPlaceholder": "功能演示动画",
       "step1": {
-        "title": "保存提示词",
-        "description": "高亮任意文本，按 Cmd+Shift+S 即可立即保存到您的库中。"
+        "title": "保存你的第一个提示词",
+        "description": "在选项页面粘贴或输入提示词，为其添加标签和分类。支持纯文本或带变量的模板。"
       },
       "step2": {
-        "title": "即时复用",
-        "description": "在任何 AI 聊天界面中输入 '/' 即可调出提示词库并插入。"
+        "title": "在 AI 页面调用",
+        "description": "进入 ChatGPT、Claude 等网站，在输入框中按 ⌘K。选择你需要的提示词，自动复制。"
       },
       "step3": {
-        "title": "与朋友分享",
-        "description": "点击「分享」获取公开链接，任何人都可以查看和复制。"
+        "title": "粘贴并发送",
+        "description": "在 AI 输入框中按 ⌘V 粘贴，直接发送或稍作修改。所有提示词本地存储，隐私安全。"
       }
     },
     "cta": {
-      "title": "准备好提升您的 AI 工作流程了吗？",
-      "subtitle": "加入数千名每天使用 Quick Prompt 的开发者和营销人员。",
-      "button": "添加到 Chrome — 免费"
+      "title": "准备好提升你的 AI 效率了吗？",
+      "subtitle": "免费安装 PromptFlow，让每次 AI 对话都更高效。支持 Chrome、Firefox 等主流浏览器。",
+      "button": "免费添加到 Chrome"
     }
   },
   "prompts": {
-    "title": "探索 AI 提示词",
-    "subtitle": "发现社区创建的最佳提示词。",
+    "title": "发现优质 AI 提示词",
+    "subtitle": "探索社区分享的最佳 ChatGPT 提示词、AI 绘画指令和写作灵感。",
     "popular": "热门",
-    "submit": "提交提示词",
+    "latest": "最新",
+    "submit": "分享提示词",
     "searchPlaceholder": "搜索提示词...",
     "categories": "分类",
     "popularTags": "热门标签",
-    "loadMore": "加载更多提示词",
+    "loadMore": "加载更多",
     "category": {
       "all": "全部",
-      "coding": "编程",
-      "marketing": "营销",
-      "business": "商业",
-      "writing": "写作",
+      "writing": "写作内容",
+      "coding": "编程开发",
       "imageGen": "图像生成",
-      "productivity": "生产力"
+      "productivity": "办公效率",
+      "learning": "学习研究",
+      "marketing": "营销运营",
+      "roleplay": "角色扮演"
     }
   },
   "blog": {
-    "title": "Quick Prompt 博客",
-    "subtitle": "来自打造最快提示词管理工具团队的洞察、教程和更新。",
+    "title": "PromptFlow 博客",
+    "subtitle": "提示词技巧、AI 工具教程和 PromptFlow 更新。",
     "readArticle": "阅读文章"
   },
   "footer": {
-    "description": "管理 ChatGPT、Claude 和其他 AI 工具提示词的最快方式。",
+    "description": "PromptFlow 是你的个人 AI 提示词库。在 ChatGPT、Claude、DeepSeek 等工具中一键调用保存的提示词。",
     "product": {
       "title": "产品",
       "explorePrompts": "浏览提示词",
@@ -103,7 +105,7 @@
       "twitter": "Twitter",
       "github": "GitHub"
     },
-    "copyright": "© {year} Quick Prompt. 保留所有权利。",
+    "copyright": "© {year} PromptFlow. 保留所有权利。",
     "privacy": "隐私政策",
     "terms": "服务条款"
   },

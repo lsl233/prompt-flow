@@ -218,6 +218,20 @@ user_purchases (
 | 视觉风格 | 现代简约 |
 | 主色调 | （待确定）|
 
+### 6.1.1 品牌关键词部署策略
+
+**核心原则**：品牌词必须出现在关键位置，同时兼顾 SEO 非品牌词流量。
+
+| 位置 | 部署方式 | 示例 |
+|-----|---------|------|
+| **Title 标签** | 品牌前置 + 核心价值词 | `PromptFlow - AI 提示词库 \| 管理你的 ChatGPT、Claude、DeepSeek 提示词` |
+| **Logo** | 品牌名 | PromptFlow |
+| **Meta Description** | 自然提及 1-2 次 | "PromptFlow 是你的个人 AI 提示词库..." |
+| **H1 标题** | 品牌 + 功能 | "用 PromptFlow 管理你的 AI 提示词库" |
+| **CTA 按钮** | 品牌名强化 | "免费安装 PromptFlow" |
+| **用户评价** | 第三方背书 | "PromptFlow 帮我节省了..." |
+| **Footer** | 品牌保护 | "© 2026 PromptFlow. All rights reserved." |
+
 ### 6.2 核心价值主张
 
 **中文**：
@@ -245,22 +259,31 @@ user_purchases (
 ### 7.1 页面 SEO 结构
 
 **首页（Landing Page）**：
-- Title: PromptFlow - 提示词，一键即达 | Prompts at Your Fingertips
-- Description: 在 ChatGPT、Claude、DeepSeek 等 AI 工具中快速调用你的提示词库。发现、管理、分享高质量 AI 提示词。
+
+| 元素 | 中文 | 英文 |
+|-----|------|------|
+| **Title** | `PromptFlow - AI 提示词库 \| 管理你的 ChatGPT、Claude、DeepSeek 提示词` | `PromptFlow - AI Prompt Library \| Manage Your ChatGPT, Claude & DeepSeek Prompts` |
+| **Description** | PromptFlow 是你的个人 AI 提示词库。在 ChatGPT、Claude、DeepSeek、Kimi 等任意 AI 工具中，按 ⌘K 一键调用保存的提示词。 | PromptFlow is your personal AI prompt library. Press ⌘K to instantly access saved prompts in ChatGPT, Claude, DeepSeek, Kimi and more. |
+
+**Title 策略说明**：
+- 采用**平衡型策略**：品牌前置 + 通用类目词 + 多平台列举
+- 避免过度限定单一平台（如 "ChatGPT 提示词库"），突出跨平台通用性
+- 同时服务品牌搜索用户（"PromptFlow"）和需求搜索用户（"AI prompt library"）
 
 **社区列表页**：
-- Title: 发现优质 AI 提示词 | PromptFlow Community
-- 结构化数据：ItemList
+- **Title (中文)**: `发现优质 AI 提示词 | PromptFlow Community`
+- **Title (英文)**: `Discover AI Prompts | PromptFlow Community`
+- **结构化数据**: ItemList
 
 **提示词详情页**：
-- Title: {提示词标题} | PromptFlow
-- Description: {提示词前 150 字符}
-- 结构化数据：Article/HowTo
-- URL: `/prompts/{slug}`
+- **Title**: `{提示词标题} | PromptFlow`
+- **Description**: {提示词前 150 字符}
+- **结构化数据**: Article/HowTo
+- **URL**: `/prompts/{slug}`
 
 **分类页**：
-- Title: {分类名} 提示词精选 | PromptFlow
-- Description: 发现最佳 {分类名} AI 提示词，提升你的工作效率...
+- **Title**: `{分类名} 提示词精选 | PromptFlow`
+- **Description**: 发现最佳 {分类名} AI 提示词，提升你的工作效率...
 
 ### 7.2 技术 SEO 清单
 

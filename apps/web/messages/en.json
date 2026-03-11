@@ -1,90 +1,92 @@
 {
   "metadata": {
-    "title": "Quick Prompt - Save, reuse, and share AI prompts instantly",
-    "description": "The fastest way to manage prompts for ChatGPT, Claude, and AI tools. Built for developers, marketers, and prompt engineers to boost productivity."
+    "title": "PromptFlow - AI Prompt Library | Manage Your ChatGPT, Claude & DeepSeek Prompts",
+    "description": "PromptFlow is your personal AI prompt library. Press ⌘K to instantly access saved prompts in ChatGPT, Claude, DeepSeek, Kimi and more. Supports template variables, folder management, and community sharing."
   },
   "nav": {
-    "brand": "Quick Prompt",
+    "brand": "PromptFlow",
     "prompts": "Prompts",
     "blog": "Blog",
     "extension": "Extension",
     "install": "Install Extension"
   },
   "home": {
-    "badge": "Quick Prompt v2.0 is now live",
-    "title": "Save, reuse, and share AI prompts instantly",
-    "description": "The fastest way to manage prompts for ChatGPT, Claude, and AI tools. Built for developers, marketers, and prompt engineers to boost productivity.",
-    "installChrome": "Install Chrome Extension",
-    "explorePrompts": "Explore Prompts",
-    "screenshotPlaceholder": "[Product Interface Screenshot]",
+    "badge": "Supports ChatGPT, Claude, DeepSeek & 10+ AI Platforms",
+    "title": "Your AI Prompt Library, One Keystroke Away",
+    "description": "Save and manage your best ChatGPT prompts, Midjourney commands, and Claude system prompts. Press ⌘K on any AI page to instantly access what you need.",
+    "installChrome": "Add to Chrome — Free",
+    "explorePrompts": "Browse 500+ Community Prompts",
+    "screenshotPlaceholder": "Product Interface Screenshot",
     "features": {
-      "title": "Everything you need for prompt engineering",
-      "subtitle": "A complete toolkit designed for high-efficiency AI workflows.",
+      "title": "Powerful Yet Simple",
+      "subtitle": "Designed to boost your AI productivity",
       "saveInstantly": {
-        "title": "Save instantly",
-        "description": "Capture prompts from any website with a single click using our browser extension."
+        "title": "One-Click Access to ChatGPT Prompts",
+        "description": "Press ⌘K on ChatGPT, Claude, DeepSeek or any AI page. Select from your personal prompt library and auto-copy to clipboard."
       },
       "insertOneClick": {
-        "title": "Insert in one click",
-        "description": "Access your prompt library directly inside ChatGPT, Claude, and other AI tools."
+        "title": "Smart Organization",
+        "description": "Create folders, add tags, and manage hundreds of prompts with ease. Supports journaling, writing, coding, art and more."
       },
       "organize": {
-        "title": "Organize & Tag",
-        "description": "Keep your prompts structured with folders, tags, and powerful search capabilities."
+        "title": "Community Curated Templates",
+        "description": "Discover and save the best prompts shared by the community. One-click sync to your personal prompt library."
       },
       "share": {
-        "title": "Share with a link",
-        "description": "Generate public links for your best prompts to share with your team or the community."
+        "title": "Template Variables",
+        "description": "Create prompts with variables like '{'topic'}' '{'style'}'. Auto-fill on use. One template for endless scenarios."
       }
     },
     "howItWorks": {
-      "title": "How Quick Prompt works",
-      "demoPlaceholder": "[Interactive Demo / Animation]",
+      "title": "Get Started in 3 Steps",
+      "demoPlaceholder": "Interactive Demo Animation",
       "step1": {
-        "title": "Save prompt",
-        "description": "Highlight any text and hit Cmd+Shift+S to save it to your library instantly."
+        "title": "Save Your First Prompt",
+        "description": "Paste or type your prompt in the options page. Add tags and categories. Supports plain text or templates with variables."
       },
       "step2": {
-        "title": "Reuse instantly",
-        "description": "Type '/' in any AI chat interface to bring up your prompt library and insert."
+        "title": "Access on AI Pages",
+        "description": "Go to ChatGPT, Claude, or other AI sites. Press ⌘K in the input box. Select your prompt, it's automatically copied."
       },
       "step3": {
-        "title": "Share with friends",
-        "description": "Click 'Share' to get a public link that anyone can view and copy from."
+        "title": "Paste and Send",
+        "description": "Press ⌘V to paste in the AI input box. Send directly or edit as needed. All prompts stored locally for privacy."
       }
     },
     "cta": {
-      "title": "Ready to supercharge your AI workflow?",
-      "subtitle": "Join thousands of developers and marketers who use Quick Prompt every day.",
-      "button": "Add to Chrome — It's Free"
+      "title": "Ready to Boost Your AI Workflow?",
+      "subtitle": "Install PromptFlow for free. Make every AI conversation more efficient. Supports Chrome, Firefox, and other major browsers.",
+      "button": "Add to Chrome — Free"
     }
   },
   "prompts": {
-    "title": "Explore AI Prompts",
-    "subtitle": "Discover the best prompts created by the community.",
+    "title": "Discover AI Prompts",
+    "subtitle": "Explore the best ChatGPT prompts, AI art commands, and writing inspirations shared by the community.",
     "popular": "Popular",
-    "submit": "Submit Prompt",
+    "latest": "Latest",
+    "submit": "Share Prompt",
     "searchPlaceholder": "Search prompts...",
     "categories": "Categories",
     "popularTags": "Popular Tags",
-    "loadMore": "Load More Prompts",
+    "loadMore": "Load More",
     "category": {
       "all": "All",
-      "coding": "Coding",
-      "marketing": "Marketing",
-      "business": "Business",
       "writing": "Writing",
-      "imageGen": "Image Gen",
-      "productivity": "Productivity"
+      "coding": "Coding",
+      "imageGen": "Image Generation",
+      "productivity": "Productivity",
+      "learning": "Learning",
+      "marketing": "Marketing",
+      "roleplay": "Roleplay"
     }
   },
   "blog": {
-    "title": "The Quick Prompt Blog",
-    "subtitle": "Insights, tutorials, and updates from the team building the fastest prompt management tool.",
+    "title": "The PromptFlow Blog",
+    "subtitle": "Prompt engineering tips, AI tool tutorials, and PromptFlow updates.",
     "readArticle": "Read article"
   },
   "footer": {
-    "description": "The fastest way to manage prompts for ChatGPT, Claude, and AI tools.",
+    "description": "PromptFlow is your personal AI prompt library. Access saved prompts instantly in ChatGPT, Claude, DeepSeek and more.",
     "product": {
       "title": "Product",
       "explorePrompts": "Explore Prompts",
@@ -103,7 +105,7 @@
       "twitter": "Twitter",
       "github": "GitHub"
     },
-    "copyright": "© {year} Quick Prompt. All rights reserved.",
+    "copyright": "© {year} PromptFlow. All rights reserved.",
     "privacy": "Privacy",
     "terms": "Terms"
   },
