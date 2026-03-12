@@ -12,7 +12,9 @@
       "Bash(npx tsc:*)",
       "Bash(mkdir:*)",
       "Bash(ls:*)",
-      "Bash(kill 76980:*)"
+      "Bash(kill 76980:*)",
+      "Bash(find apps/web/app/\\\\[locale\\\\] -type f -name \"*.tsx\" -o -name \"*.ts\" | head -30)",
+      "Bash(curl -sI http://localhost:3000/zh/prompts 2>/dev/null | head -5)"
     ]
   }
 }

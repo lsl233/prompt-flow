@@ -11,6 +11,8 @@ A pnpm monorepo containing multiple applications built with modern web technolog
 - **Applications**:
   - `apps/web-extension` - Cross-browser extension (Chrome/Firefox) built with WXT and React. [Details](apps/web-extension/CLAUDE.md)
   - `apps/web` - Next.js web application. [Details](apps/web/CLAUDE.md)
+- **Shared Packages**:
+  - `packages/ui` - Shared UI components and Tailwind CSS configuration
 
 ## First Principles
 
@@ -28,7 +30,7 @@ A pnpm monorepo containing multiple applications built with modern web technolog
 
 ### 3. Reuse Existing Components
 - **Always search for and reuse existing components and hooks before writing new code**
-- Look in `shared/components/`, `shared/hooks/`, and app-specific component directories
+- Look in `packages/ui/src/components/`, `shared/components/`, `shared/hooks/`, and app-specific component directories
 - Present findings and get confirmation before writing new components
 
 ## Common Commands
@@ -59,6 +61,48 @@ After any multi-file implementation, verify:
 - [ ] **All new strings are i18n wrapped**: Use `t()` function for all user-facing text
 - [ ] **No over-engineering**: Review for unnecessary abstractions
 - [ ] **Component reuse verified**: Confirm no duplicate existing components
+
+## Shared UI Package (`packages/ui`)
+
+The `@prompt-flow/ui` package provides shared Tailwind CSS configuration and reusable UI components.
+
+### Tailwind CSS Configuration
+
+**Location**: `packages/ui/src/styles/tailwind-base.css`
+
+Shared configuration includes:
+- **Fonts**: Inter (sans), JetBrains Mono (mono)
+- **Dark Mode**: `@custom-variant dark` (class-based)
+- **Utilities**: `scrollbar-hide`
+- **Animations**: `fade-in`, `zoom-in-95`, `slide-in-from-top-4`, `.animate-in`, `.duration-*`
+
+### Usage in Applications
+
+**web-extension** (`apps/web-extension/shared/style.css`):
+```css
+@import "@ui/styles/tailwind-base.css";
+```
+Vite alias configured in `wxt.config.ts`.
+
+**web** (`apps/web/app/[locale]/globals.css`):
+```css
+@import "../../../../packages/ui/src/styles/tailwind-base.css";
+```
+Uses relative path (Turbopack alias limitation with PostCSS).
+
+### Adding Shared Components
+
+Place shared components in `packages/ui/src/components/` and export from `index.ts`:
+
+```typescript
+// packages/ui/src/components/Button.tsx
+export function Button({ children }: { children: React.ReactNode }) {
+  return <button className="px-4 py-2 bg-blue-500">{children}</button>;
+}
+
+// packages/ui/src/components/index.ts
+export { Button } from './Button';
+```
 
 ## Adding Shared Packages
 

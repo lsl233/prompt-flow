@@ -11,6 +11,7 @@ export default defineConfig({
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "."),
+        "@ui/styles": path.resolve(__dirname, "../../packages/ui/src/styles"),
       },
     },
   }),

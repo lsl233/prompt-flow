@@ -1,0 +1,20 @@
+{
+  "name": "@prompt-flow/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./styles/*": "./src/styles/*",
+    "./components/*": "./src/components/*"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.1.14",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19"
+  }
+}

@@ -7,8 +7,9 @@ import { routing } from "@/i18n/routing";
 import "./globals.css";
 import Navbar from "./_components/Navbar";
 import Footer from "./_components/Footer";
+import { HtmlLang } from "./_components/HtmlLang";
 
-type Locale = typeof routing.locales[number];
+type Locale = (typeof routing.locales)[number];
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -22,7 +23,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
+  console.log("--------------");
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as Locale)) {
     notFound();
@@ -35,14 +36,11 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale === 'zh' ? 'zh-CN' : 'en'}>
-      <body className="min-h-screen bg-neutral-50 flex flex-col font-sans text-neutral-900 selection:bg-emerald-200 selection:text-emerald-900">
-        <NextIntlClientProvider messages={messages}>
-          <Navbar />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider messages={messages}>
+      <HtmlLang locale={locale} />
+      <Navbar />
+      <main className="flex-grow">{children}</main>
+      <Footer />
+    </NextIntlClientProvider>
   );
 }
