@@ -5,6 +5,7 @@ import { browser } from 'wxt/browser';
 const STORAGE_KEY = 'promptflow_prompts';
 const STORAGE_VERSION_KEY = 'promptflow_version';
 const STORAGE_THEME_KEY = 'promptflow_theme';
+const STORAGE_PINNED_TAGS_KEY = 'promptflow_pinned_tags';
 const CURRENT_VERSION = 2;
 const MAX_VERSIONS_PER_PROMPT = 20;
 
@@ -103,6 +104,7 @@ export function useStore() {
   const [prompts, setPrompts] = useState<Prompt[]>(INITIAL_PROMPTS);
   const [view, setView] = useState<ViewState>('dashboard');
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [pinnedTags, setPinnedTags] = useState<string[]>([]);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     if (typeof window !== 'undefined') {
       return document.documentElement.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -141,6 +143,12 @@ export function useStore() {
         const themeResult = await browser.storage.local.get(STORAGE_THEME_KEY);
         if (themeResult[STORAGE_THEME_KEY] !== undefined) {
           setIsDarkMode(themeResult[STORAGE_THEME_KEY] as boolean);
+        }
+
+        // Load pinned tags
+        const pinnedTagsResult = await browser.storage.local.get(STORAGE_PINNED_TAGS_KEY);
+        if (pinnedTagsResult[STORAGE_PINNED_TAGS_KEY]) {
+          setPinnedTags(pinnedTagsResult[STORAGE_PINNED_TAGS_KEY] as string[]);
         }
       } catch (e) {
         // Fallback to localStorage
@@ -291,7 +299,45 @@ export function useStore() {
     }));
   };
 
-  const allTags = Array.from(new Set(prompts.flatMap(p => p.tags))).sort();
+  // Pin a tag (add to pinned tags)
+  const pinTag = (tag: string) => {
+    if (!pinnedTags.includes(tag)) {
+      const newPinnedTags = [...pinnedTags, tag];
+      setPinnedTags(newPinnedTags);
+      // Save to storage
+      browser.storage.local.set({ [STORAGE_PINNED_TAGS_KEY]: newPinnedTags }).catch(() => {
+        localStorage.setItem(STORAGE_PINNED_TAGS_KEY, JSON.stringify(newPinnedTags));
+      });
+    }
+  };
+
+  // Unpin a tag (remove from pinned tags)
+  const unpinTag = (tag: string) => {
+    const newPinnedTags = pinnedTags.filter(t => t !== tag);
+    setPinnedTags(newPinnedTags);
+    // Save to storage
+    browser.storage.local.set({ [STORAGE_PINNED_TAGS_KEY]: newPinnedTags }).catch(() => {
+      localStorage.setItem(STORAGE_PINNED_TAGS_KEY, JSON.stringify(newPinnedTags));
+    });
+  };
+
+  // Toggle pin status of a tag
+  const togglePinTag = (tag: string) => {
+    if (pinnedTags.includes(tag)) {
+      unpinTag(tag);
+    } else {
+      pinTag(tag);
+    }
+  };
+
+  // Get all tags sorted with pinned tags first
+  const allTags = Array.from(new Set(prompts.flatMap(p => p.tags))).sort((a, b) => {
+    const aPinned = pinnedTags.includes(a);
+    const bPinned = pinnedTags.includes(b);
+    if (aPinned && !bPinned) return -1;
+    if (!aPinned && bPinned) return 1;
+    return a.localeCompare(b);
+  });
 
   // Filtered prompts based on selected tag
   const filteredPrompts = selectedTag
@@ -316,6 +362,10 @@ export function useStore() {
     recordPromptUsage,
     allTags,
     setPrompts,
+    pinnedTags,
+    pinTag,
+    unpinTag,
+    togglePinTag,
   };
 }
 

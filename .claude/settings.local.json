@@ -14,7 +14,8 @@
       "Bash(ls:*)",
       "Bash(kill 76980:*)",
       "Bash(find apps/web/app/\\\\[locale\\\\] -type f -name \"*.tsx\" -o -name \"*.ts\" | head -30)",
-      "Bash(curl -sI http://localhost:3000/zh/prompts 2>/dev/null | head -5)"
+      "Bash(curl -sI http://localhost:3000/zh/prompts 2>/dev/null | head -5)",
+      "Bash(head -20 /Users/xxx/Code/prompt-flow/apps/web/dist/en/index.html 2>/dev/null || head -20 /Users/xxx/Code/prompt-flow/apps/web/.next/server/app/en.html 2>/dev/null || find /Users/xxx/Code/prompt-flow/apps/web/.next -name \"*.html\" | head -5)"
     ]
   }
 }

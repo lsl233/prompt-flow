@@ -24,6 +24,10 @@
     "message": "标签",
     "description": "Sidebar section title - Tags"
   },
+  "sidebarPinnedTags": {
+    "message": "置顶",
+    "description": "Sidebar section title - Pinned Tags"
+  },
   "sidebarImportExport": {
     "message": "导入 / 导出",
     "description": "Sidebar navigation - Import/Export"

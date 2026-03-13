@@ -48,6 +48,8 @@ function AppContent() {
         onImportExport={() => setIsImportExportOpen(true)}
         selectedTag={store.selectedTag}
         onSelectTag={store.setSelectedTag}
+        pinnedTags={store.pinnedTags}
+        onTogglePinTag={store.togglePinTag}
       />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">

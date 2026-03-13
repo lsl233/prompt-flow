@@ -7,12 +7,32 @@ import { routing } from "@/i18n/routing";
 import "./globals.css";
 import Navbar from "./_components/Navbar";
 import Footer from "./_components/Footer";
-import { HtmlLang } from "./_components/HtmlLang";
 
 type Locale = (typeof routing.locales)[number];
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
+    alternates: {
+      canonical: "/",
+      languages: {
+        en: "/en",
+        "zh-CN": "/zh",
+      },
+    },
+    openGraph: {
+      locale: locale === "zh" ? "zh_CN" : "en_US",
+    },
+  };
 }
 
 export default async function LocaleLayout({
@@ -37,7 +57,6 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <HtmlLang locale={locale} />
       <Navbar />
       <main className="flex-grow">{children}</main>
       <Footer />

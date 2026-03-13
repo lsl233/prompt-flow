@@ -1,4 +1,4 @@
-import { LayoutDashboard, Library, Hash, Download, X, Filter } from 'lucide-react';
+import { LayoutDashboard, Library, Hash, Download, Pin, PinOff } from 'lucide-react';
 import { ViewState } from '@/shared/types';
 import { useI18n } from '@/shared/i18n';
 
@@ -9,10 +9,26 @@ interface SidebarProps {
   onImportExport: () => void;
   selectedTag: string | null;
   onSelectTag: (tag: string | null) => void;
+  pinnedTags: string[];
+  onTogglePinTag: (tag: string) => void;
 }
 
-export default function Sidebar({ view, setView, tags, onImportExport, selectedTag, onSelectTag }: SidebarProps) {
+export default function Sidebar({
+  view,
+  setView,
+  tags,
+  onImportExport,
+  selectedTag,
+  onSelectTag,
+  pinnedTags,
+  onTogglePinTag
+}: SidebarProps) {
   const { t } = useI18n();
+
+  // Separate pinned and unpinned tags
+  const pinnedTagList = tags.filter(tag => pinnedTags.includes(tag));
+  const unpinnedTagList = tags.filter(tag => !pinnedTags.includes(tag));
+
   const handleTagClick = (tag: string) => {
     if (selectedTag === tag) {
       // Toggle off if already selected
@@ -24,8 +40,9 @@ export default function Sidebar({ view, setView, tags, onImportExport, selectedT
     }
   };
 
-  const clearFilter = () => {
-    onSelectTag(null);
+  const handlePinClick = (e: React.MouseEvent, tag: string) => {
+    e.stopPropagation();
+    onTogglePinTag(tag);
   };
 
   return (
@@ -98,19 +115,38 @@ export default function Sidebar({ view, setView, tags, onImportExport, selectedT
           </div>
         )} */}
 
-        {tags.map(tag => (
-          <button
+        {/* Pinned Tags Section */}
+        {pinnedTagList.length > 0 && (
+          <>
+            <div className="px-3 py-1">
+              <p className="text-[10px] font-medium text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+                {t('sidebarPinnedTags')}
+              </p>
+            </div>
+            {pinnedTagList.map(tag => (
+              <TagItem
+                key={tag}
+                tag={tag}
+                isSelected={selectedTag === tag}
+                isPinned={true}
+                onClick={() => handleTagClick(tag)}
+                onPinClick={(e) => handlePinClick(e, tag)}
+              />
+            ))}
+            <div className="my-2 mx-3 border-t border-slate-200 dark:border-slate-700" />
+          </>
+        )}
+
+        {/* All Tags Section */}
+        {unpinnedTagList.map(tag => (
+          <TagItem
             key={tag}
+            tag={tag}
+            isSelected={selectedTag === tag}
+            isPinned={false}
             onClick={() => handleTagClick(tag)}
-            className={`w-full flex items-center gap-3 px-3 py-1.5 rounded-lg text-sm transition-colors ${
-              selectedTag === tag
-                ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-medium'
-                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-slate-200'
-            }`}
-          >
-            <Hash size={16} className={selectedTag === tag ? 'text-blue-500' : 'text-slate-400'} />
-            {tag}
-          </button>
+            onPinClick={(e) => handlePinClick(e, tag)}
+          />
         ))}
       </nav>
 
@@ -124,5 +160,43 @@ export default function Sidebar({ view, setView, tags, onImportExport, selectedT
         </button>
       </div>
     </div>
+  );
+}
+
+// Individual Tag Item Component with Pin Button
+interface TagItemProps {
+  tag: string;
+  isSelected: boolean;
+  isPinned: boolean;
+  onClick: () => void;
+  onPinClick: (e: React.MouseEvent) => void;
+}
+
+function TagItem({ tag, isSelected, isPinned, onClick, onPinClick }: TagItemProps) {
+  return (
+    <button
+      onClick={onClick}
+      className={`w-full flex items-center justify-between px-3 py-1.5 rounded-lg text-sm transition-colors group ${
+        isSelected
+          ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 font-medium'
+          : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-slate-200'
+      }`}
+    >
+      <div className="flex items-center gap-3 overflow-hidden">
+        <Hash size={16} className={isSelected ? 'text-blue-500' : isPinned ? 'text-amber-500' : 'text-slate-400'} />
+        <span className="truncate">{tag}</span>
+      </div>
+      <span
+        onClick={onPinClick}
+        className={`p-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity ${
+          isPinned
+            ? 'text-amber-500 hover:bg-amber-100 dark:hover:bg-amber-900/30'
+            : 'text-slate-400 hover:text-amber-500 hover:bg-slate-100 dark:hover:bg-slate-700'
+        }`}
+        title={isPinned ? '取消置顶' : '置顶标签'}
+      >
+        {isPinned ? <PinOff size={14} /> : <Pin size={14} />}
+      </span>
+    </button>
   );
 }

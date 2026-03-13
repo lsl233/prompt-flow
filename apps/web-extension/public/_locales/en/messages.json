@@ -24,6 +24,10 @@
     "message": "Tags",
     "description": "Sidebar section title - Tags"
   },
+  "sidebarPinnedTags": {
+    "message": "Pinned",
+    "description": "Sidebar section title - Pinned Tags"
+  },
   "sidebarImportExport": {
     "message": "Import / Export",
     "description": "Sidebar navigation - Import/Export"
