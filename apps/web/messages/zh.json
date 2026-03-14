@@ -16,7 +16,8 @@
     "description": "保存和管理你的最佳 ChatGPT 提示词、Midjourney 绘画指令、Claude 系统提示。在任何 AI 页面按 ⌘K，立即调出所需内容。",
     "installChrome": "免费添加到 Chrome",
     "explorePrompts": "浏览 500+ 社区精选提示词",
-    "screenshotPlaceholder": "产品界面截图",
+    "screenshotAlt": "PromptFlow 扩展界面截图",
+    "demoAlt": "PromptFlow 功能演示",
     "features": {
       "title": "强大而简洁的功能",
       "subtitle": "专为提升 AI 工作效率设计",

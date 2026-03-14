@@ -16,7 +16,8 @@
     "description": "Save and manage your best ChatGPT prompts, Midjourney commands, and Claude system prompts. Press ⌘K on any AI page to instantly access what you need.",
     "installChrome": "Add to Chrome — Free",
     "explorePrompts": "Browse 500+ Community Prompts",
-    "screenshotPlaceholder": "Product Interface Screenshot",
+    "screenshotAlt": "PromptFlow Extension Screenshot",
+    "demoAlt": "PromptFlow Feature Demo",
     "features": {
       "title": "Powerful Yet Simple",
       "subtitle": "Designed to boost your AI productivity",

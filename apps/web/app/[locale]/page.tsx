@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowRight,
   CheckCircle2,
@@ -11,6 +10,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { getTranslations } from "next-intl/server";
+import { MultiLangImage } from "@/components/MultiLangImage";
 
 export default async function HomePage() {
   const t = await getTranslations("home");
@@ -61,9 +61,9 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="relative aspect-[16/9] bg-neutral-100">
-              <Image
-                src="/screen-short.png"
-                alt="PromptFlow Extension Screenshot"
+              <MultiLangImage
+                name="hero"
+                alt={t("screenshotAlt")}
                 fill
                 className="object-cover"
                 priority
@@ -138,10 +138,13 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="bg-neutral-100 rounded-3xl p-8 aspect-square flex items-center justify-center border border-neutral-200">
-              <div className="text-neutral-400 font-mono text-sm">
-                {t("howItWorks.demoPlaceholder")}
-              </div>
+            <div className="relative bg-neutral-100 rounded-3xl p-8 h-full flex items-center justify-center border border-neutral-200">
+              <MultiLangImage
+                name="demo"
+                alt={t("demoAlt")}
+                fill
+                className="object-contain"
+              />
             </div>
           </div>
         </div>

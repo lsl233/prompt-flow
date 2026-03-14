@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(pnpm compile:*)"
+      "Bash(pnpm compile:*)",
+      "Bash(find /Users/xxx/Code/prompt-flow/apps/web -name \"*.json\" -type f 2>/dev/null | head -20)",
+      "Bash(npx tsc:*)"
     ]
   }
 }
