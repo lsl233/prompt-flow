@@ -79,3 +79,43 @@ Before creating new components, check:
 - [ ] **TypeScript compilation passes**: `pnpm compile`
 - [ ] **No hydration mismatches**: Check Server/Client component boundaries
 - [ ] **Build succeeds**: `pnpm build` completes without errors
+
+## Localization
+
+### i18n Setup
+
+The app uses `next-intl` for internationalization with the following structure:
+- **Messages**: `messages/en.json`, `messages/zh.json`
+- **Routing**: `i18n/routing.ts` configures supported locales
+
+### Multi-language Images
+
+Use the `LocaleImage` component for images that need locale-specific versions:
+
+```tsx
+import { LocaleImage } from "@/components/LocaleImage";
+
+// Automatically loads /screen-short/hero.en.png or /screen-short/hero.zh.png
+<LocaleImage
+  name="hero"           // Base filename
+  alt={t("screenshotAlt")}
+  fill                  // or width/height for fixed size
+  className="object-cover"
+  priority              // Optional: for above-the-fold images
+/>
+```
+
+**File Naming Convention**:
+```
+public/screen-short/
+├── hero.en.png       # English version (default)
+├── hero.zh.png       # Chinese version
+├── demo.en.png
+└── demo.zh.png
+```
+
+**Behavior**:
+- Automatically detects current locale via `getLocale()`
+- Falls back to `en` version if locale-specific image doesn't exist
+- Server Component only (uses `fs.existsSync` for file checking)
+- SEO-friendly: correct image path is rendered in static HTML per locale

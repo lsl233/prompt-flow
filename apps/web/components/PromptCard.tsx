@@ -1,5 +1,6 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import { cn } from "@ui/lib/utils";
+import Link from "next/link";
 import { Copy, Eye, Heart } from 'lucide-react';
 import { Button } from './Button';
 import { TagChip } from './TagChip';
@@ -18,7 +19,10 @@ export interface PromptCardProps extends React.HTMLAttributes<HTMLDivElement> {
 export function PromptCard({ id, title, description, tags, usageCount, slug, className = '', ...props }: PromptCardProps) {
   return (
     <div
-      className={`group flex flex-col justify-between rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-neutral-300 ${className}`}
+      className={cn(
+        "group flex flex-col justify-between rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm transition-all hover:shadow-md hover:border-neutral-300",
+        className
+      )}
       {...props}
     >
       <div>

@@ -3,7 +3,11 @@
     "allow": [
       "Bash(pnpm compile:*)",
       "Bash(find /Users/xxx/Code/prompt-flow/apps/web -name \"*.json\" -type f 2>/dev/null | head -20)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(pnpm --filter @prompt-flow/ui compile)",
+      "Bash(find /Users/xxx/Code/prompt-flow/apps/web/components -name \"*.tsx\" -type f 2>/dev/null | head -20)",
+      "Bash(pnpm --filter web build 2>&1 | head -50)",
+      "Bash(pnpm --filter web build 2>&1 | head -60)"
     ]
   }
 }

@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/Button";
 import { getTranslations } from "next-intl/server";
-import { MultiLangImage } from "@/components/MultiLangImage";
+import { LocaleImage } from "@/components/LocaleImage";
 
 export default async function HomePage() {
   const t = await getTranslations("home");
@@ -61,7 +61,7 @@ export default async function HomePage() {
               </div>
             </div>
             <div className="relative aspect-[16/9] bg-neutral-100">
-              <MultiLangImage
+              <LocaleImage
                 name="hero"
                 alt={t("screenshotAlt")}
                 fill
@@ -139,7 +139,7 @@ export default async function HomePage() {
             </div>
 
             <div className="relative bg-neutral-100 rounded-3xl p-8 h-full flex items-center justify-center border border-neutral-200">
-              <MultiLangImage
+              <LocaleImage
                 name="demo"
                 alt={t("demoAlt")}
                 fill
