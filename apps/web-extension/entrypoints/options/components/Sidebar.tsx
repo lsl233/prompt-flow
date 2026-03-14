@@ -1,4 +1,4 @@
-import { LayoutDashboard, Library, Hash, Download, Pin, PinOff } from 'lucide-react';
+import { LayoutDashboard, Library, Hash, Settings, Pin, PinOff } from 'lucide-react';
 import { ViewState } from '@/shared/types';
 import { useI18n } from '@/shared/i18n';
 
@@ -6,7 +6,6 @@ interface SidebarProps {
   view: ViewState;
   setView: (view: ViewState) => void;
   tags: string[];
-  onImportExport: () => void;
   selectedTag: string | null;
   onSelectTag: (tag: string | null) => void;
   pinnedTags: string[];
@@ -17,7 +16,6 @@ export default function Sidebar({
   view,
   setView,
   tags,
-  onImportExport,
   selectedTag,
   onSelectTag,
   pinnedTags,
@@ -152,11 +150,15 @@ export default function Sidebar({
 
       <div className="p-4 border-t border-slate-200 dark:border-slate-700 space-y-1">
         <button
-          onClick={onImportExport}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+          onClick={() => setView('settings')}
+          className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+            view === 'settings'
+              ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-700/50'
+          }`}
         >
-          <Download size={18} />
-          {t('sidebarImportExport')}
+          <Settings size={18} />
+          {t('sidebarSettings') || 'Settings'}
         </button>
       </div>
     </div>

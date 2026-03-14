@@ -18,7 +18,7 @@ export interface Prompt {
   lastUsedAt: number | null;
 }
 
-export type ViewState = 'dashboard' | 'library';
+export type ViewState = 'dashboard' | 'library' | 'settings';
 
 export interface FilterState {
   tag: string | null;

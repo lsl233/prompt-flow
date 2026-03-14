@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   CheckCircle2,
@@ -50,7 +51,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          {/* Product Screenshot Placeholder */}
+          {/* Product Screenshot */}
           <div className="mt-20 mx-auto max-w-5xl rounded-2xl border border-neutral-200 bg-white shadow-2xl overflow-hidden ring-1 ring-neutral-900/5">
             <div className="h-12 border-b border-neutral-200 bg-neutral-50 flex items-center px-4 gap-2">
               <div className="flex gap-1.5">
@@ -59,10 +60,14 @@ export default async function HomePage() {
                 <div className="h-3 w-3 rounded-full bg-emerald-400"></div>
               </div>
             </div>
-            <div className="aspect-[16/9] bg-neutral-100 flex items-center justify-center p-8">
-              <div className="w-full h-full border border-dashed border-neutral-300 rounded-xl bg-white/50 flex items-center justify-center text-neutral-400 font-mono text-sm">
-                {t("screenshotPlaceholder")}
-              </div>
+            <div className="relative aspect-[16/9] bg-neutral-100">
+              <Image
+                src="/screen-short.png"
+                alt="PromptFlow Extension Screenshot"
+                fill
+                className="object-cover"
+                priority
+              />
             </div>
           </div>
         </div>

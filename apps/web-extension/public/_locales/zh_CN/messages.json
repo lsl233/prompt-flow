@@ -32,6 +32,10 @@
     "message": "导入 / 导出",
     "description": "Sidebar navigation - Import/Export"
   },
+  "sidebarSettings": {
+    "message": "设置",
+    "description": "Sidebar navigation - Settings"
+  },
 
   "topbarSearchPlaceholder": {
     "message": "搜索提示词（任意页面按 Cmd+K）",
@@ -611,5 +615,122 @@
   "contentScriptMatchedSites": {
     "message": "内容脚本在以下主流 AI 平台运行：ChatGPT、Claude、Gemini、Perplexity、Bing Chat、DeepSeek、Kimi、Doubao、通义千问等。",
     "description": "Information about supported AI platforms"
+  },
+
+  "settingsTitle": {
+    "message": "设置",
+    "description": "Settings page title"
+  },
+  "settingsImportExport": {
+    "message": "导入 / 导出",
+    "description": "Settings tab - Import/Export"
+  },
+  "settingsShortcuts": {
+    "message": "快捷键",
+    "description": "Settings tab - Keyboard Shortcuts"
+  },
+  "settingsAbout": {
+    "message": "关于",
+    "description": "Settings tab - About"
+  },
+  "settingsExportTitle": {
+    "message": "导出数据",
+    "description": "Export section title"
+  },
+  "settingsExportDescription": {
+    "message": "将所有提示词下载为 JSON 文件，用于备份或分享。",
+    "description": "Export section description"
+  },
+  "settingsExportButton": {
+    "message": "导出提示词",
+    "description": "Export button"
+  },
+  "settingsImportTitle": {
+    "message": "导入数据",
+    "description": "Import section title"
+  },
+  "settingsImportDescription": {
+    "message": "从 JSON 文件导入提示词。您可以选择合并或替换现有数据。",
+    "description": "Import section description"
+  },
+  "settingsImportMerge": {
+    "message": "合并",
+    "description": "Import mode - Merge"
+  },
+  "settingsImportReplace": {
+    "message": "替换",
+    "description": "Import mode - Replace"
+  },
+  "settingsImportDropzone": {
+    "message": "点击或拖拽 JSON 文件到此处",
+    "description": "Import dropzone text"
+  },
+  "settingsImportPreview": {
+    "message": "导入预览",
+    "description": "Import preview title"
+  },
+  "settingsImportNewPrompts": {
+    "message": "个新提示词",
+    "description": "Import preview - new prompts"
+  },
+  "settingsImportUpdatedPrompts": {
+    "message": "个待更新",
+    "description": "Import preview - prompts to update"
+  },
+  "settingsImportUnchanged": {
+    "message": "个未更改",
+    "description": "Import preview - unchanged"
+  },
+  "settingsImportConfirm": {
+    "message": "确认导入",
+    "description": "Import confirm button"
+  },
+  "settingsImportCancel": {
+    "message": "取消",
+    "description": "Cancel button"
+  },
+  "settingsExportSuccess": {
+    "message": "导出成功",
+    "description": "Export success toast"
+  },
+  "settingsImportSuccess": {
+    "message": "导入成功",
+    "description": "Import success toast"
+  },
+  "settingsImportInvalidFormat": {
+    "message": "文件格式无效",
+    "description": "Import error - invalid format"
+  },
+  "settingsImportParseError": {
+    "message": "解析文件失败",
+    "description": "Import error - parse error"
+  },
+  "settingsShortcutsTitle": {
+    "message": "键盘快捷键",
+    "description": "Shortcuts section title"
+  },
+  "settingsShortcutsDescription": {
+    "message": "键盘快捷键可以在浏览器扩展设置中自定义。",
+    "description": "Shortcuts section description"
+  },
+  "settingsShortcutsTip": {
+    "message": "提示：您可以访问 chrome://extensions/shortcuts（Chrome）或 about:addons（Firefox）来自定义快捷键。",
+    "description": "Shortcuts tip"
+  },
+  "settingsVersion": {
+    "message": "版本",
+    "description": "Version label"
+  },
+  "settingsAboutDescription": {
+    "message": "PromptFlow 是一个浏览器扩展，帮助您管理和快速访问 AI 提示词。",
+    "description": "About section description"
+  },
+  "settingsLinks": {
+    "message": "链接",
+    "description": "Links section title"
+  },
+  "settingsWebsite": {
+    "message": "网站",
+    "description": "Website link"
   }
 }

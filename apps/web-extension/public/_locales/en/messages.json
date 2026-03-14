@@ -32,6 +32,10 @@
     "message": "Import / Export",
     "description": "Sidebar navigation - Import/Export"
   },
+  "sidebarSettings": {
+    "message": "Settings",
+    "description": "Sidebar navigation - Settings"
+  },
 
   "topbarSearchPlaceholder": {
     "message": "Search prompts (Cmd+K in any page)",
@@ -611,5 +615,122 @@
   "contentScriptMatchedSites": {
     "message": "Content script runs on major AI platforms including: ChatGPT, Claude, Gemini, Perplexity, Bing Chat, DeepSeek, Kimi, Doubao, and Qianwen.",
     "description": "Information about supported AI platforms"
+  },
+
+  "settingsTitle": {
+    "message": "Settings",
+    "description": "Settings page title"
+  },
+  "settingsImportExport": {
+    "message": "Import / Export",
+    "description": "Settings tab - Import/Export"
+  },
+  "settingsShortcuts": {
+    "message": "Shortcuts",
+    "description": "Settings tab - Keyboard Shortcuts"
+  },
+  "settingsAbout": {
+    "message": "About",
+    "description": "Settings tab - About"
+  },
+  "settingsExportTitle": {
+    "message": "Export Data",
+    "description": "Export section title"
+  },
+  "settingsExportDescription": {
+    "message": "Download all your prompts as a JSON file for backup or sharing.",
+    "description": "Export section description"
+  },
+  "settingsExportButton": {
+    "message": "Export Prompts",
+    "description": "Export button"
+  },
+  "settingsImportTitle": {
+    "message": "Import Data",
+    "description": "Import section title"
+  },
+  "settingsImportDescription": {
+    "message": "Import prompts from a JSON file. You can choose to merge or replace existing data.",
+    "description": "Import section description"
+  },
+  "settingsImportMerge": {
+    "message": "Merge",
+    "description": "Import mode - Merge"
+  },
+  "settingsImportReplace": {
+    "message": "Replace",
+    "description": "Import mode - Replace"
+  },
+  "settingsImportDropzone": {
+    "message": "Click or drag JSON file here",
+    "description": "Import dropzone text"
+  },
+  "settingsImportPreview": {
+    "message": "Import Preview",
+    "description": "Import preview title"
+  },
+  "settingsImportNewPrompts": {
+    "message": "new prompts",
+    "description": "Import preview - new prompts"
+  },
+  "settingsImportUpdatedPrompts": {
+    "message": "to update",
+    "description": "Import preview - prompts to update"
+  },
+  "settingsImportUnchanged": {
+    "message": "unchanged",
+    "description": "Import preview - unchanged"
+  },
+  "settingsImportConfirm": {
+    "message": "Confirm Import",
+    "description": "Import confirm button"
+  },
+  "settingsImportCancel": {
+    "message": "Cancel",
+    "description": "Cancel button"
+  },
+  "settingsExportSuccess": {
+    "message": "Exported successfully",
+    "description": "Export success toast"
+  },
+  "settingsImportSuccess": {
+    "message": "Imported successfully",
+    "description": "Import success toast"
+  },
+  "settingsImportInvalidFormat": {
+    "message": "Invalid file format",
+    "description": "Import error - invalid format"
+  },
+  "settingsImportParseError": {
+    "message": "Failed to parse file",
+    "description": "Import error - parse error"
+  },
+  "settingsShortcutsTitle": {
+    "message": "Keyboard Shortcuts",
+    "description": "Shortcuts section title"
+  },
+  "settingsShortcutsDescription": {
+    "message": "Keyboard shortcuts can be customized in your browser extension settings.",
+    "description": "Shortcuts section description"
+  },
+  "settingsShortcutsTip": {
+    "message": "Tip: You can customize shortcuts by going to chrome://extensions/shortcuts (Chrome) or about:addons (Firefox).",
+    "description": "Shortcuts tip"
+  },
+  "settingsVersion": {
+    "message": "Version",
+    "description": "Version label"
+  },
+  "settingsAboutDescription": {
+    "message": "PromptFlow is a browser extension that helps you manage and quickly access your AI prompts.",
+    "description": "About section description"
+  },
+  "settingsLinks": {
+    "message": "Links",
+    "description": "Links section title"
+  },
+  "settingsWebsite": {
+    "message": "Website",
+    "description": "Website link"
   }
 }

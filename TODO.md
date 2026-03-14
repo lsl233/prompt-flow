@@ -57,14 +57,23 @@
 - [x] 授权成功后自动注入 content script
 - [x] Popup 中增加"打开 Prompt Picker"按钮，点击后注入并打开 content script
 
-### 7. 设置模块 - 功能整合与信息展示
+### 7. 设置模块 - 功能整合与信息展示 ✅ 已完成
 
-**文件**：`entrypoints/options/App.tsx`, 新建 `entrypoints/options/components/SettingsPanel.tsx`
+**文件**：`entrypoints/options/App.tsx`, `entrypoints/options/components/SettingsPanel.tsx`
 
-**需求**：
-- [ ] 导入/导出功能移到设置模块
-- [ ] 版本号查看
-- [ ] 快捷键查看
+**已完成**：
+- [x] 导入/导出功能移到设置模块
+  - 新建 SettingsPanel 组件，包含 Import/Export、Shortcuts、About 三个标签页
+  - 从 Sidebar 移除导入/导出按钮，改为设置入口
+- [x] 版本号查看
+  - 从 `wxt.config.ts` 读取版本号（1.0.3）
+  - 在设置面板 About 标签页显示扩展版本
+- [x] 快捷键查看
+  - 从 manifest 的 `commands` 配置读取快捷键（Ctrl+ShiftP / Cmd+Shift+P）
+  - 在 Shortcuts 标签页展示并说明如何自定义
+
+**新增文件**：
+- `entrypoints/options/components/SettingsPanel.tsx` - 设置面板主组件
 
 ---
 

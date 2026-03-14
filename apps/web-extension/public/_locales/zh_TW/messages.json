@@ -32,6 +32,10 @@
     "message": "匯入 / 匯出",
     "description": "Sidebar navigation - Import/Export"
   },
+  "sidebarSettings": {
+    "message": "設定",
+    "description": "Sidebar navigation - Settings"
+  },
 
   "topbarSearchPlaceholder": {
     "message": "搜尋提示詞（任意頁面按 Cmd+K）",
@@ -611,5 +615,122 @@
   "contentScriptMatchedSites": {
     "message": "內容腳本在以下主流 AI 平台執行：ChatGPT、Claude、Gemini、Perplexity、Bing Chat、DeepSeek、Kimi、Doubao、通義千問等。",
     "description": "Information about supported AI platforms"
+  },
+
+  "settingsTitle": {
+    "message": "設定",
+    "description": "Settings page title"
+  },
+  "settingsImportExport": {
+    "message": "匯入 / 匯出",
+    "description": "Settings tab - Import/Export"
+  },
+  "settingsShortcuts": {
+    "message": "快速鍵",
+    "description": "Settings tab - Keyboard Shortcuts"
+  },
+  "settingsAbout": {
+    "message": "關於",
+    "description": "Settings tab - About"
+  },
+  "settingsExportTitle": {
+    "message": "匯出資料",
+    "description": "Export section title"
+  },
+  "settingsExportDescription": {
+    "message": "將所有提示詞下載為 JSON 檔案，用於備份或分享。",
+    "description": "Export section description"
+  },
+  "settingsExportButton": {
+    "message": "匯出提示詞",
+    "description": "Export button"
+  },
+  "settingsImportTitle": {
+    "message": "匯入資料",
+    "description": "Import section title"
+  },
+  "settingsImportDescription": {
+    "message": "從 JSON 檔案匯入提示詞。您可以選擇合併或取代現有資料。",
+    "description": "Import section description"
+  },
+  "settingsImportMerge": {
+    "message": "合併",
+    "description": "Import mode - Merge"
+  },
+  "settingsImportReplace": {
+    "message": "取代",
+    "description": "Import mode - Replace"
+  },
+  "settingsImportDropzone": {
+    "message": "點擊或拖曳 JSON 檔案到此處",
+    "description": "Import dropzone text"
+  },
+  "settingsImportPreview": {
+    "message": "匯入預覽",
+    "description": "Import preview title"
+  },
+  "settingsImportNewPrompts": {
+    "message": "個新提示詞",
+    "description": "Import preview - new prompts"
+  },
+  "settingsImportUpdatedPrompts": {
+    "message": "個待更新",
+    "description": "Import preview - prompts to update"
+  },
+  "settingsImportUnchanged": {
+    "message": "個未更改",
+    "description": "Import preview - unchanged"
+  },
+  "settingsImportConfirm": {
+    "message": "確認匯入",
+    "description": "Import confirm button"
+  },
+  "settingsImportCancel": {
+    "message": "取消",
+    "description": "Cancel button"
+  },
+  "settingsExportSuccess": {
+    "message": "匯出成功",
+    "description": "Export success toast"
+  },
+  "settingsImportSuccess": {
+    "message": "匯入成功",
+    "description": "Import success toast"
+  },
+  "settingsImportInvalidFormat": {
+    "message": "檔案格式無效",
+    "description": "Import error - invalid format"
+  },
+  "settingsImportParseError": {
+    "message": "解析檔案失敗",
+    "description": "Import error - parse error"
+  },
+  "settingsShortcutsTitle": {
+    "message": "鍵盤快速鍵",
+    "description": "Shortcuts section title"
+  },
+  "settingsShortcutsDescription": {
+    "message": "鍵盤快速鍵可以在瀏覽器擴充功能設定中自訂。",
+    "description": "Shortcuts section description"
+  },
+  "settingsShortcutsTip": {
+    "message": "提示：您可以訪問 chrome://extensions/shortcuts（Chrome）或 about:addons（Firefox）來自訂快速鍵。",
+    "description": "Shortcuts tip"
+  },
+  "settingsVersion": {
+    "message": "版本",
+    "description": "Version label"
+  },
+  "settingsAboutDescription": {
+    "message": "PromptFlow 是一個瀏覽器擴充功能，幫助您管理和快速存取 AI 提示詞。",
+    "description": "About section description"
+  },
+  "settingsLinks": {
+    "message": "連結",
+    "description": "Links section title"
+  },
+  "settingsWebsite": {
+    "message": "網站",
+    "description": "Website link"
   }
 }

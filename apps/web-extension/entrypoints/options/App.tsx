@@ -6,14 +6,13 @@ import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 import Dashboard from './components/Dashboard';
 import PromptLibrary from './components/PromptLibrary';
+import SettingsPanel from './components/SettingsPanel';
 import FloatingPopup from './components/FloatingPopup';
-import ImportExportModal from './components/Modals/ImportExportModal';
 import PromptEditorModal from './components/Modals/PromptEditorModal';
 import '@/shared/style.css';
 
 function AppContent() {
   const store = useStore();
-  const [isImportExportOpen, setIsImportExportOpen] = useState(false);
   const [editingPromptId, setEditingPromptId] = useState<string | null>(null);
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [isFloatingOpen, setIsFloatingOpen] = useState(false);
@@ -45,7 +44,6 @@ function AppContent() {
         view={store.view}
         setView={store.setView}
         tags={store.allTags}
-        onImportExport={() => setIsImportExportOpen(true)}
         selectedTag={store.selectedTag}
         onSelectTag={store.setSelectedTag}
         pinnedTags={store.pinnedTags}
@@ -63,10 +61,14 @@ function AppContent() {
 
         <main className="flex-1 overflow-y-auto p-6">
           <div className="max-w-6xl mx-auto">
-            {store.view === 'dashboard' ? (
+            {store.view === 'dashboard' && (
               <Dashboard store={store} onCreatePrompt={handleCreatePrompt} />
-            ) : (
+            )}
+            {store.view === 'library' && (
               <PromptLibrary store={store} onEditPrompt={handleEditPrompt} />
+            )}
+            {store.view === 'settings' && (
+              <SettingsPanel store={store} />
             )}
           </div>
         </main>
@@ -77,13 +79,6 @@ function AppContent() {
           promptId={editingPromptId}
           store={store}
           onClose={() => setIsEditorOpen(false)}
-        />
-      )}
-
-      {isImportExportOpen && (
-        <ImportExportModal
-          store={store}
-          onClose={() => setIsImportExportOpen(false)}
         />
       )}
 
