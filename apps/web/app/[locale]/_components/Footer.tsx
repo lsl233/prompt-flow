@@ -49,7 +49,7 @@ export default function Footer() {
                   {t('product.features')}
                 </button>
               </li>
-              <li><a href="#" className="hover:text-[var(--color-accent-primary)] transition-colors">{t('product.chromeExtension')}</a></li>
+              <li><a href="https://chromewebstore.google.com/detail/prompt-flow/hfifkmpkoiciamimifcahopbdefknnko" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-accent-primary)] transition-colors">{t('product.chromeExtension')}</a></li>
               <li><Link href="/community" className="hover:text-[var(--color-accent-primary)] transition-colors">{t('product.community')}</Link></li>
             </ul>
           </div>
@@ -69,7 +69,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-[var(--color-text-tertiary)]">
               <li><a href="#" className="hover:text-[var(--color-accent-primary)] transition-colors">{t('company.about')}</a></li>
               <li><a href="#" className="hover:text-[var(--color-accent-primary)] transition-colors">{t('company.twitter')}</a></li>
-              <li><a href="#" className="hover:text-[var(--color-accent-primary)] transition-colors">{t('company.github')}</a></li>
+              <li><a href="https://github.com/promptflow/promptflow" target="_blank" rel="noopener noreferrer" className="hover:text-[var(--color-accent-primary)] transition-colors">{t('company.github')}</a></li>
             </ul>
           </div>
         </div>

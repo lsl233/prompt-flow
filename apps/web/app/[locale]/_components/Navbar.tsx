@@ -49,6 +49,7 @@ export function Navbar({ t }: NavbarProps) {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
+          {/*
           <button
             onClick={scrollToFeatures}
             className="text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
@@ -62,11 +63,14 @@ export function Navbar({ t }: NavbarProps) {
             {t.community}
           </Link>
           <a
-            href="#"
+            href="https://github.com/promptflow/promptflow"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-sm font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
           >
             {t.github}
           </a>
+          */}
         </div>
 
         {/* Right Side */}
@@ -76,7 +80,9 @@ export function Navbar({ t }: NavbarProps) {
           </div>
           <ThemeSwitcher />
           <a
-            href="#"
+            href="https://chromewebstore.google.com/detail/prompt-flow/hfifkmpkoiciamimifcahopbdefknnko"
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm btn-glow"
           >
             {t.install}
@@ -99,6 +105,7 @@ export function Navbar({ t }: NavbarProps) {
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)]">
           <div className="px-4 py-4 space-y-3">
+            {/*
             <button
               onClick={scrollToFeatures}
               className="block w-full text-left px-3 py-2 rounded-lg text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)] transition-colors"
@@ -113,14 +120,19 @@ export function Navbar({ t }: NavbarProps) {
               {t.community}
             </Link>
             <a
-              href="#"
+              href="https://github.com/promptflow/promptflow"
+              target="_blank"
+              rel="noopener noreferrer"
               className="block px-3 py-2 rounded-lg text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-bg-tertiary)] transition-colors"
             >
               {t.github}
             </a>
+            */}
             <div className="pt-3 border-t border-[var(--color-border-subtle)]">
               <a
-                href="#"
+                href="https://chromewebstore.google.com/detail/prompt-flow/hfifkmpkoiciamimifcahopbdefknnko"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full px-4 py-3 rounded-lg font-medium btn-glow"
               >
                 {t.install}

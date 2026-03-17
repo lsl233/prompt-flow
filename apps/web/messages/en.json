@@ -18,6 +18,7 @@
       "description": "Press ⌘K on any AI page to instantly summon your prompt library. Supports ChatGPT, Claude, DeepSeek, Kimi and more. Make every AI conversation efficient and precise.",
       "install": "Install Free",
       "demo": "Watch Demo",
+      "browseCommunity": "Browse Community",
       "screenshotAlt": "PromptFlow product interface showing command palette quick access"
     },
     "features": {
@@ -70,7 +71,7 @@
       "title": "Start Free Today",
       "subtitle": "Join thousands of users boosting their AI workflow efficiency",
       "chrome": "Add to Chrome",
-      "firefox": "Add to Firefox"
+      "browseCommunity": "Browse Community"
     }
   },
   "community": {
