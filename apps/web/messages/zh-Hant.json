@@ -1,0 +1,128 @@
+{
+  "metadata": {
+    "title": "PromptFlow - 專業 AI 提示詞管理工具 | 一鍵調用提示詞庫",
+    "description": "PromptFlow 是你的專業 AI 提示詞管理工具。在 ChatGPT、Claude、DeepSeek 等任意 AI 平台中，按 ⌘K 一鍵調用保存的提示詞。支援智能分類、跨平台同步。"
+  },
+  "nav": {
+    "brand": "PromptFlow",
+    "features": "功能",
+    "community": "社區",
+    "install": "免費安裝",
+    "github": "GitHub"
+  },
+  "home": {
+    "hero": {
+      "badge": "已支援 ChatGPT、Claude、DeepSeek 等 10+ AI 平台",
+      "title": "專業 AI 提示詞管理工具",
+      "subtitle": "一鍵調用 · 智能分類 · 跨平台支援",
+      "description": "在任意 AI 頁面按 ⌘K，瞬間調出你的提示詞庫。支援 ChatGPT、Claude、DeepSeek、Kimi 等主流平台，讓每次 AI 對話都高效精準。",
+      "install": "免費安裝",
+      "demo": "查看演示"
+    },
+    "features": {
+      "title": "核心功能",
+      "subtitle": "專為 AI 工作效率設計",
+      "items": {
+        "quickAccess": {
+          "title": "⌘K 快速喚起",
+          "description": "在任何 AI 頁面按 ⌘K，瞬間調出提示詞面板。無需切換標籤頁，靈感觸手可及。"
+        },
+        "smartOrg": {
+          "title": "智能分類管理",
+          "description": "標籤 + 資料夾雙維度管理，支援全文搜尋。再多的提示詞也能秒速定位。"
+        },
+        "crossPlatform": {
+          "title": "跨平台支援",
+          "description": "完美相容 ChatGPT、Claude、DeepSeek、Kimi、Gemini 等 10+ 主流 AI 平台。"
+        }
+      }
+    },
+    "community": {
+      "title": "社區精選",
+      "subtitle": "發現來自社區的高品質提示詞，一鍵匯入到你的個人庫",
+      "browseAll": "瀏覽社區 →",
+      "import": "匯入",
+      "importSuccess": "已匯入",
+      "installPrompt": "請安裝 PromptFlow 外掛以使用此功能",
+      "emptyState": "成為第一個貢獻者",
+      "by": "作者"
+    },
+    "useCases": {
+      "title": "適合誰使用",
+      "subtitle": "無論你是創作者、開發者還是營運人員，PromptFlow 都能提升你的 AI 工作效率",
+      "cases": {
+        "creator": {
+          "title": "內容創作者",
+          "description": "管理文案範本、標題公式、內容框架。讓 AI 成為你創作的加速器。"
+        },
+        "developer": {
+          "title": "開發者",
+          "description": "保存程式碼片段、重構指令、Code Review 範本。提升程式設計效率 10 倍。"
+        },
+        "operator": {
+          "title": "營運人員",
+          "description": "儲存資料分析 Prompt、報告範本、用戶洞察框架。讓資料驅動決策。"
+        }
+      }
+    },
+    "cta": {
+      "title": "免費開始使用",
+      "subtitle": "加入數千用戶，提升你的 AI 工作效率",
+      "chrome": "添加到 Chrome",
+      "firefox": "添加到 Firefox"
+    }
+  },
+  "community": {
+    "metadata": {
+      "title": "社區精選提示詞 | PromptFlow",
+      "description": "發現社區分享的最佳 AI 提示詞。涵蓋寫作、程式設計、圖像生成等多個領域，一鍵匯入到你的 PromptFlow 庫。"
+    },
+    "title": "發現社區精選提示詞",
+    "subtitle": "探索來自全球用戶的高品質提示詞，一鍵匯入使用",
+    "search": "搜尋提示詞...",
+    "categories": {
+      "all": "全部",
+      "writing": "寫作",
+      "coding": "程式設計",
+      "image": "圖像生成",
+      "other": "其他"
+    },
+    "import": "匯入到個人庫",
+    "importSuccess": "已匯入",
+    "installPrompt": "請安裝 PromptFlow 外掛以匯入此提示詞",
+    "emptyState": {
+      "title": "暫無匹配結果",
+      "description": "嘗試其他搜尋詞，或成為第一個貢獻者"
+    },
+    "contribute": "貢獻提示詞"
+  },
+  "footer": {
+    "description": "PromptFlow 是你的專業 AI 提示詞管理工具。在 ChatGPT、Claude、DeepSeek 等工具中一鍵調用保存的提示詞。",
+    "product": {
+      "title": "產品",
+      "features": "功能特性",
+      "chromeExtension": "Chrome 外掛",
+      "community": "社區"
+    },
+    "resources": {
+      "title": "資源",
+      "blog": "部落格",
+      "documentation": "文件"
+    },
+    "company": {
+      "title": "公司",
+      "about": "關於我們",
+      "twitter": "Twitter",
+      "github": "GitHub"
+    },
+    "copyright": "© {year} PromptFlow. 保留所有權利。",
+    "privacy": "隱私政策",
+    "terms": "服務條款"
+  },
+  "localeSwitcher": {
+    "label": "語言",
+    "zh": "中文",
+    "en": "English",
+    "zh-Hant": "繁體中文"
+  }
+}

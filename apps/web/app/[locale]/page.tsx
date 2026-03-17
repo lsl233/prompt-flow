@@ -1,213 +1,367 @@
 import React from "react";
 import Link from "next/link";
 import {
+  Command,
+  FolderSearch,
+  Monitor,
+  PenTool,
+  Code2,
+  BarChart3,
+  Heart,
   ArrowRight,
-  CheckCircle2,
-  Zap,
-  Folder,
-  Share2,
   Chrome,
 } from "lucide-react";
-import { Button } from "@/components/Button";
 import { getTranslations } from "next-intl/server";
-import { LocaleImage } from "@/components/LocaleImage";
+import { ImportButton } from "@/components/ImportButton";
+import { getAllPrompts } from "@/lib/community-prompts";
 
 export default async function HomePage() {
   const t = await getTranslations("home");
+  const communityT = await getTranslations("community");
+  const prompts = getAllPrompts().slice(0, 3);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col min-h-screen bg-[var(--color-bg-primary)]">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-white pt-24 pb-32 sm:pt-32 sm:pb-40">
-        <div className="absolute inset-x-0 top-0 h-96 bg-linear-to-b from-neutral-100 to-transparent" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="inline-flex items-center rounded-full border border-neutral-200 bg-white px-3 py-1 text-sm font-medium text-neutral-600 mb-8 shadow-sm">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-500 mr-2"></span>
-            {t("badge")}
+      <section className="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-28">
+        {/* Grid Background */}
+        <div className="absolute inset-0 grid-pattern opacity-50" />
+
+        {/* Gradient Orbs */}
+        <div className="absolute top-20 left-1/4 w-96 h-96 bg-[var(--color-accent-primary)] opacity-5 blur-[128px] rounded-full" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[var(--color-accent-secondary)] opacity-5 blur-[100px] rounded-full" />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border-subtle)] mb-8 reveal">
+              <span className="w-2 h-2 rounded-full bg-[var(--color-accent-primary)] animate-pulse" />
+              <span className="text-sm text-[var(--color-text-secondary)]">{t("hero.badge")}</span>
+            </div>
+
+            {/* Title */}
+            <h1 className="mx-auto max-w-4xl text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4 reveal reveal-delay-1">
+              <span className="text-[var(--color-text-primary)]">{t("hero.title")}</span>
+            </h1>
+
+            {/* Subtitle with gradient */}
+            <p className="text-xl sm:text-2xl font-medium gradient-text mb-6 reveal reveal-delay-2">
+              {t("hero.subtitle")}
+            </p>
+
+            {/* Description */}
+            <p className="mx-auto max-w-2xl text-base sm:text-lg text-[var(--color-text-secondary)] mb-10 reveal reveal-delay-3">
+              {t("hero.description")}
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 reveal reveal-delay-4">
+              <a
+                href="#"
+                className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold btn-glow"
+              >
+                <Chrome className="w-5 h-5" />
+                {t("hero.install")}
+              </a>
+              <a
+                href="#demo"
+                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] border border-[var(--color-border-subtle)] hover:border-[var(--color-border-strong)] transition-all"
+              >
+                {t("hero.demo")}
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+
+            {/* Product Demo Window */}
+            <div className="mt-16 mx-auto max-w-5xl reveal reveal-delay-4">
+              <div className="relative rounded-2xl overflow-hidden border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] shadow-2xl">
+                {/* Window Header */}
+                <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--color-border-subtle)] bg-[var(--color-bg-tertiary)]">
+                  <div className="flex gap-1.5">
+                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                  </div>
+                  <div className="flex-1 text-center">
+                    <span className="text-xs text-[var(--color-text-tertiary)] font-mono">promptflow.js — -zsh</span>
+                  </div>
+                  <div className="w-16" />
+                </div>
+
+                {/* Demo Content */}
+                <div className="relative aspect-[16/9] bg-[var(--color-bg-primary)] p-8">
+                  {/* Simulated Command Palette */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg">
+                    <div className="rounded-xl border border-[var(--color-border-strong)] bg-[var(--color-bg-secondary)] shadow-2xl overflow-hidden">
+                      {/* Search Bar */}
+                      <div className="flex items-center gap-3 px-4 py-3 border-b border-[var(--color-border-subtle)]">
+                        <Command className="w-5 h-5 text-[var(--color-text-tertiary)]" />
+                        <span className="text-[var(--color-text-tertiary)] font-mono text-sm">Search prompts...</span>
+                        <div className="ml-auto flex gap-1">
+                          <span className="key-cap">⌘</span>
+                          <span className="key-cap">K</span>
+                        </div>
+                      </div>
+                      {/* Prompt List */}
+                      <div className="p-2">
+                        {["Code Review Assistant", "小红书文案生成器", "数据分析 Prompt"].map((item, i) => (
+                          <div
+                            key={item}
+                            className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
+                              i === 0 ? "bg-[var(--color-accent-primary)]/10" : ""
+                            }`}
+                          >
+                            <div className={`w-2 h-2 rounded-full ${
+                              i === 0 ? "bg-[var(--color-accent-primary)]" : "bg-[var(--color-text-tertiary)]"
+                            }`} />
+                            <span className={`text-sm font-mono ${
+                              i === 0 ? "text-[var(--color-accent-primary)]" : "text-[var(--color-text-secondary)]"
+                            }`}>
+                              {item}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Background Elements */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-20">
+                    <div className="text-6xl font-mono text-[var(--color-accent-primary)]">&gt;_</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Divider */}
+      <div className="section-divider" />
+
+      {/* Features Section */}
+      <section id="features" className="py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] mb-4">
+              {t("features.title")}
+            </h2>
+            <p className="text-lg text-[var(--color-text-secondary)]">{t("features.subtitle")}</p>
           </div>
 
-          <h1 className="mx-auto max-w-4xl text-5xl font-bold tracking-tight text-neutral-900 sm:text-7xl mb-6">
-            {t("title")}
-          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Feature 1 */}
+            <div className="group spotlight-border rounded-2xl p-8 card-lift">
+              <div className="w-12 h-12 rounded-xl bg-[var(--color-accent-primary)]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Command className="w-6 h-6 text-[var(--color-accent-primary)]" />
+              </div>
+              <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+                {t("features.items.quickAccess.title")}
+              </h3>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                {t("features.items.quickAccess.description")}
+              </p>
+            </div>
 
-          <p className="mx-auto max-w-2xl text-lg text-neutral-600 mb-10 leading-relaxed">
-            {t("description")}
-          </p>
+            {/* Feature 2 */}
+            <div className="group spotlight-border rounded-2xl p-8 card-lift">
+              <div className="w-12 h-12 rounded-xl bg-[var(--color-accent-secondary)]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <FolderSearch className="w-6 h-6 text-[var(--color-accent-secondary)]" />
+              </div>
+              <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+                {t("features.items.smartOrg.title")}
+              </h3>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                {t("features.items.smartOrg.description")}
+              </p>
+            </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="w-full sm:w-auto gap-2">
-              <Chrome className="h-5 w-5" />
-              {t("installChrome")}
-            </Button>
-            <Link href="/prompts" className="w-full sm:w-auto">
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto gap-2"
-              >
-                {t("explorePrompts")}
-                <ArrowRight className="h-4 w-4" />
-              </Button>
+            {/* Feature 3 */}
+            <div className="group spotlight-border rounded-2xl p-8 card-lift">
+              <div className="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Monitor className="w-6 h-6 text-purple-500" />
+              </div>
+              <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+                {t("features.items.crossPlatform.title")}
+              </h3>
+              <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                {t("features.items.crossPlatform.description")}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section Divider */}
+      <div className="section-divider" />
+
+      {/* Community Section */}
+      <section className="py-24 lg:py-32">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-12">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] mb-4">
+                {t("community.title")}
+              </h2>
+              <p className="text-lg text-[var(--color-text-secondary)]">{t("community.subtitle")}</p>
+            </div>
+            <Link
+              href="/community"
+              className="inline-flex items-center gap-2 text-[var(--color-accent-primary)] hover:text-[var(--color-accent-secondary)] font-medium transition-colors"
+            >
+              {t("community.browseAll")}
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          {/* Product Screenshot */}
-          <div className="mt-20 mx-auto max-w-5xl rounded-2xl border border-neutral-200 bg-white shadow-2xl overflow-hidden ring-1 ring-neutral-900/5">
-            <div className="h-12 border-b border-neutral-200 bg-neutral-50 flex items-center px-4 gap-2">
-              <div className="flex gap-1.5">
-                <div className="h-3 w-3 rounded-full bg-red-400"></div>
-                <div className="h-3 w-3 rounded-full bg-amber-400"></div>
-                <div className="h-3 w-3 rounded-full bg-emerald-400"></div>
-              </div>
+          {prompts.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {prompts.map((prompt) => (
+                <div
+                  key={prompt.id}
+                  className="group spotlight-border rounded-2xl p-6 flex flex-col"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <span className="px-3 py-1 rounded-full text-xs font-medium bg-[var(--color-bg-tertiary)] text-[var(--color-text-tertiary)] border border-[var(--color-border-subtle)]">
+                      {communityT(`categories.${prompt.category}`)}
+                    </span>
+                    <div className="flex items-center gap-1 text-[var(--color-text-tertiary)]">
+                      <Heart className="w-4 h-4" />
+                      <span className="text-sm">{prompt.likes}</span>
+                    </div>
+                  </div>
+                  <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
+                    {prompt.title}
+                  </h3>
+                  <p className="text-sm text-[var(--color-text-tertiary)] line-clamp-2 mb-4 flex-grow">
+                    {prompt.content}
+                  </p>
+                  <div className="flex items-center justify-between pt-4 border-t border-[var(--color-border-subtle)]">
+                    <span className="text-sm text-[var(--color-text-tertiary)]">
+                      {t("community.by")} {prompt.author}
+                    </span>
+                    <ImportButton
+                      promptId={prompt.id}
+                      t={{
+                        import: t("community.import"),
+                        importSuccess: t("community.importSuccess"),
+                        installPrompt: t("community.installPrompt"),
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="relative aspect-[16/9] bg-neutral-100">
-              <LocaleImage
-                name="hero"
-                alt={t("screenshotAlt")}
-                fill
-                className="object-cover"
-                priority
-              />
+          ) : (
+            <div className="text-center py-16 border border-dashed border-[var(--color-border-subtle)] rounded-2xl">
+              <p className="text-[var(--color-text-tertiary)]">{t("community.emptyState")}</p>
             </div>
-          </div>
+          )}
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 bg-neutral-50">
+      {/* Section Divider */}
+      <div className="section-divider" />
+
+      {/* Use Cases Section */}
+      <section className="py-24 lg:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
-              {t("features.title")}
+            <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] mb-4">
+              {t("useCases.title")}
             </h2>
-            <p className="mt-4 text-lg text-neutral-600">
-              {t("features.subtitle")}
+            <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+              {t("useCases.subtitle")}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <FeatureCard
-              icon={<Zap className="h-6 w-6 text-amber-500" />}
-              title={t("features.saveInstantly.title")}
-              description={t("features.saveInstantly.description")}
-            />
-            <FeatureCard
-              icon={<CheckCircle2 className="h-6 w-6 text-emerald-500" />}
-              title={t("features.insertOneClick.title")}
-              description={t("features.insertOneClick.description")}
-            />
-            <FeatureCard
-              icon={<Folder className="h-6 w-6 text-blue-500" />}
-              title={t("features.organize.title")}
-              description={t("features.organize.description")}
-            />
-            <FeatureCard
-              icon={<Share2 className="h-6 w-6 text-purple-500" />}
-              title={t("features.share.title")}
-              description={t("features.share.description")}
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="py-24 bg-white border-t border-neutral-200">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl mb-8">
-                {t("howItWorks.title")}
-              </h2>
-
-              <div className="space-y-8">
-                <Step
-                  number="1"
-                  title={t("howItWorks.step1.title")}
-                  description={t("howItWorks.step1.description")}
-                />
-                <Step
-                  number="2"
-                  title={t("howItWorks.step2.title")}
-                  description={t("howItWorks.step2.description")}
-                />
-                <Step
-                  number="3"
-                  title={t("howItWorks.step3.title")}
-                  description={t("howItWorks.step3.description")}
-                />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Creator */}
+            <div className="relative p-8 rounded-2xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-subtle)] overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center mb-6">
+                  <PenTool className="w-7 h-7 text-pink-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+                  {t("useCases.cases.creator.title")}
+                </h3>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                  {t("useCases.cases.creator.description")}
+                </p>
               </div>
             </div>
 
-            <div className="relative bg-neutral-100 rounded-3xl p-8 h-full flex items-center justify-center border border-neutral-200">
-              <LocaleImage
-                name="demo"
-                alt={t("demoAlt")}
-                fill
-                className="object-contain"
-              />
+            {/* Developer */}
+            <div className="relative p-8 rounded-2xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-subtle)] overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center mb-6">
+                  <Code2 className="w-7 h-7 text-blue-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+                  {t("useCases.cases.developer.title")}
+                </h3>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                  {t("useCases.cases.developer.description")}
+                </p>
+              </div>
+            </div>
+
+            {/* Operator */}
+            <div className="relative p-8 rounded-2xl bg-[var(--color-bg-secondary)] border border-[var(--color-border-subtle)] overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="relative">
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center mb-6">
+                  <BarChart3 className="w-7 h-7 text-amber-400" />
+                </div>
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-3">
+                  {t("useCases.cases.operator.title")}
+                </h3>
+                <p className="text-[var(--color-text-secondary)] leading-relaxed">
+                  {t("useCases.cases.operator.description")}
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 bg-neutral-900 text-white text-center">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
+      {/* Bottom CTA Section */}
+      <section className="py-24 lg:py-32 relative overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-[var(--color-bg-secondary)]" />
+        <div className="absolute inset-0 grid-pattern opacity-30" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--color-accent-primary)] opacity-5 blur-[150px] rounded-full" />
+
+        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] mb-4">
             {t("cta.title")}
           </h2>
-          <p className="text-lg text-neutral-400 mb-10">{t("cta.subtitle")}</p>
-          <Button
-            size="lg"
-            className="bg-white text-neutral-900 hover:bg-neutral-100 gap-2"
-          >
-            <Chrome className="h-5 w-5" />
-            {t("cta.button")}
-          </Button>
+          <p className="text-lg text-[var(--color-text-secondary)] mb-10">
+            {t("cta.subtitle")}
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="#"
+              className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold btn-glow w-full sm:w-auto justify-center"
+            >
+              <Chrome className="w-5 h-5" />
+              {t("cta.chrome")}
+            </a>
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-medium text-[var(--color-text-primary)] bg-[var(--color-bg-tertiary)] border border-[var(--color-border-subtle)] hover:border-[var(--color-border-strong)] transition-all w-full sm:w-auto justify-center"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+              </svg>
+              {t("cta.firefox")}
+            </a>
+          </div>
         </div>
       </section>
-    </div>
-  );
-}
-
-function FeatureCard({
-  icon,
-  title,
-  description,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="bg-white p-6 rounded-2xl border border-neutral-200 shadow-sm transition-all hover:shadow-md">
-      <div className="h-12 w-12 rounded-xl bg-neutral-50 flex items-center justify-center border border-neutral-100 mb-6">
-        {icon}
-      </div>
-      <h3 className="text-lg font-semibold text-neutral-900 mb-2">{title}</h3>
-      <p className="text-neutral-500 text-sm leading-relaxed">{description}</p>
-    </div>
-  );
-}
-
-function Step({
-  number,
-  title,
-  description,
-}: {
-  number: string;
-  title: string;
-  description: string;
-}) {
-  return (
-    <div className="flex gap-4">
-      <div className="shrink-0 flex h-10 w-10 items-center justify-center rounded-full bg-neutral-900 text-white font-semibold">
-        {number}
-      </div>
-      <div>
-        <h3 className="text-xl font-semibold text-neutral-900 mb-2">{title}</h3>
-        <p className="text-neutral-500 leading-relaxed">{description}</p>
-      </div>
     </div>
   );
 }

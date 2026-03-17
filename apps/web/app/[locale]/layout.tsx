@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import "./globals.css";
-import Navbar from "./_components/Navbar";
+import { Navbar } from "./_components/Navbar";
 import Footer from "./_components/Footer";
 
 type Locale = (typeof routing.locales)[number];
@@ -20,17 +20,29 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
+    title: t("title"),
+    description: t("description"),
     alternates: {
-      canonical: "/",
+      canonical: `/${locale}`,
       languages: {
         en: "/en",
         "zh-CN": "/zh",
+        "zh-TW": "/zh-Hant",
       },
     },
     openGraph: {
-      locale: locale === "zh" ? "zh_CN" : "en_US",
+      title: t("title"),
+      description: t("description"),
+      locale: locale === "zh" ? "zh_CN" : locale === "zh-Hant" ? "zh_TW" : "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
     },
   };
 }
@@ -43,7 +55,7 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  console.log("--------------");
+
   // Ensure that the incoming `locale` is valid
   if (!routing.locales.includes(locale as Locale)) {
     notFound();
@@ -54,10 +66,19 @@ export default async function LocaleLayout({
 
   // Get messages for the current locale
   const messages = await getMessages();
+  const t = await getTranslations("nav");
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <Navbar />
+      <Navbar
+        t={{
+          brand: t("brand"),
+          features: t("features"),
+          community: t("community"),
+          install: t("install"),
+          github: t("github"),
+        }}
+      />
       <main className="flex-grow">{children}</main>
       <Footer />
     </NextIntlClientProvider>
