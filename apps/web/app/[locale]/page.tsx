@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { ImportButton } from "@/components/ImportButton";
+import { LocaleImage } from "@/components/LocaleImage";
 import { getAllPrompts } from "@/lib/community-prompts";
 
 export default async function HomePage() {
@@ -36,12 +37,16 @@ export default async function HomePage() {
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-bg-secondary)] border border-[var(--color-border-subtle)] mb-8 reveal">
               <span className="w-2 h-2 rounded-full bg-[var(--color-accent-primary)] animate-pulse" />
-              <span className="text-sm text-[var(--color-text-secondary)]">{t("hero.badge")}</span>
+              <span className="text-sm text-[var(--color-text-secondary)]">
+                {t("hero.badge")}
+              </span>
             </div>
 
             {/* Title */}
             <h1 className="mx-auto max-w-4xl text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-4 reveal reveal-delay-1">
-              <span className="text-[var(--color-text-primary)]">{t("hero.title")}</span>
+              <span className="text-[var(--color-text-primary)]">
+                {t("hero.title")}
+              </span>
             </h1>
 
             {/* Subtitle with gradient */}
@@ -83,51 +88,23 @@ export default async function HomePage() {
                     <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
                   </div>
                   <div className="flex-1 text-center">
-                    <span className="text-xs text-[var(--color-text-tertiary)] font-mono">promptflow.js — -zsh</span>
+                    <span className="text-xs text-[var(--color-text-tertiary)] font-mono">
+                      promptflow.js — -zsh
+                    </span>
                   </div>
                   <div className="w-16" />
                 </div>
 
-                {/* Demo Content */}
-                <div className="relative aspect-[16/9] bg-[var(--color-bg-primary)] p-8">
-                  {/* Simulated Command Palette */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg">
-                    <div className="rounded-xl border border-[var(--color-border-strong)] bg-[var(--color-bg-secondary)] shadow-2xl overflow-hidden">
-                      {/* Search Bar */}
-                      <div className="flex items-center gap-3 px-4 py-3 border-b border-[var(--color-border-subtle)]">
-                        <Command className="w-5 h-5 text-[var(--color-text-tertiary)]" />
-                        <span className="text-[var(--color-text-tertiary)] font-mono text-sm">Search prompts...</span>
-                        <div className="ml-auto flex gap-1">
-                          <span className="key-cap">⌘</span>
-                          <span className="key-cap">K</span>
-                        </div>
-                      </div>
-                      {/* Prompt List */}
-                      <div className="p-2">
-                        {["Code Review Assistant", "小红书文案生成器", "数据分析 Prompt"].map((item, i) => (
-                          <div
-                            key={item}
-                            className={`flex items-center gap-3 px-3 py-2 rounded-lg ${
-                              i === 0 ? "bg-[var(--color-accent-primary)]/10" : ""
-                            }`}
-                          >
-                            <div className={`w-2 h-2 rounded-full ${
-                              i === 0 ? "bg-[var(--color-accent-primary)]" : "bg-[var(--color-text-tertiary)]"
-                            }`} />
-                            <span className={`text-sm font-mono ${
-                              i === 0 ? "text-[var(--color-accent-primary)]" : "text-[var(--color-text-secondary)]"
-                            }`}>
-                              {item}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Background Elements */}
-                  <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                    <div className="text-6xl font-mono text-[var(--color-accent-primary)]">&gt;_</div>
+                {/* Demo Content - Product Screenshot */}
+                <div className="aspect-[16/9] bg-[var(--color-bg-primary)] p-2">
+                  <div className="relative aspect-[16/9]">
+                    <LocaleImage
+                      name="hero"
+                      alt={t("hero.screenshotAlt")}
+                      fill
+                      className="object-cover"
+                      priority
+                    />
                   </div>
                 </div>
               </div>
@@ -146,7 +123,9 @@ export default async function HomePage() {
             <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] mb-4">
               {t("features.title")}
             </h2>
-            <p className="text-lg text-[var(--color-text-secondary)]">{t("features.subtitle")}</p>
+            <p className="text-lg text-[var(--color-text-secondary)]">
+              {t("features.subtitle")}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -203,7 +182,9 @@ export default async function HomePage() {
               <h2 className="text-3xl sm:text-4xl font-bold text-[var(--color-text-primary)] mb-4">
                 {t("community.title")}
               </h2>
-              <p className="text-lg text-[var(--color-text-secondary)]">{t("community.subtitle")}</p>
+              <p className="text-lg text-[var(--color-text-secondary)]">
+                {t("community.subtitle")}
+              </p>
             </div>
             <Link
               href="/community"
@@ -254,7 +235,9 @@ export default async function HomePage() {
             </div>
           ) : (
             <div className="text-center py-16 border border-dashed border-[var(--color-border-subtle)] rounded-2xl">
-              <p className="text-[var(--color-text-tertiary)]">{t("community.emptyState")}</p>
+              <p className="text-[var(--color-text-tertiary)]">
+                {t("community.emptyState")}
+              </p>
             </div>
           )}
         </div>

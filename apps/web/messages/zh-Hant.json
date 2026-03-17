@@ -17,7 +17,8 @@
       "subtitle": "一鍵調用 · 智能分類 · 跨平台支援",
       "description": "在任意 AI 頁面按 ⌘K，瞬間調出你的提示詞庫。支援 ChatGPT、Claude、DeepSeek、Kimi 等主流平台，讓每次 AI 對話都高效精準。",
       "install": "免費安裝",
-      "demo": "查看演示"
+      "demo": "查看演示",
+      "screenshotAlt": "PromptFlow 產品介面，展示 ⌘K 快速喚起提示詞面板"
     },
     "features": {
       "title": "核心功能",

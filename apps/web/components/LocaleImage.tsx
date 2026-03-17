@@ -1,7 +1,9 @@
+"use client";
+
 import Image from "next/image";
-import { getLocale } from "next-intl/server";
-import { existsSync } from "fs";
-import { join } from "path";
+import { useTheme } from "next-themes";
+import { useLocale } from "next-intl";
+import { useEffect, useState } from "react";
 
 interface LocaleImageProps {
   /** 图片基础名称（不含扩展名和语言后缀） */
@@ -10,8 +12,6 @@ interface LocaleImageProps {
   ext?: string;
   /** 图片目录，默认 /screen-short */
   dir?: string;
-  /** 兜底语言，默认 en */
-  fallback?: string;
   /** 图片 alt 文本 */
   alt: string;
   /** 是否优先加载 */
@@ -24,45 +24,79 @@ interface LocaleImageProps {
   height?: number;
   /** 自定义 className */
   className?: string;
+  /** 是否支持主题切换，默认 true */
+  themeAware?: boolean;
 }
 
 /**
- * 本地化图片组件
+ * 本地化图片组件（支持明暗主题）
  *
- * 根据当前语言自动选择对应图片：
- * - /screen-short/{name}.{locale}.{ext}
- * - 不存在则使用 fallback 语言版本
+ * 根据当前语言和主题自动选择对应图片，优先级：
+ * 1. /screen-short/{name}.{locale}.{theme}.{ext} (语言+主题版本，如 hero.zh.dark.png)
+ * 2. /screen-short/{name}.{locale}.{ext} (语言特定版本，如 hero.zh.png)
+ * 3. /screen-short/{name}.{theme}.{ext} (主题特定版本，如 hero.dark.png)
+ * 4. /screen-short/{name}.{ext} (通用版本，如 hero.png)
  *
  * 使用示例：
  * ```tsx
  * <LocaleImage name="hero" alt="产品截图" fill className="object-cover" />
- * // 渲染为：/screen-short/hero.zh.png 或 /screen-short/hero.en.png
  * ```
  */
-export async function LocaleImage({
+export function LocaleImage({
   name,
   ext = "png",
   dir = "/screen-short",
-  fallback = "en",
   alt,
   priority = false,
   fill = false,
   width,
   height,
   className,
+  themeAware = true,
 }: LocaleImageProps) {
-  const locale = await getLocale();
+  const locale = useLocale();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [currentSrcIndex, setCurrentSrcIndex] = useState(0);
 
-  // 构建图片路径
-  const localizedPath = `${dir}/${name}.${locale}.${ext}`;
-  const fallbackPath = `${dir}/${name}.${fallback}.${ext}`;
+  // 避免 hydration 不匹配
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  // 检查本地文件是否存在（仅在服务端构建时检查）
-  const publicDir = join(process.cwd(), "public");
-  const localFilePath = join(publicDir, localizedPath);
-  const hasLocalFile = existsSync(localFilePath);
+  // 构建候选路径列表
+  const getCandidatePaths = () => {
+    const paths: string[] = [];
+    const theme = themeAware ? resolvedTheme : undefined;
 
-  const src = hasLocalFile ? localizedPath : fallbackPath;
+    if (theme) {
+      // 优先级 1: 语言+主题组合
+      paths.push(`${dir}/${name}.${locale}.${theme}.${ext}`);
+    }
+    // 优先级 2: 仅语言
+    paths.push(`${dir}/${name}.${locale}.${ext}`);
+
+    if (theme) {
+      // 优先级 3: 仅主题
+      paths.push(`${dir}/${name}.${theme}.${ext}`);
+    }
+    // 优先级 4: 通用版本
+    paths.push(`${dir}/${name}.${ext}`);
+
+    return paths;
+  };
+
+  const candidatePaths = getCandidatePaths();
+
+  // 未挂载时使用通用路径
+  const src = mounted ? candidatePaths[currentSrcIndex] : `${dir}/${name}.${ext}`;
+
+  // 图片加载失败时尝试下一个候选
+  const handleError = () => {
+    if (currentSrcIndex < candidatePaths.length - 1) {
+      setCurrentSrcIndex(prev => prev + 1);
+    }
+  };
 
   return (
     <Image
@@ -73,6 +107,7 @@ export async function LocaleImage({
       height={fill ? undefined : height}
       priority={priority}
       className={className}
+      onError={handleError}
     />
   );
 }
