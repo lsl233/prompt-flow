@@ -1,9 +1,11 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
-import { Command, Menu, X, Github } from 'lucide-react';
-import LocaleSwitcher from './LocaleSwitcher';
+import Link from "next/link";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import LocaleSwitcher from "./LocaleSwitcher";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 
 interface NavbarProps {
   t: {
@@ -19,9 +21,9 @@ export function Navbar({ t }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToFeatures = () => {
-    const featuresSection = document.getElementById('features');
+    const featuresSection = document.getElementById("features");
     if (featuresSection) {
-      featuresSection.scrollIntoView({ behavior: 'smooth' });
+      featuresSection.scrollIntoView({ behavior: "smooth" });
     }
     setMobileMenuOpen(false);
   };
@@ -31,8 +33,14 @@ export function Navbar({ t }: NavbarProps) {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)] text-[var(--color-bg-primary)] shadow-lg shadow-[var(--color-accent-primary)]/20">
-            <Command className="h-5 w-5" />
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl overflow-hidden">
+            <Image
+              src="/logo.svg"
+              alt="PromptFlow"
+              width={36}
+              height={36}
+              className="w-full h-full"
+            />
           </div>
           <span className="text-lg font-bold text-[var(--color-text-primary)] tracking-tight">
             {t.brand}
@@ -62,23 +70,27 @@ export function Navbar({ t }: NavbarProps) {
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <div className="hidden sm:block">
             <LocaleSwitcher />
           </div>
+          <ThemeSwitcher />
           <a
             href="#"
             className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm btn-glow"
           >
             {t.install}
           </a>
-
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
           </button>
         </div>
       </div>
@@ -114,7 +126,8 @@ export function Navbar({ t }: NavbarProps) {
                 {t.install}
               </a>
             </div>
-            <div className="pt-2 sm:hidden">
+            <div className="flex items-center justify-between pt-3 border-t border-[var(--color-border-subtle)]">
+              <ThemeSwitcher />
               <LocaleSwitcher />
             </div>
           </div>

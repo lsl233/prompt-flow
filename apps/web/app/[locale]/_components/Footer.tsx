@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Command } from 'lucide-react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 export default function Footer() {
@@ -21,8 +21,14 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
             <Link href="/" className="flex items-center gap-2 font-semibold text-[var(--color-text-primary)] mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--color-accent-primary)] to-[var(--color-accent-secondary)] text-[var(--color-bg-primary)]">
-                <Command className="h-4 w-4" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl overflow-hidden">
+                <Image
+                  src="/logo.svg"
+                  alt="PromptFlow"
+                  width={32}
+                  height={32}
+                  className="w-full h-full"
+                />
               </div>
               <span className="text-lg">{navT('brand')}</span>
             </Link>

@@ -7,6 +7,7 @@ import { routing } from "@/i18n/routing";
 import "./globals.css";
 import { Navbar } from "./_components/Navbar";
 import Footer from "./_components/Footer";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 type Locale = (typeof routing.locales)[number];
 
@@ -70,17 +71,24 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <Navbar
-        t={{
-          brand: t("brand"),
-          features: t("features"),
-          community: t("community"),
-          install: t("install"),
-          github: t("github"),
-        }}
-      />
-      <main className="flex-grow">{children}</main>
-      <Footer />
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="dark"
+        enableSystem={false}
+        disableTransitionOnChange={false}
+      >
+        <Navbar
+          t={{
+            brand: t("brand"),
+            features: t("features"),
+            community: t("community"),
+            install: t("install"),
+            github: t("github"),
+          }}
+        />
+        <main className="flex-grow">{children}</main>
+        <Footer />
+      </ThemeProvider>
     </NextIntlClientProvider>
   );
 }

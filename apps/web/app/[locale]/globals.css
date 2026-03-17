@@ -4,7 +4,7 @@
 @import "../../../../packages/ui/src/styles/tailwind-base.css";
 
 @theme {
-  /* Custom color palette - Dark Developer Theme */
+  /* Dark theme (default) */
   --color-bg-primary: #0a0a0b;
   --color-bg-secondary: #121214;
   --color-bg-tertiary: #1a1a1e;
@@ -26,6 +26,25 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
+/* Light theme overrides */
+html.light {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8f9fa;
+  --color-bg-tertiary: #f1f3f5;
+  --color-bg-elevated: #e9ecef;
+
+  --color-accent-primary: #0d9488;
+  --color-accent-secondary: #0891b2;
+  --color-accent-glow: rgba(13, 148, 136, 0.15);
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-tertiary: #9ca3af;
+
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-border-strong: rgba(0, 0, 0, 0.12);
+}
+
 /* Base styles */
 html {
   scroll-behavior: smooth;
@@ -37,9 +56,10 @@ body {
   color: var(--color-text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Dark */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -56,6 +76,15 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-tertiary);
+}
+
+/* Light theme scrollbar */
+html.light ::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+}
+
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
 }
 
 /* Selection color */
@@ -75,6 +104,7 @@ body {
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border-subtle);
   overflow: hidden;
+  transition: border-color 0.3s ease;
 }
 
 .spotlight-border::before {
@@ -85,7 +115,7 @@ body {
   padding: 1px;
   background: radial-gradient(
     800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(0, 212, 170, 0.4),
+    rgba(13, 148, 136, 0.4),
     transparent 40%
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -115,7 +145,11 @@ body {
 }
 
 .glow-text {
-  text-shadow: 0 0 40px rgba(0, 212, 170, 0.5);
+  text-shadow: 0 0 40px rgba(13, 148, 136, 0.5);
+}
+
+html.light .glow-text {
+  text-shadow: 0 0 40px rgba(13, 148, 136, 0.3);
 }
 
 /* Animated gradient text */
@@ -215,11 +249,15 @@ body {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
+html.light .card-lift:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
 /* Primary button glow */
 .btn-glow {
   position: relative;
   background: var(--color-accent-primary);
-  color: var(--color-bg-primary);
+  color: white;
   transition: all 0.3s ease;
 }
 
@@ -241,7 +279,7 @@ body {
 
 .btn-glow:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 30px rgba(0, 212, 170, 0.3);
+  box-shadow: 0 8px 30px rgba(13, 148, 136, 0.3);
 }
 
 /* Section divider with gradient */

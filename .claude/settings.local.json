@@ -18,7 +18,9 @@
       "Bash(head -20 /Users/xxx/Code/prompt-flow/apps/web/dist/en/index.html 2>/dev/null || head -20 /Users/xxx/Code/prompt-flow/apps/web/.next/server/app/en.html 2>/dev/null || find /Users/xxx/Code/prompt-flow/apps/web/.next -name \"*.html\" | head -5)",
       "Bash(find /Users/xxx/Code/prompt-flow/apps/web-extension -name \"manifest*\" -o -name \"wxt.config*\" 2>/dev/null | head -10)",
       "Bash(git diff:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }
