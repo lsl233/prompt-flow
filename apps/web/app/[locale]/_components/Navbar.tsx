@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import LocaleSwitcher from "./LocaleSwitcher";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import { Link } from "@/i18n/navigation";
 
 interface NavbarProps {
   t: {
@@ -19,14 +19,6 @@ interface NavbarProps {
 
 export function Navbar({ t }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const scrollToFeatures = () => {
-    const featuresSection = document.getElementById("features");
-    if (featuresSection) {
-      featuresSection.scrollIntoView({ behavior: "smooth" });
-    }
-    setMobileMenuOpen(false);
-  };
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-[var(--color-border-subtle)] bg-[var(--color-bg-primary)]/80 backdrop-blur-xl">

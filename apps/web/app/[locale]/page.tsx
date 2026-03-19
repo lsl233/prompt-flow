@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import {
   Command,
   FolderSearch,
@@ -15,6 +14,7 @@ import { getTranslations } from "next-intl/server";
 import { ImportButton } from "@/components/ImportButton";
 import { LocaleImage } from "@/components/LocaleImage";
 import { getAllPrompts } from "@/lib/community-prompts";
+import { Link } from "@/i18n/navigation";
 
 export default async function HomePage() {
   const t = await getTranslations("home");
@@ -23,6 +23,26 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-[var(--color-bg-primary)]">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: "PromptFlow",
+            applicationCategory: "BrowserApplication",
+            operatingSystem: "Chrome, Firefox, Edge",
+            description: t("hero.description"),
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
+            },
+          }),
+        }}
+      />
+
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-24 pb-20 lg:pt-32 lg:pb-28">
         {/* Grid Background */}

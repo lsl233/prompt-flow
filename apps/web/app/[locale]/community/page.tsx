@@ -1,24 +1,31 @@
 import React from "react";
-import Link from "next/link";
 import { Search, Heart, ArrowLeft, Sparkles } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import { ImportButton } from "@/components/ImportButton";
 import { getAllPrompts } from "@/lib/community-prompts";
 import type { CommunityPrompt } from "@/types/prompt";
+import type { Locale } from "@/i18n/routing";
+import { buildPageMetadata } from "@/lib/seo";
+import { Link } from "@/i18n/navigation";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("community.metadata");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({
+    locale,
+    namespace: "community.metadata",
+  });
 
-  return {
+  return buildPageMetadata({
+    locale: locale as Locale,
+    pathname: "/community",
     title: t("title"),
     description: t("description"),
-    openGraph: {
-      title: t("title"),
-      description: t("description"),
-      type: "website",
-    },
-  };
+  });
 }
 
 export default async function CommunityPage() {

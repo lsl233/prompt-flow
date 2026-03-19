@@ -8,6 +8,7 @@ import "./globals.css";
 import { Navbar } from "./_components/Navbar";
 import Footer from "./_components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { buildPageMetadata } from "@/lib/seo";
 
 type Locale = (typeof routing.locales)[number];
 
@@ -23,29 +24,12 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "metadata" });
 
-  return {
+  return buildPageMetadata({
+    locale: locale as Locale,
+    pathname: "/",
     title: t("title"),
     description: t("description"),
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        en: "/en",
-        "zh-CN": "/zh",
-        "zh-TW": "/zh-Hant",
-      },
-    },
-    openGraph: {
-      title: t("title"),
-      description: t("description"),
-      locale: locale === "zh" ? "zh_CN" : locale === "zh-Hant" ? "zh_TW" : "en_US",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: t("title"),
-      description: t("description"),
-    },
-  };
+  });
 }
 
 export default async function LocaleLayout({

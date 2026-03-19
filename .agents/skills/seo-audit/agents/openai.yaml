@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEO Audit"
+  short_description: "Review technical and content SEO"
+  default_prompt: "Use $seo-audit to review and fix SEO issues in this codebase, including metadata, multilingual content, URLs, images, and indexing behavior."

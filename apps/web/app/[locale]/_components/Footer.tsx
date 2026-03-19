@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 export default function Footer() {
   const t = useTranslations('footer');

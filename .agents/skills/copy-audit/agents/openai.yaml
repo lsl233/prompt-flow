@@ -1,0 +1,4 @@
+interface:
+  display_name: "Copy Audit"
+  short_description: "Review copy for SEO, product, and UX"
+  default_prompt: "Use $copy-audit to review and improve all user-facing copy in this project, including page text, metadata, form copy, CTA labels, and image alt/title text."

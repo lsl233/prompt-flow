@@ -44,7 +44,7 @@ interface LocaleImageProps {
  */
 export function LocaleImage({
   name,
-  ext = "png",
+  ext = "webp",
   dir = "/screen-short",
   alt,
   priority = false,
@@ -89,12 +89,14 @@ export function LocaleImage({
   const candidatePaths = getCandidatePaths();
 
   // 未挂载时使用通用路径
-  const src = mounted ? candidatePaths[currentSrcIndex] : `${dir}/${name}.${ext}`;
+  const src = mounted
+    ? candidatePaths[currentSrcIndex]
+    : `${dir}/${name}.${ext}`;
 
   // 图片加载失败时尝试下一个候选
   const handleError = () => {
     if (currentSrcIndex < candidatePaths.length - 1) {
-      setCurrentSrcIndex(prev => prev + 1);
+      setCurrentSrcIndex((prev) => prev + 1);
     }
   };
 
