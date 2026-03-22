@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "generate:locale-image-manifest": "node ./scripts/generate-locale-image-manifest.mjs",
+    "predev": "npm run generate:locale-image-manifest",
     "dev": "next dev",
+    "prebuild": "npm run generate:locale-image-manifest",
     "build": "next build",
     "start": "next start",
+    "prelint": "npm run generate:locale-image-manifest",
     "lint": "eslint"
   },
   "dependencies": {

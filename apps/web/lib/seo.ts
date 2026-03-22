@@ -35,7 +35,6 @@ export function getLanguageAlternates(pathname = "") {
   return {
     en: getLocalePath("en", pathname),
     "zh-CN": getLocalePath("zh", pathname),
-    "zh-TW": getLocalePath("zh-Hant", pathname),
     "x-default": getLocalePath("en", pathname),
   };
 }
@@ -44,8 +43,6 @@ export function getOpenGraphLocale(locale: Locale) {
   switch (locale) {
     case "zh":
       return "zh_CN";
-    case "zh-Hant":
-      return "zh_TW";
     default:
       return "en_US";
   }

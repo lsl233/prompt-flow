@@ -1,22 +1,22 @@
 {
   "metadata": {
-    "title": "PromptFlow - Professional AI Prompt Manager | One-Click Prompt Library",
-    "description": "PromptFlow is your professional AI prompt management tool. Press ⌘K on any AI platform like ChatGPT, Claude, DeepSeek to instantly access your saved prompts. Smart organization & cross-platform support."
+    "title": "PromptFlow - Access Your Prompt Library in Any AI Tool",
+    "description": "PromptFlow helps you organize and open your prompt library with ⌘K across ChatGPT, Claude, DeepSeek, Gemini, and other AI tools."
   },
   "nav": {
     "brand": "PromptFlow",
     "features": "Features",
     "community": "Community",
-    "install": "Install Free",
+    "install": "Add to Chrome",
     "github": "GitHub"
   },
   "home": {
     "hero": {
       "badge": "Supports ChatGPT, Claude, DeepSeek & 10+ AI platforms",
-      "title": "Professional AI Prompt Manager",
-      "subtitle": "One-Click Access · Smart Organization · Cross-Platform",
-      "description": "Press ⌘K on any AI page to instantly summon your prompt library. Supports ChatGPT, Claude, DeepSeek, Kimi and more. Make every AI conversation efficient and precise.",
-      "install": "Install Free",
+      "title": "Open Your Prompt Library Without Leaving the Chat",
+      "subtitle": "⌘K Access · Organized Prompts · Works Across AI Tools",
+      "description": "Press ⌘K on ChatGPT, Claude, DeepSeek, Gemini, and other AI tools to open your saved prompts in seconds. Keep your prompt library organized and ready to use.",
+      "install": "Add to Chrome",
       "demo": "Watch Demo",
       "browseCommunity": "Browse Community",
       "screenshotAlt": "PromptFlow product interface showing command palette quick access"
@@ -27,24 +27,24 @@
       "items": {
         "quickAccess": {
           "title": "⌘K Quick Access",
-          "description": "Press ⌘K on any AI page to instantly open the prompt panel. No tab switching needed, inspiration at your fingertips."
+          "description": "Open your prompt library from the page you're already on. No tab switching, no copy-paste between notes and chats."
         },
         "smartOrg": {
           "title": "Smart Organization",
-          "description": "Tags + folders dual-dimension management with full-text search. Locate any prompt in seconds, no matter how large your library."
+          "description": "Organize prompts with tags, folders, and search so you can find the right one quickly, even as your library grows."
         },
         "crossPlatform": {
-          "title": "Cross-Platform Support",
-          "description": "Perfectly compatible with ChatGPT, Claude, DeepSeek, Kimi, Gemini and 10+ major AI platforms."
+          "title": "Works Across AI Tools",
+          "description": "Use the same prompt library across ChatGPT, Claude, DeepSeek, Kimi, Gemini, and more."
         }
       }
     },
     "community": {
       "title": "Community Picks",
-      "subtitle": "Discover high-quality prompts from the community, import with one click to your library",
+      "subtitle": "Browse useful prompts shared by the community and add them to your prompt library in one click",
       "browseAll": "Browse Community →",
-      "import": "Import",
-      "importSuccess": "Imported",
+      "import": "Add to Library",
+      "importSuccess": "Added",
       "installPrompt": "Please install the PromptFlow extension to use this feature",
       "emptyState": "Be the first contributor",
       "by": "by"
@@ -59,28 +59,29 @@
         },
         "developer": {
           "title": "Developers",
-          "description": "Save code snippets, refactoring instructions, Code Review templates. Boost coding efficiency 10x."
+          "description": "Save debugging prompts, refactoring instructions, and code review checklists so you can reuse them when you need them."
         },
         "operator": {
           "title": "Operators",
-          "description": "Store data analysis prompts, report templates, user insight frameworks. Drive decisions with data."
+          "description": "Keep analysis prompts, report templates, and research frameworks in one place for repeatable work."
         }
       }
     },
     "cta": {
-      "title": "Start Free Today",
-      "subtitle": "Join thousands of users boosting their AI workflow efficiency",
+      "title": "Build a Prompt Library You Can Actually Reuse",
+      "subtitle": "Install the extension and open your saved prompts anywhere you work with AI",
       "chrome": "Add to Chrome",
       "browseCommunity": "Browse Community"
     }
   },
   "community": {
     "metadata": {
-      "title": "Community Prompts | PromptFlow",
-      "description": "Discover the best AI prompts shared by the community. Covering writing, coding, image generation and more. One-click import to your PromptFlow library."
+      "title": "Community Prompt Library | PromptFlow",
+      "description": "Explore writing, coding, image, and workflow prompts shared by the PromptFlow community. Add useful prompts to your library in one click."
     },
+    "backToHome": "Back to Home",
     "title": "Discover Community Prompts",
-    "subtitle": "Explore high-quality prompts from users worldwide, import with one click",
+    "subtitle": "Explore prompts from the community and add useful ones to your prompt library",
     "search": "Search prompts...",
     "categories": {
       "all": "All",
@@ -89,17 +90,17 @@
       "image": "Image Gen",
       "other": "Other"
     },
-    "import": "Import to Library",
-    "importSuccess": "Imported",
+    "import": "Add to Library",
+    "importSuccess": "Added",
     "installPrompt": "Please install the PromptFlow extension to import this prompt",
     "emptyState": {
       "title": "No results found",
-      "description": "Try different search terms, or be the first contributor"
+      "description": "Try different search terms, or share the first prompt with the community"
     },
     "contribute": "Contribute Prompt"
   },
   "footer": {
-    "description": "PromptFlow is your professional AI prompt management tool. One-click access to your saved prompts on ChatGPT, Claude, DeepSeek and more.",
+    "description": "PromptFlow helps you organize and open your prompt library across ChatGPT, Claude, DeepSeek, and other AI tools.",
     "product": {
       "title": "Product",
       "features": "Features",
@@ -124,7 +125,6 @@
   "localeSwitcher": {
     "label": "Language",
     "zh": "中文",
-    "en": "English",
-    "zh-Hant": "繁體中文"
+    "en": "English"
   }
 }

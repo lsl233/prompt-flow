@@ -1,14 +1,12 @@
-"use client";
-
-import Image from "next/image";
-import { useTheme } from "next-themes";
-import { useLocale } from "next-intl";
-import { useEffect, useState } from "react";
+import { getLocale } from "next-intl/server";
+import { routing, type Locale } from "@/i18n/routing";
+import manifest from "@/lib/generated/locale-image-manifest.json";
+import { LocaleImageClient } from "./LocaleImageClient";
 
 interface LocaleImageProps {
   /** 图片基础名称（不含扩展名和语言后缀） */
   name: string;
-  /** 图片扩展名，默认 png */
+  /** 图片扩展名，默认 webp */
   ext?: string;
   /** 图片目录，默认 /screen-short */
   dir?: string;
@@ -28,21 +26,76 @@ interface LocaleImageProps {
   themeAware?: boolean;
 }
 
+type Theme = "light" | "dark";
+
+type ManifestEntry = {
+  default: string | null;
+  locales: Partial<Record<Locale, string>>;
+  themes: Partial<Record<Theme, string>>;
+  localeThemes: Partial<Record<Locale, Partial<Record<Theme, string>>>>;
+};
+
+type LocaleImageManifest = Record<
+  string,
+  Record<string, Record<string, ManifestEntry>>
+>;
+
+const localeImageManifest = manifest as LocaleImageManifest;
+const defaultTheme: Theme = "dark";
+
+function normalizeDir(dir: string) {
+  return dir.replace(/^\/+|\/+$/g, "");
+}
+
+function fallbackSrc(dir: string, name: string, ext: string) {
+  return dir ? `/${dir}/${name}.${ext}` : `/${name}.${ext}`;
+}
+
+function getManifestEntry(dir: string, name: string, ext: string) {
+  return localeImageManifest[dir]?.[name]?.[ext];
+}
+
+function resolveSrc(
+  entry: ManifestEntry | undefined,
+  locale: Locale,
+  ext: string,
+  dir: string,
+  name: string,
+  theme?: Theme
+) {
+  const localeThemeSrc = theme
+    ? entry?.localeThemes?.[locale]?.[theme]
+    : undefined;
+  const localeSrc = entry?.locales?.[locale];
+  const themeSrc = theme ? entry?.themes?.[theme] : undefined;
+  const defaultSrc = entry?.default;
+
+  return localeThemeSrc ?? localeSrc ?? themeSrc ?? defaultSrc ?? fallbackSrc(dir, name, ext);
+}
+
+function resolveDefaultSrc(
+  entry: ManifestEntry | undefined,
+  locale: Locale,
+  ext: string,
+  dir: string,
+  name: string
+) {
+  return (
+    entry?.localeThemes?.[locale]?.[defaultTheme] ??
+    entry?.locales?.[locale] ??
+    entry?.themes?.[defaultTheme] ??
+    entry?.themes?.light ??
+    entry?.default ??
+    fallbackSrc(dir, name, ext)
+  );
+}
+
 /**
  * 本地化图片组件（支持明暗主题）
  *
- * 根据当前语言和主题自动选择对应图片，优先级：
- * 1. /screen-short/{name}.{locale}.{theme}.{ext} (语言+主题版本，如 hero.zh.dark.png)
- * 2. /screen-short/{name}.{locale}.{ext} (语言特定版本，如 hero.zh.png)
- * 3. /screen-short/{name}.{theme}.{ext} (主题特定版本，如 hero.dark.png)
- * 4. /screen-short/{name}.{ext} (通用版本，如 hero.png)
- *
- * 使用示例：
- * ```tsx
- * <LocaleImage name="hero" alt="产品截图" fill className="object-cover" />
- * ```
+ * 图片变体由构建期 manifest 管理，运行时只负责查表，不再探测文件是否存在。
  */
-export function LocaleImage({
+export async function LocaleImage({
   name,
   ext = "webp",
   dir = "/screen-short",
@@ -54,62 +107,55 @@ export function LocaleImage({
   className,
   themeAware = true,
 }: LocaleImageProps) {
-  const locale = useLocale();
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [currentSrcIndex, setCurrentSrcIndex] = useState(0);
+  const rawLocale = await getLocale();
+  const locale = routing.locales.includes(rawLocale as Locale)
+    ? (rawLocale as Locale)
+    : routing.defaultLocale;
+  const normalizedDir = normalizeDir(dir);
+  const entry = getManifestEntry(normalizedDir, name, ext);
+  const defaultSrc = resolveDefaultSrc(entry, locale, ext, normalizedDir, name);
 
-  // 避免 hydration 不匹配
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  if (!themeAware) {
+    return (
+      <LocaleImageClient
+        alt={alt}
+        src={defaultSrc}
+        priority={priority}
+        fill={fill}
+        width={width}
+        height={height}
+        className={className}
+      />
+    );
+  }
 
-  // 构建候选路径列表
-  const getCandidatePaths = () => {
-    const paths: string[] = [];
-    const theme = themeAware ? resolvedTheme : undefined;
-
-    if (theme) {
-      // 优先级 1: 语言+主题组合
-      paths.push(`${dir}/${name}.${locale}.${theme}.${ext}`);
-    }
-    // 优先级 2: 仅语言
-    paths.push(`${dir}/${name}.${locale}.${ext}`);
-
-    if (theme) {
-      // 优先级 3: 仅主题
-      paths.push(`${dir}/${name}.${theme}.${ext}`);
-    }
-    // 优先级 4: 通用版本
-    paths.push(`${dir}/${name}.${ext}`);
-
-    return paths;
-  };
-
-  const candidatePaths = getCandidatePaths();
-
-  // 未挂载时使用通用路径
-  const src = mounted
-    ? candidatePaths[currentSrcIndex]
-    : `${dir}/${name}.${ext}`;
-
-  // 图片加载失败时尝试下一个候选
-  const handleError = () => {
-    if (currentSrcIndex < candidatePaths.length - 1) {
-      setCurrentSrcIndex((prev) => prev + 1);
-    }
-  };
+  const lightSrc = resolveSrc(
+    entry,
+    locale,
+    ext,
+    normalizedDir,
+    name,
+    "light"
+  );
+  const darkSrc = resolveSrc(
+    entry,
+    locale,
+    ext,
+    normalizedDir,
+    name,
+    "dark"
+  );
 
   return (
-    <Image
-      src={src}
+    <LocaleImageClient
       alt={alt}
-      fill={fill}
-      width={fill ? undefined : width}
-      height={fill ? undefined : height}
+      src={defaultSrc}
       priority={priority}
+      fill={fill}
+      width={width}
+      height={height}
       className={className}
-      onError={handleError}
+      themeSources={{ light: lightSrc, dark: darkSrc }}
     />
   );
 }

@@ -222,7 +222,7 @@ Before creating new components, check:
 ### i18n Setup
 
 The app uses `next-intl` for internationalization:
-- **Messages**: `messages/en.json`, `messages/zh.json`, `messages/zh-Hant.json`
+- **Messages**: `messages/en.json`, `messages/zh.json`
 - **Routing**: `i18n/routing.ts` configures supported locales
 - **Namespaces**: Use dot notation `t("home.hero.title")`
 
@@ -296,5 +296,4 @@ types/                # TypeScript types
 messages/             # i18n translations
 ├── en.json
 ├── zh.json
-└── zh-Hant.json
 ```

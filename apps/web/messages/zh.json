@@ -1,22 +1,22 @@
 {
   "metadata": {
-    "title": "PromptFlow - 专业 AI 提示词管理工具 | 一键调用提示词库",
-    "description": "PromptFlow 是你的专业 AI 提示词管理工具。在 ChatGPT、Claude、DeepSeek 等任意 AI 平台中，按 ⌘K 一键调用保存的提示词。支持智能分类、跨平台同步。"
+    "title": "PromptFlow - 在任意 AI 工具中打开你的提示词库",
+    "description": "PromptFlow 帮你在 ChatGPT、Claude、DeepSeek、Gemini 等 AI 工具中，用 ⌘K 快速打开并使用你的提示词库。"
   },
   "nav": {
     "brand": "PromptFlow",
     "features": "功能",
     "community": "社区",
-    "install": "免费安装",
+    "install": "添加到 Chrome",
     "github": "GitHub"
   },
   "home": {
     "hero": {
       "badge": "已支持 ChatGPT、Claude、DeepSeek 等 10+ AI 平台",
-      "title": "专业 AI 提示词管理工具",
-      "subtitle": "一键调用 · 智能分类 · 跨平台支持",
-      "description": "在任意 AI 页面按 ⌘K，瞬间调出你的提示词库。支持 ChatGPT、Claude、DeepSeek、Kimi 等主流平台，让每次 AI 对话都高效精准。",
-      "install": "免费安装",
+      "title": "不离开对话框，直接打开你的提示词库",
+      "subtitle": "⌘K 快速调用 · 提示词有序整理 · 适用于多种 AI 工具",
+      "description": "在 ChatGPT、Claude、DeepSeek、Gemini 等 AI 工具中按 ⌘K，几秒内打开并使用你的常用提示词。把提示词整理成可随时调用的提示词库。",
+      "install": "添加到 Chrome",
       "demo": "查看演示",
       "browseCommunity": "浏览社区",
       "screenshotAlt": "PromptFlow 产品界面，展示 ⌘K 快速唤起提示词面板"
@@ -27,24 +27,24 @@
       "items": {
         "quickAccess": {
           "title": "⌘K 快速唤起",
-          "description": "在任何 AI 页面按 ⌘K，瞬间调出提示词面板。无需切换标签页，灵感触手可及。"
+          "description": "在当前 AI 页面直接打开提示词库，无需切换标签页，也不用在聊天框和笔记之间来回复制。"
         },
         "smartOrg": {
           "title": "智能分类管理",
-          "description": "标签 + 文件夹双维度管理，支持全文搜索。再多的提示词也能秒速定位。"
+          "description": "用标签、文件夹和搜索整理提示词，库再大也能快速找到要用的那一条。"
         },
         "crossPlatform": {
-          "title": "跨平台支持",
-          "description": "完美兼容 ChatGPT、Claude、DeepSeek、Kimi、Gemini 等 10+ 主流 AI 平台。"
+          "title": "适用于多种 AI 工具",
+          "description": "同一套提示词库可用于 ChatGPT、Claude、DeepSeek、Kimi、Gemini 等常见 AI 工具。"
         }
       }
     },
     "community": {
       "title": "社区精选",
-      "subtitle": "发现来自社区的高质量提示词，一键导入到你的个人库",
+      "subtitle": "浏览社区分享的实用提示词，一键加入你的提示词库",
       "browseAll": "浏览社区 →",
-      "import": "导入",
-      "importSuccess": "已导入",
+      "import": "加入提示词库",
+      "importSuccess": "已加入",
       "installPrompt": "请安装 PromptFlow 插件以使用此功能",
       "emptyState": "成为第一个贡献者",
       "by": "作者"
@@ -59,28 +59,29 @@
         },
         "developer": {
           "title": "开发者",
-          "description": "保存代码片段、重构指令、Code Review 模板。提升编程效率 10x。"
+          "description": "保存调试提示词、重构指令和代码审查清单，需要时直接复用。"
         },
         "operator": {
           "title": "运营人员",
-          "description": "存储数据分析 Prompt、报告模板、用户洞察框架。让数据驱动决策。"
+          "description": "把分析提示词、报告模板和调研框架整理到一起，让重复工作更容易复用。"
         }
       }
     },
     "cta": {
-      "title": "免费开始使用",
-      "subtitle": "加入数千用户，提升你的 AI 工作效率",
+      "title": "建立一个真正能复用的提示词库",
+      "subtitle": "安装扩展后，在你常用的 AI 工具里随时打开并使用保存的提示词",
       "chrome": "添加到 Chrome",
       "browseCommunity": "浏览社区"
     }
   },
   "community": {
     "metadata": {
-      "title": "社区精选提示词 | PromptFlow",
-      "description": "发现社区分享的最佳 AI 提示词。涵盖写作、编程、图像生成等多个领域，一键导入到你的 PromptFlow 库。"
+      "title": "社区提示词库 | PromptFlow",
+      "description": "探索 PromptFlow 社区分享的写作、编程、图像生成和工作流提示词，一键加入你的提示词库。"
     },
+    "backToHome": "返回首页",
     "title": "发现社区精选提示词",
-    "subtitle": "探索来自全球用户的高质量提示词，一键导入使用",
+    "subtitle": "浏览社区分享的提示词，把有用的内容一键加入你的提示词库",
     "search": "搜索提示词...",
     "categories": {
       "all": "全部",
@@ -89,17 +90,17 @@
       "image": "图像生成",
       "other": "其他"
     },
-    "import": "导入到个人库",
-    "importSuccess": "已导入",
+    "import": "加入提示词库",
+    "importSuccess": "已加入",
     "installPrompt": "请安装 PromptFlow 插件以导入此提示词",
     "emptyState": {
       "title": "暂无匹配结果",
-      "description": "尝试其他搜索词，或成为第一个贡献者"
+      "description": "试试其他搜索词，或分享第一条社区提示词"
     },
     "contribute": "贡献提示词"
   },
   "footer": {
-    "description": "PromptFlow 是你的专业 AI 提示词管理工具。在 ChatGPT、Claude、DeepSeek 等工具中一键调用保存的提示词。",
+    "description": "PromptFlow 帮你在 ChatGPT、Claude、DeepSeek 等 AI 工具中整理并快速打开提示词库。",
     "product": {
       "title": "产品",
       "features": "功能特性",
@@ -124,7 +125,6 @@
   "localeSwitcher": {
     "label": "语言",
     "zh": "中文",
-    "en": "English",
-    "zh-Hant": "繁體中文"
+    "en": "English"
   }
 }

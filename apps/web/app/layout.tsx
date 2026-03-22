@@ -7,11 +7,11 @@ import "./[locale]/globals.css";
 export const metadata: Metadata = {
   metadataBase: getMetadataBase(),
   title: {
-    default: "PromptFlow - Professional AI Prompt Manager",
+    default: "PromptFlow - Access Your Prompts in Any AI Tool",
     template: "%s | PromptFlow",
   },
   description:
-    "PromptFlow helps you manage and instantly access prompts across ChatGPT, Claude, DeepSeek, and other AI tools.",
+    "PromptFlow helps you organize and access your prompt library across ChatGPT, Claude, DeepSeek, and other AI tools.",
   applicationName: "PromptFlow",
   category: "productivity",
   robots: {

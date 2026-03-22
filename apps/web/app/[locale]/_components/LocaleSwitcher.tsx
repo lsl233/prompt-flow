@@ -8,7 +8,6 @@ import { usePathname, useRouter } from '@/i18n/navigation';
 const localeNames: Record<Locale, string> = {
   en: 'English',
   zh: '中文',
-  'zh-Hant': '繁體中文',
 };
 
 export default function LocaleSwitcher() {

@@ -30,6 +30,7 @@ export async function generateMetadata({
 
 export default async function CommunityPage() {
   const t = await getTranslations("community");
+  const navT = await getTranslations("nav");
   const prompts = getAllPrompts();
 
   const categories: (CommunityPrompt["category"] | "all")[] = ["all", "writing", "coding", "image", "other"];
@@ -48,13 +49,13 @@ export default async function CommunityPage() {
             className="inline-flex items-center gap-2 text-sm text-[var(--color-text-tertiary)] hover:text-[var(--color-text-primary)] transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Home
+            {t("backToHome")}
           </Link>
 
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-accent-primary)]/10 border border-[var(--color-accent-primary)]/20 mb-6">
               <Sparkles className="w-4 h-4 text-[var(--color-accent-primary)]" />
-              <span className="text-sm font-medium text-[var(--color-accent-primary)]">Community</span>
+              <span className="text-sm font-medium text-[var(--color-accent-primary)]">{navT("community")}</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--color-text-primary)] mb-4">
