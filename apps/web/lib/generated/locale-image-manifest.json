@@ -1,0 +1,100 @@
+{
+  "": {
+    "favicon": {
+      "png": {
+        "default": "/favicon.png",
+        "locales": {},
+        "localeThemes": {},
+        "themes": {}
+      }
+    },
+    "file": {
+      "svg": {
+        "default": "/file.svg",
+        "locales": {},
+        "localeThemes": {},
+        "themes": {}
+      }
+    },
+    "globe": {
+      "svg": {
+        "default": "/globe.svg",
+        "locales": {},
+        "localeThemes": {},
+        "themes": {}
+      }
+    },
+    "icon-128": {
+      "png": {
+        "default": "/icon-128.png",
+        "locales": {},
+        "localeThemes": {},
+        "themes": {}
+      }
+    },
+    "logo": {
+      "svg": {
+        "default": "/logo.svg",
+        "locales": {},
+        "localeThemes": {},
+        "themes": {}
+      }
+    },
+    "next": {
+      "svg": {
+        "default": "/next.svg",
+        "locales": {},
+        "localeThemes": {},
+        "themes": {}
+      }
+    },
+    "vercel": {
+      "svg": {
+        "default": "/vercel.svg",
+        "locales": {},
+        "localeThemes": {},
+        "themes": {}
+      }
+    },
+    "window": {
+      "svg": {
+        "default": "/window.svg",
+        "locales": {},
+        "localeThemes": {},
+        "themes": {}
+      }
+    }
+  },
+  "screen-short": {
+    "demo": {
+      "png": {
+        "default": null,
+        "locales": {
+          "zh": "/screen-short/demo.zh.png"
+        },
+        "localeThemes": {},
+        "themes": {}
+      }
+    },
+    "hero": {
+      "png": {
+        "default": null,
+        "locales": {},
+        "localeThemes": {},
+        "themes": {
+          "dark": "/screen-short/hero.dark.png",
+          "light": "/screen-short/hero.light.png"
+        }
+      },
+      "webp": {
+        "default": null,
+        "locales": {},
+        "localeThemes": {},
+        "themes": {
+          "dark": "/screen-short/hero.dark.webp",
+          "light": "/screen-short/hero.light.webp"
+        }
+      }
+    }
+  }
+}
