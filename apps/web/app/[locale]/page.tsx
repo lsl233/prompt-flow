@@ -336,7 +336,7 @@ export default async function HomePage() {
       <section className="py-24 lg:py-32 relative overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 bg-[var(--color-bg-secondary)]" />
-        <div className="absolute inset-0 grid-pattern opacity-30" />
+        {/*<div className="absolute inset-0 grid-pattern opacity-30" />*/}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--color-accent-primary)] opacity-5 blur-[150px] rounded-full" />
 
         <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">

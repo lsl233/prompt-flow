@@ -7,7 +7,7 @@ import {
   Star,
 } from "lucide-react";
 import { ImportButton } from "@/components/ImportButton";
-import { CopyButton } from "@/components/CopyButton";
+import { PromptWorkbench } from "@/components/community/PromptWorkbench";
 import { Link } from "@/i18n/navigation";
 import type {
   CommunityPrompt,
@@ -98,6 +98,14 @@ export function getCommunityDictionary(locale: string) {
           community: "社区",
           category: "分类",
         },
+        promptTitle: "提示词内容",
+        variablesTitle: "变量设置",
+        examplesTitle: "示例参考",
+        copyTemplate: "复制模板",
+        copyFilled: "复制填充后的 Prompt",
+        reset: "重置",
+        variableHint: "填写变量并实时预览",
+        required: "必填",
         relatedTitle: "继续看这些 Prompt",
       },
       categoryPage: {
@@ -207,6 +215,14 @@ export function getCommunityDictionary(locale: string) {
         community: "Community",
         category: "Category",
       },
+      promptTitle: "Prompt body",
+      variablesTitle: "Variables",
+      examplesTitle: "Examples",
+      copyTemplate: "Copy template",
+      copyFilled: "Copy filled prompt",
+      reset: "Reset",
+      variableHint: "Set values and preview live",
+      required: "Required",
       relatedTitle: "Keep browsing",
     },
     categoryPage: {
@@ -564,7 +580,7 @@ export function PromptDetailLayout({
 }) {
   return (
     <section className="relative overflow-hidden border-b border-[var(--color-border-subtle)]">
-      <div className="absolute inset-0 grid-pattern opacity-30" />
+      {/*<div className="absolute inset-0 grid-pattern opacity-30" />*/}
       <div className="absolute left-1/3 top-0 h-96 w-96 rounded-full bg-cyan-400/10 blur-[160px]" />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="relative flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
@@ -626,69 +642,20 @@ export function PromptDetailLayout({
             ))}
           </div>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
-            <div className="rounded-[2rem] border border-[var(--color-border-strong)] bg-[var(--color-bg-secondary)] p-6">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-border-subtle)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
-                <Sparkles className="h-3.5 w-3.5" />
-                <span>Prompt</span>
-              </div>
-              <pre className="whitespace-pre-wrap text-sm leading-8 text-[var(--color-text-primary)]">
-                {prompt.content}
-              </pre>
-            </div>
-
-            <div className="grid gap-6">
-              <div className="rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6">
-                <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
-                  Variables
-                </h3>
-                <div className="mt-4 grid gap-4">
-                  {prompt.variables.map((variable) => (
-                    <div
-                      key={variable.name}
-                      className="rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-bg-primary)] p-4"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="font-mono text-sm text-[var(--color-accent-primary)]">{`{{${variable.name}}}`}</span>
-                        {variable.required ? (
-                          <span className="rounded-full bg-[var(--color-accent-primary)]/10 px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent-primary)]">
-                            {dictionary.labels.variable}
-                          </span>
-                        ) : null}
-                      </div>
-                      <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">
-                        {variable.description}
-                      </p>
-                      {variable.example ? (
-                        <p className="mt-2 text-xs text-[var(--color-text-tertiary)]">
-                          e.g. {variable.example}
-                        </p>
-                      ) : null}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/*<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                <div className="rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6">
-                  <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
-                    {dictionary.labels.exampleInput}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">
-                    {prompt.exampleInput}
-                  </p>
-                </div>
-
-                <div className="rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6">
-                  <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
-                    {dictionary.labels.exampleOutput}
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">
-                    {prompt.exampleOutput}
-                  </p>
-                </div>
-              </div>*/}
-            </div>
+          <div className="mt-10">
+            <PromptWorkbench
+              prompt={prompt}
+              labels={{
+                promptTitle: dictionary.detail.promptTitle,
+                variablesTitle: dictionary.detail.variablesTitle,
+                copyTemplate: dictionary.detail.copyTemplate,
+                copyFilled: dictionary.detail.copyFilled,
+                copied: dictionary.buttons.copied,
+                reset: dictionary.detail.reset,
+                variableHint: dictionary.detail.variableHint,
+                required: dictionary.detail.required,
+              }}
+            />
           </div>
 
           <div className="mt-8 rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)]/70 p-6">
