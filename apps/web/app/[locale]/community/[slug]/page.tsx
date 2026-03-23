@@ -11,7 +11,6 @@ import { buildPageMetadata } from "@/lib/seo";
 import {
   CommunityCTA,
   getCommunityDictionary,
-  PromptContentBlock,
   PromptDetailLayout,
   PromptGrid,
   SectionHeading,
@@ -73,10 +72,6 @@ export default async function CommunityPromptDetailPage({
       <PromptDetailLayout prompt={prompt} category={category} dictionary={dictionary} />
 
       <div className="mx-auto max-w-7xl space-y-16 px-4 py-14 sm:px-6 lg:px-8 lg:py-18">
-        <section>
-          <PromptContentBlock prompt={prompt} dictionary={dictionary} />
-        </section>
-
         <section>
           <SectionHeading
             title={dictionary.detail.relatedTitle}

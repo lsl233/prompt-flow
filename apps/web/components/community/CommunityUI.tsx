@@ -1,8 +1,19 @@
-import { ArrowRight, CheckCircle2, Flame, Layers3, Sparkles, Star } from "lucide-react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Flame,
+  Layers3,
+  Sparkles,
+  Star,
+} from "lucide-react";
 import { ImportButton } from "@/components/ImportButton";
 import { CopyButton } from "@/components/CopyButton";
 import { Link } from "@/i18n/navigation";
-import type { CommunityPrompt, PromptCategory, PromptTag } from "@/types/prompt";
+import type {
+  CommunityPrompt,
+  PromptCategory,
+  PromptTag,
+} from "@/types/prompt";
 
 type SupportedLocale = "en" | "zh";
 
@@ -15,22 +26,23 @@ export function getCommunityDictionary(locale: string) {
     return {
       meta: {
         indexTitle: "Prompt 社区 | PromptFlow",
-        indexDescription: "浏览社区精选 Prompt，按主题、标签和详情页静态查看完整内容。",
+        indexDescription:
+          "浏览社区精选 Prompt，按主题、标签和详情页静态查看完整内容。",
         featured: "精选 Prompt",
         latest: "最新收录",
         categories: "主题分区",
         tags: "热门标签",
         related: "相关 Prompt",
       },
-    buttons: {
-      copy: "复制 Prompt",
-      copied: "已复制",
-      import: "导入到 PromptFlow",
-      importSuccess: "已导入",
-      installPrompt: "请先安装 PromptFlow 插件",
-      view: "查看详情",
-      browseCategory: "进入分类",
-      browseTag: "查看标签",
+      buttons: {
+        copy: "复制 Prompt",
+        copied: "已复制",
+        import: "导入到 PromptFlow",
+        importSuccess: "已导入",
+        installPrompt: "请先安装 PromptFlow 插件",
+        view: "查看详情",
+        browseCategory: "进入分类",
+        browseTag: "查看标签",
         explore: "继续探索",
       },
       labels: {
@@ -69,7 +81,8 @@ export function getCommunityDictionary(locale: string) {
       home: {
         eyebrow: "Prompt Community",
         title: "把 Prompt 社区做成一份可浏览、可复制、可导入的静态目录",
-        description: "这版页面聚焦 MVP 的浏览体验：先把首页、详情页、分类页和标签页搭清楚，再承接后续 JSON 内容源与 SEO。",
+        description:
+          "这版页面聚焦 MVP 的浏览体验：先把首页、详情页、分类页和标签页搭清楚，再承接后续 JSON 内容源与 SEO。",
         stats: [
           { label: "精选 Prompt", value: "08" },
           { label: "核心分类", value: "04" },
@@ -77,7 +90,8 @@ export function getCommunityDictionary(locale: string) {
         ],
         faqTitle: "MVP 常见问题",
         ctaTitle: "先把静态浏览体验打磨出来",
-        ctaDescription: "用户现在就能按分类、标签和详情页浏览 Prompt，复制或导入路径也已经保留。",
+        ctaDescription:
+          "用户现在就能按分类、标签和详情页浏览 Prompt，复制或导入路径也已经保留。",
       },
       detail: {
         breadcrumbs: {
@@ -100,15 +114,18 @@ export function getCommunityDictionary(locale: string) {
       faq: [
         {
           question: "这些页面现在是静态的吗？",
-          answer: "是。当前内容直接来自本地数据文件，适合先把结构、组件和路由稳定下来。",
+          answer:
+            "是。当前内容直接来自本地数据文件，适合先把结构、组件和路由稳定下来。",
         },
         {
           question: "用户现在能做什么？",
-          answer: "可以浏览首页、进入分类和标签页、查看详情，并直接复制或导入 Prompt。",
+          answer:
+            "可以浏览首页、进入分类和标签页、查看详情，并直接复制或导入 Prompt。",
         },
         {
           question: "为什么先做静态版本？",
-          answer: "先把信息架构和视觉层搭稳，后续接 JSON 内容源、SEO 和内链时成本更低。",
+          answer:
+            "先把信息架构和视觉层搭稳，后续接 JSON 内容源、SEO 和内链时成本更低。",
         },
       ],
     };
@@ -117,7 +134,8 @@ export function getCommunityDictionary(locale: string) {
   return {
     meta: {
       indexTitle: "Prompt Community | PromptFlow",
-      indexDescription: "Browse static MVP community pages for prompts, categories, tags, and detail views.",
+      indexDescription:
+        "Browse static MVP community pages for prompts, categories, tags, and detail views.",
       featured: "Featured prompts",
       latest: "Latest prompts",
       categories: "Category lanes",
@@ -170,8 +188,10 @@ export function getCommunityDictionary(locale: string) {
     },
     home: {
       eyebrow: "Prompt Community",
-      title: "A static MVP directory for browsing, copying, and importing prompts",
-      description: "This version focuses on structure first: a stronger landing page, detail pages, category pages, and tag pages that can later plug into JSON content and SEO.",
+      title:
+        "A static MVP directory for browsing, copying, and importing prompts",
+      description:
+        "This version focuses on structure first: a stronger landing page, detail pages, category pages, and tag pages that can later plug into JSON content and SEO.",
       stats: [
         { label: "Featured prompts", value: "08" },
         { label: "Core categories", value: "04" },
@@ -179,7 +199,8 @@ export function getCommunityDictionary(locale: string) {
       ],
       faqTitle: "MVP FAQ",
       ctaTitle: "Ship the browsing layer first",
-      ctaDescription: "Users can already browse by category, tag, and detail page, with copy and import paths kept intact.",
+      ctaDescription:
+        "Users can already browse by category, tag, and detail page, with copy and import paths kept intact.",
     },
     detail: {
       breadcrumbs: {
@@ -202,15 +223,18 @@ export function getCommunityDictionary(locale: string) {
     faq: [
       {
         question: "Are these pages static right now?",
-        answer: "Yes. They use local data so the information architecture and components can stabilize first.",
+        answer:
+          "Yes. They use local data so the information architecture and components can stabilize first.",
       },
       {
         question: "What can users do already?",
-        answer: "Browse the index, open category and tag pages, inspect full prompt details, then copy or import a prompt.",
+        answer:
+          "Browse the index, open category and tag pages, inspect full prompt details, then copy or import a prompt.",
       },
       {
         question: "Why ship static pages first?",
-        answer: "It de-risks the content model and visual system before JSON ingestion, SEO, and deeper internal linking.",
+        answer:
+          "It de-risks the content model and visual system before JSON ingestion, SEO, and deeper internal linking.",
       },
     ],
   };
@@ -248,7 +272,9 @@ export function CommunityHero({
             <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--color-text-secondary)] sm:text-lg">
               {description}
             </p>
-            {children ? <div className="mt-8 flex flex-wrap gap-3">{children}</div> : null}
+            {children ? (
+              <div className="mt-8 flex flex-wrap gap-3">{children}</div>
+            ) : null}
           </div>
 
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
@@ -261,7 +287,9 @@ export function CommunityHero({
                 <div className="text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text-primary)]">
                   {stat.value}
                 </div>
-                <div className="mt-2 text-sm text-[var(--color-text-tertiary)]">{stat.label}</div>
+                <div className="mt-2 text-sm text-[var(--color-text-tertiary)]">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
@@ -285,7 +313,9 @@ export function SectionHeading({
         <span>{title}</span>
       </div>
       {description ? (
-        <p className="text-sm leading-7 text-[var(--color-text-secondary)] sm:text-base">{description}</p>
+        <p className="text-sm leading-7 text-[var(--color-text-secondary)] sm:text-base">
+          {description}
+        </p>
       ) : null}
     </div>
   );
@@ -308,7 +338,9 @@ export function CategoryGrid({
           href={`/community/category/${category.slug}`}
           className="group relative overflow-hidden rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6 transition-transform duration-300 hover:-translate-y-1"
         >
-          <div className={`absolute inset-0 bg-gradient-to-br ${category.accent} opacity-70`} />
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${category.accent} opacity-70`}
+          />
           <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
           <div className="relative">
             <div className="flex items-start justify-between gap-4">
@@ -337,9 +369,12 @@ export function CategoryGrid({
             </div>
             <div className="mt-6 flex items-center justify-between border-t border-white/10 pt-5 text-sm">
               <span className="text-[var(--color-text-tertiary)]">
-                {promptsByCategory[category.slug]?.length ?? 0} {dictionary.labels.prompts}
+                {promptsByCategory[category.slug]?.length ?? 0}{" "}
+                {dictionary.labels.prompts}
               </span>
-              <span className="text-[var(--color-text-primary)]">{dictionary.buttons.browseCategory}</span>
+              <span className="text-[var(--color-text-primary)]">
+                {dictionary.buttons.browseCategory}
+              </span>
             </div>
           </div>
         </Link>
@@ -348,11 +383,7 @@ export function CategoryGrid({
   );
 }
 
-export function HotTagsRow({
-  tags,
-}: {
-  tags: PromptTag[];
-}) {
+export function HotTagsRow({ tags }: { tags: PromptTag[] }) {
   return (
     <div className="flex flex-wrap gap-3">
       {tags.map((tag) => (
@@ -361,7 +392,9 @@ export function HotTagsRow({
           href={`/community/tag/${tag.slug}`}
           className="group rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] px-4 py-3 text-sm text-[var(--color-text-secondary)] transition-all hover:border-[var(--color-accent-primary)]/40 hover:text-[var(--color-text-primary)]"
         >
-          <span className="font-medium text-[var(--color-text-primary)]">#{tag.slug}</span>
+          <span className="font-medium text-[var(--color-text-primary)]">
+            #{tag.slug}
+          </span>
           <span className="mx-2 text-[var(--color-text-tertiary)]">/</span>
           <span>{tag.description}</span>
         </Link>
@@ -385,7 +418,9 @@ export function PromptCard({
           <span>{dictionary.categoryNames[prompt.category]}</span>
         </div>
         <div className="text-right">
-          <div className="text-sm font-semibold text-[var(--color-text-primary)]">{prompt.likes}</div>
+          <div className="text-sm font-semibold text-[var(--color-text-primary)]">
+            {prompt.likes}
+          </div>
           <div className="text-xs text-[var(--color-text-tertiary)]">likes</div>
         </div>
       </div>
@@ -393,7 +428,9 @@ export function PromptCard({
       <h3 className="mt-5 text-2xl font-semibold tracking-[-0.03em] text-[var(--color-text-primary)]">
         {prompt.title}
       </h3>
-      <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">{prompt.summary}</p>
+      <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">
+        {prompt.summary}
+      </p>
 
       <div className="mt-5 flex flex-wrap gap-2">
         {prompt.tags.map((tag) => (
@@ -466,8 +503,12 @@ export function CommunityFAQ({
           key={item.question}
           className="rounded-[1.75rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6"
         >
-          <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">{item.question}</h3>
-          <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">{item.answer}</p>
+          <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
+            {item.question}
+          </h3>
+          <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">
+            {item.answer}
+          </p>
         </div>
       ))}
     </div>
@@ -495,7 +536,9 @@ export function CommunityCTA({
           <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-[var(--color-text-primary)]">
             {title}
           </h2>
-          <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">{description}</p>
+          <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">
+            {description}
+          </p>
         </div>
         <div className="flex flex-wrap gap-3">
           <Link
@@ -525,70 +568,161 @@ export function PromptDetailLayout({
       <div className="absolute left-1/3 top-0 h-96 w-96 rounded-full bg-cyan-400/10 blur-[160px]" />
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="relative flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
-          <Link href="/community">{dictionary.detail.breadcrumbs.community}</Link>
+          <Link href="/community">
+            {dictionary.detail.breadcrumbs.community}
+          </Link>
           <span>/</span>
-          <Link href={`/community/category/${category.slug}`}>{dictionary.categoryNames[category.slug]}</Link>
+          <Link href={`/community/category/${category.slug}`}>
+            {dictionary.categoryNames[category.slug]}
+          </Link>
         </div>
 
-        <div className="mt-6 grid gap-10 lg:grid-cols-[1.25fr_0.75fr]">
-          <div>
-            <div className="flex flex-wrap items-center gap-2">
-              {prompt.featured ? (
-                <span className="rounded-full border border-[var(--color-accent-primary)]/20 bg-[var(--color-accent-primary)]/10 px-3 py-1 text-xs text-[var(--color-accent-primary)]">
-                  {dictionary.labels.featured}
-                </span>
-              ) : null}
-              {prompt.verified ? (
-                <span className="rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] px-3 py-1 text-xs text-[var(--color-text-secondary)]">
-                  {dictionary.labels.verified}
-                </span>
-              ) : null}
-            </div>
-            <h1 className="mt-5 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-[var(--color-text-primary)] sm:text-5xl">
-              {prompt.title}
-            </h1>
-            <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--color-text-secondary)] sm:text-lg">
-              {prompt.summary}
-            </p>
+        <div className="mt-6 max-w-6xl">
+          <div className="flex flex-wrap items-center gap-2">
+            {prompt.featured ? (
+              <span className="rounded-full border border-[var(--color-accent-primary)]/20 bg-[var(--color-accent-primary)]/10 px-3 py-1 text-xs text-[var(--color-accent-primary)]">
+                {dictionary.labels.featured}
+              </span>
+            ) : null}
+            {prompt.verified ? (
+              <span className="rounded-full border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] px-3 py-1 text-xs text-[var(--color-text-secondary)]">
+                {dictionary.labels.verified}
+              </span>
+            ) : null}
+          </div>
+          <h1 className="mt-5 max-w-4xl text-4xl font-semibold tracking-[-0.04em] text-[var(--color-text-primary)] sm:text-5xl">
+            {prompt.title}
+          </h1>
+          <p className="mt-5 max-w-3xl text-base leading-8 text-[var(--color-text-secondary)] sm:text-lg">
+            {prompt.summary}
+          </p>
+          {/*
+          <div className="mt-8 flex flex-wrap gap-3">
+            <CopyButton
+              value={prompt.content}
+              label={dictionary.buttons.copy}
+              successLabel={dictionary.buttons.copied}
+              className="border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-primary)]/40"
+            />
+            <ImportButton
+              promptId={prompt.id}
+              t={{
+                import: dictionary.buttons.import,
+                importSuccess: dictionary.buttons.importSuccess,
+                installPrompt: dictionary.buttons.installPrompt,
+              }}
+            />
+          </div>*/}
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <CopyButton
-                value={prompt.content}
-                label={dictionary.buttons.copy}
-                successLabel={dictionary.buttons.copied}
-                className="border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-primary)]/40"
-              />
-              <ImportButton
-                promptId={prompt.id}
-                t={{
-                  import: dictionary.buttons.import,
-                  importSuccess: dictionary.buttons.importSuccess,
-                  installPrompt: dictionary.buttons.installPrompt,
-                }}
-              />
+          <div className="mt-8 flex flex-wrap gap-2">
+            {prompt.tags.map((tag) => (
+              <Link
+                key={tag}
+                href={`/community/tag/${tag}`}
+                className="rounded-full border border-[var(--color-border-subtle)] px-3 py-1 text-xs text-[var(--color-text-tertiary)] transition-colors hover:text-[var(--color-text-primary)]"
+              >
+                #{tag}
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-[1.08fr_0.92fr]">
+            <div className="rounded-[2rem] border border-[var(--color-border-strong)] bg-[var(--color-bg-secondary)] p-6">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-border-subtle)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
+                <Sparkles className="h-3.5 w-3.5" />
+                <span>Prompt</span>
+              </div>
+              <pre className="whitespace-pre-wrap text-sm leading-8 text-[var(--color-text-primary)]">
+                {prompt.content}
+              </pre>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-2">
-              {prompt.tags.map((tag) => (
-                <Link
-                  key={tag}
-                  href={`/community/tag/${tag}`}
-                  className="rounded-full border border-[var(--color-border-subtle)] px-3 py-1 text-xs text-[var(--color-text-tertiary)] transition-colors hover:text-[var(--color-text-primary)]"
-                >
-                  #{tag}
-                </Link>
-              ))}
+            <div className="grid gap-6">
+              <div className="rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6">
+                <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
+                  Variables
+                </h3>
+                <div className="mt-4 grid gap-4">
+                  {prompt.variables.map((variable) => (
+                    <div
+                      key={variable.name}
+                      className="rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-bg-primary)] p-4"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="font-mono text-sm text-[var(--color-accent-primary)]">{`{{${variable.name}}}`}</span>
+                        {variable.required ? (
+                          <span className="rounded-full bg-[var(--color-accent-primary)]/10 px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent-primary)]">
+                            {dictionary.labels.variable}
+                          </span>
+                        ) : null}
+                      </div>
+                      <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">
+                        {variable.description}
+                      </p>
+                      {variable.example ? (
+                        <p className="mt-2 text-xs text-[var(--color-text-tertiary)]">
+                          e.g. {variable.example}
+                        </p>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/*<div className="grid gap-6 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+                <div className="rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6">
+                  <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
+                    {dictionary.labels.exampleInput}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">
+                    {prompt.exampleInput}
+                  </p>
+                </div>
+
+                <div className="rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6">
+                  <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
+                    {dictionary.labels.exampleOutput}
+                  </h3>
+                  <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">
+                    {prompt.exampleOutput}
+                  </p>
+                </div>
+              </div>*/}
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6">
-            <dl className="grid gap-5">
-              <MetaItem label={dictionary.labels.author} value={prompt.author} />
-              <MetaItem label={dictionary.labels.updated} value={prompt.createdAt} />
-              <MetaItem label={dictionary.labels.difficulty} value={dictionary.difficulty[prompt.difficulty]} />
-              <MetaItem label={dictionary.labels.promptType} value={dictionary.promptType[prompt.promptType]} />
-              <MetaItem label={dictionary.labels.targetModels} value={prompt.targetModels.join(" / ")} />
-              <MetaItem label={dictionary.labels.useCase} value={prompt.useCase} />
+          <div className="mt-8 rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)]/70 p-6">
+            <dl className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              <MetaItem
+                label={dictionary.labels.author}
+                value={prompt.author}
+                subtle
+              />
+              <MetaItem
+                label={dictionary.labels.updated}
+                value={prompt.createdAt}
+                subtle
+              />
+              <MetaItem
+                label={dictionary.labels.difficulty}
+                value={dictionary.difficulty[prompt.difficulty]}
+                subtle
+              />
+              <MetaItem
+                label={dictionary.labels.promptType}
+                value={dictionary.promptType[prompt.promptType]}
+                subtle
+              />
+              <MetaItem
+                label={dictionary.labels.targetModels}
+                value={prompt.targetModels.join(" / ")}
+                subtle
+              />
+              <MetaItem
+                label={dictionary.labels.useCase}
+                value={prompt.useCase}
+                subtle
+              />
             </dl>
           </div>
         </div>
@@ -597,64 +731,29 @@ export function PromptDetailLayout({
   );
 }
 
-function MetaItem({ label, value }: { label: string; value: string }) {
-  return (
-    <div>
-      <dt className="text-xs uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">{label}</dt>
-      <dd className="mt-2 text-sm leading-7 text-[var(--color-text-primary)]">{value}</dd>
-    </div>
-  );
-}
-
-export function PromptContentBlock({
-  prompt,
-  dictionary,
+function MetaItem({
+  label,
+  value,
+  subtle = false,
 }: {
-  prompt: CommunityPrompt;
-  dictionary: CommunityDictionary;
+  label: string;
+  value: string;
+  subtle?: boolean;
 }) {
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-      <div className="rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6">
-        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-border-subtle)] px-3 py-1 text-xs uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
-          <Sparkles className="h-3.5 w-3.5" />
-          <span>Prompt Body</span>
-        </div>
-        <pre className="whitespace-pre-wrap text-sm leading-8 text-[var(--color-text-primary)]">{prompt.content}</pre>
-      </div>
-
-      <div className="grid gap-6">
-        <div className="rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6">
-          <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">Variables</h3>
-          <div className="mt-4 grid gap-4">
-            {prompt.variables.map((variable) => (
-              <div key={variable.name} className="rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-bg-primary)] p-4">
-                <div className="flex items-center gap-2">
-                  <span className="font-mono text-sm text-[var(--color-accent-primary)]">{`{{${variable.name}}}`}</span>
-                  {variable.required ? (
-                    <span className="rounded-full bg-[var(--color-accent-primary)]/10 px-2 py-0.5 text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent-primary)]">
-                      {dictionary.labels.variable}
-                    </span>
-                  ) : null}
-                </div>
-                <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">{variable.description}</p>
-                {variable.example ? (
-                  <p className="mt-2 text-xs text-[var(--color-text-tertiary)]">e.g. {variable.example}</p>
-                ) : null}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="rounded-[2rem] border border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)] p-6">
-          <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">{dictionary.labels.exampleInput}</h3>
-          <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">{prompt.exampleInput}</p>
-          <div className="mt-6 border-t border-[var(--color-border-subtle)] pt-6">
-            <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">{dictionary.labels.exampleOutput}</h3>
-            <p className="mt-3 text-sm leading-7 text-[var(--color-text-secondary)]">{prompt.exampleOutput}</p>
-          </div>
-        </div>
-      </div>
+    <div>
+      <dt className="text-xs uppercase tracking-[0.16em] text-[var(--color-text-tertiary)]">
+        {label}
+      </dt>
+      <dd
+        className={`mt-2 text-sm leading-7 ${
+          subtle
+            ? "text-[var(--color-text-secondary)]"
+            : "text-[var(--color-text-primary)]"
+        }`}
+      >
+        {value}
+      </dd>
     </div>
   );
 }
@@ -711,11 +810,7 @@ export function InlineCategoryLinks({
   );
 }
 
-export function InlineTagLinks({
-  tags,
-}: {
-  tags: PromptTag[];
-}) {
+export function InlineTagLinks({ tags }: { tags: PromptTag[] }) {
   return (
     <div className="flex flex-wrap gap-3">
       {tags.map((tag) => (
