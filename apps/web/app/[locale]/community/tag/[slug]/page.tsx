@@ -32,20 +32,32 @@ export async function generateMetadata({
   const dictionary = getCommunityDictionary(locale);
 
   if (!tag) {
-    return buildPageMetadata({
-      locale: locale as Locale,
-      pathname: "/community",
-      title: dictionary.meta.indexTitle,
-      description: dictionary.meta.indexDescription,
-    });
+    return {
+      ...buildPageMetadata({
+        locale: locale as Locale,
+        pathname: "/community",
+        title: dictionary.meta.indexTitle,
+        description: dictionary.meta.indexDescription,
+      }),
+      robots: {
+        index: false,
+        follow: true,
+      },
+    };
   }
 
-  return buildPageMetadata({
-    locale: locale as Locale,
-    pathname: `/community/tag/${tag.slug}`,
-    title: `#${tag.slug} | PromptFlow`,
-    description: tag.description,
-  });
+  return {
+    ...buildPageMetadata({
+      locale: locale as Locale,
+      pathname: `/community/tag/${tag.slug}`,
+      title: `#${tag.slug} | PromptFlow`,
+      description: tag.description,
+    }),
+    robots: {
+      index: false,
+      follow: true,
+    },
+  };
 }
 
 export default async function CommunityTagPage({

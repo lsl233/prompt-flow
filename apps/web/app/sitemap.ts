@@ -1,16 +1,15 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { getCanonicalPath, getLanguageAlternates, getSiteUrl } from "@/lib/seo";
-import { getAllCategories, getAllPrompts, getAllTags } from "@/lib/community-prompts";
+import { getAllCategories, getAllPrompts } from "@/lib/community-prompts";
 
-const STATIC_ROUTES = ["/", "/community"] as const;
+const STATIC_ROUTES = ["/", "/community", "/community/category"] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = getSiteUrl();
   const dynamicRoutes = [
     ...getAllPrompts().map((prompt) => `/community/${prompt.slug}`),
     ...getAllCategories().map((category) => `/community/category/${category.slug}`),
-    ...getAllTags().map((tag) => `/community/tag/${tag.slug}`),
   ];
   const routes = [...STATIC_ROUTES, ...dynamicRoutes];
 
