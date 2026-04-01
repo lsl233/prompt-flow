@@ -1,0 +1,35 @@
+{
+  "id": "p019",
+  "slug": "image-style-transfer-prompt",
+  "title": "Image Style Transfer Prompt",
+  "summary": "生成将特定艺术风格迁移到图像的 Midjourney Prompt。",
+  "content": "请将以下概念转换成 Midjourney 风格迁移提示词。",
+  "author": "ArtFusion",
+  "category": "image",
+  "tags": ["midjourney", "xiaohongshu"],
+  "targetModels": ["Midjourney v6", "DALL-E 3"],
+  "language": "en",
+  "variables": [
+    {
+      "name": "baseImage",
+      "description": "基础图像描述",
+      "required": true,
+      "example": "a portrait photo"
+    },
+    {
+      "name": "style",
+      "description": "目标艺术风格",
+      "required": true,
+      "example": "Van Gogh style"
+    }
+  ],
+  "promptType": "generator",
+  "difficulty": "intermediate",
+  "featured": false,
+  "verified": false,
+  "useCase": "生成风格迁移的图像 Prompt。",
+  "exampleInput": "baseImage=a cat, style=Japanese ukiyo-e",
+  "exampleOutput": "Midjourney 风格迁移 Prompt",
+  "likes": 334,
+  "createdAt": "2026-02-28"
+}

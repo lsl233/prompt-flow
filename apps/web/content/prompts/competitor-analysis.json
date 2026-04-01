@@ -1,0 +1,35 @@
+{
+  "id": "p020",
+  "slug": "competitor-analysis",
+  "title": "Competitor Analysis Report",
+  "summary": "分析竞争对手并生成结构化的竞品分析报告。",
+  "content": "请对以下竞争对手进行深入分析并生成报告。",
+  "author": "StrategyHub",
+  "category": "other",
+  "tags": ["marketing", "journal"],
+  "targetModels": ["GPT-4.1", "GPT-5", "Claude 3.7 Sonnet"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "competitors",
+      "description": "竞争对手列表",
+      "required": true,
+      "example": "竞品 A、竞品 B"
+    },
+    {
+      "name": "focusArea",
+      "description": "分析重点",
+      "required": false,
+      "example": "功能/定价/用户体验"
+    }
+  ],
+  "promptType": "workflow",
+  "difficulty": "advanced",
+  "featured": false,
+  "verified": false,
+  "useCase": "快速完成竞品分析。",
+  "exampleInput": "竞品=Notion vs Obsidian",
+  "exampleOutput": "结构化竞品分析报告",
+  "likes": 201,
+  "createdAt": "2026-02-27"
+}

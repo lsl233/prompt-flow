@@ -1,0 +1,29 @@
+{
+  "id": "p015",
+  "slug": "daily-reflection-prompt",
+  "title": "Daily Reflection Journal",
+  "summary": "引导每日复盘的写作提示，帮助反思和成长。",
+  "content": "请根据以下主题引导，完成今天的每日复盘。",
+  "author": "MindfulDay",
+  "category": "other",
+  "tags": ["journal"],
+  "targetModels": ["GPT-4.1", "GPT-5", "Claude 3.5 Sonnet"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "focusArea",
+      "description": "今日重点领域",
+      "required": false,
+      "example": "工作/学习/健康"
+    }
+  ],
+  "promptType": "template",
+  "difficulty": "beginner",
+  "featured": false,
+  "verified": false,
+  "useCase": "每日个人复盘和成长记录。",
+  "exampleInput": "focusArea=工作",
+  "exampleOutput": "引导式复盘问题清单",
+  "likes": 98,
+  "createdAt": "2026-03-04"
+}

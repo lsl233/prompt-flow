@@ -1,0 +1,29 @@
+{
+  "id": "p004",
+  "slug": "midjourney-scene-director",
+  "title": "Midjourney Scene Director",
+  "summary": "把一个简短描述扩写成带镜头语言、材质和光线的 MJ Prompt。",
+  "content": "Turn the following concept into three Midjourney-ready prompt directions:\n\nConcept: {{concept}}\n\nFor each direction, include:\n- visual style\n- camera framing\n- lighting\n- material and texture cues\n- environment details\n- a suggested aspect ratio\n\nRules:\n- Output in English.\n- Make each direction visually distinct.\n- Avoid generic adjectives.",
+  "author": "AI Artist Lab",
+  "category": "image",
+  "tags": ["midjourney", "xiaohongshu"],
+  "targetModels": ["Midjourney v6", "GPT-4.1", "GPT-5"],
+  "language": "en",
+  "variables": [
+    {
+      "name": "concept",
+      "description": "需要转成 Prompt 的视觉概念",
+      "required": true,
+      "example": "未来感书店里的透明雨夜"
+    }
+  ],
+  "promptType": "generator",
+  "difficulty": "intermediate",
+  "featured": true,
+  "verified": true,
+  "useCase": "把抽象画面想法转成可直接生成图片的 Prompt。",
+  "exampleInput": "concept=retro kiosk on Mars",
+  "exampleOutput": "三个风格不同的 Midjourney 英文提示词。",
+  "likes": 412,
+  "createdAt": "2026-03-15"
+}

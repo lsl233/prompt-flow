@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "chatgpt",
+    "title": "ChatGPT",
+    "description": "适用于日常问答、结构化生成与工作流封装的通用标签。",
+    "categorySlugs": ["coding", "other"],
+    "relatedTagSlugs": ["marketing", "journal"],
+    "featured": true
+  },
+  {
+    "slug": "journal",
+    "title": "Journal",
+    "description": "围绕日记、复盘与表达训练的写作提示模板。",
+    "categorySlugs": ["writing", "other"],
+    "relatedTagSlugs": ["marketing", "chatgpt"],
+    "featured": true
+  },
+  {
+    "slug": "midjourney",
+    "title": "Midjourney",
+    "description": "用于图像生成、风格控制与镜头语言设计的提示词。",
+    "categorySlugs": ["image"],
+    "relatedTagSlugs": ["xiaohongshu"],
+    "featured": true
+  },
+  {
+    "slug": "xiaohongshu",
+    "title": "Xiaohongshu",
+    "description": "适合种草文案、封面标题和笔记结构拆解的内容模板。",
+    "categorySlugs": ["writing", "image"],
+    "relatedTagSlugs": ["marketing", "journal"],
+    "featured": true
+  },
+  {
+    "slug": "marketing",
+    "title": "Marketing",
+    "description": "覆盖营销策略、内容包装、增长实验和转化文案。",
+    "categorySlugs": ["writing", "other", "coding"],
+    "relatedTagSlugs": ["xiaohongshu", "chatgpt", "journal"],
+    "featured": true
+  },
+  {
+    "slug": "resume",
+    "title": "Resume",
+    "description": "求职场景下的简历润色、经历重写和岗位匹配分析。",
+    "categorySlugs": ["coding", "writing"],
+    "relatedTagSlugs": ["chatgpt", "journal"],
+    "featured": false
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "id": "p005",
+  "slug": "resume-bullet-rewriter",
+  "title": "Resume Bullet Rewriter",
+  "summary": "把普通经历描述改写成结果导向、可量化的简历要点。",
+  "content": "你是一位招聘经理和职业教练。请把以下经历重写成简历 bullet points。\n\n要求：\n- 每条以动作动词开头。\n- 优先体现结果、影响和量化指标。\n- 如果缺少指标，请给出可以补充的数据建议。\n- 输出中英文双语版本。\n\n原始经历：\n{{experience}}\n\n目标岗位：\n{{targetRole}}",
+  "author": "Career Forge",
+  "category": "writing",
+  "tags": ["resume", "chatgpt"],
+  "targetModels": ["GPT-4.1", "GPT-5", "Claude 3.7 Sonnet"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "experience",
+      "description": "原始经历描述",
+      "required": true,
+      "example": "负责社媒账号运营，涨粉较快"
+    },
+    {
+      "name": "targetRole",
+      "description": "目标岗位",
+      "required": true,
+      "example": "增长运营 / 产品营销"
+    }
+  ],
+  "promptType": "template",
+  "difficulty": "beginner",
+  "featured": false,
+  "verified": true,
+  "useCase": "改写简历、作品集或自我介绍中的经历段落。",
+  "exampleInput": "experience=做过校园活动策划，targetRole=市场实习生",
+  "exampleOutput": "3-5 条双语 bullet points，并附可补充指标建议。",
+  "likes": 149,
+  "createdAt": "2026-03-14"
+}

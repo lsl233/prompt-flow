@@ -1,0 +1,41 @@
+{
+  "id": "p002",
+  "slug": "xiaohongshu-launch-copy-engine",
+  "title": "Xiaohongshu Launch Copy Engine",
+  "summary": "为产品发布生成小红书风格标题、开头钩子和正文节奏。",
+  "content": "请以资深内容策划的身份，为 {{product}} 生成一篇小红书发布文案。\n\n输出结构：\n- 5 个标题方案\n- 1 个 80-120 字的开场钩子\n- 正文分成 3 段，每段都有明确目的\n- 结尾加互动问题\n\n写作要求：\n- 口语化，但不要浮夸。\n- 强调真实体验、具体场景和细节。\n- 自然融入 {{sellingPoint}}。\n- 适合 {{audience}} 阅读。",
+  "author": "Mika Studio",
+  "category": "writing",
+  "tags": ["xiaohongshu", "marketing"],
+  "targetModels": ["GPT-4.1", "GPT-5", "Claude 3.7 Sonnet"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "product",
+      "description": "产品名或服务名",
+      "required": true,
+      "example": "AI 写作课程"
+    },
+    {
+      "name": "sellingPoint",
+      "description": "最核心卖点",
+      "required": true,
+      "example": "3 天做出第一套提示词系统"
+    },
+    {
+      "name": "audience",
+      "description": "目标受众",
+      "required": true,
+      "example": "自由职业者 / 小团队创始人"
+    }
+  ],
+  "promptType": "generator",
+  "difficulty": "beginner",
+  "featured": true,
+  "verified": true,
+  "useCase": "为内容营销或新品发布生成第一版社媒文案。",
+  "exampleInput": "product=提示词管理插件，sellingPoint=一键在 AI 页面调起，audience=重度 AI 用户",
+  "exampleOutput": "提供标题候选、正文和结尾互动问题。",
+  "likes": 256,
+  "createdAt": "2026-03-17"
+}

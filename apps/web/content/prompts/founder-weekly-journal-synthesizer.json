@@ -1,0 +1,29 @@
+{
+  "id": "p003",
+  "slug": "founder-weekly-journal-synthesizer",
+  "title": "Founder Weekly Journal Synthesizer",
+  "summary": "把零散周记整理成清晰的进展、问题和下周决策项。",
+  "content": "你是创业者的复盘编辑。请把下面一周的零散记录整理成一份清晰的周报。\n\n输出结构：\n1. 本周最重要的 3 个进展\n2. 正在积累的问题与风险\n3. 对产品、增长、团队的关键洞察\n4. 下周最值得推进的 3 件事\n5. 一句可以直接发到团队群的总结\n\n要求：\n- 保留原始语气，但提升结构感。\n- 不要发明不存在的信息。\n- 如果信息冲突，请指出冲突点。",
+  "author": "Lattice Notes",
+  "category": "other",
+  "tags": ["journal", "chatgpt"],
+  "targetModels": ["GPT-4.1 mini", "GPT-5", "Claude 3.5 Sonnet"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "rawNotes",
+      "description": "一周内零散记录",
+      "required": true,
+      "example": "会议记录、碎片想法、待办事项"
+    }
+  ],
+  "promptType": "workflow",
+  "difficulty": "beginner",
+  "featured": false,
+  "verified": true,
+  "useCase": "把创业者、独立开发者的周记快速整理成可复盘文档。",
+  "exampleInput": "包含产品上线、用户反馈、增长实验和招聘记录的碎片笔记。",
+  "exampleOutput": "输出结构化周报与下周优先级。",
+  "likes": 174,
+  "createdAt": "2026-03-16"
+}

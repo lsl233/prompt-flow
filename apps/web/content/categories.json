@@ -1,0 +1,30 @@
+[
+  {
+    "slug": "writing",
+    "title": "Writing Systems",
+    "description": "面向内容创作、结构化表达和语气控制的提示词集合。",
+    "accent": "from-amber-300/30 via-orange-400/20 to-transparent",
+    "featuredTagSlugs": ["xiaohongshu", "journal", "marketing"]
+  },
+  {
+    "slug": "coding",
+    "title": "Code Operators",
+    "description": "覆盖代码生成、重构、审查和调试等高频开发场景。",
+    "accent": "from-emerald-300/30 via-cyan-400/20 to-transparent",
+    "featuredTagSlugs": ["chatgpt", "resume", "marketing"]
+  },
+  {
+    "slug": "image",
+    "title": "Visual Engines",
+    "description": "为 Midjourney 和视觉生成工具准备的构图与风格提示。",
+    "accent": "from-fuchsia-300/25 via-rose-300/20 to-transparent",
+    "featuredTagSlugs": ["midjourney", "xiaohongshu"]
+  },
+  {
+    "slug": "other",
+    "title": "Workflow Kits",
+    "description": "适合研究、分析、运营与跨部门协作的通用 Prompt。",
+    "accent": "from-slate-200/20 via-sky-300/10 to-transparent",
+    "featuredTagSlugs": ["journal", "marketing", "chatgpt"]
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "id": "p006",
+  "slug": "prompt-ops-content-calendar",
+  "title": "Prompt Ops Content Calendar",
+  "summary": "围绕一个主题生成 2 周内容规划，包括角度、目标和 CTA。",
+  "content": "请你作为内容运营负责人，围绕 {{topic}} 生成 14 天内容日历。\n\n每一天都输出：\n- 内容角度\n- 适合平台\n- 核心信息点\n- CTA\n- 需要准备的素材\n\n要求：\n- 至少覆盖教育、案例、观点、转化四类内容。\n- 节奏上前轻后重，最后 3 天更偏转化。",
+  "author": "Ops Grid",
+  "category": "other",
+  "tags": ["marketing", "xiaohongshu"],
+  "targetModels": ["GPT-5", "Claude 3.7 Sonnet", "Gemini 2.0 Flash"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "topic",
+      "description": "内容主题",
+      "required": true,
+      "example": "AI 提示词管理"
+    }
+  ],
+  "promptType": "workflow",
+  "difficulty": "intermediate",
+  "featured": true,
+  "verified": true,
+  "useCase": "快速生成连续内容规划，适合 launch 前两周执行。",
+  "exampleInput": "topic=独立开发者产品上线",
+  "exampleOutput": "14 天日历，含平台、素材与 CTA。",
+  "likes": 237,
+  "createdAt": "2026-03-13"
+}

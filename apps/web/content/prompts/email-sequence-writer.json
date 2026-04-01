@@ -1,0 +1,35 @@
+{
+  "id": "p012",
+  "slug": "email-sequence-writer",
+  "title": "Email Sequence Writer",
+  "summary": "生成销售或营销用的邮件序列。",
+  "content": "请为以下产品或服务生成一套 5 封的邮件序列。",
+  "author": "CopyKing",
+  "category": "writing",
+  "tags": ["marketing", "chatgpt"],
+  "targetModels": ["GPT-4.1", "GPT-5", "Claude 3.7 Sonnet"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "product",
+      "description": "产品或服务名称",
+      "required": true,
+      "example": "在线课程平台"
+    },
+    {
+      "name": "goal",
+      "description": "邮件序列目标",
+      "required": true,
+      "example": "引导注册试用"
+    }
+  ],
+  "promptType": "generator",
+  "difficulty": "intermediate",
+  "featured": false,
+  "verified": false,
+  "useCase": "生成完整的邮件营销序列。",
+  "exampleInput": "产品=项目管理软件，goal=免费试用转化",
+  "exampleOutput": "5 封邮件序列大纲",
+  "likes": 234,
+  "createdAt": "2026-03-07"
+}

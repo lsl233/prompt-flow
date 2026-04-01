@@ -1,0 +1,35 @@
+{
+  "id": "p013",
+  "slug": "product-description-writer",
+  "title": "Product Description Writer",
+  "summary": "为电商或 SaaS 产品生成有说服力的产品描述。",
+  "content": "请为以下产品生成有吸引力的产品描述。",
+  "author": "ContentCraft",
+  "category": "writing",
+  "tags": ["marketing", "xiaohongshu"],
+  "targetModels": ["GPT-4.1", "GPT-5"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "productName",
+      "description": "产品名称",
+      "required": true,
+      "example": "智能手表"
+    },
+    {
+      "name": "keyFeatures",
+      "description": "核心功能点",
+      "required": true,
+      "example": "健康监测、NFC 支付"
+    }
+  ],
+  "promptType": "generator",
+  "difficulty": "beginner",
+  "featured": false,
+  "verified": false,
+  "useCase": "快速生成电商产品页面文案。",
+  "exampleInput": "产品=无线耳机，features=降噪、长续航",
+  "exampleOutput": "产品标题、亮点和详细描述",
+  "likes": 189,
+  "createdAt": "2026-03-06"
+}

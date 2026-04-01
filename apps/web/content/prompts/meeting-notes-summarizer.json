@@ -1,0 +1,29 @@
+{
+  "id": "p014",
+  "slug": "meeting-notes-summarizer",
+  "title": "Meeting Notes Summarizer",
+  "summary": "将会议记录整理成结构化的摘要和行动项。",
+  "content": "请将以下会议记录整理成结构化摘要，包含决策、行动项和负责人。",
+  "author": "ProductivityPro",
+  "category": "other",
+  "tags": ["journal", "chatgpt"],
+  "targetModels": ["GPT-4.1", "GPT-5", "Claude 3.7 Sonnet"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "rawNotes",
+      "description": "原始会议记录",
+      "required": true,
+      "example": "未整理的会议笔记"
+    }
+  ],
+  "promptType": "workflow",
+  "difficulty": "beginner",
+  "featured": false,
+  "verified": false,
+  "useCase": "快速整理会议纪要。",
+  "exampleInput": "包含讨论和决定的会议记录",
+  "exampleOutput": "摘要、决策和行动项列表",
+  "likes": 156,
+  "createdAt": "2026-03-05"
+}

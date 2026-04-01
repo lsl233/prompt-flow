@@ -1,0 +1,29 @@
+{
+  "id": "p010",
+  "slug": "sql-query-optimizer",
+  "title": "SQL Query Optimizer",
+  "summary": "分析 SQL 查询并提供性能优化建议。",
+  "content": "请分析以下 SQL 查询的性能问题并提供优化建议。",
+  "author": "DataWizard",
+  "category": "coding",
+  "tags": ["chatgpt"],
+  "targetModels": ["GPT-4.1", "GPT-5"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "sqlQuery",
+      "description": "需要优化的 SQL 查询",
+      "required": true,
+      "example": "SELECT * FROM ..."
+    }
+  ],
+  "promptType": "assistant",
+  "difficulty": "advanced",
+  "featured": false,
+  "verified": false,
+  "useCase": "优化数据库查询性能。",
+  "exampleInput": "包含多表 JOIN 的复杂查询",
+  "exampleOutput": "优化建议和重构后的 SQL",
+  "likes": 198,
+  "createdAt": "2026-03-09"
+}

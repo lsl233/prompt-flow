@@ -1,0 +1,35 @@
+{
+  "id": "p016",
+  "slug": "social-media-content-calendar",
+  "title": "Social Media Content Calendar",
+  "summary": "为社交媒体账号生成月度内容日历。",
+  "content": "请为以下社交媒体账号生成 30 天内容日历。",
+  "author": "SocialButterfly",
+  "category": "writing",
+  "tags": ["marketing", "xiaohongshu"],
+  "targetModels": ["GPT-4.1", "GPT-5"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "platform",
+      "description": "社交媒体平台",
+      "required": true,
+      "example": "小红书/微博/抖音"
+    },
+    {
+      "name": "brand",
+      "description": "品牌或账号定位",
+      "required": true,
+      "example": "科技数码评测"
+    }
+  ],
+  "promptType": "workflow",
+  "difficulty": "intermediate",
+  "featured": false,
+  "verified": false,
+  "useCase": "规划社交媒体内容发布计划。",
+  "exampleInput": "平台=小红书，品牌=美妆教程",
+  "exampleOutput": "30 天内容日历",
+  "likes": 212,
+  "createdAt": "2026-03-03"
+}

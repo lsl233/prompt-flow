@@ -1,0 +1,29 @@
+{
+  "id": "p017",
+  "slug": "bug-analysis-report",
+  "title": "Bug Analysis Report",
+  "summary": "分析 bug 原因并生成结构化的故障报告。",
+  "content": "请分析以下 bug 现象并生成结构化的故障分析报告。",
+  "author": "DebugMaster",
+  "category": "coding",
+  "tags": ["chatgpt"],
+  "targetModels": ["GPT-4.1", "GPT-5", "Claude 3.7 Sonnet"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "bugDescription",
+      "description": "Bug 描述和复现步骤",
+      "required": true,
+      "example": "错误信息和复现环境"
+    }
+  ],
+  "promptType": "assistant",
+  "difficulty": "intermediate",
+  "featured": false,
+  "verified": false,
+  "useCase": "系统性分析 bug 根因。",
+  "exampleInput": "崩溃日志和复现步骤",
+  "exampleOutput": "根因分析和修复建议",
+  "likes": 178,
+  "createdAt": "2026-03-02"
+}

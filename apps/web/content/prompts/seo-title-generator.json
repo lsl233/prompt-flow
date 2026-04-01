@@ -1,0 +1,35 @@
+{
+  "id": "p011",
+  "slug": "seo-title-generator",
+  "title": "SEO Title & Meta Generator",
+  "summary": "为文章或产品页面生成 SEO 友好的标题和元描述。",
+  "content": "请为以下内容生成 SEO 优化的标题和元描述。",
+  "author": "SEOMaster",
+  "category": "writing",
+  "tags": ["marketing", "chatgpt"],
+  "targetModels": ["GPT-4.1", "GPT-5", "Claude 3.7 Sonnet"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "content",
+      "description": "文章或页面内容",
+      "required": true,
+      "example": "博客文章正文"
+    },
+    {
+      "name": "targetKeyword",
+      "description": "目标关键词",
+      "required": true,
+      "example": "AI 写作工具"
+    }
+  ],
+  "promptType": "generator",
+  "difficulty": "beginner",
+  "featured": false,
+  "verified": false,
+  "useCase": "提升内容 SEO 效果。",
+  "exampleInput": "关于 AI 写作工具的评测文章",
+  "exampleOutput": "5 个标题选项和元描述",
+  "likes": 167,
+  "createdAt": "2026-03-08"
+}

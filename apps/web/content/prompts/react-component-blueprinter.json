@@ -1,0 +1,29 @@
+{
+  "id": "p007",
+  "slug": "react-component-blueprinter",
+  "title": "React Component Blueprinter",
+  "summary": "根据功能描述生成带 props、状态和边界条件说明的组件骨架。",
+  "content": "你是一位前端架构师。请根据下面的需求，生成一个 React + TypeScript 组件蓝图。\n\n必须输出：\n1. 组件职责说明\n2. Props 定义\n3. 状态设计\n4. 事件与副作用清单\n5. 组件代码骨架\n6. 最容易遗漏的边界条件\n\n功能描述：\n{{featureDescription}}",
+  "author": "ReactWizard",
+  "category": "coding",
+  "tags": ["chatgpt", "resume"],
+  "targetModels": ["GPT-4.1", "GPT-5", "Claude 3.7 Sonnet"],
+  "language": "zh-CN",
+  "variables": [
+    {
+      "name": "featureDescription",
+      "description": "组件功能描述",
+      "required": true,
+      "example": "一个支持筛选、排序和分页的资源列表"
+    }
+  ],
+  "promptType": "assistant",
+  "difficulty": "intermediate",
+  "featured": false,
+  "verified": false,
+  "useCase": "在开始编码前先拿到一个结构可靠的组件蓝图。",
+  "exampleInput": "featureDescription=团队成员邀请弹窗，支持邮箱校验和权限配置",
+  "exampleOutput": "生成组件草图、类型和边界条件清单。",
+  "likes": 298,
+  "createdAt": "2026-03-12"
+}
