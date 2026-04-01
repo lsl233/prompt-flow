@@ -16,7 +16,9 @@ export interface PromptCardProps extends React.HTMLAttributes<HTMLDivElement> {
   key?: React.Key;
 }
 
-export function PromptCard({ id, title, description, tags, usageCount, slug, className = '', ...props }: PromptCardProps) {
+export function PromptCard({ id: _id, title, description, tags, usageCount, slug, className = '', ...props }: PromptCardProps) {
+  void _id;
+
   return (
     <div
       className={cn(

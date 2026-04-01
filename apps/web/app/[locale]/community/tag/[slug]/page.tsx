@@ -18,8 +18,8 @@ import {
   SectionHeading,
 } from "@/components/community/CommunityUI";
 
-export function generateStaticParams() {
-  return getAllTags().map((tag) => ({ slug: tag.slug }));
+export async function generateStaticParams() {
+  return (await getAllTags()).map((tag) => ({ slug: tag.slug }));
 }
 
 export async function generateMetadata({
@@ -28,7 +28,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const tag = getTagBySlug(slug);
+  const tag = await getTagBySlug(slug);
   const dictionary = getCommunityDictionary(locale);
 
   if (!tag) {
@@ -67,18 +67,20 @@ export default async function CommunityTagPage({
 }) {
   const { locale, slug } = await params;
   const dictionary = getCommunityDictionary(locale);
-  const tag = getTagBySlug(slug);
+  const tag = await getTagBySlug(slug);
 
   if (!tag) {
     notFound();
   }
 
-  const prompts = getPromptsByTag(tag.slug);
-  const relatedCategories = tag.categorySlugs
-    .map((categorySlug) => getCategoryBySlug(categorySlug))
+  const prompts = await getPromptsByTag(tag.slug);
+  const relatedCategories = (await Promise.all(
+    tag.categorySlugs.map((categorySlug) => getCategoryBySlug(categorySlug))
+  ))
     .filter((category): category is NonNullable<typeof category> => Boolean(category));
-  const relatedTags = tag.relatedTagSlugs
-    .map((tagSlug) => getTagBySlug(tagSlug))
+  const relatedTags = (await Promise.all(
+    tag.relatedTagSlugs.map((tagSlug) => getTagBySlug(tagSlug))
+  ))
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   return (

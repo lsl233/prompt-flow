@@ -44,13 +44,18 @@ export default async function CommunityPage({
 }) {
   const { locale } = await params;
   const dictionary = getCommunityDictionary(locale);
-  const categories = getAllCategories();
-  const featuredPrompts = getFeaturedPrompts().slice(0, 3);
-  const latestPrompts = getLatestPrompts(6);
-  const featuredTags = getFeaturedTags();
+  const categories = await getAllCategories();
+  const featuredPrompts = (await getFeaturedPrompts()).slice(0, 3);
+  const latestPrompts = await getLatestPrompts(6);
+  const featuredTags = await getFeaturedTags();
 
   const promptsByCategory = Object.fromEntries(
-    categories.map((category) => [category.slug, getPromptsByCategory(category.slug)])
+    await Promise.all(
+      categories.map(async (category) => [
+        category.slug,
+        await getPromptsByCategory(category.slug),
+      ])
+    )
   );
 
   return (

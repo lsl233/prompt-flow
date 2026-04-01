@@ -41,10 +41,16 @@ export default async function CommunityCategoryIndexPage({
 }) {
   const { locale } = await params;
   const dictionary = getCommunityDictionary(locale);
-  const categories = getAllCategories();
-  const featuredTags = getFeaturedTags();
+  const categories = await getAllCategories();
+  const featuredTags = await getFeaturedTags();
+  const allPrompts = await getAllPrompts();
   const promptsByCategory = Object.fromEntries(
-    categories.map((category) => [category.slug, getPromptsByCategory(category.slug)])
+    await Promise.all(
+      categories.map(async (category) => [
+        category.slug,
+        await getPromptsByCategory(category.slug),
+      ])
+    )
   );
 
   return (
@@ -63,7 +69,7 @@ export default async function CommunityCategoryIndexPage({
         }
         stats={[
           { label: locale === "zh" ? "分类数" : "Categories", value: String(categories.length).padStart(2, "0") },
-          { label: locale === "zh" ? "Prompt 总量" : "Prompts", value: String(getAllPrompts().length).padStart(2, "0") },
+          { label: locale === "zh" ? "Prompt 总量" : "Prompts", value: String(allPrompts.length).padStart(2, "0") },
           { label: locale === "zh" ? "热门标签" : "Hot tags", value: String(featuredTags.length).padStart(2, "0") },
         ]}
       />

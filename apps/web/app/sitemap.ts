@@ -5,11 +5,13 @@ import { getAllCategories, getAllPrompts } from "@/lib/community-prompts";
 
 const STATIC_ROUTES = ["/", "/community", "/community/category"] as const;
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
+  const prompts = await getAllPrompts();
+  const categories = await getAllCategories();
   const dynamicRoutes = [
-    ...getAllPrompts().map((prompt) => `/community/${prompt.slug}`),
-    ...getAllCategories().map((category) => `/community/category/${category.slug}`),
+    ...prompts.map((prompt) => `/community/${prompt.slug}`),
+    ...categories.map((category) => `/community/category/${category.slug}`),
   ];
   const routes = [...STATIC_ROUTES, ...dynamicRoutes];
 

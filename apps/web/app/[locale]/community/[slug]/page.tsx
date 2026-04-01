@@ -16,8 +16,8 @@ import {
   SectionHeading,
 } from "@/components/community/CommunityUI";
 
-export function generateStaticParams() {
-  return getAllPrompts().map((prompt) => ({ slug: prompt.slug }));
+export async function generateStaticParams() {
+  return (await getAllPrompts()).map((prompt) => ({ slug: prompt.slug }));
 }
 
 export async function generateMetadata({
@@ -26,7 +26,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const prompt = getPromptBySlug(slug);
+  const prompt = await getPromptBySlug(slug);
   const dictionary = getCommunityDictionary(locale);
 
   if (!prompt) {
@@ -52,20 +52,20 @@ export default async function CommunityPromptDetailPage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
-  const prompt = getPromptBySlug(slug);
+  const prompt = await getPromptBySlug(slug);
 
   if (!prompt) {
     notFound();
   }
 
   const dictionary = getCommunityDictionary(locale);
-  const category = getCategoryBySlug(prompt.category);
+  const category = await getCategoryBySlug(prompt.category);
 
   if (!category) {
     notFound();
   }
 
-  const relatedPrompts = getRelatedPrompts(prompt);
+  const relatedPrompts = await getRelatedPrompts(prompt);
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">

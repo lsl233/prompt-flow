@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Hash } from "lucide-react";
 import {
+  getAllCategories,
+  getAllPrompts,
   getAllTags,
-  getCategoryBySlug,
-  getPromptsByTag,
 } from "@/lib/community-prompts";
 import type { Locale } from "@/i18n/routing";
 import { buildPageMetadata } from "@/lib/seo";
@@ -41,7 +41,16 @@ export default async function CommunityTagIndexPage({
 }) {
   const { locale } = await params;
   const dictionary = getCommunityDictionary(locale);
-  const tags = getAllTags();
+  const tags = await getAllTags();
+  const categories = await getAllCategories();
+  const prompts = await getAllPrompts();
+  const categoryMap = new Map(categories.map((category) => [category.slug, category]));
+  const promptsByTag = new Map(
+    tags.map((tag) => [
+      tag.slug,
+      prompts.filter((prompt) => prompt.tags.includes(tag.slug)),
+    ])
+  );
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
@@ -76,9 +85,9 @@ export default async function CommunityTagIndexPage({
           />
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {tags.map((tag) => {
-              const promptCount = getPromptsByTag(tag.slug).length;
+              const promptCount = promptsByTag.get(tag.slug)?.length ?? 0;
               const relatedCategories = tag.categorySlugs
-                .map((categorySlug) => getCategoryBySlug(categorySlug))
+                .map((categorySlug) => categoryMap.get(categorySlug))
                 .filter((category): category is NonNullable<typeof category> => Boolean(category));
 
               return (

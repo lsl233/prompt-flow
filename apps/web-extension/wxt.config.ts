@@ -7,7 +7,7 @@ import { DEFAULT_AI_WEBSITES, getMatchPatterns } from "./shared/ai-websites";
 export default defineConfig({
   modules: ["@wxt-dev/module-react"],
   vite: () => ({
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss() as any],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "."),

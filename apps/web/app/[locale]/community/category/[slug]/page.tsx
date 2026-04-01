@@ -18,8 +18,8 @@ import {
   SectionHeading,
 } from "@/components/community/CommunityUI";
 
-export function generateStaticParams() {
-  return getAllCategories().map((category) => ({ slug: category.slug }));
+export async function generateStaticParams() {
+  return (await getAllCategories()).map((category) => ({ slug: category.slug }));
 }
 
 export async function generateMetadata({
@@ -28,7 +28,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const category = getCategoryBySlug(slug);
+  const category = await getCategoryBySlug(slug);
   const dictionary = getCommunityDictionary(locale);
 
   if (!category) {
@@ -55,15 +55,16 @@ export default async function CommunityCategoryPage({
 }) {
   const { locale, slug } = await params;
   const dictionary = getCommunityDictionary(locale);
-  const category = getCategoryBySlug(slug);
+  const category = await getCategoryBySlug(slug);
 
   if (!category) {
     notFound();
   }
 
-  const prompts = getPromptsByCategory(category.slug);
-  const relatedTags = category.featuredTagSlugs
-    .map((tagSlug) => getTagBySlug(tagSlug))
+  const prompts = await getPromptsByCategory(category.slug);
+  const resolvedRelatedTags = (
+    await Promise.all(category.featuredTagSlugs.map((tagSlug) => getTagBySlug(tagSlug)))
+  )
     .filter((tag): tag is NonNullable<typeof tag> => Boolean(tag));
 
   return (
@@ -74,7 +75,7 @@ export default async function CommunityCategoryPage({
         description={category.description}
         stats={[
           { label: dictionary.labels.prompts, value: String(prompts.length).padStart(2, "0") },
-          { label: dictionary.meta.tags, value: String(relatedTags.length).padStart(2, "0") },
+          { label: dictionary.meta.tags, value: String(resolvedRelatedTags.length).padStart(2, "0") },
           { label: dictionary.labels.featured, value: String(prompts.filter((item) => item.featured).length).padStart(2, "0") },
         ]}
       />
@@ -93,7 +94,7 @@ export default async function CommunityCategoryPage({
             title={dictionary.meta.tags}
             description="相关标签用于继续收窄或扩展内容视角，承担分类页的内链角色。"
           />
-          <InlineTagLinks tags={relatedTags} />
+          <InlineTagLinks tags={resolvedRelatedTags} />
         </section>
 
         <section>

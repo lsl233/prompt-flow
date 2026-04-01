@@ -19,7 +19,7 @@ import { Link } from "@/i18n/navigation";
 export default async function HomePage() {
   const t = await getTranslations("home");
   const communityT = await getTranslations("community");
-  const prompts = getAllPrompts().slice(0, 3);
+  const prompts = (await getAllPrompts()).slice(0, 3);
 
   return (
     <div className="flex flex-col min-h-screen bg-[var(--color-bg-primary)]">

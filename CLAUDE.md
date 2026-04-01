@@ -10,28 +10,9 @@ A pnpm monorepo containing multiple applications built with modern web technolog
 - **Monorepo Structure**: `apps/` for applications, `packages/` for shared utilities
 - **Applications**:
   - `apps/web-extension` - Cross-browser extension (Chrome/Firefox) built with WXT and React. [Details](apps/web-extension/CLAUDE.md)
-  - `apps/web` - Next.js web application. [Details](apps/web/CLAUDE.md)
+  - `apps/web` - Next.js web application with Drizzle ORM and Postgres. [Details](apps/web/CLAUDE.md)
 - **Shared Packages**:
   - `packages/ui` - Shared UI components and Tailwind CSS configuration
-
-## First Principles
-
-### 1. Understand Before Implementing
-- **Do not start implementing before fully understanding the user's intent and project conventions**
-- When user provides a specific implementation plan or references a specific component/file, follow it exactly
-- Do not explore alternative approaches or start implementing before confirming understanding
-- Ask for clarification if requirements are ambiguous
-
-### 2. Prefer Simple Solutions
-- **Implement the minimal viable solution first**
-- Avoid proposing complex alternatives (CSS-in-JS, Tailwind config changes, new dependencies) when simple approaches work
-- Do not build full settings pages for simple configuration changes
-- Reject unnecessary abstractions and premature generalization
-
-### 3. Reuse Existing Components
-- **Always search for and reuse existing components and hooks before writing new code**
-- Look in `packages/ui/src/components/`, `shared/components/`, `shared/hooks/`, and app-specific component directories
-- Present findings and get confirmation before writing new components
 
 ## Common Commands
 
@@ -44,23 +25,33 @@ pnpm install
 # Type Checking (all packages)
 pnpm compile
 
+# Web app commands
+pnpm --filter web dev              # Start Next.js dev server
+pnpm --filter web build            # Build for production
+pnpm --filter web start            # Start production server
+pnpm --filter web lint             # Run ESLint
+
+# Database commands (web app)
+pnpm --filter web db:generate      # Generate Drizzle migrations
+pnpm --filter web db:migrate       # Run database migrations
+pnpm --filter web db:seed          # Seed database with initial data
+
+# Web extension commands
+pnpm dev                           # Start WXT dev mode (Chrome) - root shortcut
+pnpm dev:firefox                   # Start WXT dev mode (Firefox)
+pnpm build                         # Build extension for Chrome
+pnpm build:firefox                 # Build extension for Firefox
+pnpm zip                           # Create distribution zip (Chrome)
+pnpm zip:firefox                   # Create distribution zip (Firefox)
+
 # Run commands in a specific app
 pnpm --filter web-extension <command>
 pnpm --filter web <command>
 
 # Add dependency to specific app
+pnpm --filter web add <package>
 pnpm --filter web-extension add <package>
 ```
-
-## Post-Implementation Verification
-
-After any multi-file implementation, verify:
-
-- [ ] **TypeScript compilation passes**: Run `pnpm compile`
-- [ ] **No runtime errors from missing providers/context**: Check component tree
-- [ ] **All new strings are i18n wrapped**: Use `t()` function for all user-facing text
-- [ ] **No over-engineering**: Review for unnecessary abstractions
-- [ ] **Component reuse verified**: Confirm no duplicate existing components
 
 ## Shared UI Package (`packages/ui`)
 
@@ -112,6 +103,35 @@ To add a shared package in `packages/`:
 2. Initialize: `cd packages/<name> && pnpm init`
 3. Configure `package.json` with proper name: `@prompt-flow/<name>`
 4. Reference in apps: `pnpm --filter <app> add @prompt-flow/<name>`
+
+## First Principles
+
+### 1. Understand Before Implementing
+- **Do not start implementing before fully understanding the user's intent and project conventions**
+- When user provides a specific implementation plan or references a specific component/file, follow it exactly
+- Do not explore alternative approaches or start implementing before confirming understanding
+- Ask for clarification if requirements are ambiguous
+
+### 2. Prefer Simple Solutions
+- **Implement the minimal viable solution first**
+- Avoid proposing complex alternatives (CSS-in-JS, Tailwind config changes, new dependencies) when simple approaches work
+- Do not build full settings pages for simple configuration changes
+- Reject unnecessary abstractions and premature generalization
+
+### 3. Reuse Existing Components
+- **Always search for and reuse existing components and hooks before writing new code**
+- Look in `packages/ui/src/components/`, `shared/components/`, `shared/hooks/`, and app-specific component directories
+- Present findings and get confirmation before writing new components
+
+## Post-Implementation Verification
+
+After any multi-file implementation, verify:
+
+- [ ] **TypeScript compilation passes**: Run `pnpm compile`
+- [ ] **No runtime errors from missing providers/context**: Check component tree
+- [ ] **All new strings are i18n wrapped**: Use `t()` function for all user-facing text
+- [ ] **No over-engineering**: Review for unnecessary abstractions
+- [ ] **Component reuse verified**: Confirm no duplicate existing components
 
 ## TODO Management
 
