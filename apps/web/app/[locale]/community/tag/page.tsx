@@ -16,16 +16,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const dictionary = getCommunityDictionary(locale);
 
   return {
     ...buildPageMetadata({
       locale: locale as Locale,
       pathname: "/community/tag",
-      title: locale === "zh" ? "Prompt 标签 | PromptFlow" : "Prompt Tags | PromptFlow",
-      description:
-        locale === "zh"
-          ? "浏览 Prompt 社区全部标签入口，按专题、平台和场景继续探索内容。"
-          : "Browse all prompt community tags and explore prompts by topic, platform, and scenario.",
+      title: dictionary.tagIndexPage.metaTitle,
+      description: dictionary.tagIndexPage.metaDescription,
     }),
     robots: {
       index: false,
@@ -41,9 +39,9 @@ export default async function CommunityTagIndexPage({
 }) {
   const { locale } = await params;
   const dictionary = getCommunityDictionary(locale);
-  const tags = await getAllTags();
-  const categories = await getAllCategories();
-  const prompts = await getAllPrompts();
+  const tags = await getAllTags(locale);
+  const categories = await getAllCategories(locale);
+  const prompts = await getAllPrompts(locale);
   const categoryMap = new Map(categories.map((category) => [category.slug, category]));
   const promptsByTag = new Map(
     tags.map((tag) => [
@@ -55,33 +53,21 @@ export default async function CommunityTagIndexPage({
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
       <CommunityHero
-        eyebrow={locale === "zh" ? "Tag Index" : "Tag Index"}
-        title={
-          locale === "zh"
-            ? "按专题、平台和场景串联 Prompt"
-            : "Connect prompts through topics, platforms, and scenarios"
-        }
-        description={
-          locale === "zh"
-            ? "标签页负责把横向关系串起来。它不是分类的替代品，而是帮助用户从一个语境跳到另一个语境的索引层。"
-            : "Tags connect prompts across categories. They are not a replacement for categories, but the cross-topic layer that keeps browsing fluid."
-        }
+        eyebrow={dictionary.tagIndexPage.eyebrow}
+        title={dictionary.tagIndexPage.title}
+        description={dictionary.tagIndexPage.description}
         stats={[
-          { label: locale === "zh" ? "标签数" : "Tags", value: String(tags.length).padStart(2, "0") },
-          { label: locale === "zh" ? "精选标签" : "Featured", value: String(tags.filter((tag) => tag.featured).length).padStart(2, "0") },
-          { label: locale === "zh" ? "覆盖分类" : "Categories", value: String(new Set(tags.flatMap((tag) => tag.categorySlugs)).size).padStart(2, "0") },
+          { label: dictionary.tagIndexPage.statLabels.tags, value: String(tags.length).padStart(2, "0") },
+          { label: dictionary.tagIndexPage.statLabels.featured, value: String(tags.filter((tag) => tag.featured).length).padStart(2, "0") },
+          { label: dictionary.tagIndexPage.statLabels.categories, value: String(new Set(tags.flatMap((tag) => tag.categorySlugs)).size).padStart(2, "0") },
         ]}
       />
 
       <div className="mx-auto max-w-7xl space-y-16 px-4 py-14 sm:px-6 lg:px-8 lg:py-18">
         <section>
           <SectionHeading
-            title={locale === "zh" ? "全部标签" : "All tags"}
-            description={
-              locale === "zh"
-                ? "标签入口页让 `/community/tag` 成为真实目录，而不只是一个动态 slug 容器。"
-                : "This index makes `/community/tag` a real directory page instead of just a dynamic slug container."
-            }
+            title={dictionary.tagIndexPage.allTagsTitle}
+            description={dictionary.tagIndexPage.allTagsDescription}
           />
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {tags.map((tag) => {
@@ -133,7 +119,7 @@ export default async function CommunityTagIndexPage({
 
         <section>
           <CommunityCTA
-            title={locale === "zh" ? "继续按标签深入浏览" : "Keep exploring through tags"}
+            title={dictionary.tagIndexPage.ctaTitle}
             description={dictionary.home.ctaDescription}
             dictionary={dictionary}
           />

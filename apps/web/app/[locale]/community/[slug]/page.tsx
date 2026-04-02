@@ -17,7 +17,7 @@ import {
 } from "@/components/community/CommunityUI";
 
 export async function generateStaticParams() {
-  return (await getAllPrompts()).map((prompt) => ({ slug: prompt.slug }));
+  return (await getAllPrompts("zh")).map((prompt) => ({ slug: prompt.slug }));
 }
 
 export async function generateMetadata({
@@ -26,7 +26,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const prompt = await getPromptBySlug(slug);
+  const prompt = await getPromptBySlug(slug, locale);
   const dictionary = getCommunityDictionary(locale);
 
   if (!prompt) {
@@ -52,30 +52,30 @@ export default async function CommunityPromptDetailPage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
-  const prompt = await getPromptBySlug(slug);
+  const prompt = await getPromptBySlug(slug, locale);
 
   if (!prompt) {
     notFound();
   }
 
   const dictionary = getCommunityDictionary(locale);
-  const category = await getCategoryBySlug(prompt.category);
+  const category = await getCategoryBySlug(prompt.category, locale);
 
   if (!category) {
     notFound();
   }
 
-  const relatedPrompts = await getRelatedPrompts(prompt);
+  const relatedPrompts = await getRelatedPrompts(prompt, 3, locale);
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
-      <PromptDetailLayout prompt={prompt} category={category} dictionary={dictionary} />
+      <PromptDetailLayout prompt={prompt} category={category} dictionary={dictionary} locale={locale} />
 
       <div className="mx-auto max-w-7xl space-y-16 px-4 py-14 sm:px-6 lg:px-8 lg:py-18">
         <section>
           <SectionHeading
             title={dictionary.detail.relatedTitle}
-            description="相关 Prompt 先按分类和标签相似度做静态推荐，后续再替换成真实的相关推荐策略。"
+            description={dictionary.detail.relatedDescription}
           />
           <PromptGrid prompts={relatedPrompts} dictionary={dictionary} />
         </section>

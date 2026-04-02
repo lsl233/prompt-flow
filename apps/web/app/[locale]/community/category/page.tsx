@@ -22,15 +22,13 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const dictionary = getCommunityDictionary(locale);
 
   return buildPageMetadata({
     locale: locale as Locale,
     pathname: "/community/category",
-    title: locale === "zh" ? "Prompt 分类 | PromptFlow" : "Prompt Categories | PromptFlow",
-    description:
-      locale === "zh"
-        ? "查看 Prompt 社区所有分类入口，按主题浏览写作、编程、图像和工作流内容。"
-        : "Browse all prompt community categories and explore writing, coding, image, and workflow collections.",
+    title: dictionary.categoryIndexPage.metaTitle,
+    description: dictionary.categoryIndexPage.metaDescription,
   });
 }
 
@@ -41,14 +39,14 @@ export default async function CommunityCategoryIndexPage({
 }) {
   const { locale } = await params;
   const dictionary = getCommunityDictionary(locale);
-  const categories = await getAllCategories();
-  const featuredTags = await getFeaturedTags();
-  const allPrompts = await getAllPrompts();
+  const categories = await getAllCategories(locale);
+  const featuredTags = await getFeaturedTags(locale);
+  const allPrompts = await getAllPrompts(locale);
   const promptsByCategory = Object.fromEntries(
     await Promise.all(
       categories.map(async (category) => [
         category.slug,
-        await getPromptsByCategory(category.slug),
+        await getPromptsByCategory(category.slug, locale),
       ])
     )
   );
@@ -56,33 +54,21 @@ export default async function CommunityCategoryIndexPage({
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
       <CommunityHero
-        eyebrow={locale === "zh" ? "Category Index" : "Category Index"}
-        title={
-          locale === "zh"
-            ? "先按主题理解社区，再进入具体 Prompt"
-            : "Start with themes before diving into individual prompts"
-        }
-        description={
-          locale === "zh"
-            ? "分类页是社区的信息骨架。先看清每个主题覆盖什么内容，再决定往哪个方向深入，会比在海量 Prompt 里直接搜索更高效。"
-            : "Categories are the structural layer of the community. Start with the broad theme, then drill into the prompts that matter."
-        }
+        eyebrow={dictionary.categoryIndexPage.eyebrow}
+        title={dictionary.categoryIndexPage.title}
+        description={dictionary.categoryIndexPage.description}
         stats={[
-          { label: locale === "zh" ? "分类数" : "Categories", value: String(categories.length).padStart(2, "0") },
-          { label: locale === "zh" ? "Prompt 总量" : "Prompts", value: String(allPrompts.length).padStart(2, "0") },
-          { label: locale === "zh" ? "热门标签" : "Hot tags", value: String(featuredTags.length).padStart(2, "0") },
+          { label: dictionary.categoryIndexPage.statLabels.categories, value: String(categories.length).padStart(2, "0") },
+          { label: dictionary.categoryIndexPage.statLabels.prompts, value: String(allPrompts.length).padStart(2, "0") },
+          { label: dictionary.categoryIndexPage.statLabels.tags, value: String(featuredTags.length).padStart(2, "0") },
         ]}
       />
 
       <div className="mx-auto max-w-7xl space-y-16 px-4 py-14 sm:px-6 lg:px-8 lg:py-18">
         <section>
           <SectionHeading
-            title={locale === "zh" ? "全部分类" : "All categories"}
-            description={
-              locale === "zh"
-                ? "每个分类页都应该是独立入口页，而不是只有详情页的附属导航。"
-                : "Each category should work as a real entry page, not just a supporting navigation node."
-            }
+            title={dictionary.categoryIndexPage.allCategoriesTitle}
+            description={dictionary.categoryIndexPage.allCategoriesDescription}
           />
           <CategoryGrid
             categories={categories}
@@ -94,18 +80,14 @@ export default async function CommunityCategoryIndexPage({
         <section>
           <SectionHeading
             title={dictionary.meta.tags}
-            description={
-              locale === "zh"
-                ? "如果用户想从专题而不是主题切入，可以继续进入标签索引。"
-                : "If users prefer topic-based browsing instead of category-based browsing, the tag index is the next layer."
-            }
+            description={dictionary.categoryIndexPage.tagsDescription}
           />
           <HotTagsRow tags={featuredTags} />
         </section>
 
         <section>
           <CommunityCTA
-            title={locale === "zh" ? "继续进入具体分类页" : "Continue into a category page"}
+            title={dictionary.categoryIndexPage.ctaTitle}
             description={dictionary.home.ctaDescription}
             dictionary={dictionary}
           />

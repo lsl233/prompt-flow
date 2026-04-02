@@ -8,17 +8,13 @@ import type {
   CategoryFrontmatter,
   TagFrontmatter,
   PromptFrontmatter,
-  LocalizedField,
 } from "@/types/prompt";
 import {
   parseMarkdown,
   readMarkdownFiles,
-  readMarkdownFile,
   getLocalizedField,
   getPromptContentByLocale,
 } from "./content";
-
-const CONTENT_DIR = path.join(process.cwd(), "content");
 
 /**
  * 分类排序：维持原始顺序（writing, coding, image, other）
@@ -35,12 +31,13 @@ const CATEGORY_ORDER: PromptCategorySlug[] = [
  */
 function parseCategory(
   data: CategoryFrontmatter,
-  content: string
+  content: string,
+  locale: string
 ): PromptCategory {
   return {
     slug: data.slug,
-    title: getLocalizedField(data.title, "zh"),
-    description: getLocalizedField(data.description, "zh"),
+    title: getLocalizedField(data.title, locale),
+    description: getLocalizedField(data.description, locale),
     accent: data.accent,
     featuredTagSlugs: data.featuredTagSlugs,
     content: content || undefined,
@@ -52,12 +49,13 @@ function parseCategory(
  */
 function parseTag(
   data: TagFrontmatter,
-  content: string
+  content: string,
+  locale: string
 ): PromptTag {
   return {
     slug: data.slug,
-    title: getLocalizedField(data.title, "zh"),
-    description: getLocalizedField(data.description, "zh"),
+    title: getLocalizedField(data.title, locale),
+    description: getLocalizedField(data.description, locale),
     categorySlugs: data.categorySlugs,
     relatedTagSlugs: data.relatedTagSlugs,
     featured: data.featured,
@@ -71,7 +69,7 @@ function parseTag(
 function parsePrompt(
   data: PromptFrontmatter,
   rawContent: string,
-  locale: string = "zh"
+  locale: string
 ): CommunityPrompt {
   return {
     id: data.id,
@@ -83,7 +81,7 @@ function parsePrompt(
     category: data.category,
     tags: data.tags,
     targetModels: data.targetModels,
-    language: "zh-CN", // Default language, original JSON had this but frontmatter doesn't
+    language: "zh-CN",
     variables: data.variables,
     promptType: data.promptType,
     difficulty: data.difficulty,
@@ -97,7 +95,8 @@ function parsePrompt(
   };
 }
 
-const loadAllCategories = cache(async (): Promise<PromptCategory[]> => {
+// 使用 cache 时，locale 参数会成为缓存 key 的一部分
+const loadAllCategories = cache(async (locale: string): Promise<PromptCategory[]> => {
   const categories = await readMarkdownFiles<CategoryFrontmatter>("categories");
 
   // Sort by CATEGORY_ORDER
@@ -108,16 +107,16 @@ const loadAllCategories = cache(async (): Promise<PromptCategory[]> => {
   });
 
   return sorted.map((c) =>
-    parseCategory(c.data, c.content)
+    parseCategory(c.data, c.content, locale)
   );
 });
 
-const loadAllTags = cache(async (): Promise<PromptTag[]> => {
+const loadAllTags = cache(async (locale: string): Promise<PromptTag[]> => {
   const tags = await readMarkdownFiles<TagFrontmatter>("tags");
-  return tags.map((t) => parseTag(t.data, t.content));
+  return tags.map((t) => parseTag(t.data, t.content, locale));
 });
 
-const loadAllPrompts = cache(async (): Promise<CommunityPrompt[]> => {
+const loadAllPrompts = cache(async (locale: string): Promise<CommunityPrompt[]> => {
   const prompts = await readMarkdownFiles<PromptFrontmatter>("prompts");
 
   // Sort by createdAt descending
@@ -127,78 +126,92 @@ const loadAllPrompts = cache(async (): Promise<CommunityPrompt[]> => {
     return dateB - dateA;
   });
 
-  return sorted.map((p) => parsePrompt(p.data, p.content));
+  return sorted.map((p) => parsePrompt(p.data, p.content, locale));
 });
 
-export async function getAllPrompts(): Promise<CommunityPrompt[]> {
-  return loadAllPrompts();
+export async function getAllPrompts(locale: string = "zh"): Promise<CommunityPrompt[]> {
+  return loadAllPrompts(locale);
 }
 
 export async function getPromptById(
-  id: string
+  id: string,
+  locale: string = "zh"
 ): Promise<CommunityPrompt | undefined> {
-  return (await getAllPrompts()).find((prompt) => prompt.id === id);
+  return (await getAllPrompts(locale)).find((prompt) => prompt.id === id);
 }
 
 export async function getPromptBySlug(
-  slug: string
+  slug: string,
+  locale: string = "zh"
 ): Promise<CommunityPrompt | undefined> {
-  return (await getAllPrompts()).find((prompt) => prompt.slug === slug);
+  return (await getAllPrompts(locale)).find((prompt) => prompt.slug === slug);
 }
 
-export async function getFeaturedPrompts(): Promise<CommunityPrompt[]> {
-  return (await getAllPrompts()).filter((prompt) => prompt.featured);
+export async function getFeaturedPrompts(
+  locale: string = "zh"
+): Promise<CommunityPrompt[]> {
+  return (await getAllPrompts(locale)).filter((prompt) => prompt.featured);
 }
 
-export async function getLatestPrompts(limit = 6): Promise<CommunityPrompt[]> {
-  return (await getAllPrompts()).slice(0, limit);
+export async function getLatestPrompts(
+  limit = 6,
+  locale: string = "zh"
+): Promise<CommunityPrompt[]> {
+  return (await getAllPrompts(locale)).slice(0, limit);
 }
 
 export async function getPromptsByCategory(
-  categorySlug: PromptCategorySlug
+  categorySlug: PromptCategorySlug,
+  locale: string = "zh"
 ): Promise<CommunityPrompt[]> {
-  return (await getAllPrompts()).filter(
+  return (await getAllPrompts(locale)).filter(
     (prompt) => prompt.category === categorySlug
   );
 }
 
 export async function getPromptsByTag(
-  tagSlug: string
+  tagSlug: string,
+  locale: string = "zh"
 ): Promise<CommunityPrompt[]> {
-  return (await getAllPrompts()).filter((prompt) =>
+  return (await getAllPrompts(locale)).filter((prompt) =>
     prompt.tags.includes(tagSlug)
   );
 }
 
-export async function getAllCategories(): Promise<PromptCategory[]> {
-  return loadAllCategories();
+export async function getAllCategories(locale: string = "zh"): Promise<PromptCategory[]> {
+  return loadAllCategories(locale);
 }
 
 export async function getCategoryBySlug(
-  slug: string
+  slug: string,
+  locale: string = "zh"
 ): Promise<PromptCategory | undefined> {
-  return (await getAllCategories()).find((category) => category.slug === slug);
+  return (await getAllCategories(locale)).find((category) => category.slug === slug);
 }
 
-export async function getAllTags(): Promise<PromptTag[]> {
-  return loadAllTags();
+export async function getAllTags(locale: string = "zh"): Promise<PromptTag[]> {
+  return loadAllTags(locale);
 }
 
 export async function getTagBySlug(
-  slug: string
+  slug: string,
+  locale: string = "zh"
 ): Promise<PromptTag | undefined> {
-  return (await getAllTags()).find((tag) => tag.slug === slug);
+  return (await getAllTags(locale)).find((tag) => tag.slug === slug);
 }
 
-export async function getFeaturedTags(): Promise<PromptTag[]> {
-  return (await getAllTags()).filter((tag) => tag.featured);
+export async function getFeaturedTags(
+  locale: string = "zh"
+): Promise<PromptTag[]> {
+  return (await getAllTags(locale)).filter((tag) => tag.featured);
 }
 
 export async function getRelatedPrompts(
   prompt: CommunityPrompt,
-  limit = 3
+  limit = 3,
+  locale: string = "zh"
 ): Promise<CommunityPrompt[]> {
-  return (await getAllPrompts())
+  return (await getAllPrompts(locale))
     .filter((candidate) => candidate.slug !== prompt.slug)
     .map((candidate) => {
       const sharedTags = candidate.tags.filter((tag) =>
@@ -218,11 +231,12 @@ export async function getRelatedPrompts(
 }
 
 export async function searchPrompts(
-  query: string
+  query: string,
+  locale: string = "zh"
 ): Promise<CommunityPrompt[]> {
   const lowerQuery = query.toLowerCase();
 
-  return (await getAllPrompts()).filter(
+  return (await getAllPrompts(locale)).filter(
     (prompt) =>
       prompt.title.toLowerCase().includes(lowerQuery) ||
       prompt.summary.toLowerCase().includes(lowerQuery) ||

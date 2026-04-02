@@ -19,7 +19,7 @@ import {
 } from "@/components/community/CommunityUI";
 
 export async function generateStaticParams() {
-  return (await getAllTags()).map((tag) => ({ slug: tag.slug }));
+  return (await getAllTags("zh")).map((tag) => ({ slug: tag.slug }));
 }
 
 export async function generateMetadata({
@@ -28,7 +28,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const tag = await getTagBySlug(slug);
+  const tag = await getTagBySlug(slug, locale);
   const dictionary = getCommunityDictionary(locale);
 
   if (!tag) {
@@ -67,19 +67,19 @@ export default async function CommunityTagPage({
 }) {
   const { locale, slug } = await params;
   const dictionary = getCommunityDictionary(locale);
-  const tag = await getTagBySlug(slug);
+  const tag = await getTagBySlug(slug, locale);
 
   if (!tag) {
     notFound();
   }
 
-  const prompts = await getPromptsByTag(tag.slug);
+  const prompts = await getPromptsByTag(tag.slug, locale);
   const relatedCategories = (await Promise.all(
-    tag.categorySlugs.map((categorySlug) => getCategoryBySlug(categorySlug))
+    tag.categorySlugs.map((categorySlug) => getCategoryBySlug(categorySlug, locale))
   ))
     .filter((category): category is NonNullable<typeof category> => Boolean(category));
   const relatedTags = (await Promise.all(
-    tag.relatedTagSlugs.map((tagSlug) => getTagBySlug(tagSlug))
+    tag.relatedTagSlugs.map((tagSlug) => getTagBySlug(tagSlug, locale))
   ))
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
@@ -99,8 +99,8 @@ export default async function CommunityTagPage({
       <div className="mx-auto max-w-7xl space-y-16 px-4 py-14 sm:px-6 lg:px-8 lg:py-18">
         <section>
           <SectionHeading
-            title={dictionary.meta.related}
-            description="标签页承担专题页角色，用一个具体主题把分散在不同分类中的 Prompt 串起来。"
+            title={dictionary.tagPage.relatedTitle}
+            description={dictionary.tagPage.relatedDescription}
           />
           <PromptGrid prompts={prompts} dictionary={dictionary} />
         </section>
@@ -108,7 +108,7 @@ export default async function CommunityTagPage({
         <section>
           <SectionHeading
             title={dictionary.tagPage.relatedCategories}
-            description="如果用户是从专题切入，分类链接可以帮助他们回到更稳定的浏览结构。"
+            description={dictionary.tagPage.relatedCategoriesDescription}
           />
           <InlineCategoryLinks categories={relatedCategories} dictionary={dictionary} />
         </section>
@@ -116,7 +116,7 @@ export default async function CommunityTagPage({
         <section>
           <SectionHeading
             title={dictionary.tagPage.relatedTags}
-            description="相近标签让标签页之间形成图状关系，这也是后续 SEO 和内链扩展的基础。"
+            description={dictionary.tagPage.relatedTagsDescription}
           />
           <InlineTagLinks tags={relatedTags} />
         </section>

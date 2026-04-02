@@ -60,6 +60,7 @@ export function getCommunityDictionary(locale: string) {
         prompts: "条 Prompt",
         allPrompts: "全部 Prompt",
         noItems: "暂无内容",
+        likes: "喜欢",
       },
       difficulty: {
         beginner: "入门",
@@ -93,6 +94,68 @@ export function getCommunityDictionary(locale: string) {
         ctaDescription:
           "用户现在就能按分类、标签和详情页浏览 Prompt，复制或导入路径也已经保留。",
       },
+      // 社区首页索引页
+      indexPage: {
+        browseEntry: {
+          title: "浏览入口",
+          description: "先进入分类索引或标签索引，用户会更清楚社区内容的组织方式。",
+          categoryLink: "进入分类索引",
+          tagLink: "进入标签索引",
+        },
+        categorySection: {
+          title: "主题分区",
+          description: "用主题分区组织浏览路径，先让用户知道这里有什么，再决定点进哪类 Prompt。",
+        },
+        tagSection: {
+          title: "热门标签",
+          description: "标签页承担专题聚合和内链入口的角色，适合从用途、平台和场景出发继续深入。",
+        },
+        featuredSection: {
+          title: "精选 Prompt",
+          description: "首页第一屏之后优先展示代表性 Prompt，让用户快速理解社区内容质量。",
+        },
+        latestSection: {
+          title: "最新收录",
+          description: "保留最新收录区块，后续接入 JSON 内容源后可以自然过渡为真实更新流。",
+        },
+        faqSection: {
+          title: "常见问题",
+          description: "这版先解决结构和体验，不急着把动态能力全塞进来。",
+        },
+      },
+      // 分类索引页
+      categoryIndexPage: {
+        metaTitle: "Prompt 分类 | PromptFlow",
+        metaDescription: "查看 Prompt 社区所有分类入口，按主题浏览写作、编程、图像和工作流内容。",
+        eyebrow: "Category Index",
+        title: "先按主题理解社区，再进入具体 Prompt",
+        description: "分类页是社区的信息骨架。先看清每个主题覆盖什么内容，再决定往哪个方向深入，会比在海量 Prompt 里直接搜索更高效。",
+        allCategoriesTitle: "全部分类",
+        allCategoriesDescription: "每个分类页都应该是独立入口页，而不是只有详情页的附属导航。",
+        tagsDescription: "如果用户想从专题而不是主题切入，可以继续进入标签索引。",
+        ctaTitle: "继续进入具体分类页",
+        statLabels: {
+          categories: "分类数",
+          prompts: "Prompt 总量",
+          tags: "热门标签",
+        },
+      },
+      // 标签索引页
+      tagIndexPage: {
+        metaTitle: "Prompt 标签 | PromptFlow",
+        metaDescription: "浏览 Prompt 社区全部标签入口，按专题、平台和场景继续探索内容。",
+        eyebrow: "Tag Index",
+        title: "按专题、平台和场景串联 Prompt",
+        description: "标签页负责把横向关系串起来。它不是分类的替代品，而是帮助用户从一个语境跳到另一个语境的索引层。",
+        allTagsTitle: "全部标签",
+        allTagsDescription: "标签入口页让 `/community/tag` 成为真实目录，而不只是一个动态 slug 容器。",
+        ctaTitle: "继续按标签深入浏览",
+        statLabels: {
+          tags: "标签数",
+          featured: "精选标签",
+          categories: "覆盖分类",
+        },
+      },
       detail: {
         breadcrumbs: {
           community: "社区",
@@ -107,16 +170,42 @@ export function getCommunityDictionary(locale: string) {
         variableHint: "填写变量并实时预览",
         required: "必填",
         relatedTitle: "继续看这些 Prompt",
+        relatedDescription: "相关 Prompt 先按分类和标签相似度做静态推荐，后续再替换成真实的相关推荐策略。",
       },
+      // 分类详情页
       categoryPage: {
         eyebrow: "Category Lens",
+        featuredTitle: "精选",
+        featuredDescription: "分类页负责把同一主题下的 Prompt 放到一个明确的上下文里，用户不需要回到首页再理解内容范围。",
+        tagsTitle: "相关标签",
+        tagsDescription: "相关标签用于继续收窄或扩展内容视角，承担分类页的内链角色。",
         faqTitle: "这个分类包含什么",
+        faqDescription: "分类页也要有解释能力，而不是只堆列表。",
+        faqItems: [
+          {
+            question: "这个分类适合谁看？",
+            answer: "如果你主要在做{CATEGORY}相关工作，这一页就是最短路径。",
+          },
+          {
+            question: "为什么还要展示标签？",
+            answer: "因为分类负责大方向，标签负责专题和语境，两者一起才能形成可浏览的内链结构。",
+          },
+          {
+            question: "后续可以接什么？",
+            answer: "后续可以直接接入 JSON 内容源、静态参数、ItemList JSON-LD 和搜索过滤。",
+          },
+        ],
         ctaTitle: "继续从这个主题延展",
       },
+      // 标签详情页
       tagPage: {
         eyebrow: "Topic Track",
+        relatedTitle: "相关 Prompt",
+        relatedDescription: "标签页承担专题页角色，用一个具体主题把分散在不同分类中的 Prompt 串起来。",
         relatedCategories: "相关分类",
+        relatedCategoriesDescription: "如果用户是从专题切入，分类链接可以帮助他们回到更稳定的浏览结构。",
         relatedTags: "相近标签",
+        relatedTagsDescription: "相近标签让标签页之间形成图状关系，这也是后续 SEO 和内链扩展的基础。",
         ctaTitle: "继续按标签串联浏览",
       },
       faq: [
@@ -176,6 +265,7 @@ export function getCommunityDictionary(locale: string) {
       prompts: "prompts",
       allPrompts: "All prompts",
       noItems: "Nothing here yet",
+      likes: "likes",
     },
     difficulty: {
       beginner: "Beginner",
@@ -210,6 +300,68 @@ export function getCommunityDictionary(locale: string) {
       ctaDescription:
         "Users can already browse by category, tag, and detail page, with copy and import paths kept intact.",
     },
+    // Community index page
+    indexPage: {
+      browseEntry: {
+        title: "Browse entry points",
+        description: "Give users explicit category and tag indexes so the information hierarchy is clear before they drill down.",
+        categoryLink: "Open category index",
+        tagLink: "Open tag index",
+      },
+      categorySection: {
+        title: "Category lanes",
+        description: "Browse the community by theme first: writing, coding, image, and workflow.",
+      },
+      tagSection: {
+        title: "Hot tags",
+        description: "Browse by topic, platform, and use case to connect prompts across categories.",
+      },
+      featuredSection: {
+        title: "Featured prompts",
+        description: "Highlight representative prompts right after the hero so users quickly understand the community quality.",
+      },
+      latestSection: {
+        title: "Latest prompts",
+        description: "A static section for now; can transition to a live update stream once JSON content is integrated.",
+      },
+      faqSection: {
+        title: "FAQ",
+        description: "This version focuses on structure and UX first — dynamic features can come later.",
+      },
+    },
+    // Category index page
+    categoryIndexPage: {
+      metaTitle: "Prompt Categories | PromptFlow",
+      metaDescription: "Browse all prompt community categories and explore writing, coding, image, and workflow collections.",
+      eyebrow: "Category Index",
+      title: "Start with themes before diving into individual prompts",
+      description: "Categories are the structural layer of the community. Start with the broad theme, then drill into the prompts that matter.",
+      allCategoriesTitle: "All categories",
+      allCategoriesDescription: "Each category should work as a real entry page, not just a supporting navigation node.",
+      tagsDescription: "If users prefer topic-based browsing instead of category-based browsing, the tag index is the next layer.",
+      ctaTitle: "Continue into a category page",
+      statLabels: {
+        categories: "Categories",
+        prompts: "Prompts",
+        tags: "Hot tags",
+      },
+    },
+    // Tag index page
+    tagIndexPage: {
+      metaTitle: "Prompt Tags | PromptFlow",
+      metaDescription: "Browse all prompt community tags and explore prompts by topic, platform, and scenario.",
+      eyebrow: "Tag Index",
+      title: "Connect prompts through topics, platforms, and scenarios",
+      description: "Tags connect prompts across categories. They are not a replacement for categories, but the cross-topic layer that keeps browsing fluid.",
+      allTagsTitle: "All tags",
+      allTagsDescription: "This index makes `/community/tag` a real directory page instead of just a dynamic slug container.",
+      ctaTitle: "Keep exploring through tags",
+      statLabels: {
+        tags: "Tags",
+        featured: "Featured",
+        categories: "Categories",
+      },
+    },
     detail: {
       breadcrumbs: {
         community: "Community",
@@ -224,16 +376,42 @@ export function getCommunityDictionary(locale: string) {
       variableHint: "Set values and preview live",
       required: "Required",
       relatedTitle: "Keep browsing",
+      relatedDescription: "Related prompts are statically recommended by category and tag similarity — will be replaced with real recommendations later.",
     },
+    // Category detail page
     categoryPage: {
       eyebrow: "Category Lens",
+      featuredTitle: "Featured",
+      featuredDescription: "Categories put prompts in a clear context so users don't need to return to the home page to understand the content scope.",
+      tagsTitle: "Related tags",
+      tagsDescription: "Related tags narrow or expand the content perspective, serving as the internal linking layer for category pages.",
       faqTitle: "What lives in this lane",
+      faqDescription: "Category pages also need explanatory power, not just listings.",
+      faqItems: [
+        {
+          question: "Who should browse this lane?",
+          answer: "If your workflow centers on {CATEGORY}, this is the fastest entry point.",
+        },
+        {
+          question: "Why show tags here?",
+          answer: "Categories set the lane, while tags expose the context and subtopics needed for internal linking.",
+        },
+        {
+          question: "What can plug in later?",
+          answer: "Later this page can plug into JSON content, static params, ItemList JSON-LD, and search filters.",
+        },
+      ],
       ctaTitle: "Keep exploring this theme",
     },
+    // Tag detail page
     tagPage: {
       eyebrow: "Topic Track",
+      relatedTitle: "Related prompts",
+      relatedDescription: "Tag pages act as topic pages, connecting prompts scattered across different categories under a specific theme.",
       relatedCategories: "Related categories",
+      relatedCategoriesDescription: "If users enter from a topic, category links help them return to a more stable browsing structure.",
       relatedTags: "Related tags",
+      relatedTagsDescription: "Related tags form a graph between tag pages — this is the foundation for future SEO and internal linking.",
       ctaTitle: "Follow the tag graph",
     },
     faq: [
@@ -437,7 +615,7 @@ export function PromptCard({
           <div className="text-sm font-semibold text-[var(--color-text-primary)]">
             {prompt.likes}
           </div>
-          <div className="text-xs text-[var(--color-text-tertiary)]">likes</div>
+          <div className="text-xs text-[var(--color-text-tertiary)]">{dictionary.labels.likes}</div>
         </div>
       </div>
 
@@ -573,10 +751,12 @@ export function PromptDetailLayout({
   prompt,
   category,
   dictionary,
+  locale,
 }: {
   prompt: CommunityPrompt;
   category: PromptCategory;
   dictionary: CommunityDictionary;
+  locale: string;
 }) {
   return (
     <section className="relative overflow-hidden border-b border-[var(--color-border-subtle)]">
@@ -645,6 +825,7 @@ export function PromptDetailLayout({
           <div className="mt-10">
             <PromptWorkbench
               prompt={prompt}
+              locale={locale}
               labels={{
                 promptTitle: dictionary.detail.promptTitle,
                 variablesTitle: dictionary.detail.variablesTitle,

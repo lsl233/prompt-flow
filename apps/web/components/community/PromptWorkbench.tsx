@@ -58,9 +58,11 @@ function renderPromptPreview(content: string, values: Record<string, string>) {
 
 export function PromptWorkbench({
   prompt,
+  locale,
   labels,
 }: {
   prompt: CommunityPrompt;
+  locale: string;
   labels: {
     promptTitle: string;
     variablesTitle: string;
@@ -159,7 +161,7 @@ export function PromptWorkbench({
                     ) : null}
                   </div>
                   <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">
-                    {getLocalizedField(variable.description, "zh")}
+                    {getLocalizedField(variable.description, locale)}
                   </p>
                   <AutoResizeTextarea
                     value={values[variable.name] ?? ""}
