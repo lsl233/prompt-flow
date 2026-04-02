@@ -22,7 +22,16 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(git:*)",
-      "Bash(node -e \":*)"
+      "Bash(node -e \":*)",
+      "Bash(,)",
+      "Bash(: true,)",
+      "Bash(curl -s http://localhost:3001/zh/community)",
+      "Bash(curl -s http://localhost:3001/en/community)",
+      "Bash(curl -s http://localhost:3000/en/community)",
+      "Bash(curl -sL http://localhost:3000/en/community)",
+      "Bash(curl -sL http://localhost:3000/en/community/senior-code-review-copilot)",
+      "Bash(curl -sL http://localhost:3000/en/community/category/coding)",
+      "Bash(curl -sL http://localhost:3000/en/community/tag/chatgpt)"
     ]
   }
 }

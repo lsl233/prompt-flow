@@ -5,6 +5,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { RotateCcw, Sparkles } from "lucide-react";
 import { CopyButton } from "@/components/CopyButton";
 import type { CommunityPrompt, PromptVariable } from "@/types/prompt";
+import { getLocalizedField } from "@/lib/localized";
 
 function replaceVariables(content: string, values: Record<string, string>) {
   return content.replace(/\{\{(.*?)\}\}/g, (match, rawName) => {
@@ -158,7 +159,7 @@ export function PromptWorkbench({
                     ) : null}
                   </div>
                   <p className="mt-2 text-sm leading-7 text-[var(--color-text-secondary)]">
-                    {variable.description}
+                    {getLocalizedField(variable.description, "zh")}
                   </p>
                   <AutoResizeTextarea
                     value={values[variable.name] ?? ""}
