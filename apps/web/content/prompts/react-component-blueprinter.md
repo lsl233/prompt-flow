@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 298
 createdAt: "2026-03-12"
-useCase: "在开始编码前先拿到一个结构可靠的组件蓝图。"
-exampleInput: "featureDescription=团队成员邀请弹窗，支持邮箱校验和权限配置"
-exampleOutput: "生成组件草图、类型和边界条件清单。"
+useCase:
+  zh: "在开始编码前先拿到一个结构可靠的组件蓝图。"
+  en: "Get a structurally reliable component blueprint before coding."
+exampleInput:
+  zh: "featureDescription=团队成员邀请弹窗，支持邮箱校验和权限配置"
+  en: "featureDescription=team member invite modal with email validation and permission config"
+exampleOutput:
+  zh: "生成组件草图、类型和边界条件清单。"
+  en: "Generated component sketch, types, and boundary condition checklist."
 variables:
   - name: featureDescription
     description:

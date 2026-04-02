@@ -11,9 +11,15 @@ featured: false
 verified: true
 likes: 174
 createdAt: "2026-03-16"
-useCase: "把创业者、独立开发者的周记快速整理成可复盘文档。"
-exampleInput: "包含产品上线、用户反馈、增长实验和招聘记录的碎片笔记。"
-exampleOutput: "输出结构化周报与下周优先级。"
+useCase:
+  zh: "把创业者、独立开发者的周记快速整理成可复盘文档。"
+  en: "Quickly organize weekly notes into reviewable documents."
+exampleInput:
+  zh: "包含产品上线、用户反馈、增长实验和招聘记录的碎片笔记。"
+  en: "Fragmented notes including product launch, user feedback, growth experiments, and hiring records."
+exampleOutput:
+  zh: "输出结构化周报与下周优先级。"
+  en: "Structured weekly report with next week priorities."
 variables:
   - name: rawNotes
     description:

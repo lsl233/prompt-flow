@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 178
 createdAt: "2026-03-02"
-useCase: "系统性分析 bug 根因。"
-exampleInput: "崩溃日志和复现步骤"
-exampleOutput: "根因分析和修复建议"
+useCase:
+  zh: "系统性分析 bug 根因。"
+  en: "Systematically analyze bug root causes."
+exampleInput:
+  zh: "崩溃日志和复现步骤"
+  en: "Crash logs and reproduction steps"
+exampleOutput:
+  zh: "根因分析和修复建议"
+  en: "Root cause analysis and fix recommendations"
 variables:
   - name: bugDescription
     description:

@@ -287,3 +287,7 @@ Tag page content...
   - 更新类型定义支持多语言字段
   - 所有页面验证正常，构建成功
   - 旧 JSON 文件已备份到 content/backup/ 目录
+- 2026-04-02 (补充): 扩展多语言支持
+  - 将 useCase、exampleInput、exampleOutput 字段也改为中英文双语格式
+  - 更新 PromptFrontmatter 类型定义
+  - 更新 parsePrompt 函数处理这三个字段的多语言

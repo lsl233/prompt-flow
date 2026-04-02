@@ -11,9 +11,15 @@ featured: false
 verified: true
 likes: 149
 createdAt: "2026-03-14"
-useCase: "改写简历、作品集或自我介绍中的经历段落。"
-exampleInput: "experience=做过校园活动策划，targetRole=市场实习生"
-exampleOutput: "3-5 条双语 bullet points，并附可补充指标建议。"
+useCase:
+  zh: "改写简历、作品集或自我介绍中的经历段落。"
+  en: "Rewrite experience paragraphs in resumes, portfolios, or self-introductions."
+exampleInput:
+  zh: "experience=做过校园活动策划，targetRole=市场实习生"
+  en: "experience=campus event planning, targetRole=marketing intern"
+exampleOutput:
+  zh: "3-5 条双语 bullet points，并附可补充指标建议。"
+  en: "3-5 bilingual bullet points with suggestions for additional metrics."
 variables:
   - name: experience
     description:

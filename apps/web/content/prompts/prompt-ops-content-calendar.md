@@ -11,9 +11,15 @@ featured: true
 verified: true
 likes: 237
 createdAt: "2026-03-13"
-useCase: "快速生成连续内容规划，适合 launch 前两周执行。"
-exampleInput: "topic=独立开发者产品上线"
-exampleOutput: "14 天日历，含平台、素材与 CTA。"
+useCase:
+  zh: "快速生成连续内容规划，适合 launch 前两周执行。"
+  en: "Quickly generate continuous content plans, suitable for two weeks before launch."
+exampleInput:
+  zh: "topic=独立开发者产品上线"
+  en: "topic=indie developer product launch"
+exampleOutput:
+  zh: "14 天日历，含平台、素材与 CTA。"
+  en: "14-day calendar with platforms, materials, and CTAs."
 variables:
   - name: topic
     description:

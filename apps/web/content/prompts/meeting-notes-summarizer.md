@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 156
 createdAt: "2026-03-05"
-useCase: "快速整理会议纪要。"
-exampleInput: "包含讨论和决定的会议记录"
-exampleOutput: "摘要、决策和行动项列表"
+useCase:
+  zh: "快速整理会议纪要。"
+  en: "Quickly organize meeting minutes."
+exampleInput:
+  zh: "包含讨论和决定的会议记录"
+  en: "Meeting notes including discussions and decisions"
+exampleOutput:
+  zh: "摘要、决策和行动项列表"
+  en: "Summary, decisions, and action items list"
 variables:
   - name: rawNotes
     description:

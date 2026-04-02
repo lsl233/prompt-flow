@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 234
 createdAt: "2026-03-07"
-useCase: "生成完整的邮件营销序列。"
-exampleInput: "产品=项目管理软件，goal=免费试用转化"
-exampleOutput: "5 封邮件序列大纲"
+useCase:
+  zh: "生成完整的邮件营销序列。"
+  en: "Generate complete email marketing sequences."
+exampleInput:
+  zh: "产品=项目管理软件，goal=免费试用转化"
+  en: "Product=project management software, goal=free trial conversion"
+exampleOutput:
+  zh: "5 封邮件序列大纲"
+  en: "5-email sequence outline"
 variables:
   - name: product
     description:

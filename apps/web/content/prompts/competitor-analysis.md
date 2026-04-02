@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 201
 createdAt: "2026-02-27"
-useCase: "快速完成竞品分析。"
-exampleInput: "竞品=Notion vs Obsidian"
-exampleOutput: "结构化竞品分析报告"
+useCase:
+  zh: "快速完成竞品分析。"
+  en: "Quickly complete competitive analysis."
+exampleInput:
+  zh: "竞品=Notion vs Obsidian"
+  en: "Competitors=Notion vs Obsidian"
+exampleOutput:
+  zh: "结构化竞品分析报告"
+  en: "Structured competitive analysis report"
 variables:
   - name: competitors
     description:

@@ -11,9 +11,15 @@ featured: true
 verified: true
 likes: 328
 createdAt: "2026-03-18"
-useCase: "在提交 PR 前，快速获得结构化 review 意见。"
-exampleInput: "一个包含 hooks、请求和表单校验逻辑的 React 组件。"
-exampleOutput: "列出 3 个高优先级 bug、2 个结构问题和重构示例。"
+useCase:
+  zh: "在提交 PR 前，快速获得结构化 review 意见。"
+  en: "Quickly get structured review comments before submitting PRs."
+exampleInput:
+  zh: "一个包含 hooks、请求和表单校验逻辑的 React 组件。"
+  en: "A React component with hooks, requests, and form validation logic."
+exampleOutput:
+  zh: "列出 3 个高优先级 bug、2 个结构问题和重构示例。"
+  en: "List 3 high-priority bugs, 2 structural issues, and refactoring examples."
 variables:
   - name: code
     description:

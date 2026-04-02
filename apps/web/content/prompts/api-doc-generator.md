@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 145
 createdAt: "2026-03-10"
-useCase: "快速生成符合规范的 API 文档。"
-exampleInput: "Express.js REST API"
-exampleOutput: "OpenAPI 3.0 格式文档"
+useCase:
+  zh: "快速生成符合规范的 API 文档。"
+  en: "Quickly generate standard API documentation."
+exampleInput:
+  zh: "Express.js REST API"
+  en: "Express.js REST API"
+exampleOutput:
+  zh: "OpenAPI 3.0 格式文档"
+  en: "OpenAPI 3.0 format documentation"
 variables:
   - name: codeSnippet
     description:

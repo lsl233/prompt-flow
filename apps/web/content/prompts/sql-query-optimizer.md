@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 198
 createdAt: "2026-03-09"
-useCase: "优化数据库查询性能。"
-exampleInput: "包含多表 JOIN 的复杂查询"
-exampleOutput: "优化建议和重构后的 SQL"
+useCase:
+  zh: "优化数据库查询性能。"
+  en: "Optimize database query performance."
+exampleInput:
+  zh: "包含多表 JOIN 的复杂查询"
+  en: "Complex query with multi-table JOINs"
+exampleOutput:
+  zh: "优化建议和重构后的 SQL"
+  en: "Optimization suggestions and refactored SQL"
 variables:
   - name: sqlQuery
     description:

@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 98
 createdAt: "2026-03-04"
-useCase: "每日个人复盘和成长记录。"
-exampleInput: "focusArea=工作"
-exampleOutput: "引导式复盘问题清单"
+useCase:
+  zh: "每日个人复盘和成长记录。"
+  en: "Daily personal reflection and growth record."
+exampleInput:
+  zh: "focusArea=工作"
+  en: "focusArea=work"
+exampleOutput:
+  zh: "引导式复盘问题清单"
+  en: "Guided reflection question list"
 variables:
   - name: focusArea
     description:

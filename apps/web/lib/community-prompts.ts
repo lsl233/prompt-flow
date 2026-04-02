@@ -89,9 +89,9 @@ function parsePrompt(
     difficulty: data.difficulty,
     featured: data.featured,
     verified: data.verified,
-    useCase: data.useCase,
-    exampleInput: data.exampleInput,
-    exampleOutput: data.exampleOutput,
+    useCase: getLocalizedField(data.useCase, locale),
+    exampleInput: getLocalizedField(data.exampleInput, locale),
+    exampleOutput: getLocalizedField(data.exampleOutput, locale),
     likes: data.likes,
     createdAt: data.createdAt,
   };

@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 189
 createdAt: "2026-03-06"
-useCase: "快速生成电商产品页面文案。"
-exampleInput: "产品=无线耳机，features=降噪、长续航"
-exampleOutput: "产品标题、亮点和详细描述"
+useCase:
+  zh: "快速生成电商产品页面文案。"
+  en: "Quickly generate e-commerce product page copy."
+exampleInput:
+  zh: "产品=无线耳机，features=降噪、长续航"
+  en: "Product=wireless earphones, features=noise cancellation, long battery"
+exampleOutput:
+  zh: "产品标题、亮点和详细描述"
+  en: "Product title, highlights, and detailed description"
 variables:
   - name: productName
     description:

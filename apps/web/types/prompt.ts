@@ -112,9 +112,9 @@ export interface PromptFrontmatter {
   verified: boolean;
   likes: number;
   createdAt: string;
-  useCase: string;
-  exampleInput: string;
-  exampleOutput: string;
+  useCase: LocalizedField;
+  exampleInput: LocalizedField;
+  exampleOutput: LocalizedField;
   variables: PromptVariable[];
   title: LocalizedField;
   summary: LocalizedField;

@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 212
 createdAt: "2026-03-03"
-useCase: "规划社交媒体内容发布计划。"
-exampleInput: "平台=小红书，品牌=美妆教程"
-exampleOutput: "30 天内容日历"
+useCase:
+  zh: "规划社交媒体内容发布计划。"
+  en: "Plan social media content publishing schedule."
+exampleInput:
+  zh: "平台=小红书，品牌=美妆教程"
+  en: "Platform=Xiaohongshu, brand=beauty tutorials"
+exampleOutput:
+  zh: "30 天内容日历"
+  en: "30-day content calendar"
 variables:
   - name: platform
     description:

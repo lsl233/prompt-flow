@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 167
 createdAt: "2026-03-08"
-useCase: "提升内容 SEO 效果。"
-exampleInput: "关于 AI 写作工具的评测文章"
-exampleOutput: "5 个标题选项和元描述"
+useCase:
+  zh: "提升内容 SEO 效果。"
+  en: "Improve content SEO performance."
+exampleInput:
+  zh: "关于 AI 写作工具的评测文章"
+  en: "Review article about AI writing tools"
+exampleOutput:
+  zh: "5 个标题选项和元描述"
+  en: "5 title options and meta descriptions"
 variables:
   - name: content
     description:

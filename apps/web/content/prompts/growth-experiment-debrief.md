@@ -11,9 +11,15 @@ featured: true
 verified: true
 likes: 183
 createdAt: "2026-03-11"
-useCase: "适合运营、增长或独立产品团队做数据复盘。"
-exampleInput: "A/B 测试的曝光、点击、注册和反馈摘要。"
-exampleOutput: "一份可直接发到周会的实验总结。"
+useCase:
+  zh: "适合运营、增长或独立产品团队做数据复盘。"
+  en: "Suitable for operations, growth, or independent product teams to review data."
+exampleInput:
+  zh: "A/B 测试的曝光、点击、注册和反馈摘要。"
+  en: "A/B test impressions, clicks, registrations, and feedback summary."
+exampleOutput:
+  zh: "一份可直接发到周会的实验总结。"
+  en: "An experiment summary ready for weekly meetings."
 variables:
   - name: experimentLog
     description:

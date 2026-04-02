@@ -11,9 +11,15 @@ featured: false
 verified: false
 likes: 334
 createdAt: "2026-02-28"
-useCase: "生成风格迁移的图像 Prompt。"
-exampleInput: "baseImage=a cat, style=Japanese ukiyo-e"
-exampleOutput: "Midjourney 风格迁移 Prompt"
+useCase:
+  zh: "生成风格迁移的图像 Prompt。"
+  en: "Generate image prompts for style transfer."
+exampleInput:
+  zh: "baseImage=a cat, style=Japanese ukiyo-e"
+  en: "baseImage=a cat, style=Japanese ukiyo-e"
+exampleOutput:
+  zh: "Midjourney 风格迁移 Prompt"
+  en: "Midjourney style transfer prompt"
 variables:
   - name: baseImage
     description:

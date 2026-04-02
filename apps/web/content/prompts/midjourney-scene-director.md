@@ -11,9 +11,15 @@ featured: true
 verified: true
 likes: 412
 createdAt: "2026-03-15"
-useCase: "把抽象画面想法转成可直接生成图片的 Prompt。"
-exampleInput: "concept=retro kiosk on Mars"
-exampleOutput: "三个风格不同的 Midjourney 英文提示词。"
+useCase:
+  zh: "把抽象画面想法转成可直接生成图片的 Prompt。"
+  en: "Transform abstract visual ideas into ready-to-use image prompts."
+exampleInput:
+  zh: "concept=retro kiosk on Mars"
+  en: "concept=retro kiosk on Mars"
+exampleOutput:
+  zh: "三个风格不同的 Midjourney 英文提示词。"
+  en: "Three Midjourney prompts in different styles."
 variables:
   - name: concept
     description:

@@ -11,9 +11,15 @@ featured: true
 verified: true
 likes: 256
 createdAt: "2026-03-17"
-useCase: "为内容营销或新品发布生成第一版社媒文案。"
-exampleInput: "product=提示词管理插件，sellingPoint=一键在 AI 页面调起，audience=重度 AI 用户"
-exampleOutput: "提供标题候选、正文和结尾互动问题。"
+useCase:
+  zh: "为内容营销或新品发布生成第一版社媒文案。"
+  en: "Generate first version of social media copy for content marketing or new product launches."
+exampleInput:
+  zh: "product=提示词管理插件，sellingPoint=一键在 AI 页面调起，audience=重度 AI 用户"
+  en: "product=prompt management plugin, sellingPoint=one-click launch on AI pages, audience=heavy AI users"
+exampleOutput:
+  zh: "提供标题候选、正文和结尾互动问题。"
+  en: "Provides title candidates, body text, and ending engagement questions."
 variables:
   - name: product
     description:
